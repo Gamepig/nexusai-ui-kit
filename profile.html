@@ -11,24 +11,51 @@
   <link rel="stylesheet" href="css/responsive.css">
   <link rel="stylesheet" href="css/theme-light.css">
   <style>
+    /* Mobile-First: 手機版預設 */
     .page-header {
       background: var(--color-bg-secondary);
-      padding: var(--spacing-8) 0;
+      padding: var(--spacing-6) 0;
       border-bottom: 1px solid var(--color-border-default);
-      margin-top: 80px;
-      margin-left: 280px;
+      margin-top: 64px;
+      margin-left: 0;
     }
 
     .page-header h1 {
       margin: 0;
-      font-size: var(--font-size-2xl);
+      font-size: var(--font-size-xl);
     }
 
-    .page-layout {
-      display: grid;
-      grid-template-columns: 1fr;
-      padding: var(--spacing-8);
-      margin-left: 280px;
+    .page-content {
+      padding: var(--spacing-4);
+      margin-left: 0;
+    }
+
+    /* 平板 */
+    @media (min-width: 768px) {
+      .page-header {
+        margin-top: 80px;
+        padding: var(--spacing-8) 0;
+      }
+
+      .page-header h1 {
+        font-size: var(--font-size-2xl);
+      }
+
+      .page-content {
+        padding: var(--spacing-6);
+      }
+    }
+
+    /* 桌面版 */
+    @media (min-width: 1024px) {
+      .page-header {
+        margin-left: 240px;
+      }
+
+      .page-content {
+        margin-left: 240px;
+        padding: var(--spacing-8);
+      }
     }
 
     .profile-container {
@@ -274,7 +301,7 @@
   </section>
 
   <!-- Main Content -->
-  <section class="page-layout">
+  <section class="page-content">
     <div class="container">
       <div class="profile-container">
         <!-- Left Column: Profile Info -->
