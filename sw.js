@@ -11,7 +11,7 @@ const DYNAMIC_CACHE = 'nexusai-dynamic-v1';
 const STATIC_ASSETS = [
   '/',
   '/index.html',
-  '/dashboard.html',
+  '/pages/dashboard.html',
   '/offline.html',
   '/css/design-tokens.css',
   '/css/components.css',

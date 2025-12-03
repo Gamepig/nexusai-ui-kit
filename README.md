@@ -46,8 +46,14 @@
 
 ```
 nexusai-ui-kit/
-├── 📄 頁面 (19 個)
-│   ├── index.html              # 首頁 (Landing Page)
+├── index.html                  # 首頁 (Landing Page)
+├── offline.html                # 離線頁 (PWA)
+├── test-animations.html        # 動畫測試
+├── manifest.json               # PWA Manifest
+├── sw.js                       # Service Worker
+├── README.md                   # 本檔案
+│
+├── 📄 pages/ (16 個頁面)
 │   ├── dashboard.html          # 儀表板
 │   ├── js-showcase.html        # JavaScript 功能展示 ⭐
 │   ├── projects.html           # 項目列表
@@ -63,11 +69,9 @@ nexusai-ui-kit/
 │   ├── pricing.html            # 定價頁
 │   ├── about.html              # 關於頁
 │   ├── contact.html            # 聯繫頁
-│   ├── offline.html            # 離線頁 (PWA)
-│   ├── test-animations.html    # 動畫測試
 │   └── readme-viewer.html      # 文檔查看器
 │
-├── 🎨 樣式 (17 個 CSS)
+├── 🎨 css/ (16 個 CSS)
 │   ├── design-tokens.css       # 設計變數
 │   ├── components.css          # 元件樣式
 │   ├── layout.css              # 全域佈局
@@ -85,7 +89,7 @@ nexusai-ui-kit/
 │   ├── websocket-showcase.css  # WebSocket 演示
 │   └── webgl-showcase.css      # WebGL 演示
 │
-├── 📦 JavaScript (18 個)
+├── 📦 js/ (18 個 JS)
 │   ├── main.js                 # 主 JavaScript
 │   ├── sidebar.js              # 側邊欄功能
 │   ├── theme-toggle.js         # 主題切換
@@ -105,16 +109,15 @@ nexusai-ui-kit/
 │       ├── prime-worker.js
 │       └── sort-worker.js
 │
-├── 🖼️ 資源
-│   ├── image/                  # 圖片資源
-│   ├── data/                   # 模擬數據
-│   │   ├── mock-api.json
-│   │   └── mock-data.json
-│   ├── manifest.json           # PWA Manifest
-│   └── sw.js                   # Service Worker
+├── 🖼️ image/                   # 圖片資源
+├── 📊 data/                    # 模擬數據
+│   ├── mock-api.json
+│   └── mock-data.json
 │
-└── 📄 文檔
-    └── README.md               # 本檔案
+├── 📋 planning/                # 規劃文檔
+│
+└── 📄 docs/                    # 報告文檔
+    └── RWD_ANALYSIS_REPORT.md  # RWD 分析報告
 ```
 
 ---
@@ -147,20 +150,20 @@ npx serve .
 | 頁面 | URL | 描述 |
 |------|-----|------|
 | **Landing** | `/index.html` | 首頁、特色、CTA |
-| **Dashboard** | `/dashboard.html` | KPI、表格、圖表 |
-| **JS 展示** | `/js-showcase.html` | 所有 JS 功能演示 ⭐ |
-| **Projects** | `/projects.html` | 項目列表 |
-| **Calendar** | `/calendar.html` | 日曆管理 |
-| **Kanban** | `/kanban.html` | 看板視圖 |
-| **Data Table** | `/data-table.html` | 數據表格 |
-| **Settings** | `/settings-*.html` | 設置頁面 |
-| **Pricing** | `/pricing.html` | 定價方案 |
+| **Dashboard** | `/pages/dashboard.html` | KPI、表格、圖表 |
+| **JS 展示** | `/pages/js-showcase.html` | 所有 JS 功能演示 ⭐ |
+| **Projects** | `/pages/projects.html` | 項目列表 |
+| **Calendar** | `/pages/calendar.html` | 日曆管理 |
+| **Kanban** | `/pages/kanban.html` | 看板視圖 |
+| **Data Table** | `/pages/data-table.html` | 數據表格 |
+| **Settings** | `/pages/settings-*.html` | 設置頁面 |
+| **Pricing** | `/pages/pricing.html` | 定價方案 |
 
 ---
 
 ## 🎬 功能展示
 
-### JavaScript 功能展示頁 (`js-showcase.html`)
+### JavaScript 功能展示頁 (`pages/js-showcase.html`)
 
 統整所有 JavaScript 功能演示於單一頁面：
 

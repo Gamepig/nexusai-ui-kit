@@ -3,13 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>安全設定 - NexusAI</title>
+  <title>設定 - NexusAI</title>
   <script src="https://unpkg.com/lucide@latest"></script>
-  <link rel="stylesheet" href="css/design-tokens.css">
-  <link rel="stylesheet" href="css/components.css">
-  <link rel="stylesheet" href="css/layout.css">
-  <link rel="stylesheet" href="css/responsive.css">
-  <link rel="stylesheet" href="css/theme-light.css">
+  <link rel="stylesheet" href="../css/design-tokens.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="stylesheet" href="../css/layout.css">
+  <link rel="stylesheet" href="../css/responsive.css">
+  <link rel="stylesheet" href="../css/theme-light.css">
   <style>
     /* Mobile-First: 手機版預設 */
     .page-header {
@@ -164,6 +164,12 @@
       box-shadow: 0 0 12px rgba(0, 217, 255, 0.2);
     }
 
+    .form-description {
+      font-size: var(--font-size-xs);
+      color: var(--color-text-secondary);
+      margin-top: var(--spacing-2);
+    }
+
     .form-row {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
@@ -174,7 +180,6 @@
       display: flex;
       align-items: center;
       gap: var(--spacing-3);
-      margin-bottom: var(--spacing-4);
     }
 
     .toggle-input {
@@ -190,8 +195,8 @@
     }
 
     .toggle-input:checked {
-      background: var(--color-green);
-      border-color: var(--color-green);
+      background: var(--color-cyan);
+      border-color: var(--color-cyan);
     }
 
     .toggle-input::after {
@@ -210,79 +215,10 @@
       left: 24px;
     }
 
-    .device-item {
-      background: var(--color-bg-tertiary);
-      border: 1px solid var(--color-border-muted);
-      border-radius: var(--radius-md);
-      padding: var(--spacing-4);
+    .button-group {
       display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: var(--spacing-4);
-    }
-
-    .device-info {
-      flex: 1;
-    }
-
-    .device-name {
-      font-weight: var(--font-weight-semibold);
-      color: var(--color-text-primary);
-      margin-bottom: var(--spacing-2);
-    }
-
-    .device-time {
-      font-size: var(--font-size-sm);
-      color: var(--color-text-secondary);
-    }
-
-    .device-badge {
-      background: rgba(34, 197, 94, 0.1);
-      color: var(--color-green);
-      padding: var(--spacing-1) var(--spacing-3);
-      border-radius: var(--radius-full);
-      font-size: var(--font-size-xs);
-      font-weight: var(--font-weight-semibold);
-      margin-right: var(--spacing-3);
-    }
-
-    .device-actions {
-      display: flex;
-      gap: var(--spacing-2);
-    }
-
-    .danger-zone {
-      background: rgba(239, 68, 68, 0.1);
-      border: 1px solid rgba(239, 68, 68, 0.3);
-      border-radius: var(--radius-lg);
-      padding: var(--spacing-6);
+      gap: var(--spacing-4);
       margin-top: var(--spacing-8);
-    }
-
-    .danger-title {
-      font-size: var(--font-size-lg);
-      font-weight: var(--font-weight-semibold);
-      color: var(--color-red);
-      margin-bottom: var(--spacing-4);
-    }
-
-    .danger-btn {
-      padding: var(--spacing-3) var(--spacing-6);
-      background: rgba(239, 68, 68, 0.1);
-      color: var(--color-red);
-      border: 1px solid var(--color-red);
-      border-radius: var(--radius-md);
-      font-weight: var(--font-weight-semibold);
-      cursor: pointer;
-      transition: all var(--transition-base);
-      margin-bottom: var(--spacing-3);
-      width: 100%;
-      text-align: left;
-    }
-
-    .danger-btn:hover {
-      background: var(--color-red);
-      color: white;
     }
 
     .btn-save {
@@ -294,41 +230,27 @@
       font-weight: var(--font-weight-semibold);
       cursor: pointer;
       transition: all var(--transition-base);
-      margin-right: var(--spacing-3);
     }
 
     .btn-save:hover {
+      background: var(--color-cyan);
       box-shadow: 0 0 20px rgba(0, 217, 255, 0.4);
     }
 
-    .btn-action {
-      padding: var(--spacing-2) var(--spacing-4);
+    .btn-cancel {
+      padding: var(--spacing-3) var(--spacing-6);
       background: transparent;
+      color: var(--color-text-secondary);
+      border: 1px solid var(--color-border-default);
+      border-radius: var(--radius-md);
+      font-weight: var(--font-weight-semibold);
+      cursor: pointer;
+      transition: all var(--transition-base);
+    }
+
+    .btn-cancel:hover {
+      border-color: var(--color-cyan);
       color: var(--color-cyan);
-      border: 1px solid var(--color-cyan);
-      border-radius: var(--radius-md);
-      font-size: var(--font-size-sm);
-      cursor: pointer;
-      transition: all var(--transition-base);
-    }
-
-    .btn-action:hover {
-      background: rgba(0, 217, 255, 0.1);
-    }
-
-    .btn-logout {
-      padding: var(--spacing-2) var(--spacing-4);
-      background: transparent;
-      color: var(--color-red);
-      border: 1px solid var(--color-red);
-      border-radius: var(--radius-md);
-      font-size: var(--font-size-sm);
-      cursor: pointer;
-      transition: all var(--transition-base);
-    }
-
-    .btn-logout:hover {
-      background: rgba(239, 68, 68, 0.1);
     }
 
     @media (max-width: 768px) {
@@ -346,18 +268,8 @@
         grid-template-columns: 1fr;
       }
 
-      .device-item {
+      .button-group {
         flex-direction: column;
-        align-items: flex-start;
-      }
-
-      .device-actions {
-        width: 100%;
-        margin-top: var(--spacing-4);
-      }
-
-      .device-badge {
-        margin-bottom: var(--spacing-3);
       }
     }
   </style>
@@ -366,13 +278,13 @@
   <!-- Top Navigation -->
   <nav class="top-nav">
     <div class="top-nav-container">
-      <a href="index.html" class="logo">
+      <a href="../index.html" class="logo">
         <span style="font-size: 24px;">🚀</span>
         <span>NexusAI</span>
       </a>
       <ul class="nav-links">
         <li><a href="dashboard.html"><i data-lucide="layout-dashboard" class="nav-icon"></i>儀表板</a></li>
-        <li><a href="settings-security.html" class="active"><i data-lucide="settings" class="nav-icon"></i>設定</a></li>
+        <li><a href="settings-general.html" class="active"><i data-lucide="settings" class="nav-icon"></i>設定</a></li>
         <li><a href="pricing.html"><i data-lucide="credit-card" class="nav-icon"></i>定價</a></li>
         <li><a href="about.html"><i data-lucide="users" class="nav-icon"></i>關於</a></li>
       </ul>
@@ -405,93 +317,101 @@
         <!-- Settings Sidebar -->
         <div class="settings-sidebar">
         <nav class="settings-nav">
-          <a href="settings-general.html" class="settings-nav-item">一般</a>
-          <a href="settings-security.html" class="settings-nav-item active">安全</a>
+          <a href="settings-general.html" class="settings-nav-item active">一般</a>
+          <a href="settings-security.html" class="settings-nav-item">安全</a>
           <a href="settings-billing.html" class="settings-nav-item">帳單</a>
         </nav>
       </div>
 
       <!-- Settings Content -->
       <div class="settings-content">
-        <!-- Change Password Section -->
+        <!-- Personal Info Section -->
         <div class="settings-section">
-          <div class="settings-title">變更密碼</div>
+          <div class="settings-title">個人資訊</div>
           <form>
             <div class="form-group">
-              <label class="form-label">目前密碼</label>
-              <input type="password" class="form-control" placeholder="請輸入目前密碼">
+              <label class="form-label">姓名</label>
+              <input type="text" class="form-control" value="李明軒" placeholder="請輸入您的姓名">
             </div>
 
             <div class="form-group">
-              <label class="form-label">新密碼</label>
-              <input type="password" class="form-control" placeholder="請輸入新密碼">
-              <p style="font-size: var(--font-size-xs); color: var(--color-text-secondary); margin-top: var(--spacing-2);">
-                強度: <span style="color: var(--color-green);">強</span> - 至少 8 個字符，包含大小寫和數字
-              </p>
+              <label class="form-label">電子郵件</label>
+              <input type="email" class="form-control" value="liming@example.com" placeholder="請輸入您的電子郵件">
             </div>
 
             <div class="form-group">
-              <label class="form-label">確認密碼</label>
-              <input type="password" class="form-control" placeholder="請再次輸入新密碼">
+              <label class="form-label">頭像</label>
+              <input type="file" class="form-control">
+              <p class="form-description">建議尺寸: 400x400px，最大大小: 2MB</p>
             </div>
 
-            <button type="button" class="btn-save">更新密碼</button>
+            <div class="form-group">
+              <label class="form-label">個人簡介</label>
+              <textarea class="form-control" rows="4" placeholder="分享一些關於您自己的信息...">產品經理 / 設計負責人，專注於用戶體驗和設計系統</textarea>
+            </div>
           </form>
         </div>
 
-        <!-- Two-Factor Authentication Section -->
+        <!-- Preferences Section -->
         <div class="settings-section">
-          <div class="settings-title">雙重驗證</div>
-          <div class="toggle-switch">
-            <input type="checkbox" class="toggle-input" id="2fa" checked>
-            <label for="2fa" style="flex: 1; cursor: pointer;">
-              <div style="font-weight: var(--font-weight-semibold); color: var(--color-text-primary); margin-bottom: var(--spacing-1);">雙重驗證</div>
-              <div style="font-size: var(--font-size-xs); color: var(--color-text-secondary);">狀態: 已啟用</div>
-            </label>
-          </div>
-          <button class="btn-action" style="margin-top: var(--spacing-4);">管理備用碼</button>
+          <div class="settings-title">偏好設定</div>
+          <form>
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label">語言</label>
+                <select class="form-control">
+                  <option>繁體中文</option>
+                  <option>簡體中文</option>
+                  <option>English</option>
+                  <option>日本語</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">時區</label>
+                <select class="form-control">
+                  <option>UTC+8 (台北)</option>
+                  <option>UTC+9 (東京)</option>
+                  <option>UTC+0 (倫敦)</option>
+                  <option>UTC-5 (紐約)</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">通知偏好</label>
+            </div>
+
+            <div class="toggle-switch" style="margin-bottom: var(--spacing-4);">
+              <input type="checkbox" class="toggle-input" id="emailNotif" checked>
+              <label for="emailNotif" style="flex: 1; cursor: pointer;">
+                <div style="font-weight: var(--font-weight-semibold); color: var(--color-text-primary); margin-bottom: var(--spacing-1);">電子郵件通知</div>
+                <div style="font-size: var(--font-size-xs); color: var(--color-text-secondary);">接收重要更新和通知</div>
+              </label>
+            </div>
+
+            <div class="toggle-switch" style="margin-bottom: var(--spacing-4);">
+              <input type="checkbox" class="toggle-input" id="desktopNotif" checked>
+              <label for="desktopNotif" style="flex: 1; cursor: pointer;">
+                <div style="font-weight: var(--font-weight-semibold); color: var(--color-text-primary); margin-bottom: var(--spacing-1);">桌面通知</div>
+                <div style="font-size: var(--font-size-xs); color: var(--color-text-secondary);">接收即時桌面提醒</div>
+              </label>
+            </div>
+
+            <div class="toggle-switch">
+              <input type="checkbox" class="toggle-input" id="pushNotif">
+              <label for="pushNotif" style="flex: 1; cursor: pointer;">
+                <div style="font-weight: var(--font-weight-semibold); color: var(--color-text-primary); margin-bottom: var(--spacing-1);">推播通知</div>
+                <div style="font-size: var(--font-size-xs); color: var(--color-text-secondary);">接收行動應用推播通知</div>
+              </label>
+            </div>
+          </form>
         </div>
 
-        <!-- Login Devices Section -->
-        <div class="settings-section">
-          <div class="settings-title">登入裝置</div>
-
-          <div class="device-item">
-            <div class="device-info">
-              <div class="device-name"><i data-lucide="laptop" style="width: 18px; height: 18px; vertical-align: middle; margin-right: 8px;"></i>MacBook Pro</div>
-              <div class="device-time">目前裝置 • 最後活動: 剛剛</div>
-            </div>
-            <div class="device-actions">
-              <button class="btn-action">詳情</button>
-            </div>
-          </div>
-
-          <div class="device-item">
-            <div class="device-info">
-              <div class="device-name"><i data-lucide="smartphone" style="width: 18px; height: 18px; vertical-align: middle; margin-right: 8px;"></i>iPhone 15</div>
-              <div class="device-time">最後活動: 2天前</div>
-            </div>
-            <div class="device-actions">
-              <button class="btn-logout">登出</button>
-            </div>
-          </div>
-
-          <div class="device-item">
-            <div class="device-info">
-              <div class="device-name"><i data-lucide="tablet" style="width: 18px; height: 18px; vertical-align: middle; margin-right: 8px;"></i>iPad Pro</div>
-              <div class="device-time">最後活動: 1周前</div>
-            </div>
-            <div class="device-actions">
-              <button class="btn-logout">登出</button>
-            </div>
-          </div>
-        </div>
-
-        <!-- Danger Zone -->
-        <div class="danger-zone">
-          <div class="danger-title"><i data-lucide="alert-triangle" style="width: 20px; height: 20px; vertical-align: middle; margin-right: 8px;"></i>危險區域</div>
-          <button class="danger-btn">登出所有裝置</button>
-          <button class="danger-btn">刪除帳號</button>
+        <!-- Action Buttons -->
+        <div class="button-group">
+          <button class="btn-save">儲存變更</button>
+          <button class="btn-cancel">取消</button>
         </div>
       </div>
       </div>
@@ -508,9 +428,9 @@
       <div>
         <h4>導航</h4>
         <ul>
-          <li><a href="index.html">首頁</a></li>
+          <li><a href="../index.html">首頁</a></li>
           <li><a href="dashboard.html">儀表板</a></li>
-          <li><a href="settings-security.html">設定</a></li>
+          <li><a href="settings-general.html">設定</a></li>
           <li><a href="pricing.html">定價</a></li>
         </ul>
       </div>
@@ -529,9 +449,9 @@
     </div>
   </footer>
 
-  <script src="js/theme-toggle.js"></script>
-  <script src="js/main.js"></script>
-  <script src="js/sidebar.js"></script>
+  <script src="../js/theme-toggle.js"></script>
+  <script src="../js/main.js"></script>
+  <script src="../js/sidebar.js"></script>
   <script>
     lucide.createIcons();
   </script>
