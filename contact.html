@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="zh-TW" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>聯繫 - NexusAI</title>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <link rel="stylesheet" href="css/design-tokens.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  <link rel="stylesheet" href="css/theme-light.css">
+  <style>
+    .contact-hero {
+      padding: 120px 0 60px;
+      text-align: center;
+      background: linear-gradient(180deg, var(--color-bg-primary) 0%, var(--color-bg-secondary) 100%);
+    }
+
+    .contact-hero h1 {
+      margin-bottom: var(--spacing-4);
+      font-size: 3rem;
+    }
+
+    .contact-section {
+      padding: var(--spacing-16) 0;
+    }
+
+    .contact-container {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--spacing-12);
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .contact-info {
+      padding: var(--spacing-8);
+    }
+
+    .contact-form {
+      background: var(--color-bg-card);
+      border: 1px solid var(--color-border-default);
+      border-radius: var(--radius-xl);
+      padding: var(--spacing-8);
+    }
+
+    .info-item {
+      margin-bottom: var(--spacing-8);
+      display: flex;
+      gap: var(--spacing-4);
+    }
+
+    .info-icon {
+      width: 48px;
+      height: 48px;
+      background: rgba(0, 217, 255, 0.1);
+      border-radius: var(--radius-lg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--color-cyan);
+      flex-shrink: 0;
+    }
+
+    .info-content h3 {
+      margin-bottom: var(--spacing-2);
+      color: var(--color-text-primary);
+      font-size: var(--font-size-base);
+    }
+
+    .info-content p {
+      color: var(--color-text-secondary);
+      font-size: var(--font-size-sm);
+      margin: 0;
+    }
+
+    .form-group {
+      margin-bottom: var(--spacing-6);
+    }
+
+    .form-group.full {
+      grid-column: 1 / -1;
+    }
+
+    .form-label {
+      display: block;
+      margin-bottom: var(--spacing-2);
+      font-size: var(--font-size-sm);
+      font-weight: var(--font-weight-semibold);
+      color: var(--color-text-primary);
+    }
+
+    .input,
+    textarea {
+      width: 100%;
+      padding: var(--spacing-3) var(--spacing-4);
+      background: var(--color-bg-tertiary);
+      border: 1px solid var(--color-border-default);
+      border-radius: var(--radius-md);
+      color: var(--color-text-primary);
+      font-family: var(--font-family-sans);
+      font-size: var(--font-size-base);
+      transition: var(--transition-base);
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 120px;
+    }
+
+    .input:focus,
+    textarea:focus {
+      outline: none;
+      border-color: var(--color-cyan);
+      box-shadow: 0 0 20px rgba(0, 217, 255, 0.2);
+    }
+
+    .input::placeholder,
+    textarea::placeholder {
+      color: var(--color-text-muted);
+    }
+
+    .form-actions {
+      display: flex;
+      gap: var(--spacing-3);
+      margin-top: var(--spacing-8);
+    }
+
+    .social-links {
+      display: flex;
+      gap: var(--spacing-3);
+      margin-top: var(--spacing-8);
+    }
+
+    .social-links a {
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(0, 217, 255, 0.1);
+      border: 1px solid var(--color-border-default);
+      border-radius: var(--radius-md);
+      color: var(--color-cyan);
+      transition: var(--transition-base);
+    }
+
+    .social-links a:hover {
+      background: var(--color-cyan);
+      color: var(--color-bg-primary);
+    }
+
+    /* Success Message */
+    .form-success {
+      display: none;
+      background: rgba(34, 197, 94, 0.1);
+      border: 1px solid var(--color-green);
+      border-radius: var(--radius-md);
+      padding: var(--spacing-4);
+      color: var(--color-green);
+      margin-bottom: var(--spacing-6);
+      text-align: center;
+    }
+
+    .form-success.show {
+      display: block;
+    }
+
+    @media (max-width: 1023px) {
+      .contact-container {
+        grid-template-columns: 1fr;
+      }
+
+      .contact-hero h1 {
+        font-size: 2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Top Navigation -->
+  <nav class="top-nav">
+    <div class="top-nav-container">
+      <a href="index.html" class="logo">
+        <span style="font-size: 24px;">🚀</span>
+        <span>NexusAI</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="index.html#features"><i data-lucide="star" class="nav-icon"></i>特色</a></li>
+        <li><a href="pricing.html"><i data-lucide="credit-card" class="nav-icon"></i>定價</a></li>
+        <li><a href="about.html"><i data-lucide="users" class="nav-icon"></i>關於</a></li>
+        <li><a href="contact.html" class="active"><i data-lucide="mail" class="nav-icon"></i>聯繫</a></li>
+      </ul>
+      <div class="nav-actions">
+        <button id="theme-toggle-btn" class="btn btn-outline-cyan btn-sm" title="切換主題" aria-label="切換至淺色主題">
+          <i data-lucide="sun"></i>
+        </button>
+      </div>
+      <button class="hamburger-menu">
+        <i data-lucide="menu"></i>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Sidebar Navigation (Mobile) -->
+  <aside class="sidebar">
+    <nav class="sidebar-nav">
+      <a href="index.html" class="sidebar-item">
+        <i data-lucide="home"></i>
+        <span>首頁</span>
+      </a>
+      <a href="index.html#features" class="sidebar-item">
+        <i data-lucide="star"></i>
+        <span>特色</span>
+      </a>
+      <a href="pricing.html" class="sidebar-item">
+        <i data-lucide="dollar-sign"></i>
+        <span>定價</span>
+      </a>
+      <a href="about.html" class="sidebar-item">
+        <i data-lucide="info"></i>
+        <span>關於</span>
+      </a>
+      <a href="contact.html" class="sidebar-item active">
+        <i data-lucide="mail"></i>
+        <span>聯繫</span>
+      </a>
+    </nav>
+  </aside>
+
+  <!-- Contact Hero -->
+  <section class="contact-hero">
+    <div class="container">
+      <h1>聯繫我們</h1>
+      <p style="color: var(--color-text-secondary); margin-bottom: 0;">我們很樂意聽取你的想法</p>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section class="contact-section">
+    <div class="contact-container" style="padding: 0 var(--spacing-6);">
+      <!-- Contact Info -->
+      <div class="contact-info">
+        <h2 style="margin-bottom: var(--spacing-8);">聯繫資訊</h2>
+
+        <div class="info-item">
+          <div class="info-icon">
+            <i data-lucide="map-pin" style="width: 24px; height: 24px;"></i>
+          </div>
+          <div class="info-content">
+            <h3>地址</h3>
+            <p>台灣台北市信義區信義路 5 號</p>
+          </div>
+        </div>
+
+        <div class="info-item">
+          <div class="info-icon">
+            <i data-lucide="phone" style="width: 24px; height: 24px;"></i>
+          </div>
+          <div class="info-content">
+            <h3>電話</h3>
+            <p><a href="tel:+886212345678" style="color: var(--color-cyan);">+886 (2) 1234-5678</a></p>
+          </div>
+        </div>
+
+        <div class="info-item">
+          <div class="info-icon">
+            <i data-lucide="mail" style="width: 24px; height: 24px;"></i>
+          </div>
+          <div class="info-content">
+            <h3>電子郵件</h3>
+            <p><a href="mailto:hello@nexusai.com" style="color: var(--color-cyan);">hello@nexusai.com</a></p>
+          </div>
+        </div>
+
+        <div class="info-item">
+          <div class="info-icon">
+            <i data-lucide="clock" style="width: 24px; height: 24px;"></i>
+          </div>
+          <div class="info-content">
+            <h3>營業時間</h3>
+            <p>
+              週一至週五: 09:00 - 18:00<br>
+              週六日: 關閉
+            </p>
+          </div>
+        </div>
+
+        <!-- Social Links -->
+        <h3 style="margin-top: var(--spacing-12); margin-bottom: var(--spacing-4);">關注我們</h3>
+        <div class="social-links">
+          <a href="#" title="Twitter">
+            <i data-lucide="twitter" style="width: 20px; height: 20px;"></i>
+          </a>
+          <a href="#" title="GitHub">
+            <i data-lucide="github" style="width: 20px; height: 20px;"></i>
+          </a>
+          <a href="#" title="LinkedIn">
+            <i data-lucide="linkedin" style="width: 20px; height: 20px;"></i>
+          </a>
+          <a href="#" title="Discord">
+            <i data-lucide="mail" style="width: 20px; height: 20px;"></i>
+          </a>
+        </div>
+      </div>
+
+      <!-- Contact Form -->
+      <div class="contact-form">
+        <h2 style="margin-bottom: var(--spacing-8);">發送訊息給我們</h2>
+
+        <div class="form-success" id="successMessage">
+          <i data-lucide="check-circle" style="width: 20px; height: 20px; margin-right: var(--spacing-2);"></i>
+          謝謝！我們會儘快回覆你的訊息。
+        </div>
+
+        <form id="contactForm">
+          <div class="form-group">
+            <label class="form-label">姓名 *</label>
+            <input type="text" class="input" name="name" placeholder="你的姓名" required>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">電子郵件 *</label>
+            <input type="email" class="input" name="email" placeholder="你的電子郵件" required>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">主題 *</label>
+            <input type="text" class="input" name="subject" placeholder="訊息主題" required>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">訊息 *</label>
+            <textarea class="input" name="message" placeholder="請輸入你的訊息..." required></textarea>
+          </div>
+
+          <div class="form-group">
+            <label class="toggle">
+              <input type="checkbox" name="subscribe" value="yes">
+              <span class="toggle-slider"></span>
+              <span class="toggle-label">訂閱我們的新聞通訊</span>
+            </label>
+          </div>
+
+          <div class="form-actions">
+            <button type="submit" class="btn btn-solid-cyan" style="flex: 1;">發送訊息</button>
+            <button type="reset" class="btn btn-outline-cyan" style="flex: 1;">清空</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ Quick Links -->
+  <section style="background: var(--color-bg-secondary); padding: var(--spacing-16) 0;">
+    <div class="container">
+      <h2 style="text-align: center; margin-bottom: var(--spacing-12);">常見問題</h2>
+      <div class="grid-2">
+        <div style="background: var(--color-bg-card); padding: var(--spacing-6); border-radius: var(--radius-lg); border: 1px solid var(--color-border-default);">
+          <h3 style="margin-bottom: var(--spacing-3);">回應時間</h3>
+          <p style="color: var(--color-text-secondary); margin: 0;">我們通常在 24 小時內回覆所有訊息。</p>
+        </div>
+        <div style="background: var(--color-bg-card); padding: var(--spacing-6); border-radius: var(--radius-lg); border: 1px solid var(--color-border-default);">
+          <h3 style="margin-bottom: var(--spacing-3);">技術支援</h3>
+          <p style="color: var(--color-text-secondary); margin: 0;">優先支援計畫享受 1 小時的回應時間。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div>
+        <h4>NexusAI</h4>
+        <p>現代化的深色科技主題設計系統</p>
+      </div>
+      <div>
+        <h4>導航</h4>
+        <ul>
+          <li><a href="index.html">首頁</a></li>
+          <li><a href="pricing.html">定價</a></li>
+          <li><a href="about.html">關於</a></li>
+          <li><a href="contact.html">聯繫</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>資源</h4>
+        <ul>
+          <li><a href="dashboard.html">儀表板</a></li>
+          <li><a href="#">GitHub</a></li>
+          <li><a href="#">部落格</a></li>
+          <li><a href="#">社群</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2025 NexusAI. 保留所有權利。</p>
+    </div>
+  </footer>
+
+  <script src="js/theme-toggle.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/sidebar.js"></script>
+  <script>
+    lucide.createIcons();
+
+    // Contact Form Handler
+    const contactForm = document.getElementById('contactForm');
+    const successMessage = document.getElementById('successMessage');
+
+    contactForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      // Get form data
+      const formData = Form.getFormData('#contactForm');
+      console.log('Form Data:', formData);
+
+      // Simulate form submission
+      const submitBtn = contactForm.querySelector('button[type="submit"]');
+      const originalText = submitBtn.textContent;
+      submitBtn.textContent = '發送中...';
+      submitBtn.disabled = true;
+
+      // Simulate delay
+      setTimeout(() => {
+        // Show success message
+        successMessage.classList.add('show');
+        submitBtn.textContent = originalText;
+        submitBtn.disabled = false;
+
+        // Show toast notification
+        Toast.success('訊息已成功發送！');
+
+        // Reset form
+        contactForm.reset();
+
+        // Hide success message after 5 seconds
+        setTimeout(() => {
+          successMessage.classList.remove('show');
+        }, 5000);
+      }, 1000);
+    });
+  </script>
+</body>
+</html>

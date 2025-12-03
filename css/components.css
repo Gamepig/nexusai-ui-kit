@@ -1,0 +1,1006 @@
+/**
+ * Components - Dark Tech Theme
+ * 深色科技風格元件樣式庫
+ *
+ * 依賴：design-tokens.css
+ * 使用方式：@import 'design-tokens.css'; @import 'components.css';
+ */
+
+/* ========================================
+   1. 卡片元件 (Cards)
+   ======================================== */
+
+/* 基礎卡片 */
+.card {
+  background: var(--gradient-bg-card);
+  border: var(--border-width-1) solid var(--color-border-default);
+  border-radius: var(--radius-card);
+  padding: var(--spacing-6);
+  transition: var(--transition-base);
+  position: relative;
+  overflow: hidden;
+}
+
+.card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--color-cyan), transparent);
+  opacity: 0;
+  transition: var(--transition-base);
+}
+
+.card:hover {
+  background: var(--color-bg-card-hover);
+  border-color: rgba(0, 217, 255, 0.3);
+  box-shadow: 0 4px 20px rgba(0, 217, 255, 0.1);
+}
+
+.card:hover::before {
+  opacity: 1;
+}
+
+/* 發光卡片 - 青色 */
+.card-glow-cyan {
+  background: var(--gradient-bg-card);
+  border: var(--border-width-1) solid var(--color-cyan);
+  border-radius: var(--radius-card);
+  padding: var(--spacing-6);
+  box-shadow: var(--glow-cyan);
+  transition: var(--transition-base);
+}
+
+.card-glow-cyan:hover {
+  box-shadow: var(--glow-cyan-strong);
+}
+
+/* 發光卡片 - 綠色 */
+.card-glow-green {
+  background: var(--gradient-bg-card);
+  border: var(--border-width-1) solid var(--color-green);
+  border-radius: var(--radius-card);
+  padding: var(--spacing-6);
+  box-shadow: var(--glow-green);
+  transition: var(--transition-base);
+}
+
+.card-glow-green:hover {
+  box-shadow: var(--glow-green-strong);
+}
+
+/* 發光卡片 - 紫色 */
+.card-glow-purple {
+  background: var(--gradient-bg-card);
+  border: var(--border-width-1) solid var(--color-purple);
+  border-radius: var(--radius-card);
+  padding: var(--spacing-6);
+  box-shadow: var(--glow-purple);
+  transition: var(--transition-base);
+}
+
+.card-glow-purple:hover {
+  box-shadow: var(--glow-purple-strong);
+}
+
+/* 發光卡片 - 橙色 */
+.card-glow-orange {
+  background: var(--gradient-bg-card);
+  border: var(--border-width-1) solid var(--color-orange);
+  border-radius: var(--radius-card);
+  padding: var(--spacing-6);
+  box-shadow: var(--glow-orange);
+  transition: var(--transition-base);
+}
+
+.card-glow-orange:hover {
+  box-shadow: var(--glow-orange-strong);
+}
+
+/* 發光卡片 - 紅色 */
+.card-glow-red {
+  background: var(--gradient-bg-card);
+  border: var(--border-width-1) solid var(--color-red);
+  border-radius: var(--radius-card);
+  padding: var(--spacing-6);
+  box-shadow: var(--glow-red);
+  transition: var(--transition-base);
+}
+
+.card-glow-red:hover {
+  box-shadow: var(--glow-red-strong);
+}
+
+/* 漸變邊框卡片 */
+.card-gradient-border {
+  position: relative;
+  background: var(--color-bg-card);
+  border-radius: var(--radius-card);
+  padding: var(--spacing-6);
+}
+
+.card-gradient-border::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: var(--radius-card);
+  padding: var(--border-width-2);
+  background: var(--gradient-border-rainbow);
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+/* 產業卡片 */
+.card-industry {
+  background: var(--gradient-bg-card);
+  border: var(--border-width-1) solid var(--color-border-default);
+  border-radius: var(--radius-card);
+  padding: var(--spacing-6);
+  text-align: center;
+  transition: var(--transition-base);
+}
+
+.card-industry-legal {
+  border-color: var(--color-orange);
+  background: linear-gradient(180deg, rgba(249, 115, 22, 0.1) 0%, var(--color-bg-card) 100%);
+}
+
+.card-industry-healthcare {
+  border-color: var(--color-red);
+  background: linear-gradient(180deg, rgba(239, 68, 68, 0.1) 0%, var(--color-bg-card) 100%);
+}
+
+.card-industry-finance {
+  border-color: var(--color-green);
+  background: linear-gradient(180deg, rgba(34, 197, 94, 0.1) 0%, var(--color-bg-card) 100%);
+}
+
+.card-industry-logistics {
+  border-color: #3B82F6;
+  background: linear-gradient(180deg, rgba(59, 130, 246, 0.1) 0%, var(--color-bg-card) 100%);
+}
+
+.card-industry-education {
+  border-color: var(--color-purple);
+  background: linear-gradient(180deg, rgba(168, 85, 247, 0.1) 0%, var(--color-bg-card) 100%);
+}
+
+.card-industry-insurance {
+  border-color: var(--color-cyan);
+  background: linear-gradient(180deg, rgba(6, 182, 212, 0.1) 0%, var(--color-bg-card) 100%);
+}
+
+/* ========================================
+   2. 按鈕元件 (Buttons)
+   ======================================== */
+
+/* 基礎按鈕 */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-2);
+  padding: var(--spacing-2) var(--spacing-4);
+  border-radius: var(--radius-button);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+  text-decoration: none;
+  cursor: pointer;
+  transition: var(--transition-base);
+  border: var(--border-width-1) solid transparent;
+}
+
+/* 實心按鈕 */
+.btn-solid-cyan {
+  background: linear-gradient(135deg, #00D9FF 0%, #0EA5E9 50%, #00D9FF 100%);
+  background-size: 200% 200%;
+  color: var(--color-bg-primary);
+  border-color: var(--color-cyan);
+  animation: gradientShift 3s ease infinite;
+}
+
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.btn-solid-cyan:hover {
+  box-shadow: var(--glow-cyan-strong);
+  transform: translateY(-2px);
+}
+
+.btn-solid-green {
+  background: var(--gradient-green);
+  color: var(--color-text-primary);
+  border-color: var(--color-green);
+}
+
+.btn-solid-green:hover {
+  box-shadow: var(--glow-green);
+}
+
+.btn-solid-purple {
+  background: var(--gradient-purple);
+  color: var(--color-text-primary);
+  border-color: var(--color-purple);
+}
+
+.btn-solid-purple:hover {
+  box-shadow: var(--glow-purple);
+}
+
+.btn-solid-orange {
+  background: var(--gradient-orange);
+  color: var(--color-bg-primary);
+  border-color: var(--color-orange);
+}
+
+.btn-solid-orange:hover {
+  box-shadow: var(--glow-orange);
+}
+
+.btn-solid-red {
+  background: var(--gradient-red);
+  color: var(--color-text-primary);
+  border-color: var(--color-red);
+}
+
+.btn-solid-red:hover {
+  box-shadow: var(--glow-red);
+}
+
+/* 描邊按鈕 */
+.btn-outline-cyan {
+  background: transparent;
+  color: var(--color-cyan);
+  border-color: var(--color-cyan);
+}
+
+.btn-outline-cyan:hover {
+  background: rgba(0, 217, 255, 0.1);
+  box-shadow: var(--glow-cyan);
+}
+
+.btn-outline-green {
+  background: transparent;
+  color: var(--color-green);
+  border-color: var(--color-green);
+}
+
+.btn-outline-green:hover {
+  background: rgba(34, 197, 94, 0.1);
+  box-shadow: var(--glow-green);
+}
+
+.btn-outline-purple {
+  background: transparent;
+  color: var(--color-purple);
+  border-color: var(--color-purple);
+}
+
+.btn-outline-purple:hover {
+  background: rgba(168, 85, 247, 0.1);
+  box-shadow: var(--glow-purple);
+}
+
+/* 膠囊按鈕 */
+.btn-pill {
+  border-radius: var(--radius-pill);
+  padding: var(--spacing-2) var(--spacing-5);
+}
+
+/* ========================================
+   3. 標籤元件 (Tags / Badges)
+   ======================================== */
+
+/* 基礎標籤 */
+.tag {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-1);
+  padding: var(--spacing-1) var(--spacing-3);
+  border-radius: var(--radius-tag);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-semibold);
+  text-transform: uppercase;
+}
+
+/* Tip 標籤 */
+.tag-tip {
+  background: var(--gradient-green);
+  color: var(--color-text-primary);
+  border-radius: var(--radius-pill);
+  padding: var(--spacing-1) var(--spacing-4);
+}
+
+.tag-tip-orange {
+  background: var(--gradient-orange);
+  color: var(--color-bg-primary);
+}
+
+.tag-tip-purple {
+  background: var(--gradient-purple);
+  color: var(--color-text-primary);
+}
+
+/* 優先級標籤 */
+.tag-priority-high {
+  background: var(--color-red);
+  color: var(--color-text-primary);
+}
+
+.tag-priority-medium {
+  background: var(--color-yellow);
+  color: var(--color-bg-primary);
+}
+
+.tag-priority-low {
+  background: var(--color-green);
+  color: var(--color-text-primary);
+}
+
+/* 狀態標籤 */
+.tag-status-success {
+  background: rgba(34, 197, 94, 0.15);
+  color: var(--color-green);
+  border: var(--border-width-1) solid var(--color-green);
+}
+
+.tag-status-warning {
+  background: rgba(249, 115, 22, 0.15);
+  color: var(--color-orange);
+  border: var(--border-width-1) solid var(--color-orange);
+}
+
+.tag-status-error {
+  background: rgba(239, 68, 68, 0.15);
+  color: var(--color-red);
+  border: var(--border-width-1) solid var(--color-red);
+}
+
+.tag-status-info {
+  background: rgba(0, 217, 255, 0.15);
+  color: var(--color-cyan);
+  border: var(--border-width-1) solid var(--color-cyan);
+}
+
+/* 數字徽章 */
+.badge-number {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: var(--radius-full);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-primary);
+}
+
+.badge-number-green {
+  background: var(--color-green);
+}
+
+.badge-number-purple {
+  background: var(--color-purple);
+}
+
+.badge-number-orange {
+  background: var(--color-orange);
+  color: var(--color-bg-primary);
+}
+
+.badge-number-red {
+  background: var(--color-red);
+}
+
+/* ========================================
+   4. 進度條元件 (Progress Bars)
+   ======================================== */
+
+/* 基礎進度條容器 */
+.progress-container {
+  width: 100%;
+  height: 8px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: var(--radius-pill);
+  overflow: hidden;
+}
+
+/* 進度條填充 */
+.progress-bar {
+  height: 100%;
+  border-radius: var(--radius-pill);
+  transition: width var(--transition-slow);
+}
+
+/* 漸變進度條 */
+.progress-bar-gradient {
+  background: var(--gradient-progress);
+}
+
+.progress-bar-gradient-warm {
+  background: var(--gradient-progress-warm);
+}
+
+.progress-bar-gradient-cool {
+  background: var(--gradient-progress-cool);
+}
+
+/* 單色進度條 */
+.progress-bar-cyan {
+  background: var(--gradient-cyan);
+}
+
+.progress-bar-green {
+  background: var(--gradient-green);
+}
+
+.progress-bar-purple {
+  background: var(--gradient-purple);
+}
+
+.progress-bar-orange {
+  background: var(--gradient-orange);
+}
+
+.progress-bar-red {
+  background: var(--gradient-red);
+}
+
+/* 帶發光效果的進度條 */
+.progress-bar-glow {
+  box-shadow: 0 0 10px currentColor;
+}
+
+/* ========================================
+   5. 圖示容器 (Icon Containers)
+   ======================================== */
+
+/* 圓形圖示容器 */
+.icon-circle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-full);
+  border: var(--border-width-2) solid currentColor;
+}
+
+.icon-circle-cyan {
+  color: var(--color-cyan);
+  background: rgba(0, 217, 255, 0.1);
+}
+
+.icon-circle-green {
+  color: var(--color-green);
+  background: rgba(34, 197, 94, 0.1);
+}
+
+.icon-circle-purple {
+  color: var(--color-purple);
+  background: rgba(168, 85, 247, 0.1);
+}
+
+.icon-circle-red {
+  color: var(--color-red);
+  background: rgba(239, 68, 68, 0.1);
+}
+
+/* 方形圖示容器 */
+.icon-square {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-icon-container);
+  border: var(--border-width-1) solid currentColor;
+}
+
+.icon-square-cyan {
+  color: var(--color-cyan);
+  background: rgba(0, 217, 255, 0.1);
+  border-color: var(--color-cyan);
+}
+
+.icon-square-green {
+  color: var(--color-green);
+  background: rgba(34, 197, 94, 0.1);
+  border-color: var(--color-green);
+}
+
+.icon-square-purple {
+  color: var(--color-purple);
+  background: rgba(168, 85, 247, 0.1);
+  border-color: var(--color-purple);
+}
+
+/* 實心圖示容器 */
+.icon-solid {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-icon-container);
+  color: var(--color-text-primary);
+}
+
+.icon-solid-green {
+  background: var(--gradient-green);
+}
+
+.icon-solid-red {
+  background: var(--gradient-red);
+}
+
+.icon-solid-purple {
+  background: var(--gradient-purple);
+}
+
+.icon-solid-orange {
+  background: var(--gradient-orange);
+  color: var(--color-bg-primary);
+}
+
+/* ========================================
+   6. 列表元件 (Lists)
+   ======================================== */
+
+/* 列表項目 */
+.list-item {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-3);
+  padding: var(--spacing-3) var(--spacing-4);
+  background: var(--color-bg-tertiary);
+  border-radius: var(--radius-md);
+  transition: var(--transition-base);
+}
+
+.list-item:hover {
+  background: var(--color-bg-card-hover);
+}
+
+/* 帶圖示的列表 */
+.list-item-icon {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-3);
+  padding: var(--spacing-4);
+  background: var(--color-bg-tertiary);
+  border-radius: var(--radius-md);
+  border-left: var(--border-width-3) solid transparent;
+}
+
+.list-item-icon-cyan {
+  border-left-color: var(--color-cyan);
+}
+
+.list-item-icon-green {
+  border-left-color: var(--color-green);
+}
+
+.list-item-icon-purple {
+  border-left-color: var(--color-purple);
+}
+
+.list-item-icon-red {
+  border-left-color: var(--color-red);
+}
+
+/* ========================================
+   7. 流程元件 (Flow / Process)
+   ======================================== */
+
+/* 流程步驟容器 */
+.flow-container {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-4);
+}
+
+/* 流程箭頭 */
+.flow-arrow {
+  color: var(--color-text-tertiary);
+  font-size: var(--font-size-xl);
+}
+
+/* 流程步驟卡片 */
+.flow-step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-2);
+  padding: var(--spacing-4);
+  background: var(--color-bg-card);
+  border-radius: var(--radius-card);
+  border: var(--border-width-1) solid var(--color-border-default);
+  min-width: 120px;
+  text-align: center;
+}
+
+.flow-step-purple {
+  border-color: var(--color-purple);
+  background: linear-gradient(180deg, rgba(168, 85, 247, 0.1) 0%, var(--color-bg-card) 100%);
+}
+
+.flow-step-cyan {
+  border-color: var(--color-cyan);
+  background: linear-gradient(180deg, rgba(6, 182, 212, 0.1) 0%, var(--color-bg-card) 100%);
+}
+
+.flow-step-green {
+  border-color: var(--color-green);
+  background: linear-gradient(180deg, rgba(34, 197, 94, 0.1) 0%, var(--color-bg-card) 100%);
+}
+
+/* ========================================
+   8. 數據展示 (Data Display)
+   ======================================== */
+
+/* 大數字展示 */
+.stat-number {
+  font-size: var(--font-size-5xl);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--line-height-tight);
+}
+
+.stat-number-cyan {
+  color: var(--color-cyan);
+}
+
+.stat-number-green {
+  color: var(--color-green);
+}
+
+.stat-number-yellow {
+  color: var(--color-yellow);
+}
+
+.stat-number-gradient {
+  background: var(--gradient-purple-cyan);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* 數據標籤 */
+.stat-label {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* 水平長條圖 */
+.bar-chart-item {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-4);
+  margin-bottom: var(--spacing-3);
+}
+
+.bar-chart-label {
+  min-width: 120px;
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+  text-align: right;
+}
+
+.bar-chart-bar {
+  flex: 1;
+  height: 24px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+}
+
+.bar-chart-fill {
+  height: 100%;
+  border-radius: var(--radius-sm);
+  transition: width var(--transition-slow);
+}
+
+.bar-chart-fill-red {
+  background: var(--gradient-red);
+}
+
+.bar-chart-fill-orange {
+  background: var(--gradient-orange);
+}
+
+.bar-chart-fill-purple {
+  background: var(--gradient-purple);
+}
+
+.bar-chart-fill-gradient {
+  background: var(--gradient-purple-cyan);
+}
+
+.bar-chart-value {
+  min-width: 48px;
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-primary);
+}
+
+/* ========================================
+   9. 提示訊息 (Alerts / Messages)
+   ======================================== */
+
+/* 基礎提示 */
+.alert {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--spacing-3);
+  padding: var(--spacing-4);
+  border-radius: var(--radius-md);
+  border: var(--border-width-1) solid;
+}
+
+.alert-success {
+  background: rgba(34, 197, 94, 0.1);
+  border-color: var(--color-green);
+  color: var(--color-green);
+}
+
+.alert-warning {
+  background: rgba(249, 115, 22, 0.1);
+  border-color: var(--color-orange);
+  color: var(--color-orange);
+}
+
+.alert-error {
+  background: rgba(239, 68, 68, 0.1);
+  border-color: var(--color-red);
+  color: var(--color-red);
+}
+
+.alert-info {
+  background: rgba(0, 217, 255, 0.1);
+  border-color: var(--color-cyan);
+  color: var(--color-cyan);
+}
+
+/* ========================================
+   10. 表單元件 (Form Elements)
+   ======================================== */
+
+/* 輸入框 */
+.input {
+  width: 100%;
+  padding: var(--spacing-3) var(--spacing-4);
+  background: var(--color-bg-tertiary);
+  border: var(--border-width-1) solid var(--color-border-default);
+  border-radius: var(--radius-md);
+  color: var(--color-text-primary);
+  font-size: var(--font-size-base);
+  transition: var(--transition-base);
+}
+
+.input:focus {
+  outline: none;
+  border-color: var(--color-cyan);
+  box-shadow: var(--glow-cyan);
+}
+
+.input::placeholder {
+  color: var(--color-text-muted);
+}
+
+/* 核取方塊項目 */
+.checkbox-item {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-3);
+  padding: var(--spacing-3) var(--spacing-4);
+  background: var(--color-bg-tertiary);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: var(--transition-base);
+}
+
+.checkbox-item:hover {
+  background: var(--color-bg-card-hover);
+}
+
+.checkbox-icon {
+  width: 20px;
+  height: 20px;
+  border-radius: var(--radius-sm);
+  border: var(--border-width-2) solid var(--color-border-emphasis);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: var(--transition-base);
+}
+
+.checkbox-item.checked .checkbox-icon {
+  background: var(--color-green);
+  border-color: var(--color-green);
+}
+
+/* ========================================
+   11. 分隔線 (Dividers)
+   ======================================== */
+
+.divider {
+  height: 1px;
+  background: var(--color-border-default);
+  margin: var(--spacing-4) 0;
+}
+
+.divider-gradient {
+  height: 2px;
+  background: var(--gradient-purple-cyan);
+  margin: var(--spacing-4) 0;
+  border-radius: var(--radius-full);
+}
+
+/* ========================================
+   12. 文字樣式 (Typography Utilities)
+   ======================================== */
+
+/* 標題 */
+.heading-1 {
+  font-size: var(--font-size-5xl);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--line-height-tight);
+  color: var(--color-text-primary);
+}
+
+.heading-2 {
+  font-size: var(--font-size-4xl);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--line-height-tight);
+  color: var(--color-text-primary);
+}
+
+.heading-3 {
+  font-size: var(--font-size-2xl);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-tight);
+  color: var(--color-text-primary);
+}
+
+/* 高亮文字 */
+.text-highlight-cyan {
+  color: var(--color-cyan);
+}
+
+.text-highlight-green {
+  color: var(--color-green);
+}
+
+.text-highlight-purple {
+  color: var(--color-purple);
+}
+
+.text-highlight-orange {
+  color: var(--color-orange);
+}
+
+.text-highlight-red {
+  color: var(--color-red);
+}
+
+.text-highlight-yellow {
+  color: var(--color-yellow);
+}
+
+/* 漸變文字 */
+.text-gradient {
+  background: var(--gradient-purple-cyan);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.text-gradient-warm {
+  background: var(--gradient-orange-red);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* 刪除線文字 */
+.text-strikethrough {
+  text-decoration: line-through;
+  color: var(--color-text-tertiary);
+}
+
+/* ========================================
+   13. 動畫效果 (Animations)
+   ======================================== */
+
+/* 脈衝動畫 */
+@keyframes pulse-glow {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.6;
+  }
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+/* 漸入動畫 */
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in {
+  animation: fade-in var(--transition-slow) ease-out;
+}
+
+/* 縮放動畫 */
+@keyframes scale-in {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.animate-scale-in {
+  animation: scale-in var(--transition-slow) ease-out;
+}
+
+/* ========================================
+   14. 工具類別 (Utilities)
+   ======================================== */
+
+/* Flexbox */
+.flex { display: flex; }
+.flex-col { flex-direction: column; }
+.items-center { align-items: center; }
+.justify-center { justify-content: center; }
+.justify-between { justify-content: space-between; }
+.gap-1 { gap: var(--spacing-1); }
+.gap-2 { gap: var(--spacing-2); }
+.gap-3 { gap: var(--spacing-3); }
+.gap-4 { gap: var(--spacing-4); }
+.gap-6 { gap: var(--spacing-6); }
+
+/* 間距 */
+.p-4 { padding: var(--spacing-4); }
+.p-6 { padding: var(--spacing-6); }
+.px-4 { padding-left: var(--spacing-4); padding-right: var(--spacing-4); }
+.py-2 { padding-top: var(--spacing-2); padding-bottom: var(--spacing-2); }
+.m-0 { margin: 0; }
+.mt-4 { margin-top: var(--spacing-4); }
+.mb-4 { margin-bottom: var(--spacing-4); }
+
+/* 文字對齊 */
+.text-center { text-align: center; }
+.text-left { text-align: left; }
+.text-right { text-align: right; }
+
+/* 寬度 */
+.w-full { width: 100%; }
+.max-w-sm { max-width: 384px; }
+.max-w-md { max-width: 448px; }
+.max-w-lg { max-width: 512px; }

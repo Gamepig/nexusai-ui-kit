@@ -1,0 +1,338 @@
+/**
+ * Design Tokens - Dark Tech Theme
+ * 深色科技風格設計變數
+ * 來源：Coding Tech 簡報風格分析
+ *
+ * 特色：
+ * - 深色主題背景
+ * - 柔和漸變效果
+ * - 科技感色彩系統
+ */
+
+:root {
+  /* ========================================
+     1. 基礎色彩 (Base Colors)
+     ======================================== */
+
+  /* 背景色 */
+  --color-bg-primary: #0D1117;
+  --color-bg-secondary: #161B22;
+  --color-bg-tertiary: #21262D;
+  --color-bg-elevated: #1A1F2E;
+  --color-bg-card: #1E293B;
+  --color-bg-card-hover: #242D3D;
+
+  /* 文字色 */
+  --color-text-primary: #FFFFFF;
+  --color-text-secondary: #8B949E;
+  --color-text-tertiary: #6B7280;
+  --color-text-muted: #484F58;
+
+  /* 邊框色 */
+  --color-border-default: rgba(255, 255, 255, 0.1);
+  --color-border-muted: rgba(255, 255, 255, 0.05);
+  --color-border-emphasis: rgba(255, 255, 255, 0.2);
+
+  /* ========================================
+     2. 主題色彩 (Theme Colors)
+     ======================================== */
+
+  /* Cyan 青色 - 系統、連結、主要強調 */
+  --color-cyan-50: #ECFEFF;
+  --color-cyan-100: #CFFAFE;
+  --color-cyan-200: #A5F3FC;
+  --color-cyan-300: #67E8F9;
+  --color-cyan-400: #22D3EE;
+  --color-cyan-500: #06B6D4;
+  --color-cyan-600: #0891B2;
+  --color-cyan-700: #0E7490;
+  --color-cyan: #00D9FF;
+  --color-cyan-light: #67E8F9;
+  --color-cyan-dark: #0EA5E9;
+
+  /* Green 綠色 - 成功、Production、CTA */
+  --color-green-50: #F0FDF4;
+  --color-green-100: #DCFCE7;
+  --color-green-200: #BBF7D0;
+  --color-green-300: #86EFAC;
+  --color-green-400: #4ADE80;
+  --color-green-500: #22C55E;
+  --color-green-600: #16A34A;
+  --color-green-700: #15803D;
+  --color-green: #22C55E;
+  --color-green-light: #4ADE80;
+  --color-green-dark: #10B981;
+
+  /* Purple 紫色 - 次要、Evaluate、專家 */
+  --color-purple-50: #FAF5FF;
+  --color-purple-100: #F3E8FF;
+  --color-purple-200: #E9D5FF;
+  --color-purple-300: #D8B4FE;
+  --color-purple-400: #C084FC;
+  --color-purple-500: #A855F7;
+  --color-purple-600: #9333EA;
+  --color-purple-700: #7C3AED;
+  --color-purple: #A855F7;
+  --color-purple-light: #C084FC;
+  --color-purple-dark: #8B5CF6;
+
+  /* Orange 橙色 - 警告、Tip、能量 */
+  --color-orange-50: #FFF7ED;
+  --color-orange-100: #FFEDD5;
+  --color-orange-200: #FED7AA;
+  --color-orange-300: #FDBA74;
+  --color-orange-400: #FB923C;
+  --color-orange-500: #F97316;
+  --color-orange-600: #EA580C;
+  --color-orange-700: #C2410C;
+  --color-orange: #F97316;
+  --color-orange-light: #FB923C;
+  --color-orange-dark: #EA580C;
+
+  /* Red 紅色 - 錯誤、Failure、警示 */
+  --color-red-50: #FEF2F2;
+  --color-red-100: #FEE2E2;
+  --color-red-200: #FECACA;
+  --color-red-300: #FCA5A5;
+  --color-red-400: #F87171;
+  --color-red-500: #EF4444;
+  --color-red-600: #DC2626;
+  --color-red-700: #B91C1C;
+  --color-red: #EF4444;
+  --color-red-light: #F87171;
+  --color-red-dark: #DC2626;
+
+  /* Yellow/Gold 金色 - 數據、價值 */
+  --color-yellow-50: #FEFCE8;
+  --color-yellow-100: #FEF9C3;
+  --color-yellow-200: #FEF08A;
+  --color-yellow-300: #FDE047;
+  --color-yellow-400: #FACC15;
+  --color-yellow-500: #EAB308;
+  --color-yellow-600: #CA8A04;
+  --color-yellow-700: #A16207;
+  --color-yellow: #EAB308;
+  --color-yellow-light: #FDE047;
+  --color-yellow-dark: #CA8A04;
+  --color-gold: #FFD700;
+
+  /* Teal 青綠色 - 信任、穩定 */
+  --color-teal-50: #F0FDFA;
+  --color-teal-100: #CCFBF1;
+  --color-teal-200: #99F6E4;
+  --color-teal-300: #5EEAD4;
+  --color-teal-400: #2DD4BF;
+  --color-teal-500: #14B8A6;
+  --color-teal-600: #0D9488;
+  --color-teal-700: #0F766E;
+  --color-teal: #14B8A6;
+  --color-teal-light: #2DD4BF;
+  --color-teal-dark: #0D9488;
+
+  /* ========================================
+     3. 語意色彩 (Semantic Colors)
+     ======================================== */
+
+  --color-success: var(--color-green);
+  --color-success-light: var(--color-green-light);
+  --color-success-dark: var(--color-green-dark);
+
+  --color-warning: var(--color-orange);
+  --color-warning-light: var(--color-orange-light);
+  --color-warning-dark: var(--color-orange-dark);
+
+  --color-error: var(--color-red);
+  --color-error-light: var(--color-red-light);
+  --color-error-dark: var(--color-red-dark);
+
+  --color-info: var(--color-cyan);
+  --color-info-light: var(--color-cyan-light);
+  --color-info-dark: var(--color-cyan-dark);
+
+  --color-accent: var(--color-purple);
+  --color-accent-light: var(--color-purple-light);
+  --color-accent-dark: var(--color-purple-dark);
+
+  /* ========================================
+     4. 漸變效果 (Gradients) - 柔和變化
+     ======================================== */
+
+  /* 背景漸變 */
+  --gradient-bg-card: linear-gradient(180deg, #1E293B 0%, #0F172A 100%);
+  --gradient-bg-elevated: linear-gradient(180deg, #21262D 0%, #161B22 100%);
+  --gradient-bg-subtle: linear-gradient(180deg, rgba(30, 41, 59, 0.8) 0%, rgba(15, 23, 42, 0.9) 100%);
+
+  /* 單色系漸變（同色深淺） */
+  --gradient-cyan: linear-gradient(135deg, #00D9FF 0%, #0EA5E9 100%);
+  --gradient-cyan-soft: linear-gradient(135deg, #22D3EE 0%, #06B6D4 100%);
+  --gradient-green: linear-gradient(135deg, #22C55E 0%, #10B981 100%);
+  --gradient-green-soft: linear-gradient(135deg, #4ADE80 0%, #22C55E 100%);
+  --gradient-purple: linear-gradient(135deg, #A855F7 0%, #8B5CF6 100%);
+  --gradient-purple-soft: linear-gradient(135deg, #C084FC 0%, #A855F7 100%);
+  --gradient-orange: linear-gradient(135deg, #F97316 0%, #FB923C 100%);
+  --gradient-orange-soft: linear-gradient(135deg, #FB923C 0%, #FDBA74 100%);
+  --gradient-red: linear-gradient(135deg, #EF4444 0%, #F87171 100%);
+  --gradient-red-soft: linear-gradient(135deg, #F87171 0%, #FCA5A5 100%);
+  --gradient-yellow: linear-gradient(135deg, #EAB308 0%, #FDE047 100%);
+  --gradient-teal: linear-gradient(135deg, #14B8A6 0%, #2DD4BF 100%);
+
+  /* 跨色系漸變（柔和過渡） */
+  --gradient-purple-cyan: linear-gradient(90deg, #A855F7 0%, #06B6D4 100%);
+  --gradient-purple-blue: linear-gradient(90deg, #A855F7 0%, #3B82F6 100%);
+  --gradient-green-teal: linear-gradient(90deg, #22C55E 0%, #14B8A6 100%);
+  --gradient-green-cyan: linear-gradient(90deg, #22C55E 0%, #06B6D4 100%);
+  --gradient-orange-yellow: linear-gradient(90deg, #F97316 0%, #EAB308 100%);
+  --gradient-orange-red: linear-gradient(90deg, #F59E0B 0%, #EF4444 100%);
+  --gradient-cyan-green: linear-gradient(90deg, #06B6D4 0%, #22C55E 100%);
+
+  /* 進度條漸變 */
+  --gradient-progress: linear-gradient(90deg, #A855F7 0%, #3B82F6 50%, #22C55E 100%);
+  --gradient-progress-warm: linear-gradient(90deg, #EAB308 0%, #F97316 50%, #EF4444 100%);
+  --gradient-progress-cool: linear-gradient(90deg, #8B5CF6 0%, #06B6D4 50%, #14B8A6 100%);
+
+  /* 邊框漸變 */
+  --gradient-border-rainbow: linear-gradient(135deg, #A855F7 0%, #06B6D4 50%, #22C55E 100%);
+  --gradient-border-cool: linear-gradient(135deg, #8B5CF6 0%, #06B6D4 100%);
+  --gradient-border-warm: linear-gradient(135deg, #F97316 0%, #EF4444 100%);
+
+  /* 循環圖漸變 */
+  --gradient-cycle: conic-gradient(from 0deg, #A855F7, #3B82F6, #06B6D4, #14B8A6, #22C55E, #F97316, #A855F7);
+  --gradient-cycle-soft: conic-gradient(from 0deg, #C084FC, #60A5FA, #22D3EE, #2DD4BF, #4ADE80, #FB923C, #C084FC);
+
+  /* ========================================
+     5. 陰影效果 (Shadows)
+     ======================================== */
+
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.5);
+  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.5);
+
+  /* 發光效果 */
+  --glow-cyan: 0 0 20px rgba(0, 217, 255, 0.3);
+  --glow-cyan-strong: 0 0 30px rgba(0, 217, 255, 0.5);
+  --glow-green: 0 0 20px rgba(34, 197, 94, 0.3);
+  --glow-green-strong: 0 0 30px rgba(34, 197, 94, 0.5);
+  --glow-purple: 0 0 20px rgba(168, 85, 247, 0.3);
+  --glow-purple-strong: 0 0 30px rgba(168, 85, 247, 0.5);
+  --glow-orange: 0 0 20px rgba(249, 115, 22, 0.3);
+  --glow-orange-strong: 0 0 30px rgba(249, 115, 22, 0.5);
+  --glow-red: 0 0 20px rgba(239, 68, 68, 0.3);
+  --glow-red-strong: 0 0 30px rgba(239, 68, 68, 0.5);
+  --glow-yellow: 0 0 20px rgba(234, 179, 8, 0.3);
+  --glow-yellow-strong: 0 0 30px rgba(234, 179, 8, 0.5);
+
+  /* ========================================
+     6. 間距系統 (Spacing)
+     ======================================== */
+
+  --spacing-0: 0;
+  --spacing-1: 4px;
+  --spacing-2: 8px;
+  --spacing-3: 12px;
+  --spacing-4: 16px;
+  --spacing-5: 20px;
+  --spacing-6: 24px;
+  --spacing-8: 32px;
+  --spacing-10: 40px;
+  --spacing-12: 48px;
+  --spacing-16: 64px;
+  --spacing-20: 80px;
+  --spacing-24: 96px;
+
+  /* ========================================
+     7. 圓角系統 (Border Radius)
+     ======================================== */
+
+  --radius-none: 0;
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+  --radius-2xl: 24px;
+  --radius-full: 9999px;
+
+  /* 元件專用 */
+  --radius-card: 12px;
+  --radius-button: 8px;
+  --radius-tag: 6px;
+  --radius-pill: 9999px;
+  --radius-icon-container: 12px;
+
+  /* ========================================
+     8. 字型系統 (Typography)
+     ======================================== */
+
+  --font-family-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  --font-family-mono: 'SF Mono', 'Fira Code', 'Fira Mono', Menlo, Monaco, Consolas, monospace;
+
+  /* 字體大小 */
+  --font-size-xs: 12px;
+  --font-size-sm: 14px;
+  --font-size-base: 16px;
+  --font-size-lg: 18px;
+  --font-size-xl: 20px;
+  --font-size-2xl: 24px;
+  --font-size-3xl: 30px;
+  --font-size-4xl: 36px;
+  --font-size-5xl: 48px;
+  --font-size-6xl: 60px;
+
+  /* 字重 */
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+  --font-weight-extrabold: 800;
+
+  /* 行高 */
+  --line-height-tight: 1.25;
+  --line-height-normal: 1.5;
+  --line-height-relaxed: 1.75;
+
+  /* ========================================
+     9. 過渡動畫 (Transitions)
+     ======================================== */
+
+  --transition-fast: 150ms ease;
+  --transition-base: 200ms ease;
+  --transition-slow: 300ms ease;
+  --transition-slower: 500ms ease;
+
+  /* 彈性動畫 */
+  --transition-bounce: 500ms cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  --transition-smooth: 300ms cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* ========================================
+     10. Z-Index 層級
+     ======================================== */
+
+  --z-dropdown: 1000;
+  --z-sticky: 1020;
+  --z-fixed: 1030;
+  --z-modal-backdrop: 1040;
+  --z-modal: 1050;
+  --z-popover: 1060;
+  --z-tooltip: 1070;
+
+  /* ========================================
+     11. 邊框寬度 (Border Width)
+     ======================================== */
+
+  --border-width-0: 0;
+  --border-width-1: 1px;
+  --border-width-2: 2px;
+  --border-width-3: 3px;
+  --border-width-4: 4px;
+}
+
+/* ========================================
+   深色主題基礎樣式
+   ======================================== */
+
+.dark-theme,
+[data-theme="dark"] {
+  background-color: var(--color-bg-primary);
+  color: var(--color-text-primary);
+  font-family: var(--font-family-sans);
+}

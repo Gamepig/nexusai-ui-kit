@@ -1,0 +1,519 @@
+/**
+ * PWA 演示樣式
+ * Phase 6.2
+ */
+
+/* ============================================
+   容器
+   ============================================ */
+.pwa-showcase {
+  padding: var(--spacing-6);
+}
+
+.pwa-showcase .showcase-header {
+  text-align: center;
+  margin-bottom: var(--spacing-8);
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: var(--spacing-6);
+  background: var(--color-bg-tertiary);
+  border: 1px solid var(--color-border-default);
+  border-radius: var(--radius-lg);
+}
+
+/* ============================================
+   狀態面板
+   ============================================ */
+.sw-status-panel,
+.network-status-panel {
+  background: var(--color-bg-tertiary);
+  border: 1px solid var(--color-border-default);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-4);
+  margin-bottom: var(--spacing-4);
+}
+
+.status-item {
+  display: flex;
+  justify-content: space-between;
+  padding: var(--spacing-2) 0;
+  border-bottom: 1px solid var(--color-border-muted);
+}
+
+.status-item:last-child {
+  border-bottom: none;
+}
+
+.status-label {
+  color: var(--color-text-secondary);
+}
+
+.status-value {
+  font-weight: var(--font-weight-semibold);
+}
+
+.status-value.success {
+  color: var(--color-green);
+}
+
+.status-value.warning {
+  color: var(--color-orange);
+}
+
+.sw-controls {
+  display: flex;
+  gap: var(--spacing-3);
+  flex-wrap: wrap;
+}
+
+/* ============================================
+   網路狀態
+   ============================================ */
+.network-indicator {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+  margin-bottom: var(--spacing-4);
+}
+
+.indicator-dot {
+  width: 12px;
+  height: 12px;
+  background: var(--color-green);
+  border-radius: 50%;
+  animation: pulse-dot 2s ease-in-out infinite;
+}
+
+.network-indicator.offline .indicator-dot {
+  background: var(--color-red);
+  animation: none;
+}
+
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(0.8); }
+}
+
+.network-details {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--spacing-3);
+}
+
+.detail-item {
+  background: var(--color-bg-card);
+  padding: var(--spacing-3);
+  border-radius: var(--radius-md);
+  font-size: var(--font-size-sm);
+}
+
+.detail-item span:first-child {
+  color: var(--color-text-tertiary);
+  display: block;
+  margin-bottom: var(--spacing-1);
+}
+
+/* ============================================
+   快取管理
+   ============================================ */
+.cache-info {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--spacing-4);
+  margin-bottom: var(--spacing-4);
+}
+
+.cache-stat {
+  background: var(--color-bg-tertiary);
+  border: 1px solid var(--color-border-default);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-4);
+  text-align: center;
+}
+
+.stat-value {
+  display: block;
+  font-size: var(--font-size-2xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-cyan);
+  margin-bottom: var(--spacing-1);
+}
+
+.stat-label {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-tertiary);
+}
+
+.cache-list {
+  background: var(--color-bg-tertiary);
+  border: 1px solid var(--color-border-default);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-3);
+  max-height: 200px;
+  overflow-y: auto;
+  margin-bottom: var(--spacing-4);
+}
+
+.cache-item {
+  padding: var(--spacing-2);
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+  border-bottom: 1px solid var(--color-border-muted);
+  font-family: monospace;
+  word-break: break-all;
+}
+
+.cache-item:last-child {
+  border-bottom: none;
+}
+
+.placeholder {
+  color: var(--color-text-tertiary);
+  text-align: center;
+  font-style: italic;
+}
+
+.cache-controls {
+  display: flex;
+  gap: var(--spacing-3);
+}
+
+/* ============================================
+   安裝面板
+   ============================================ */
+.install-panel {
+  background: var(--color-bg-tertiary);
+  border: 1px solid var(--color-border-default);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-5);
+  text-align: center;
+}
+
+.install-info {
+  margin-bottom: var(--spacing-4);
+}
+
+.install-info p {
+  margin-bottom: var(--spacing-3);
+  color: var(--color-text-secondary);
+}
+
+.install-info ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  gap: var(--spacing-4);
+}
+
+.install-info li {
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-sm);
+}
+
+.install-hint {
+  margin-top: var(--spacing-3);
+  font-size: var(--font-size-sm);
+  color: var(--color-text-tertiary);
+}
+
+#btn-install-pwa:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* ============================================
+   儲存空間
+   ============================================ */
+.storage-info {
+  background: var(--color-bg-tertiary);
+  border: 1px solid var(--color-border-default);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-4);
+}
+
+.storage-bar {
+  height: 8px;
+  background: var(--color-bg-card);
+  border-radius: var(--radius-full);
+  overflow: hidden;
+  margin-bottom: var(--spacing-3);
+}
+
+.storage-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--color-cyan), var(--color-purple));
+  border-radius: var(--radius-full);
+  transition: width 0.5s ease;
+}
+
+.storage-details {
+  display: flex;
+  justify-content: space-between;
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+}
+
+.storage-details strong {
+  color: var(--color-text-primary);
+}
+
+/* ============================================
+   PWA 介紹
+   ============================================ */
+.pwa-intro p {
+  color: var(--color-text-secondary);
+  margin-bottom: var(--spacing-4);
+}
+
+.feature-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--spacing-4);
+}
+
+.feature-item {
+  background: var(--color-bg-tertiary);
+  border: 1px solid var(--color-border-default);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-4);
+  text-align: center;
+}
+
+.feature-icon {
+  font-size: 32px;
+  display: block;
+  margin-bottom: var(--spacing-2);
+}
+
+.feature-item strong {
+  display: block;
+  color: var(--color-text-primary);
+  margin-bottom: var(--spacing-1);
+}
+
+.feature-item p {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-tertiary);
+  margin: 0;
+}
+
+/* ============================================
+   API 支援檢測
+   ============================================ */
+.support-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--spacing-3);
+}
+
+.support-item {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+  padding: var(--spacing-3);
+  background: var(--color-bg-tertiary);
+  border: 1px solid var(--color-border-default);
+  border-radius: var(--radius-md);
+}
+
+.support-item.supported {
+  border-color: rgba(34, 197, 94, 0.3);
+}
+
+.support-item.unsupported {
+  border-color: rgba(239, 68, 68, 0.3);
+  opacity: 0.7;
+}
+
+.support-name {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+}
+
+/* ============================================
+   生命週期圖
+   ============================================ */
+.lifecycle-diagram {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--spacing-2);
+  padding: var(--spacing-4);
+  background: var(--color-bg-tertiary);
+  border: 1px solid var(--color-border-default);
+  border-radius: var(--radius-lg);
+}
+
+.lifecycle-step {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-3);
+  flex: 1;
+  min-width: 150px;
+}
+
+.step-number {
+  width: 32px;
+  height: 32px;
+  background: var(--color-cyan);
+  color: var(--color-bg-primary);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: var(--font-weight-bold);
+  flex-shrink: 0;
+}
+
+.step-content strong {
+  display: block;
+  color: var(--color-text-primary);
+  margin-bottom: var(--spacing-1);
+}
+
+.step-content p {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-tertiary);
+  margin: 0;
+}
+
+.lifecycle-arrow {
+  color: var(--color-text-tertiary);
+  font-size: var(--font-size-xl);
+}
+
+/* ============================================
+   快取策略
+   ============================================ */
+.strategy-list {
+  display: grid;
+  gap: var(--spacing-4);
+}
+
+.strategy-item {
+  background: var(--color-bg-tertiary);
+  border: 1px solid var(--color-border-default);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-4);
+}
+
+.strategy-item strong {
+  display: block;
+  color: var(--color-cyan);
+  margin-bottom: var(--spacing-2);
+}
+
+.strategy-item p {
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-sm);
+  margin-bottom: var(--spacing-2);
+}
+
+.strategy-item code {
+  display: inline-block;
+  background: var(--color-bg-card);
+  padding: var(--spacing-1) var(--spacing-2);
+  border-radius: var(--radius-sm);
+  font-size: var(--font-size-xs);
+  color: var(--color-text-tertiary);
+}
+
+/* ============================================
+   程式碼範例
+   ============================================ */
+.code-example {
+  background: var(--color-bg-tertiary);
+  border: 1px solid var(--color-border-default);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  margin-bottom: var(--spacing-4);
+}
+
+.code-header {
+  background: var(--color-bg-card);
+  padding: var(--spacing-2) var(--spacing-4);
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+  border-bottom: 1px solid var(--color-border-default);
+}
+
+.code-example pre {
+  margin: 0;
+  padding: var(--spacing-4);
+  overflow-x: auto;
+}
+
+.code-example code {
+  font-family: 'SF Mono', Monaco, monospace;
+  font-size: var(--font-size-sm);
+  color: var(--color-text-primary);
+  line-height: 1.6;
+}
+
+/* ============================================
+   注意事項
+   ============================================ */
+.pwa-notice {
+  background: rgba(249, 115, 22, 0.1);
+  border: 1px solid rgba(249, 115, 22, 0.3);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-4);
+  margin-top: var(--spacing-6);
+}
+
+.pwa-notice h4 {
+  color: var(--color-orange);
+  margin-bottom: var(--spacing-3);
+}
+
+.pwa-notice ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.pwa-notice li {
+  padding: var(--spacing-2) 0;
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-sm);
+}
+
+.pwa-notice code {
+  background: var(--color-bg-card);
+  padding: var(--spacing-1) var(--spacing-2);
+  border-radius: var(--radius-sm);
+  font-size: var(--font-size-xs);
+  color: var(--color-cyan);
+}
+
+/* ============================================
+   響應式
+   ============================================ */
+@media (max-width: 768px) {
+  .network-details {
+    grid-template-columns: 1fr;
+  }
+
+  .cache-info {
+    grid-template-columns: 1fr;
+  }
+
+  .sw-controls,
+  .cache-controls {
+    flex-direction: column;
+  }
+
+  .sw-controls button,
+  .cache-controls button {
+    width: 100%;
+  }
+
+  .install-info ul {
+    flex-direction: column;
+    gap: var(--spacing-2);
+  }
+}

@@ -1,0 +1,228 @@
+/**
+ * Canvas 繪圖工具樣式
+ * Phase 5.2
+ */
+
+/* ============================================
+   容器
+   ============================================ */
+.canvas-drawing-showcase {
+  padding: var(--spacing-6);
+}
+
+.canvas-drawing-showcase .showcase-header {
+  text-align: center;
+  margin-bottom: var(--spacing-6);
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: var(--spacing-6);
+  background: var(--color-bg-tertiary);
+  border: 1px solid var(--color-border-default);
+  border-radius: var(--radius-lg);
+}
+
+.canvas-drawing-showcase .showcase-header h2 {
+  font-size: var(--font-size-2xl);
+  margin-bottom: var(--spacing-2);
+}
+
+/* ============================================
+   工具列
+   ============================================ */
+.canvas-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-4);
+  padding: var(--spacing-4);
+  background: var(--color-bg-tertiary);
+  border: 1px solid var(--color-border-default);
+  border-radius: var(--radius-lg);
+  margin-bottom: var(--spacing-4);
+}
+
+.tool-group {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+}
+
+.tool-group-label {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-tertiary);
+  margin-right: var(--spacing-2);
+  white-space: nowrap;
+}
+
+.tool-btn {
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border-default);
+  border-radius: var(--radius-md);
+  font-size: 18px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.tool-btn:hover {
+  border-color: var(--color-cyan);
+  background: rgba(0, 217, 255, 0.1);
+}
+
+.tool-btn.active {
+  border-color: var(--color-cyan);
+  background: rgba(0, 217, 255, 0.2);
+  box-shadow: 0 0 10px rgba(0, 217, 255, 0.3);
+}
+
+/* 顏色選擇器 */
+#brush-color {
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  border: 2px solid var(--color-border-default);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  background: transparent;
+}
+
+#brush-color::-webkit-color-swatch-wrapper {
+  padding: 2px;
+}
+
+#brush-color::-webkit-color-swatch {
+  border-radius: 4px;
+  border: none;
+}
+
+/* 顏色預設 */
+.color-presets {
+  display: flex;
+  gap: var(--spacing-1);
+}
+
+.color-preset {
+  width: 24px;
+  height: 24px;
+  border: 2px solid var(--color-border-default);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.color-preset:hover {
+  transform: scale(1.2);
+  border-color: var(--color-cyan);
+}
+
+/* 大小滑桿 */
+#brush-size {
+  width: 100px;
+  height: 6px;
+  -webkit-appearance: none;
+  background: var(--color-bg-card);
+  border-radius: var(--radius-full);
+  cursor: pointer;
+}
+
+#brush-size::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 16px;
+  height: 16px;
+  background: var(--color-cyan);
+  border-radius: 50%;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+#brush-size::-webkit-slider-thumb:hover {
+  transform: scale(1.2);
+}
+
+/* ============================================
+   畫布區
+   ============================================ */
+.canvas-container {
+  border: 1px solid var(--color-border-default);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  background: #0F172A;
+  margin-bottom: var(--spacing-4);
+}
+
+#drawing-canvas {
+  display: block;
+  width: 100%;
+  cursor: crosshair;
+}
+
+/* ============================================
+   操作列
+   ============================================ */
+.canvas-actions {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--spacing-4);
+  margin-bottom: var(--spacing-4);
+}
+
+.action-group {
+  display: flex;
+  gap: var(--spacing-2);
+}
+
+/* ============================================
+   快捷鍵提示
+   ============================================ */
+.shortcut-hints {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-4);
+  padding: var(--spacing-3);
+  background: var(--color-bg-tertiary);
+  border-radius: var(--radius-md);
+  font-size: var(--font-size-xs);
+  color: var(--color-text-tertiary);
+}
+
+.shortcut-hints .hint {
+  padding: var(--spacing-1) var(--spacing-2);
+  background: var(--color-bg-card);
+  border-radius: var(--radius-sm);
+}
+
+/* ============================================
+   響應式
+   ============================================ */
+@media (max-width: 768px) {
+  .canvas-toolbar {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .tool-group {
+    flex-wrap: wrap;
+  }
+
+  #brush-size {
+    width: 100%;
+    max-width: 150px;
+  }
+
+  .canvas-actions {
+    flex-direction: column;
+  }
+
+  .action-group {
+    flex-wrap: wrap;
+  }
+
+  .shortcut-hints {
+    display: none; /* 移動端隱藏快捷鍵提示 */
+  }
+}

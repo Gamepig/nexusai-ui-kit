@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="zh-TW" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>通知中心 - NexusAI</title>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <link rel="stylesheet" href="css/design-tokens.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  <link rel="stylesheet" href="css/theme-light.css">
+  <style>
+    .page-header {
+      background: var(--color-bg-secondary);
+      padding: var(--spacing-8) 0;
+      border-bottom: 1px solid var(--color-border-default);
+      margin-top: 80px;
+      margin-left: 280px;
+    }
+
+    .page-header h1 {
+      margin: 0;
+      font-size: var(--font-size-2xl);
+    }
+
+    .page-layout {
+      padding: var(--spacing-8);
+      margin-left: 280px;
+      width: calc(100% - 280px);
+    }
+
+    .layout-inner {
+      display: grid;
+      grid-template-columns: 200px 1fr;
+      gap: var(--spacing-8);
+      width: 100%;
+      max-width: none;
+    }
+
+    .page-layout .container {
+      width: 100%;
+      max-width: none;
+      padding: 0;
+    }
+
+    .notification-sidebar {
+      display: flex;
+      flex-direction: column;
+      gap: var(--spacing-2);
+    }
+
+    .filter-button {
+      padding: var(--spacing-3) var(--spacing-4);
+      border-radius: var(--radius-md);
+      color: var(--color-text-secondary);
+      background: transparent;
+      border: 1px solid transparent;
+      cursor: pointer;
+      transition: all var(--transition-base);
+      text-align: left;
+      font-weight: var(--font-weight-semibold);
+      font-size: var(--font-size-sm);
+    }
+
+    .filter-button:hover {
+      color: var(--color-cyan);
+      background: rgba(0, 217, 255, 0.1);
+    }
+
+    .filter-button.active {
+      color: var(--color-cyan);
+      background: rgba(0, 217, 255, 0.1);
+      border-color: var(--color-cyan);
+    }
+
+    .notification-content {
+      background: var(--color-bg-card);
+      border: 1px solid var(--color-border-default);
+      border-radius: var(--radius-lg);
+      padding: var(--spacing-6);
+    }
+
+    .content-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: var(--spacing-6);
+      padding-bottom: var(--spacing-4);
+      border-bottom: 1px solid var(--color-border-muted);
+    }
+
+    .content-title {
+      font-size: var(--font-size-lg);
+      font-weight: var(--font-weight-semibold);
+      color: var(--color-text-primary);
+    }
+
+    .mark-all-btn {
+      padding: var(--spacing-2) var(--spacing-4);
+      background: transparent;
+      color: var(--color-cyan);
+      border: 1px solid var(--color-cyan);
+      border-radius: var(--radius-md);
+      cursor: pointer;
+      font-size: var(--font-size-sm);
+      font-weight: var(--font-weight-semibold);
+      transition: all var(--transition-base);
+    }
+
+    .mark-all-btn:hover {
+      background: rgba(0, 217, 255, 0.1);
+    }
+
+    .notification-list {
+      display: flex;
+      flex-direction: column;
+      gap: var(--spacing-3);
+    }
+
+    .notification-item {
+      background: var(--color-bg-tertiary);
+      border: 1px solid var(--color-border-muted);
+      border-radius: var(--radius-lg);
+      padding: var(--spacing-4);
+      display: flex;
+      gap: var(--spacing-4);
+      transition: all var(--transition-base);
+      cursor: pointer;
+      position: relative;
+    }
+
+    .notification-item:hover {
+      background: rgba(0, 217, 255, 0.05);
+      border-color: var(--color-cyan);
+    }
+
+    .notification-item.unread {
+      background: rgba(0, 217, 255, 0.05);
+      border-color: rgba(0, 217, 255, 0.3);
+    }
+
+    .notification-item.unread::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 3px;
+      background: var(--color-cyan);
+      border-radius: 3px 0 0 3px;
+    }
+
+    .notification-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: var(--radius-lg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      color: white;
+      font-size: 20px;
+    }
+
+    .icon-system {
+      background: rgba(168, 85, 247, 0.2);
+      color: var(--color-purple);
+    }
+
+    .icon-task {
+      background: rgba(34, 197, 94, 0.2);
+      color: var(--color-green);
+    }
+
+    .icon-comment {
+      background: rgba(0, 217, 255, 0.2);
+      color: var(--color-cyan);
+    }
+
+    .icon-mention {
+      background: rgba(249, 115, 22, 0.2);
+      color: var(--color-orange);
+    }
+
+    .icon-security {
+      background: rgba(239, 68, 68, 0.2);
+      color: var(--color-red);
+    }
+
+    .notification-body {
+      flex: 1;
+    }
+
+    .notification-title {
+      font-weight: var(--font-weight-semibold);
+      color: var(--color-text-primary);
+      margin-bottom: var(--spacing-1);
+      font-size: var(--font-size-sm);
+    }
+
+    .notification-description {
+      font-size: var(--font-size-sm);
+      color: var(--color-text-secondary);
+      margin-bottom: var(--spacing-2);
+      line-height: 1.4;
+    }
+
+    .notification-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: var(--font-size-xs);
+      color: var(--color-text-tertiary);
+    }
+
+    .notification-time {
+      color: var(--color-text-secondary);
+    }
+
+    .notification-badge {
+      width: 8px;
+      height: 8px;
+      background: var(--color-cyan);
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .load-more {
+      width: 100%;
+      padding: var(--spacing-4);
+      background: var(--color-bg-tertiary);
+      border: 1px solid var(--color-border-muted);
+      border-radius: var(--radius-lg);
+      color: var(--color-text-secondary);
+      cursor: pointer;
+      transition: all var(--transition-base);
+      font-weight: var(--font-weight-semibold);
+      margin-top: var(--spacing-4);
+    }
+
+    .load-more:hover {
+      border-color: var(--color-cyan);
+      color: var(--color-cyan);
+    }
+
+    @media (max-width: 768px) {
+      .layout-inner {
+        grid-template-columns: 1fr;
+      }
+
+      .notification-sidebar {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: var(--spacing-2);
+      }
+
+      .notification-item {
+        flex-direction: column;
+      }
+
+      .notification-icon {
+        width: 32px;
+        height: 32px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Top Navigation -->
+  <nav class="top-nav">
+    <div class="top-nav-container">
+      <a href="index.html" class="logo">
+        <span style="font-size: 24px;">🚀</span>
+        <span>NexusAI</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="dashboard.html"><i data-lucide="layout-dashboard" class="nav-icon"></i>儀表板</a></li>
+        <li><a href="notifications.html" class="active"><i data-lucide="bell" class="nav-icon"></i>通知</a></li>
+        <li><a href="pricing.html"><i data-lucide="credit-card" class="nav-icon"></i>定價</a></li>
+        <li><a href="about.html"><i data-lucide="users" class="nav-icon"></i>關於</a></li>
+      </ul>
+      <div class="nav-actions">
+        <button id="theme-toggle-btn" class="btn btn-outline-cyan btn-sm" title="切換主題" aria-label="切換至淺色主題">
+          <i data-lucide="sun"></i>
+        </button>
+      </div>
+      <button class="hamburger-menu">
+        <i data-lucide="menu"></i>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Page Header -->
+  <section class="page-header">
+    <div class="container">
+      <h1>通知中心</h1>
+    </div>
+  </section>
+
+  <!-- Sidebar Navigation -->
+  <!-- Sidebar Navigation (由 sidebar.js 動態載入) -->
+  <aside id="sidebar-container" class="sidebar dashboard-sidebar"></aside>
+
+  <!-- Main Content -->
+  <section class="page-layout">
+    <div class="container">
+      <div class="layout-inner">
+        <!-- Sidebar -->
+        <div class="notification-sidebar">
+        <button class="filter-button active">全部</button>
+        <button class="filter-button">未讀 (3)</button>
+        <button class="filter-button">已讀</button>
+      </div>
+
+      <!-- Notifications Content -->
+      <div class="notification-content">
+        <div class="content-header">
+          <div class="content-title">所有通知</div>
+          <button class="mark-all-btn">全部標為已讀</button>
+        </div>
+
+        <div class="notification-list">
+          <!-- System Notification - Unread -->
+          <div class="notification-item unread">
+            <div class="notification-icon icon-system">
+              <i data-lucide="settings" style="width: 20px; height: 20px;"></i>
+            </div>
+            <div class="notification-body">
+              <div class="notification-title">系統維護通知</div>
+              <div class="notification-description">系統將在今日晚上 10:00 進行定期維護，預計 2 小時完成。請妥善安排工作。</div>
+              <div class="notification-meta">
+                <span class="notification-time">30 分鐘前</span>
+                <div class="notification-badge"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Task Notification - Unread -->
+          <div class="notification-item unread">
+            <div class="notification-icon icon-task">
+              <i data-lucide="check-circle" style="width: 20px; height: 20px;"></i>
+            </div>
+            <div class="notification-body">
+              <div class="notification-title">任務已指派給您</div>
+              <div class="notification-description">王小美 分配了新任務 "前端頁面設計" 給您，該任務優先級為高。</div>
+              <div class="notification-meta">
+                <span class="notification-time">1 小時前</span>
+                <div class="notification-badge"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Comment Notification - Unread -->
+          <div class="notification-item unread">
+            <div class="notification-icon icon-comment">
+              <i data-lucide="message-circle" style="width: 20px; height: 20px;"></i>
+            </div>
+            <div class="notification-body">
+              <div class="notification-title">新評論於 "API 設計"</div>
+              <div class="notification-description">陳大衛 在您的評論下回覆："已根據您的建議進行調整，請再次審查。"</div>
+              <div class="notification-meta">
+                <span class="notification-time">2 小時前</span>
+                <div class="notification-badge"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Mention Notification - Read -->
+          <div class="notification-item">
+            <div class="notification-icon icon-mention">
+              <i data-lucide="at-sign" style="width: 20px; height: 20px;"></i>
+            </div>
+            <div class="notification-body">
+              <div class="notification-title">有人提及您</div>
+              <div class="notification-description">何美麗 在 "專案進度討論" 中提及了您，希望聽取您的意見。</div>
+              <div class="notification-meta">
+                <span class="notification-time">5 小時前</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Task Update - Read -->
+          <div class="notification-item">
+            <div class="notification-icon icon-task">
+              <i data-lucide="check-circle" style="width: 20px; height: 20px;"></i>
+            </div>
+            <div class="notification-body">
+              <div class="notification-title">任務狀態已更新</div>
+              <div class="notification-description">張敬 將 "設計稿審查" 任務標記為已完成。</div>
+              <div class="notification-meta">
+                <span class="notification-time">1 天前</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Security Alert - Read -->
+          <div class="notification-item">
+            <div class="notification-icon icon-security">
+              <i data-lucide="shield-alert" style="width: 20px; height: 20px;"></i>
+            </div>
+            <div class="notification-body">
+              <div class="notification-title">新設備登入</div>
+              <div class="notification-description">檢測到新設備登入您的帳戶 (iPhone 15, iOS 18)，位置: 台北。如非本人操作，請立即修改密碼。</div>
+              <div class="notification-meta">
+                <span class="notification-time">2 天前</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Project Update - Read -->
+          <div class="notification-item">
+            <div class="notification-icon icon-system">
+              <i data-lucide="folder" style="width: 20px; height: 20px;"></i>
+            </div>
+            <div class="notification-body">
+              <div class="notification-title">專案更新提醒</div>
+              <div class="notification-description">"NexusAI 平台開發" 專案已完成 20 個任務，當前進度 75%。</div>
+              <div class="notification-meta">
+                <span class="notification-time">3 天前</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Collaboration Update - Read -->
+          <div class="notification-item">
+            <div class="notification-icon icon-comment">
+              <i data-lucide="message-circle" style="width: 20px; height: 20px;"></i>
+            </div>
+            <div class="notification-body">
+              <div class="notification-title">共享文件已更新</div>
+              <div class="notification-description">李明軒 更新了 "2025 產品規劃" 文件，新增了第四季度的目標。</div>
+              <div class="notification-meta">
+                <span class="notification-time">5 天前</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Approval Notification - Read -->
+          <div class="notification-item">
+            <div class="notification-icon icon-task">
+              <i data-lucide="check-circle" style="width: 20px; height: 20px;"></i>
+            </div>
+            <div class="notification-body">
+              <div class="notification-title">您的提案已批准</div>
+              <div class="notification-description">您提交的 "效能優化計畫" 已獲得批准，可以開始進行。</div>
+              <div class="notification-meta">
+                <span class="notification-time">1 週前</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Review Request - Read -->
+          <div class="notification-item">
+            <div class="notification-icon icon-mention">
+              <i data-lucide="at-sign" style="width: 20px; height: 20px;"></i>
+            </div>
+            <div class="notification-body">
+              <div class="notification-title">程式碼審查請求</div>
+              <div class="notification-description">陳大衛 請求您審查 PR #284 "新增使用者認證功能"，預計耗時 20 分鐘。</div>
+              <div class="notification-meta">
+                <span class="notification-time">1 週前</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <button class="load-more">載入更多通知</button>
+      </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div>
+        <h4>NexusAI</h4>
+        <p>現代化的深色科技主題設計系統</p>
+      </div>
+      <div>
+        <h4>導航</h4>
+        <ul>
+          <li><a href="index.html">首頁</a></li>
+          <li><a href="dashboard.html">儀表板</a></li>
+          <li><a href="notifications.html">通知</a></li>
+          <li><a href="pricing.html">定價</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>資源</h4>
+        <ul>
+          <li><a href="#">GitHub</a></li>
+          <li><a href="#">部落格</a></li>
+          <li><a href="#">社群</a></li>
+          <li><a href="#">文檔</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2025 NexusAI. 保留所有權利。</p>
+    </div>
+  </footer>
+
+  <script src="js/theme-toggle.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/sidebar.js"></script>
+  <script>
+    lucide.createIcons();
+  </script>
+</body>
+</html>

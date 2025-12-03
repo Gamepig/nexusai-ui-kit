@@ -1,0 +1,229 @@
+/**
+ * Light Theme - NexusAI Demo Site
+ * 淺色主題變數覆蓋
+ *
+ * 使用方式：在 <html> 加上 data-theme="light" 屬性
+ */
+
+[data-theme="light"] {
+  /* 背景色 */
+  --color-bg-primary: #FFFFFF;
+  --color-bg-secondary: #F8FAFC;
+  --color-bg-tertiary: #F1F5F9;
+  --color-bg-elevated: #FFFFFF;
+  --color-bg-card: #FFFFFF;
+  --color-bg-card-hover: #F8FAFC;
+
+  /* 文字色 */
+  --color-text-primary: #0F172A;
+  --color-text-secondary: #475569;
+  --color-text-tertiary: #64748B;
+  --color-text-muted: #94A3B8;
+
+  /* 邊框色 */
+  --color-border-default: rgba(15, 23, 42, 0.1);
+  --color-border-muted: rgba(15, 23, 42, 0.05);
+  --color-border-emphasis: rgba(15, 23, 42, 0.15);
+
+  /* 強調色（加深版本） */
+  --color-cyan: #0891B2;
+  --color-cyan-light: #06B6D4;
+  --color-cyan-dark: #0E7490;
+
+  --color-green: #16A34A;
+  --color-green-light: #22C55E;
+  --color-green-dark: #15803D;
+
+  --color-purple: #7C3AED;
+  --color-purple-light: #A855F7;
+  --color-purple-dark: #6D28D9;
+
+  --color-orange: #EA580C;
+  --color-orange-light: #F97316;
+  --color-orange-dark: #C2410C;
+
+  --color-red: #DC2626;
+  --color-red-light: #EF4444;
+  --color-red-dark: #B91C1C;
+
+  --color-yellow: #CA8A04;
+  --color-yellow-light: #EAB308;
+  --color-yellow-dark: #A16207;
+
+  /* 陰影（減輕） */
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.07);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+
+  /* 發光效果（減弱） */
+  --glow-cyan: 0 0 20px rgba(8, 145, 178, 0.15);
+  --glow-cyan-strong: 0 0 30px rgba(8, 145, 178, 0.25);
+  --glow-green: 0 0 20px rgba(22, 163, 74, 0.15);
+  --glow-green-strong: 0 0 30px rgba(22, 163, 74, 0.25);
+  --glow-purple: 0 0 20px rgba(124, 58, 237, 0.15);
+  --glow-purple-strong: 0 0 30px rgba(124, 58, 237, 0.25);
+  --glow-orange: 0 0 20px rgba(234, 88, 12, 0.15);
+  --glow-orange-strong: 0 0 30px rgba(234, 88, 12, 0.25);
+  --glow-red: 0 0 20px rgba(220, 38, 38, 0.15);
+  --glow-red-strong: 0 0 30px rgba(220, 38, 38, 0.25);
+  --glow-yellow: 0 0 20px rgba(202, 138, 4, 0.15);
+  --glow-yellow-strong: 0 0 30px rgba(202, 138, 4, 0.25);
+
+  /* 漸變背景 */
+  --gradient-bg-card: linear-gradient(180deg, #FFFFFF 0%, #F8FAFC 100%);
+  --gradient-bg-elevated: linear-gradient(180deg, #FFFFFF 0%, #F1F5F9 100%);
+  --gradient-bg-subtle: linear-gradient(180deg, rgba(248, 250, 252, 0.8) 0%, rgba(241, 245, 249, 0.9) 100%);
+
+  /* 漸變色彩（使用加深色） */
+  --gradient-cyan: linear-gradient(135deg, #0891B2 0%, #0E7490 100%);
+  --gradient-cyan-soft: linear-gradient(135deg, #06B6D4 0%, #0891B2 100%);
+  --gradient-green: linear-gradient(135deg, #16A34A 0%, #15803D 100%);
+  --gradient-green-soft: linear-gradient(135deg, #22C55E 0%, #16A34A 100%);
+  --gradient-purple: linear-gradient(135deg, #7C3AED 0%, #6D28D9 100%);
+  --gradient-purple-soft: linear-gradient(135deg, #A855F7 0%, #7C3AED 100%);
+  --gradient-orange: linear-gradient(135deg, #EA580C 0%, #C2410C 100%);
+  --gradient-orange-soft: linear-gradient(135deg, #F97316 0%, #EA580C 100%);
+  --gradient-red: linear-gradient(135deg, #DC2626 0%, #B91C1C 100%);
+  --gradient-red-soft: linear-gradient(135deg, #EF4444 0%, #DC2626 100%);
+  --gradient-yellow: linear-gradient(135deg, #CA8A04 0%, #A16207 100%);
+
+  /* 跨色系漸變 */
+  --gradient-purple-cyan: linear-gradient(90deg, #7C3AED 0%, #0891B2 100%);
+  --gradient-purple-blue: linear-gradient(90deg, #7C3AED 0%, #2563EB 100%);
+  --gradient-green-teal: linear-gradient(90deg, #16A34A 0%, #0D9488 100%);
+  --gradient-green-cyan: linear-gradient(90deg, #16A34A 0%, #0891B2 100%);
+  --gradient-orange-yellow: linear-gradient(90deg, #EA580C 0%, #CA8A04 100%);
+  --gradient-orange-red: linear-gradient(90deg, #EA580C 0%, #DC2626 100%);
+  --gradient-cyan-green: linear-gradient(90deg, #0891B2 0%, #16A34A 100%);
+
+  /* 進度條漸變 */
+  --gradient-progress: linear-gradient(90deg, #7C3AED 0%, #2563EB 50%, #16A34A 100%);
+  --gradient-progress-warm: linear-gradient(90deg, #CA8A04 0%, #EA580C 50%, #DC2626 100%);
+  --gradient-progress-cool: linear-gradient(90deg, #6D28D9 0%, #0891B2 50%, #0D9488 100%);
+
+  /* 邊框漸變 */
+  --gradient-border-rainbow: linear-gradient(135deg, #7C3AED 0%, #0891B2 50%, #16A34A 100%);
+  --gradient-border-cool: linear-gradient(135deg, #6D28D9 0%, #0891B2 100%);
+  --gradient-border-warm: linear-gradient(135deg, #EA580C 0%, #DC2626 100%);
+}
+
+/* 特殊元素覆蓋（處理硬編碼的顏色） */
+[data-theme="light"] body {
+  background-color: var(--color-bg-primary);
+  color: var(--color-text-primary);
+}
+
+[data-theme="light"] .top-nav {
+  background: linear-gradient(180deg, rgba(248, 250, 252, 0.98) 0%, rgba(255, 255, 255, 0.95) 100%);
+  border-bottom-color: rgba(8, 145, 178, 0.1);
+}
+
+[data-theme="light"] .sidebar {
+  background: linear-gradient(180deg, rgba(248, 250, 252, 0.98) 0%, rgba(255, 255, 255, 0.95) 100%);
+  border-right-color: rgba(8, 145, 178, 0.1);
+}
+
+[data-theme="light"] footer {
+  background: linear-gradient(180deg, var(--color-bg-secondary) 0%, var(--color-bg-primary) 100%);
+  border-top-color: rgba(8, 145, 178, 0.1);
+}
+
+[data-theme="light"] .hero::after {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.7) 0%, rgba(248, 250, 252, 0.9) 100%);
+}
+
+[data-theme="light"] .hero::before {
+  background: radial-gradient(circle, rgba(8, 145, 178, 0.1) 0%, transparent 70%);
+}
+
+[data-theme="light"] ::selection {
+  background-color: rgba(8, 145, 178, 0.3);
+  color: var(--color-text-primary);
+}
+
+[data-theme="light"] ::-webkit-scrollbar-track {
+  background: var(--color-bg-secondary);
+}
+
+[data-theme="light"] ::-webkit-scrollbar-thumb {
+  background: var(--color-bg-tertiary);
+}
+
+[data-theme="light"] ::-webkit-scrollbar-thumb:hover {
+  background: var(--color-border-emphasis);
+}
+
+/* 按鈕文字色修正（實心按鈕在淺色主題需要白字） */
+[data-theme="light"] .btn-solid-cyan,
+[data-theme="light"] .btn-solid-green,
+[data-theme="light"] .btn-solid-purple,
+[data-theme="light"] .btn-solid-orange,
+[data-theme="light"] .btn-solid-red {
+  color: #FFFFFF;
+}
+
+/* 標籤文字色修正 */
+[data-theme="light"] .tag-tip,
+[data-theme="light"] .tag-tip-purple,
+[data-theme="light"] .tag-priority-high,
+[data-theme="light"] .tag-priority-low {
+  color: #FFFFFF;
+}
+
+[data-theme="light"] .tag-tip-orange,
+[data-theme="light"] .tag-priority-medium {
+  color: #0F172A;
+}
+
+/* Dashboard KPI 卡片（硬編碼背景色覆蓋） */
+[data-theme="light"] .kpi-card {
+  background: linear-gradient(180deg, #FFFFFF 0%, #F8FAFC 100%);
+  border-color: var(--color-border-default);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+[data-theme="light"] .kpi-card::before {
+  background: linear-gradient(90deg, transparent, var(--color-cyan), transparent);
+}
+
+/* 統計卡片 */
+[data-theme="light"] .stat-card {
+  background: linear-gradient(180deg, #FFFFFF 0%, #F8FAFC 100%);
+}
+
+/* 圖表區域 */
+[data-theme="light"] .chart-container,
+[data-theme="light"] .chart-card {
+  background: var(--color-bg-card);
+  border-color: var(--color-border-default);
+}
+
+/* 資料表格 */
+[data-theme="light"] .data-table {
+  background: var(--color-bg-card);
+}
+
+[data-theme="light"] .data-table th {
+  background: var(--color-bg-secondary);
+  color: var(--color-text-secondary);
+}
+
+[data-theme="light"] .data-table tr:hover {
+  background: var(--color-bg-tertiary);
+}
+
+/* 活動列表 */
+[data-theme="light"] .activity-item {
+  border-color: var(--color-border-default);
+}
+
+/* 快速操作按鈕 */
+[data-theme="light"] .quick-action {
+  background: var(--color-bg-secondary);
+  border-color: var(--color-border-default);
+}
+
+[data-theme="light"] .quick-action:hover {
+  background: var(--color-bg-tertiary);
+}

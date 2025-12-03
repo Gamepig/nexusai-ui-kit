@@ -1,0 +1,273 @@
+/**
+ * Worker 多線程演示樣式
+ * Phase 6.4
+ */
+
+/* ============================================
+   容器
+   ============================================ */
+.worker-showcase {
+  padding: var(--spacing-6);
+}
+
+.worker-showcase .showcase-header {
+  text-align: center;
+  margin-bottom: var(--spacing-8);
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: var(--spacing-6);
+  background: var(--color-bg-tertiary);
+  border: 1px solid var(--color-border-default);
+  border-radius: var(--radius-lg);
+}
+
+.worker-showcase .showcase-header h2 {
+  font-size: var(--font-size-2xl);
+  margin-bottom: var(--spacing-2);
+}
+
+.section-desc {
+  color: var(--color-text-secondary);
+  margin-bottom: var(--spacing-4);
+  font-size: var(--font-size-sm);
+}
+
+/* ============================================
+   Demo 區塊
+   ============================================ */
+.worker-demo {
+  background: var(--color-bg-tertiary);
+  border: 1px solid var(--color-border-default);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-5);
+}
+
+.demo-controls {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-4);
+  margin-bottom: var(--spacing-4);
+  flex-wrap: wrap;
+}
+
+.demo-controls label {
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-sm);
+}
+
+.demo-controls select {
+  padding: var(--spacing-2) var(--spacing-3);
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border-default);
+  border-radius: var(--radius-md);
+  color: var(--color-text-primary);
+  font-size: var(--font-size-sm);
+}
+
+/* ============================================
+   比較區
+   ============================================ */
+.demo-comparison {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--spacing-4);
+}
+
+.demo-card {
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border-default);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-4);
+  text-align: center;
+}
+
+.demo-card h4 {
+  font-size: var(--font-size-base);
+  margin-bottom: var(--spacing-2);
+}
+
+.demo-card .demo-desc {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-tertiary);
+  margin-bottom: var(--spacing-3);
+}
+
+/* 結果框 */
+.result-box {
+  margin-top: var(--spacing-4);
+  padding: var(--spacing-3);
+  background: var(--color-bg-tertiary);
+  border-radius: var(--radius-md);
+}
+
+.result-time {
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-cyan);
+}
+
+.result-count {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+  margin-top: var(--spacing-1);
+}
+
+/* UI 指示器 */
+.ui-indicator {
+  margin-top: var(--spacing-3);
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.ui-indicator.active {
+  opacity: 1;
+}
+
+.spinner {
+  width: 20px;
+  height: 20px;
+  border: 2px solid var(--color-border-default);
+  border-top-color: var(--color-cyan);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* 進度條 */
+.progress-bar {
+  margin-top: var(--spacing-3);
+  height: 6px;
+  background: var(--color-bg-tertiary);
+  border-radius: var(--radius-full);
+  overflow: hidden;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.progress-bar.active {
+  opacity: 1;
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--color-cyan), var(--color-purple));
+  border-radius: var(--radius-full);
+  width: 0%;
+  transition: width 0.3s ease;
+}
+
+/* ============================================
+   UI 響應性測試
+   ============================================ */
+.ui-test-area {
+  background: var(--color-bg-tertiary);
+  border: 1px solid var(--color-border-default);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-5);
+  text-align: center;
+}
+
+.test-animation {
+  height: 100px;
+  position: relative;
+  background: var(--color-bg-card);
+  border-radius: var(--radius-md);
+  margin-bottom: var(--spacing-4);
+  overflow: hidden;
+}
+
+.bouncing-ball {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  background: var(--color-cyan);
+  border-radius: 50%;
+  animation: bounce 1s ease-in-out infinite;
+  left: 50%;
+  transform: translateX(-50%);
+  box-shadow: 0 0 15px var(--color-cyan);
+}
+
+@keyframes bounce {
+  0%, 100% {
+    top: 10px;
+  }
+  50% {
+    top: 70px;
+  }
+}
+
+.test-hint {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-tertiary);
+  margin-bottom: var(--spacing-4);
+}
+
+.test-counter {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-3);
+}
+
+.test-counter span {
+  color: var(--color-text-secondary);
+}
+
+/* ============================================
+   說明區
+   ============================================ */
+.worker-info {
+  margin-top: var(--spacing-6);
+  background: var(--color-bg-tertiary);
+  border: 1px solid var(--color-border-default);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-5);
+}
+
+.worker-info h3 {
+  margin-bottom: var(--spacing-4);
+}
+
+.worker-info ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.worker-info li {
+  padding: var(--spacing-2) 0;
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-sm);
+  border-bottom: 1px solid var(--color-border-muted);
+}
+
+.worker-info li:last-child {
+  border-bottom: none;
+}
+
+.worker-info li strong {
+  color: var(--color-text-primary);
+}
+
+/* ============================================
+   響應式
+   ============================================ */
+@media (max-width: 768px) {
+  .demo-comparison {
+    grid-template-columns: 1fr;
+  }
+
+  .demo-controls {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}

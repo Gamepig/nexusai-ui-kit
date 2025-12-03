@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="zh-TW" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>關於 - NexusAI</title>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <link rel="stylesheet" href="css/design-tokens.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  <link rel="stylesheet" href="css/theme-light.css">
+  <style>
+    .about-hero {
+      padding: 120px 0 60px;
+      text-align: center;
+      background: linear-gradient(180deg, var(--color-bg-primary) 0%, var(--color-bg-secondary) 100%);
+    }
+
+    .about-hero h1 {
+      margin-bottom: var(--spacing-4);
+      font-size: 3rem;
+    }
+
+    .about-section {
+      padding: var(--spacing-16) 0;
+    }
+
+    .about-content {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .about-text {
+      font-size: var(--font-size-lg);
+      line-height: var(--line-height-relaxed);
+      color: var(--color-text-secondary);
+      margin-bottom: var(--spacing-8);
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: var(--spacing-6);
+      margin: var(--spacing-12) 0;
+    }
+
+    .stat-card {
+      background: var(--color-bg-card);
+      border: 1px solid var(--color-border-default);
+      border-radius: var(--radius-lg);
+      padding: var(--spacing-6);
+      text-align: center;
+    }
+
+    .stat-number {
+      font-size: 2rem;
+      font-weight: var(--font-weight-bold);
+      color: var(--color-cyan);
+      margin-bottom: var(--spacing-2);
+    }
+
+    .stat-label {
+      color: var(--color-text-secondary);
+      font-size: var(--font-size-sm);
+    }
+
+    .values-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--spacing-6);
+      margin: var(--spacing-12) 0;
+    }
+
+    .value-card {
+      background: var(--color-bg-card);
+      border: 1px solid var(--color-border-default);
+      border-radius: var(--radius-lg);
+      padding: var(--spacing-6);
+      text-align: center;
+    }
+
+    .value-card h3 {
+      margin-bottom: var(--spacing-2);
+      color: var(--color-cyan);
+    }
+
+    @media (max-width: 1279px) {
+      .stats-grid,
+      .values-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 768px) {
+      .stats-grid,
+      .values-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .about-hero h1 {
+        font-size: 2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Top Navigation -->
+  <nav class="top-nav">
+    <div class="top-nav-container">
+      <a href="index.html" class="logo">
+        <span style="font-size: 24px;">🚀</span>
+        <span>NexusAI</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="index.html#features"><i data-lucide="star" class="nav-icon"></i>特色</a></li>
+        <li><a href="pricing.html"><i data-lucide="credit-card" class="nav-icon"></i>定價</a></li>
+        <li><a href="about.html" class="active"><i data-lucide="users" class="nav-icon"></i>關於</a></li>
+        <li><a href="contact.html"><i data-lucide="mail" class="nav-icon"></i>聯繫</a></li>
+      </ul>
+      <div class="nav-actions">
+        <button id="theme-toggle-btn" class="btn btn-outline-cyan btn-sm" title="切換主題" aria-label="切換至淺色主題">
+          <i data-lucide="sun"></i>
+        </button>
+      </div>
+      <button class="hamburger-menu">
+        <i data-lucide="menu"></i>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Sidebar Navigation (Mobile) -->
+  <aside class="sidebar">
+    <nav class="sidebar-nav">
+      <a href="index.html" class="sidebar-item">
+        <i data-lucide="home"></i>
+        <span>首頁</span>
+      </a>
+      <a href="index.html#features" class="sidebar-item">
+        <i data-lucide="star"></i>
+        <span>特色</span>
+      </a>
+      <a href="pricing.html" class="sidebar-item">
+        <i data-lucide="dollar-sign"></i>
+        <span>定價</span>
+      </a>
+      <a href="about.html" class="sidebar-item active">
+        <i data-lucide="info"></i>
+        <span>關於</span>
+      </a>
+      <a href="contact.html" class="sidebar-item">
+        <i data-lucide="mail"></i>
+        <span>聯繫</span>
+      </a>
+    </nav>
+  </aside>
+
+  <!-- About Hero -->
+  <section class="about-hero">
+    <div class="container">
+      <h1>關於我們</h1>
+      <p style="color: var(--color-text-secondary); margin-bottom: 0;">簡潔、高效、現代的設計系統</p>
+    </div>
+  </section>
+
+  <!-- Main Content -->
+  <section class="about-section">
+    <div class="about-content">
+      <p class="about-text">
+        NexusAI 是一套深色科技風格的 UI 設計系統，專為快速構建現代 Web 應用而生。
+      </p>
+      <p class="about-text">
+        基於 CSS 變數與模組化元件，提供靈活且可擴展的開發體驗。
+      </p>
+    </div>
+  </section>
+
+  <!-- Stats Section -->
+  <section style="background: var(--color-bg-secondary); padding: var(--spacing-16) 0;">
+    <div class="about-content">
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-number">10K+</div>
+          <div class="stat-label">使用者</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">50+</div>
+          <div class="stat-label">元件</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">15</div>
+          <div class="stat-label">頁面範例</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">99.9%</div>
+          <div class="stat-label">可用性</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Values Section -->
+  <section class="about-section">
+    <div class="about-content">
+      <h2 style="text-align: center; margin-bottom: var(--spacing-12);">核心理念</h2>
+      <div class="values-grid">
+        <div class="value-card">
+          <h3>簡潔</h3>
+          <p style="color: var(--color-text-secondary);">去除不必要的複雜性</p>
+        </div>
+        <div class="value-card">
+          <h3>高效</h3>
+          <p style="color: var(--color-text-secondary);">每個元件都經過效能優化</p>
+        </div>
+        <div class="value-card">
+          <h3>一致</h3>
+          <p style="color: var(--color-text-secondary);">統一的設計語言與系統</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact CTA -->
+  <section class="about-section">
+    <div class="about-content" style="text-align: center;">
+      <h2 style="margin-bottom: var(--spacing-6);">聯繫我們</h2>
+      <div style="display: flex; gap: var(--spacing-4); justify-content: center; flex-wrap: wrap;">
+        <a href="contact.html" class="btn btn-solid-cyan">前往聯繫頁</a>
+        <a href="mailto:hello@nexusai.com" class="btn btn-outline-cyan">發送郵件</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div>
+        <h4>NexusAI</h4>
+        <p>現代化的深色科技主題設計系統</p>
+      </div>
+      <div>
+        <h4>導航</h4>
+        <ul>
+          <li><a href="index.html">首頁</a></li>
+          <li><a href="pricing.html">定價</a></li>
+          <li><a href="about.html">關於</a></li>
+          <li><a href="contact.html">聯繫</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>資源</h4>
+        <ul>
+          <li><a href="dashboard.html">儀表板</a></li>
+          <li><a href="#">GitHub</a></li>
+          <li><a href="#">部落格</a></li>
+          <li><a href="#">社群</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2025 NexusAI. 保留所有權利。</p>
+    </div>
+  </footer>
+
+  <script src="js/theme-toggle.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/sidebar.js"></script>
+  <script>
+    lucide.createIcons();
+  </script>
+</body>
+</html>

@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="zh-TW" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JavaScript 功能展示 - NexusAI</title>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <link rel="stylesheet" href="css/design-tokens.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  <link rel="stylesheet" href="css/theme-light.css">
+  <link rel="stylesheet" href="css/animations-showcase.css">
+  <link rel="stylesheet" href="css/web-api-showcase.css">
+  <link rel="stylesheet" href="css/interactions-showcase.css">
+  <link rel="stylesheet" href="css/es-features-showcase.css">
+  <link rel="stylesheet" href="css/charts-showcase.css">
+  <link rel="stylesheet" href="css/animations-extended.css">
+  <link rel="stylesheet" href="css/canvas-drawing.css">
+  <link rel="stylesheet" href="css/worker-showcase.css">
+  <link rel="stylesheet" href="css/pwa-showcase.css">
+  <link rel="stylesheet" href="css/websocket-showcase.css">
+  <link rel="stylesheet" href="css/webgl-showcase.css">
+  <!-- Animation Libraries CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+  <!-- Chart.js CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+  <!-- Lottie CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.2/lottie.min.js"></script>
+  <!-- Mo.js CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/@mojs/core@1.5.0/dist/mo.umd.min.js"></script>
+  <style>
+    .showcase-header {
+      background: var(--color-bg-secondary);
+      padding: var(--spacing-8) 0;
+      border-bottom: 1px solid var(--color-border-default);
+      margin-top: 80px;
+      margin-left: 280px;
+    }
+
+    .showcase-header h1 {
+      margin: 0;
+      font-size: var(--font-size-2xl);
+    }
+
+    .showcase-layout {
+      display: grid;
+      grid-template-columns: 1fr;
+      padding: var(--spacing-8);
+      margin-left: 280px;
+    }
+
+    .status-badge {
+      display: inline-block;
+      padding: var(--spacing-1) var(--spacing-3);
+      border-radius: var(--radius-full);
+      font-size: var(--font-size-xs);
+      font-weight: var(--font-weight-semibold);
+    }
+
+    .status-active {
+      background: rgba(34, 197, 94, 0.1);
+      color: var(--color-green);
+    }
+
+    .status-pending {
+      background: rgba(249, 115, 22, 0.1);
+      color: var(--color-orange);
+    }
+
+    .status-inactive {
+      background: rgba(107, 114, 128, 0.1);
+      color: var(--color-text-secondary);
+    }
+
+    .table-container {
+      overflow-x: auto;
+    }
+
+    .data-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .data-table th {
+      background: var(--color-bg-tertiary);
+      padding: var(--spacing-3) var(--spacing-4);
+      text-align: left;
+      font-weight: var(--font-weight-semibold);
+      color: var(--color-text-primary);
+      border-bottom: 1px solid var(--color-border-default);
+      font-size: var(--font-size-sm);
+    }
+
+    .data-table td {
+      padding: var(--spacing-3) var(--spacing-4);
+      border-bottom: 1px solid var(--color-border-muted);
+      color: var(--color-text-secondary);
+      font-size: var(--font-size-sm);
+    }
+
+    .data-table tbody tr:hover {
+      background: var(--color-bg-tertiary);
+    }
+
+    @media (max-width: 768px) {
+      .showcase-header {
+        margin-top: 64px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Top Navigation -->
+  <nav class="top-nav">
+    <div class="top-nav-container">
+      <a href="index.html" class="logo">
+        <span style="font-size: 24px;">🚀</span>
+        <span>NexusAI</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="index.html#features"><i data-lucide="star" class="nav-icon"></i>特色</a></li>
+        <li><a href="pricing.html"><i data-lucide="credit-card" class="nav-icon"></i>定價</a></li>
+        <li><a href="about.html"><i data-lucide="users" class="nav-icon"></i>關於</a></li>
+        <li><a href="contact.html"><i data-lucide="mail" class="nav-icon"></i>聯繫</a></li>
+      </ul>
+      <div class="nav-actions">
+        <button id="theme-toggle-btn" class="btn btn-outline-cyan btn-sm" title="切換主題" aria-label="切換至淺色主題">
+          <i data-lucide="sun"></i>
+        </button>
+      </div>
+      <button class="hamburger-menu">
+        <i data-lucide="menu"></i>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Sidebar Navigation -->
+  <aside id="sidebar-container" class="sidebar dashboard-sidebar"></aside>
+
+  <!-- Page Header -->
+  <section class="showcase-header">
+    <div class="container">
+      <h1>JavaScript 功能展示</h1>
+      <p style="color: var(--color-text-secondary); margin: var(--spacing-2) 0 0 0;">探索現代 Web 技術與 JavaScript 功能示範</p>
+    </div>
+  </section>
+
+  <!-- Showcase Content -->
+  <section class="showcase-layout">
+    <div class="container">
+      <!-- Features Showcase Section -->
+      <div class="tabs-container">
+        <div class="tabs">
+          <button class="tab-item active" data-tab="animations" onclick="switchTab(event)">
+            🎬 動畫效果
+          </button>
+          <button class="tab-item" data-tab="web-apis" onclick="switchTab(event)">
+            🌐 Web API
+          </button>
+          <button class="tab-item" data-tab="interactions" onclick="switchTab(event)">
+            ⚙️ 互動功能
+          </button>
+          <button class="tab-item" data-tab="es-features" onclick="switchTab(event)">
+            ⚡ ES 特性
+          </button>
+          <button class="tab-item" data-tab="charts" onclick="switchTab(event)">
+            📊 數據可視化
+          </button>
+          <button class="tab-item" data-tab="animations-extended" onclick="switchTab(event)">
+            🎬 擴展動畫
+          </button>
+          <button class="tab-item" data-tab="canvas-drawing" onclick="switchTab(event)">
+            🎨 繪圖工具
+          </button>
+          <button class="tab-item" data-tab="worker" onclick="switchTab(event)">
+            ⚡ 多線程
+          </button>
+          <button class="tab-item" data-tab="pwa" onclick="switchTab(event)">
+            📱 PWA
+          </button>
+          <button class="tab-item" data-tab="websocket" onclick="switchTab(event)">
+            🔌 WebSocket
+          </button>
+          <button class="tab-item" data-tab="webgl" onclick="switchTab(event)">
+            🎮 3D 效果
+          </button>
+        </div>
+      </div>
+
+      <!-- Animation Showcase Tab -->
+      <div id="animations-tab" class="tab-content active">
+        <div id="anime-showcase"></div>
+        <div id="gsap-showcase"></div>
+        <div id="canvas-showcase"></div>
+      </div>
+
+      <!-- Web API Tab -->
+      <div id="web-apis-tab" class="tab-content"></div>
+
+      <!-- Interactions Tab -->
+      <div id="interactions-tab" class="tab-content">
+        <!-- 拖拽排序演示 -->
+        <div class="showcase-section">
+          <h3>🎯 拖拽排序</h3>
+          <p style="color: var(--color-text-secondary); margin-bottom: var(--spacing-4);">拖動卡片重新排序（演示）</p>
+
+          <div class="demo-control-group">
+            <div class="showcase-demo-area" style="flex: 1; min-width: 100%;">
+              <div style="display: flex; gap: var(--spacing-4); width: 100%; flex-wrap: wrap;">
+                <div class="card-medium" draggable="true" data-draggable="widget" style="flex: 1; min-width: 150px; cursor: move;">
+                  📊 Dashboard
+                </div>
+                <div class="card-medium" draggable="true" data-draggable="widget" style="flex: 1; min-width: 150px; cursor: move;">
+                  📁 專案管理
+                </div>
+                <div class="card-medium" draggable="true" data-draggable="widget" style="flex: 1; min-width: 150px; cursor: move;">
+                  📈 數據分析
+                </div>
+              </div>
+            </div>
+          </div>
+          <p style="color: var(--color-text-tertiary); font-size: var(--font-size-sm);">💡 提示：拖動卡片即可重新排序</p>
+        </div>
+
+        <!-- 搜尋增強演示 -->
+        <div class="showcase-section">
+          <h3>🔍 搜尋增強</h3>
+          <p style="color: var(--color-text-secondary); margin-bottom: var(--spacing-4);">實時模糊搜尋 + 自動完成</p>
+
+          <div style="position: relative; margin-bottom: var(--spacing-4);">
+            <input type="text" placeholder="試著輸入 'Dashboard' 或 '資料'..." data-search="input" style="width: 100%; padding: var(--spacing-3); background: var(--color-bg-tertiary); border: 1px solid var(--color-border-default); border-radius: var(--radius-md); color: var(--color-text-primary);">
+            <div data-search="suggestions" style="position: absolute; top: 100%; left: 0; right: 0; z-index: 100; background: var(--color-bg-secondary); border: 1px solid var(--color-border-default); border-top: none; border-radius: 0 0 var(--radius-md) var(--radius-md); max-height: 0; overflow: hidden; transition: max-height 0.2s ease;"></div>
+          </div>
+
+          <div style="margin-top: var(--spacing-6);">
+            <h4 style="margin-bottom: var(--spacing-3); color: var(--color-text-secondary);">搜尋歷史</h4>
+            <div data-search="history" style="display: flex; flex-wrap: wrap; gap: var(--spacing-2); padding: var(--spacing-3); background: var(--color-bg-tertiary); border-radius: var(--radius-md); width: 100%; min-height: 44px;"></div>
+          </div>
+        </div>
+
+        <!-- 表格互動演示 -->
+        <div class="showcase-section">
+          <h3>📊 表格互動</h3>
+          <p style="color: var(--color-text-secondary); margin-bottom: var(--spacing-4);">點擊列頭排序、行選擇、篩選</p>
+
+          <div class="table-container" style="margin-top: var(--spacing-4);">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>名稱</th>
+                  <th>金額</th>
+                  <th>狀態</th>
+                  <th>日期</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Alice Chen</td>
+                  <td>NT$5,000</td>
+                  <td><span class="status-badge status-active">已完成</span></td>
+                  <td>2025-12-03</td>
+                </tr>
+                <tr>
+                  <td>Bob Smith</td>
+                  <td>NT$3,200</td>
+                  <td><span class="status-badge status-pending">待處理</span></td>
+                  <td>2025-12-02</td>
+                </tr>
+                <tr>
+                  <td>Carol Wang</td>
+                  <td>NT$7,800</td>
+                  <td><span class="status-badge status-active">已完成</span></td>
+                  <td>2025-12-01</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p style="color: var(--color-text-tertiary); font-size: var(--font-size-sm); margin-top: var(--spacing-3);">💡 提示：點擊列標題可排序</p>
+        </div>
+
+        <!-- 表單驗證演示 -->
+        <div class="showcase-section">
+          <h3>✓ 表單即時驗證</h3>
+          <p style="color: var(--color-text-secondary); margin-bottom: var(--spacing-4);">實時驗證 + 視覺反饋</p>
+
+          <form data-form="validate" style="max-width: 500px;">
+            <div class="demo-control-item">
+              <label>電子郵件</label>
+              <input type="email" placeholder="user@example.com" data-validate="email">
+              <div class="error-message">❌ 請輸入有效的電子郵件</div>
+            </div>
+
+            <div class="demo-control-item">
+              <label>用戶名（3-20 字符）</label>
+              <input type="text" placeholder="username" data-validate="username" data-min-length="3">
+              <div class="error-message">❌ 用戶名必須為 3-20 字符</div>
+            </div>
+
+            <div class="demo-control-item">
+              <label>密碼（至少 8 字符，含大小寫和數字）</label>
+              <input type="password" placeholder="Password123" data-validate="password">
+              <div class="error-message">❌ 密碼必須至少 8 字符，含大小寫和數字</div>
+            </div>
+
+            <button type="submit" class="btn btn-solid-cyan" style="width: 100%; margin-top: var(--spacing-4);">
+              提交表單
+            </button>
+          </form>
+        </div>
+
+        <!-- 鍵盤快捷鍵演示 -->
+        <div class="showcase-section">
+          <h3>⌨️ 鍵盤快捷鍵</h3>
+          <p style="color: var(--color-text-secondary); margin-bottom: var(--spacing-4);">全局快捷鍵支持</p>
+
+          <div data-shortcuts="help"></div>
+        </div>
+
+        <!-- 手勢識別提示 -->
+        <div class="showcase-section">
+          <h3>👆 觸摸手勢（移動設備）</h3>
+          <p style="color: var(--color-text-secondary);">支持滑動、長按、捏合等手勢</p>
+          <ul style="margin-top: var(--spacing-4); padding-left: var(--spacing-6); color: var(--color-text-secondary); line-height: 2;">
+            <li>📱 左右滑動：切換卡片</li>
+            <li>👉 長按：顯示上下文菜單</li>
+            <li>🤏 雙指捏合：放大/縮小</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- ES Features Tab -->
+      <div id="es-features-tab" class="tab-content">
+        <!-- 由 es-features.js 動態渲染 -->
+      </div>
+
+      <!-- Charts Tab -->
+      <div id="charts-tab" class="tab-content">
+        <!-- 由 charts.js 動態渲染 -->
+      </div>
+
+      <!-- Animations Extended Tab -->
+      <div id="animations-extended-tab" class="tab-content">
+        <!-- 由 animations-extended.js 動態渲染 -->
+      </div>
+
+      <!-- Canvas Drawing Tab -->
+      <div id="canvas-drawing-tab" class="tab-content">
+        <!-- 由 canvas-drawing.js 動態渲染 -->
+      </div>
+
+      <!-- Worker Tab -->
+      <div id="worker-tab" class="tab-content">
+        <!-- 由 worker-showcase.js 動態渲染 -->
+      </div>
+
+      <!-- PWA Tab -->
+      <div id="pwa-tab" class="tab-content">
+        <!-- 由 pwa-showcase.js 動態渲染 -->
+      </div>
+
+      <!-- WebSocket Tab -->
+      <div id="websocket-tab" class="tab-content">
+        <!-- 由 websocket-showcase.js 動態渲染 -->
+      </div>
+
+      <!-- WebGL Tab -->
+      <div id="webgl-tab" class="tab-content">
+        <!-- 由 webgl-showcase.js 動態渲染 -->
+      </div>
+    </div>
+  </section>
+
+  <script src="js/theme-toggle.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/sidebar.js"></script>
+  <script src="js/animations.js"></script>
+  <script src="js/web-api.js"></script>
+  <script src="js/web-api-showcase.js"></script>
+  <script src="js/interactions.js"></script>
+  <script src="js/es-features.js"></script>
+  <script src="js/charts.js"></script>
+  <script src="js/animations-extended.js"></script>
+  <script src="js/canvas-drawing.js"></script>
+  <script src="js/worker-showcase.js"></script>
+  <script src="js/pwa-showcase.js"></script>
+  <script src="js/websocket-showcase.js"></script>
+  <script src="js/webgl-showcase.js"></script>
+  <script>
+    lucide.createIcons();
+
+    // Page loaded
+    console.log('JS Showcase loaded successfully');
+    Toast.success('JavaScript 功能展示已載入');
+
+    // Tab switching function
+    function switchTab(event) {
+      const tabName = event.target.dataset.tab;
+
+      // Hide all tab contents
+      const tabContents = document.querySelectorAll('.tab-content');
+      tabContents.forEach(content => {
+        content.classList.remove('active');
+      });
+
+      // Remove active class from all tab items
+      const tabItems = document.querySelectorAll('.tab-item');
+      tabItems.forEach(item => {
+        item.classList.remove('active');
+      });
+
+      // Show selected tab
+      const selectedTab = document.getElementById(tabName + '-tab');
+      if (selectedTab) {
+        selectedTab.classList.add('active');
+        event.target.classList.add('active');
+
+        // Initialize showcase if on animations tab
+        if (tabName === 'animations') {
+          window.animationShowcases = window.animationShowcases || initAnimationShowcases();
+        }
+
+        // Initialize Web API showcase if on web-apis tab
+        if (tabName === 'web-apis') {
+          if (selectedTab.children.length === 0 && typeof initWebAPIShowcases === 'function') {
+            initWebAPIShowcases();
+          }
+        }
+
+        // Initialize ES Features showcase if on es-features tab
+        if (tabName === 'es-features') {
+          if (selectedTab.children.length === 0 && typeof initESFeaturesShowcase === 'function') {
+            initESFeaturesShowcase();
+          }
+        }
+
+        // Initialize Charts showcase if on charts tab
+        if (tabName === 'charts') {
+          if (selectedTab.children.length === 0 && typeof initChartsShowcase === 'function') {
+            initChartsShowcase();
+          }
+        }
+
+        // Initialize Animations Extended showcase if on animations-extended tab
+        if (tabName === 'animations-extended') {
+          if (selectedTab.children.length === 0 && typeof initAnimationsExtendedShowcase === 'function') {
+            initAnimationsExtendedShowcase();
+          }
+        }
+
+        // Initialize Canvas Drawing showcase if on canvas-drawing tab
+        if (tabName === 'canvas-drawing') {
+          if (selectedTab.children.length === 0 && typeof initCanvasDrawingShowcase === 'function') {
+            initCanvasDrawingShowcase();
+          }
+        }
+
+        // Initialize Worker showcase if on worker tab
+        if (tabName === 'worker') {
+          if (selectedTab.children.length === 0 && typeof initWorkerShowcase === 'function') {
+            initWorkerShowcase();
+          }
+        }
+
+        // Initialize PWA showcase if on pwa tab
+        if (tabName === 'pwa') {
+          if (selectedTab.children.length === 0 && typeof initPWAShowcase === 'function') {
+            initPWAShowcase();
+          }
+        }
+
+        // Initialize WebSocket showcase if on websocket tab
+        if (tabName === 'websocket') {
+          if (selectedTab.children.length === 0 && typeof initWebSocketShowcase === 'function') {
+            initWebSocketShowcase();
+          }
+        }
+
+        // Initialize WebGL showcase if on webgl tab
+        if (tabName === 'webgl') {
+          if (selectedTab.children.length === 0 && typeof initWebGLShowcase === 'function') {
+            initWebGLShowcase();
+          }
+        }
+      }
+    }
+
+    // Scroll to showcase section and switch tabs
+    function scrollToShowcase(tabName) {
+      const tabButton = document.querySelector(`[data-tab="${tabName}"]`);
+      if (tabButton) {
+        tabButton.click();
+        setTimeout(() => {
+          const showcaseSection = document.querySelector('.tabs-container');
+          if (showcaseSection) {
+            showcaseSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+        }, 100);
+      }
+    }
+  </script>
+</body>
+</html>

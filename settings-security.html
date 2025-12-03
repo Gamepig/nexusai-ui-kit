@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="zh-TW" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>安全設定 - NexusAI</title>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <link rel="stylesheet" href="css/design-tokens.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  <link rel="stylesheet" href="css/theme-light.css">
+  <style>
+    .page-header {
+      background: var(--color-bg-secondary);
+      padding: var(--spacing-8) 0;
+      border-bottom: 1px solid var(--color-border-default);
+      margin-top: 80px;
+      margin-left: 280px;
+    }
+
+    .page-header h1 {
+      margin: 0;
+      font-size: var(--font-size-2xl);
+    }
+
+    .page-layout {
+      padding: var(--spacing-8);
+      margin-left: 280px;
+      width: calc(100% - 280px);
+    }
+
+    .layout-inner {
+      display: grid;
+      grid-template-columns: 200px 1fr;
+      gap: var(--spacing-8);
+      width: 100%;
+      max-width: none;
+    }
+
+    .page-layout .container {
+      width: 100%;
+      max-width: none;
+      padding: 0;
+    }
+
+    .settings-sidebar {
+      display: flex;
+      flex-direction: column;
+      gap: var(--spacing-2);
+    }
+
+    .settings-nav {
+      display: flex;
+      flex-direction: column;
+      gap: var(--spacing-2);
+    }
+
+    .settings-nav-item {
+      padding: var(--spacing-3) var(--spacing-4);
+      border-radius: var(--radius-md);
+      color: var(--color-text-secondary);
+      cursor: pointer;
+      transition: all var(--transition-base);
+      text-decoration: none;
+      border-left: 3px solid transparent;
+      font-weight: var(--font-weight-semibold);
+      font-size: var(--font-size-sm);
+    }
+
+    .settings-nav-item:hover {
+      color: var(--color-cyan);
+      background: rgba(0, 217, 255, 0.1);
+    }
+
+    .settings-nav-item.active {
+      color: var(--color-cyan);
+      background: rgba(0, 217, 255, 0.1);
+      border-left-color: var(--color-cyan);
+    }
+
+    .settings-content {
+      background: var(--color-bg-card);
+      border: 1px solid var(--color-border-default);
+      border-radius: var(--radius-lg);
+      padding: var(--spacing-8);
+    }
+
+    .settings-section {
+      margin-bottom: var(--spacing-8);
+      padding-bottom: var(--spacing-8);
+      border-bottom: 1px solid var(--color-border-muted);
+    }
+
+    .settings-section:last-child {
+      margin-bottom: 0;
+      padding-bottom: 0;
+      border-bottom: none;
+    }
+
+    .settings-title {
+      font-size: var(--font-size-lg);
+      font-weight: var(--font-weight-semibold);
+      color: var(--color-text-primary);
+      margin-bottom: var(--spacing-6);
+    }
+
+    .form-group {
+      margin-bottom: var(--spacing-6);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .form-label {
+      font-size: var(--font-size-sm);
+      font-weight: var(--font-weight-semibold);
+      color: var(--color-text-primary);
+      margin-bottom: var(--spacing-2);
+    }
+
+    .form-control {
+      padding: var(--spacing-3) var(--spacing-4);
+      background: var(--color-bg-tertiary);
+      border: 1px solid var(--color-border-default);
+      border-radius: var(--radius-md);
+      color: var(--color-text-primary);
+      font-size: var(--font-size-sm);
+      transition: all var(--transition-base);
+    }
+
+    .form-control:focus {
+      outline: none;
+      border-color: var(--color-cyan);
+      box-shadow: 0 0 12px rgba(0, 217, 255, 0.2);
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--spacing-6);
+    }
+
+    .toggle-switch {
+      display: flex;
+      align-items: center;
+      gap: var(--spacing-3);
+      margin-bottom: var(--spacing-4);
+    }
+
+    .toggle-input {
+      appearance: none;
+      width: 50px;
+      height: 28px;
+      background: var(--color-bg-tertiary);
+      border: 1px solid var(--color-border-default);
+      border-radius: 14px;
+      cursor: pointer;
+      position: relative;
+      transition: all var(--transition-base);
+    }
+
+    .toggle-input:checked {
+      background: var(--color-green);
+      border-color: var(--color-green);
+    }
+
+    .toggle-input::after {
+      content: '';
+      position: absolute;
+      width: 24px;
+      height: 24px;
+      background: white;
+      border-radius: 50%;
+      top: 2px;
+      left: 2px;
+      transition: left 0.3s;
+    }
+
+    .toggle-input:checked::after {
+      left: 24px;
+    }
+
+    .device-item {
+      background: var(--color-bg-tertiary);
+      border: 1px solid var(--color-border-muted);
+      border-radius: var(--radius-md);
+      padding: var(--spacing-4);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: var(--spacing-4);
+    }
+
+    .device-info {
+      flex: 1;
+    }
+
+    .device-name {
+      font-weight: var(--font-weight-semibold);
+      color: var(--color-text-primary);
+      margin-bottom: var(--spacing-2);
+    }
+
+    .device-time {
+      font-size: var(--font-size-sm);
+      color: var(--color-text-secondary);
+    }
+
+    .device-badge {
+      background: rgba(34, 197, 94, 0.1);
+      color: var(--color-green);
+      padding: var(--spacing-1) var(--spacing-3);
+      border-radius: var(--radius-full);
+      font-size: var(--font-size-xs);
+      font-weight: var(--font-weight-semibold);
+      margin-right: var(--spacing-3);
+    }
+
+    .device-actions {
+      display: flex;
+      gap: var(--spacing-2);
+    }
+
+    .danger-zone {
+      background: rgba(239, 68, 68, 0.1);
+      border: 1px solid rgba(239, 68, 68, 0.3);
+      border-radius: var(--radius-lg);
+      padding: var(--spacing-6);
+      margin-top: var(--spacing-8);
+    }
+
+    .danger-title {
+      font-size: var(--font-size-lg);
+      font-weight: var(--font-weight-semibold);
+      color: var(--color-red);
+      margin-bottom: var(--spacing-4);
+    }
+
+    .danger-btn {
+      padding: var(--spacing-3) var(--spacing-6);
+      background: rgba(239, 68, 68, 0.1);
+      color: var(--color-red);
+      border: 1px solid var(--color-red);
+      border-radius: var(--radius-md);
+      font-weight: var(--font-weight-semibold);
+      cursor: pointer;
+      transition: all var(--transition-base);
+      margin-bottom: var(--spacing-3);
+      width: 100%;
+      text-align: left;
+    }
+
+    .danger-btn:hover {
+      background: var(--color-red);
+      color: white;
+    }
+
+    .btn-save {
+      padding: var(--spacing-3) var(--spacing-6);
+      background: var(--color-cyan);
+      color: var(--color-bg-primary);
+      border: none;
+      border-radius: var(--radius-md);
+      font-weight: var(--font-weight-semibold);
+      cursor: pointer;
+      transition: all var(--transition-base);
+      margin-right: var(--spacing-3);
+    }
+
+    .btn-save:hover {
+      box-shadow: 0 0 20px rgba(0, 217, 255, 0.4);
+    }
+
+    .btn-action {
+      padding: var(--spacing-2) var(--spacing-4);
+      background: transparent;
+      color: var(--color-cyan);
+      border: 1px solid var(--color-cyan);
+      border-radius: var(--radius-md);
+      font-size: var(--font-size-sm);
+      cursor: pointer;
+      transition: all var(--transition-base);
+    }
+
+    .btn-action:hover {
+      background: rgba(0, 217, 255, 0.1);
+    }
+
+    .btn-logout {
+      padding: var(--spacing-2) var(--spacing-4);
+      background: transparent;
+      color: var(--color-red);
+      border: 1px solid var(--color-red);
+      border-radius: var(--radius-md);
+      font-size: var(--font-size-sm);
+      cursor: pointer;
+      transition: all var(--transition-base);
+    }
+
+    .btn-logout:hover {
+      background: rgba(239, 68, 68, 0.1);
+    }
+
+    @media (max-width: 768px) {
+      .layout-inner {
+        grid-template-columns: 1fr;
+      }
+
+      .settings-sidebar {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: var(--spacing-2);
+      }
+
+      .form-row {
+        grid-template-columns: 1fr;
+      }
+
+      .device-item {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .device-actions {
+        width: 100%;
+        margin-top: var(--spacing-4);
+      }
+
+      .device-badge {
+        margin-bottom: var(--spacing-3);
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Top Navigation -->
+  <nav class="top-nav">
+    <div class="top-nav-container">
+      <a href="index.html" class="logo">
+        <span style="font-size: 24px;">🚀</span>
+        <span>NexusAI</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="dashboard.html"><i data-lucide="layout-dashboard" class="nav-icon"></i>儀表板</a></li>
+        <li><a href="settings-security.html" class="active"><i data-lucide="settings" class="nav-icon"></i>設定</a></li>
+        <li><a href="pricing.html"><i data-lucide="credit-card" class="nav-icon"></i>定價</a></li>
+        <li><a href="about.html"><i data-lucide="users" class="nav-icon"></i>關於</a></li>
+      </ul>
+      <div class="nav-actions">
+        <button id="theme-toggle-btn" class="btn btn-outline-cyan btn-sm" title="切換主題" aria-label="切換至淺色主題">
+          <i data-lucide="sun"></i>
+        </button>
+      </div>
+      <button class="hamburger-menu">
+        <i data-lucide="menu"></i>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Page Header -->
+  <section class="page-header">
+    <div class="container">
+      <h1>設定</h1>
+    </div>
+  </section>
+
+  <!-- Sidebar Navigation -->
+  <!-- Sidebar Navigation (由 sidebar.js 動態載入) -->
+  <aside id="sidebar-container" class="sidebar dashboard-sidebar"></aside>
+
+  <!-- Main Content -->
+  <section class="page-layout">
+    <div class="container">
+      <div class="layout-inner">
+        <!-- Settings Sidebar -->
+        <div class="settings-sidebar">
+        <nav class="settings-nav">
+          <a href="settings-general.html" class="settings-nav-item">一般</a>
+          <a href="settings-security.html" class="settings-nav-item active">安全</a>
+          <a href="settings-billing.html" class="settings-nav-item">帳單</a>
+        </nav>
+      </div>
+
+      <!-- Settings Content -->
+      <div class="settings-content">
+        <!-- Change Password Section -->
+        <div class="settings-section">
+          <div class="settings-title">變更密碼</div>
+          <form>
+            <div class="form-group">
+              <label class="form-label">目前密碼</label>
+              <input type="password" class="form-control" placeholder="請輸入目前密碼">
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">新密碼</label>
+              <input type="password" class="form-control" placeholder="請輸入新密碼">
+              <p style="font-size: var(--font-size-xs); color: var(--color-text-secondary); margin-top: var(--spacing-2);">
+                強度: <span style="color: var(--color-green);">強</span> - 至少 8 個字符，包含大小寫和數字
+              </p>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">確認密碼</label>
+              <input type="password" class="form-control" placeholder="請再次輸入新密碼">
+            </div>
+
+            <button type="button" class="btn-save">更新密碼</button>
+          </form>
+        </div>
+
+        <!-- Two-Factor Authentication Section -->
+        <div class="settings-section">
+          <div class="settings-title">雙重驗證</div>
+          <div class="toggle-switch">
+            <input type="checkbox" class="toggle-input" id="2fa" checked>
+            <label for="2fa" style="flex: 1; cursor: pointer;">
+              <div style="font-weight: var(--font-weight-semibold); color: var(--color-text-primary); margin-bottom: var(--spacing-1);">雙重驗證</div>
+              <div style="font-size: var(--font-size-xs); color: var(--color-text-secondary);">狀態: 已啟用</div>
+            </label>
+          </div>
+          <button class="btn-action" style="margin-top: var(--spacing-4);">管理備用碼</button>
+        </div>
+
+        <!-- Login Devices Section -->
+        <div class="settings-section">
+          <div class="settings-title">登入裝置</div>
+
+          <div class="device-item">
+            <div class="device-info">
+              <div class="device-name"><i data-lucide="laptop" style="width: 18px; height: 18px; vertical-align: middle; margin-right: 8px;"></i>MacBook Pro</div>
+              <div class="device-time">目前裝置 • 最後活動: 剛剛</div>
+            </div>
+            <div class="device-actions">
+              <button class="btn-action">詳情</button>
+            </div>
+          </div>
+
+          <div class="device-item">
+            <div class="device-info">
+              <div class="device-name"><i data-lucide="smartphone" style="width: 18px; height: 18px; vertical-align: middle; margin-right: 8px;"></i>iPhone 15</div>
+              <div class="device-time">最後活動: 2天前</div>
+            </div>
+            <div class="device-actions">
+              <button class="btn-logout">登出</button>
+            </div>
+          </div>
+
+          <div class="device-item">
+            <div class="device-info">
+              <div class="device-name"><i data-lucide="tablet" style="width: 18px; height: 18px; vertical-align: middle; margin-right: 8px;"></i>iPad Pro</div>
+              <div class="device-time">最後活動: 1周前</div>
+            </div>
+            <div class="device-actions">
+              <button class="btn-logout">登出</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Danger Zone -->
+        <div class="danger-zone">
+          <div class="danger-title"><i data-lucide="alert-triangle" style="width: 20px; height: 20px; vertical-align: middle; margin-right: 8px;"></i>危險區域</div>
+          <button class="danger-btn">登出所有裝置</button>
+          <button class="danger-btn">刪除帳號</button>
+        </div>
+      </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div>
+        <h4>NexusAI</h4>
+        <p>現代化的深色科技主題設計系統</p>
+      </div>
+      <div>
+        <h4>導航</h4>
+        <ul>
+          <li><a href="index.html">首頁</a></li>
+          <li><a href="dashboard.html">儀表板</a></li>
+          <li><a href="settings-security.html">設定</a></li>
+          <li><a href="pricing.html">定價</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>資源</h4>
+        <ul>
+          <li><a href="#">GitHub</a></li>
+          <li><a href="#">部落格</a></li>
+          <li><a href="#">社群</a></li>
+          <li><a href="#">文檔</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2025 NexusAI. 保留所有權利。</p>
+    </div>
+  </footer>
+
+  <script src="js/theme-toggle.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/sidebar.js"></script>
+  <script>
+    lucide.createIcons();
+  </script>
+</body>
+</html>

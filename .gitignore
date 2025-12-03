@@ -1,0 +1,14 @@
+# Exclude planning folder
+planning/
+
+# macOS
+.DS_Store
+
+# Logs
+*.log
+
+# Editor
+.idea/
+.vscode/
+*.swp
+*.swo

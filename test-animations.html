@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="zh-TW" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>動畫演示測試</title>
+  <link rel="stylesheet" href="css/design-tokens.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/animations-showcase.css">
+  <link rel="stylesheet" href="css/theme-light.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <style>
+    body {
+      background: var(--color-bg-primary);
+      color: var(--color-text-primary);
+      padding: 20px;
+    }
+    .test-container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    h1 {
+      margin-bottom: 30px;
+      border-bottom: 2px solid var(--color-cyan);
+      padding-bottom: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="test-container">
+    <h1>🎬 動畫效果演示測試</h1>
+    <div id="anime-showcase"></div>
+    <div id="gsap-showcase"></div>
+    <div id="canvas-showcase"></div>
+  </div>
+
+  <script src="js/theme-toggle.js"></script>
+  <script src="js/animations.js"></script>
+  <script>
+    console.log('Test page loaded');
+    // Animations should initialize automatically
+  </script>
+</body>
+</html>

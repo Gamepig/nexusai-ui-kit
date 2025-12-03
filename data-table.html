@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="zh-TW" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>資料管理 - NexusAI</title>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <link rel="stylesheet" href="css/design-tokens.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  <link rel="stylesheet" href="css/theme-light.css">
+  <style>
+    .page-header {
+      background: var(--color-bg-secondary);
+      padding: var(--spacing-8) 0;
+      border-bottom: 1px solid var(--color-border-default);
+      margin-top: 80px;
+      margin-left: 280px;
+    }
+
+    .page-header h1 {
+      margin: 0;
+      font-size: var(--font-size-2xl);
+    }
+
+    .page-layout {
+      display: grid;
+      grid-template-columns: 1fr;
+      padding: var(--spacing-8);
+      margin-left: 280px;
+    }
+
+    .controls-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: var(--spacing-8);
+      flex-wrap: wrap;
+      gap: var(--spacing-4);
+    }
+
+    .search-box {
+      display: flex;
+      align-items: center;
+      gap: var(--spacing-2);
+      padding: var(--spacing-2) var(--spacing-4);
+      background: var(--color-bg-tertiary);
+      border: 1px solid var(--color-border-default);
+      border-radius: var(--radius-md);
+      flex: 0 1 300px;
+    }
+
+    .search-box input {
+      flex: 1;
+      background: transparent;
+      border: none;
+      color: var(--color-text-primary);
+      outline: none;
+      font-size: var(--font-size-sm);
+    }
+
+    .table-wrapper {
+      background: var(--color-bg-card);
+      border: 1px solid var(--color-border-default);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      margin-bottom: var(--spacing-8);
+    }
+
+    .table-header {
+      padding: var(--spacing-6);
+      border-bottom: 1px solid var(--color-border-muted);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: var(--color-bg-tertiary);
+    }
+
+    .table-header-title {
+      font-size: var(--font-size-lg);
+      font-weight: var(--font-weight-semibold);
+      color: var(--color-text-primary);
+    }
+
+    .table-controls {
+      display: flex;
+      gap: var(--spacing-3);
+    }
+
+    .data-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .data-table th {
+      background: var(--color-bg-tertiary);
+      padding: var(--spacing-4) var(--spacing-6);
+      text-align: left;
+      font-weight: var(--font-weight-semibold);
+      color: var(--color-text-primary);
+      border-bottom: 1px solid var(--color-border-default);
+      font-size: var(--font-size-sm);
+    }
+
+    .data-table td {
+      padding: var(--spacing-4) var(--spacing-6);
+      border-bottom: 1px solid var(--color-border-muted);
+      color: var(--color-text-secondary);
+      font-size: var(--font-size-sm);
+    }
+
+    .data-table tbody tr:hover {
+      background: var(--color-bg-tertiary);
+    }
+
+    .checkbox {
+      width: 18px;
+      height: 18px;
+      cursor: pointer;
+      accent-color: var(--color-cyan);
+    }
+
+    .status-badge {
+      display: inline-block;
+      padding: var(--spacing-1) var(--spacing-3);
+      border-radius: var(--radius-full);
+      font-size: var(--font-size-xs);
+      font-weight: var(--font-weight-semibold);
+    }
+
+    .status-active {
+      background: rgba(34, 197, 94, 0.1);
+      color: var(--color-green);
+    }
+
+    .status-pending {
+      background: rgba(249, 115, 22, 0.1);
+      color: var(--color-orange);
+    }
+
+    .status-inactive {
+      background: rgba(107, 114, 128, 0.1);
+      color: var(--color-text-secondary);
+    }
+
+    .action-buttons {
+      display: flex;
+      gap: var(--spacing-2);
+    }
+
+    .action-btn {
+      padding: var(--spacing-2) var(--spacing-3);
+      background: var(--color-bg-tertiary);
+      border: 1px solid var(--color-border-default);
+      border-radius: var(--radius-md);
+      color: var(--color-text-secondary);
+      cursor: pointer;
+      font-size: var(--font-size-xs);
+      transition: all var(--transition-base);
+    }
+
+    .action-btn:hover {
+      border-color: var(--color-cyan);
+      color: var(--color-cyan);
+    }
+
+    .table-footer {
+      padding: var(--spacing-6);
+      border-top: 1px solid var(--color-border-muted);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: var(--color-bg-tertiary);
+      font-size: var(--font-size-sm);
+      color: var(--color-text-secondary);
+    }
+
+    .pagination {
+      display: flex;
+      gap: var(--spacing-2);
+    }
+
+    .pagination button {
+      min-width: 36px;
+      height: 36px;
+      border: 1px solid var(--color-border-default);
+      background: var(--color-bg-card);
+      color: var(--color-text-primary);
+      border-radius: var(--radius-md);
+      cursor: pointer;
+      transition: all var(--transition-base);
+      font-size: var(--font-size-sm);
+    }
+
+    .pagination button:hover,
+    .pagination button.active {
+      border-color: var(--color-cyan);
+      background: rgba(0, 217, 255, 0.1);
+      color: var(--color-cyan);
+    }
+
+    @media (max-width: 768px) {
+      .controls-bar {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .search-box {
+        flex: 1;
+      }
+
+      .data-table {
+        font-size: var(--font-size-xs);
+      }
+
+      .data-table th,
+      .data-table td {
+        padding: var(--spacing-2) var(--spacing-3);
+      }
+
+      .table-footer {
+        flex-direction: column;
+        gap: var(--spacing-4);
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Top Navigation -->
+  <nav class="top-nav">
+    <div class="top-nav-container">
+      <a href="index.html" class="logo">
+        <span style="font-size: 24px;">🚀</span>
+        <span>NexusAI</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="dashboard.html"><i data-lucide="layout-dashboard" class="nav-icon"></i>儀表板</a></li>
+        <li><a href="data-table.html" class="active"><i data-lucide="table" class="nav-icon"></i>資料</a></li>
+        <li><a href="pricing.html"><i data-lucide="credit-card" class="nav-icon"></i>定價</a></li>
+        <li><a href="about.html"><i data-lucide="users" class="nav-icon"></i>關於</a></li>
+      </ul>
+      <div class="nav-actions">
+        <button id="theme-toggle-btn" class="btn btn-outline-cyan btn-sm" title="切換主題" aria-label="切換至淺色主題">
+          <i data-lucide="sun"></i>
+        </button>
+      </div>
+      <button class="hamburger-menu">
+        <i data-lucide="menu"></i>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Sidebar Navigation (由 sidebar.js 動態載入) -->
+  <aside id="sidebar-container" class="sidebar dashboard-sidebar"></aside>
+
+  <!-- Page Header -->
+  <section class="page-header">
+    <div class="container">
+      <h1>資料管理</h1>
+    </div>
+  </section>
+
+  <!-- Main Content -->
+  <section class="page-layout">
+    <div class="container">
+      <!-- Controls -->
+      <div class="controls-bar">
+        <div class="search-box">
+          <i data-lucide="search" style="width: 18px; height: 18px; color: var(--color-text-secondary);"></i>
+          <input type="text" placeholder="搜尋資料...">
+        </div>
+        <div style="display: flex; gap: var(--spacing-3);">
+          <select style="padding: var(--spacing-2) var(--spacing-3); background: var(--color-bg-tertiary); border: 1px solid var(--color-border-default); border-radius: var(--radius-md); color: var(--color-text-primary);">
+            <option>全部狀態</option>
+            <option>啟用</option>
+            <option>停用</option>
+            <option>待審核</option>
+          </select>
+          <button class="btn btn-outline-cyan"><i data-lucide="download" style="width: 16px; height: 16px;"></i> 匯出</button>
+          <button class="btn btn-solid-cyan"><i data-lucide="plus" style="width: 16px; height: 16px;"></i> 新增</button>
+        </div>
+      </div>
+
+      <!-- Table -->
+      <div class="table-wrapper">
+        <div class="table-header">
+          <div class="table-header-title">用戶列表</div>
+          <div class="table-controls">
+            <span style="color: var(--color-text-secondary); font-size: var(--font-size-sm);">共 50 筆</span>
+          </div>
+        </div>
+
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th style="width: 40px;"><input type="checkbox" class="checkbox"></th>
+              <th>ID</th>
+              <th>名稱</th>
+              <th>電子郵件</th>
+              <th>狀態</th>
+              <th>建立日期</th>
+              <th style="text-align: right;">操作</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><input type="checkbox" class="checkbox"></td>
+              <td>001</td>
+              <td>張三</td>
+              <td>zhang@example.com</td>
+              <td><span class="status-badge status-active">啟用</span></td>
+              <td>2025-12-01</td>
+              <td style="text-align: right;">
+                <div class="action-buttons">
+                  <button class="action-btn">檢視</button>
+                  <button class="action-btn">編輯</button>
+                  <button class="action-btn">刪除</button>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td><input type="checkbox" class="checkbox"></td>
+              <td>002</td>
+              <td>李四</td>
+              <td>li@example.com</td>
+              <td><span class="status-badge status-active">啟用</span></td>
+              <td>2025-11-28</td>
+              <td style="text-align: right;">
+                <div class="action-buttons">
+                  <button class="action-btn">檢視</button>
+                  <button class="action-btn">編輯</button>
+                  <button class="action-btn">刪除</button>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td><input type="checkbox" class="checkbox"></td>
+              <td>003</td>
+              <td>王五</td>
+              <td>wang@example.com</td>
+              <td><span class="status-badge status-pending">待審核</span></td>
+              <td>2025-11-25</td>
+              <td style="text-align: right;">
+                <div class="action-buttons">
+                  <button class="action-btn">檢視</button>
+                  <button class="action-btn">編輯</button>
+                  <button class="action-btn">刪除</button>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td><input type="checkbox" class="checkbox"></td>
+              <td>004</td>
+              <td>趙六</td>
+              <td>zhao@example.com</td>
+              <td><span class="status-badge status-inactive">停用</span></td>
+              <td>2025-11-20</td>
+              <td style="text-align: right;">
+                <div class="action-buttons">
+                  <button class="action-btn">檢視</button>
+                  <button class="action-btn">編輯</button>
+                  <button class="action-btn">刪除</button>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td><input type="checkbox" class="checkbox"></td>
+              <td>005</td>
+              <td>孫七</td>
+              <td>sun@example.com</td>
+              <td><span class="status-badge status-active">啟用</span></td>
+              <td>2025-11-18</td>
+              <td style="text-align: right;">
+                <div class="action-buttons">
+                  <button class="action-btn">檢視</button>
+                  <button class="action-btn">編輯</button>
+                  <button class="action-btn">刪除</button>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td><input type="checkbox" class="checkbox"></td>
+              <td>006</td>
+              <td>周八</td>
+              <td>zhou@example.com</td>
+              <td><span class="status-badge status-active">啟用</span></td>
+              <td>2025-11-15</td>
+              <td style="text-align: right;">
+                <div class="action-buttons">
+                  <button class="action-btn">檢視</button>
+                  <button class="action-btn">編輯</button>
+                  <button class="action-btn">刪除</button>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td><input type="checkbox" class="checkbox"></td>
+              <td>007</td>
+              <td>吳九</td>
+              <td>wu@example.com</td>
+              <td><span class="status-badge status-pending">待審核</span></td>
+              <td>2025-11-12</td>
+              <td style="text-align: right;">
+                <div class="action-buttons">
+                  <button class="action-btn">檢視</button>
+                  <button class="action-btn">編輯</button>
+                  <button class="action-btn">刪除</button>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td><input type="checkbox" class="checkbox"></td>
+              <td>008</td>
+              <td>鄭十</td>
+              <td>zheng@example.com</td>
+              <td><span class="status-badge status-active">啟用</span></td>
+              <td>2025-11-10</td>
+              <td style="text-align: right;">
+                <div class="action-buttons">
+                  <button class="action-btn">檢視</button>
+                  <button class="action-btn">編輯</button>
+                  <button class="action-btn">刪除</button>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td><input type="checkbox" class="checkbox"></td>
+              <td>009</td>
+              <td>陳十一</td>
+              <td>chen@example.com</td>
+              <td><span class="status-badge status-inactive">停用</span></td>
+              <td>2025-11-08</td>
+              <td style="text-align: right;">
+                <div class="action-buttons">
+                  <button class="action-btn">檢視</button>
+                  <button class="action-btn">編輯</button>
+                  <button class="action-btn">刪除</button>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td><input type="checkbox" class="checkbox"></td>
+              <td>010</td>
+              <td>郭十二</td>
+              <td>guo@example.com</td>
+              <td><span class="status-badge status-active">啟用</span></td>
+              <td>2025-11-05</td>
+              <td style="text-align: right;">
+                <div class="action-buttons">
+                  <button class="action-btn">檢視</button>
+                  <button class="action-btn">編輯</button>
+                  <button class="action-btn">刪除</button>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="table-footer">
+          <div>顯示 1-10 共 50 筆</div>
+          <select style="padding: var(--spacing-2) var(--spacing-3); background: var(--color-bg-card); border: 1px solid var(--color-border-default); border-radius: var(--radius-md); color: var(--color-text-primary); font-size: var(--font-size-sm);">
+            <option>每頁 10 筆</option>
+            <option>每頁 20 筆</option>
+            <option>每頁 50 筆</option>
+          </select>
+          <div class="pagination">
+            <button>&lt;</button>
+            <button class="active">1</button>
+            <button>2</button>
+            <button>3</button>
+            <button>4</button>
+            <button>5</button>
+            <button>&gt;</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div>
+        <h4>NexusAI</h4>
+        <p>現代化的深色科技主題設計系統</p>
+      </div>
+      <div>
+        <h4>導航</h4>
+        <ul>
+          <li><a href="index.html">首頁</a></li>
+          <li><a href="dashboard.html">儀表板</a></li>
+          <li><a href="data-table.html">資料管理</a></li>
+          <li><a href="pricing.html">定價</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>資源</h4>
+        <ul>
+          <li><a href="#">GitHub</a></li>
+          <li><a href="#">部落格</a></li>
+          <li><a href="#">社群</a></li>
+          <li><a href="#">文檔</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2025 NexusAI. 保留所有權利。</p>
+    </div>
+  </footer>
+
+  <script src="js/theme-toggle.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/sidebar.js"></script>
+  <script>
+    lucide.createIcons();
+  </script>
+</body>
+</html>

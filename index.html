@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="zh-TW" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NexusAI - 深色科技主題 Demo</title>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <link rel="stylesheet" href="css/design-tokens.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  <link rel="stylesheet" href="css/theme-light.css">
+  <style>
+    /* Hero Section */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding-top: 80px;
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(180deg, rgba(15, 23, 42, 0.7) 0%, rgba(15, 23, 42, 0.9) 100%);
+      z-index: 1;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -20%;
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, rgba(0, 217, 255, 0.1) 0%, transparent 70%);
+      border-radius: 50%;
+      animation: float 6s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(30px); }
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      max-width: 800px;
+    }
+
+    .hero h1 {
+      font-size: 4rem;
+      margin-bottom: var(--spacing-6);
+      background: linear-gradient(135deg, #00D9FF 0%, #A855F7 100%);
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      line-height: 1.2;
+    }
+
+    .hero p {
+      font-size: 1.25rem;
+      color: var(--color-text-secondary);
+      margin-bottom: var(--spacing-8);
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: var(--spacing-4);
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    /* Features Section */
+    .features {
+      background: var(--color-bg-secondary);
+      padding: var(--spacing-20) 0;
+    }
+
+    .feature-card {
+      background: var(--color-bg-card);
+      border: 1px solid var(--color-border-default);
+      border-radius: var(--radius-lg);
+      padding: var(--spacing-8);
+      transition: all var(--transition-base);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .feature-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--color-cyan), transparent);
+    }
+
+    .feature-card:hover {
+      border-color: var(--color-cyan);
+      box-shadow: 0 0 30px rgba(0, 217, 255, 0.2);
+      transform: translateY(-5px);
+    }
+
+    .feature-icon {
+      width: 48px;
+      height: 48px;
+      background: rgba(0, 217, 255, 0.1);
+      border-radius: var(--radius-lg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: var(--spacing-4);
+      color: var(--color-cyan);
+    }
+
+    .feature-card h3 {
+      font-size: var(--font-size-xl);
+      margin-bottom: var(--spacing-3);
+      color: var(--color-text-primary);
+    }
+
+    /* CTA Section */
+    .cta-section {
+      background: linear-gradient(135deg, rgba(0, 217, 255, 0.05) 0%, rgba(168, 85, 247, 0.05) 100%);
+      border: 1px solid rgba(0, 217, 255, 0.2);
+      border-radius: var(--radius-xl);
+      padding: var(--spacing-12) var(--spacing-8);
+      text-align: center;
+      margin: var(--spacing-20) auto;
+      max-width: 800px;
+    }
+
+    .cta-section h2 {
+      margin-bottom: var(--spacing-4);
+    }
+  </style>
+</head>
+<body>
+  <!-- Top Navigation -->
+  <nav class="top-nav">
+    <div class="top-nav-container">
+      <a href="index.html" class="logo">
+        <span style="font-size: 24px;">🚀</span>
+        <span>NexusAI</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="#features" class="active"><i data-lucide="star" class="nav-icon"></i>特色</a></li>
+        <li><a href="pricing.html"><i data-lucide="credit-card" class="nav-icon"></i>定價</a></li>
+        <li><a href="about.html"><i data-lucide="users" class="nav-icon"></i>關於</a></li>
+        <li><a href="contact.html"><i data-lucide="mail" class="nav-icon"></i>聯繫</a></li>
+      </ul>
+      <div class="nav-actions">
+        <button id="theme-toggle-btn" class="btn btn-outline-cyan btn-sm" title="切換主題" aria-label="切換至淺色主題">
+          <i data-lucide="sun"></i>
+        </button>
+      </div>
+      <button class="hamburger-menu">
+        <i data-lucide="menu"></i>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Sidebar Navigation (Mobile) -->
+  <aside class="sidebar">
+    <nav class="sidebar-nav">
+      <a href="index.html" class="sidebar-item active">
+        <i data-lucide="home"></i>
+        <span>首頁</span>
+      </a>
+      <a href="#features" class="sidebar-item">
+        <i data-lucide="star"></i>
+        <span>特色</span>
+      </a>
+      <a href="pricing.html" class="sidebar-item">
+        <i data-lucide="dollar-sign"></i>
+        <span>定價</span>
+      </a>
+      <a href="about.html" class="sidebar-item">
+        <i data-lucide="info"></i>
+        <span>關於</span>
+      </a>
+      <a href="contact.html" class="sidebar-item">
+        <i data-lucide="mail"></i>
+        <span>聯繫</span>
+      </a>
+    </nav>
+  </aside>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-content">
+      <h1>歡迎來到 NexusAI</h1>
+      <p>現代深色科技主題展示 - 完整的 UI 設計系統與元件庫</p>
+      <div class="hero-buttons">
+        <a href="dashboard.html" class="btn btn-solid-cyan btn-lg">開始探索</a>
+        <a href="readme-viewer.html" class="btn btn-outline-cyan btn-lg">查看文檔</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features Section -->
+  <section id="features" class="features">
+    <div class="container">
+      <h2 style="text-align: center; margin-bottom: var(--spacing-16);">核心特色</h2>
+      <div class="grid-3">
+        <div class="feature-card">
+          <div class="feature-icon">
+            <i data-lucide="zap" style="width: 28px; height: 28px;"></i>
+          </div>
+          <h3>高效能</h3>
+          <p>純 HTML + CSS + 最小化 JavaScript，極速載入與執行。</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">
+            <i data-lucide="palette" style="width: 28px; height: 28px;"></i>
+          </div>
+          <h3>設計系統</h3>
+          <p>完整的色彩、字型、間距系統，確保一致的視覺表現。</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">
+            <i data-lucide="responsive" style="width: 28px; height: 28px;"></i>
+          </div>
+          <h3>響應式設計</h3>
+          <p>從手機到桌面，完美適應各種螢幕尺寸。</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">
+            <i data-lucide="layers" style="width: 28px; height: 28px;"></i>
+          </div>
+          <h3>可重用元件</h3>
+          <p>按鈕、卡片、表單等 30+ 個精心設計的元件。</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">
+            <i data-lucide="moon" style="width: 28px; height: 28px;"></i>
+          </div>
+          <h3>深色主題</h3>
+          <p>專業的深色主題搭配發光效果，展現現代科技感。</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">
+            <i data-lucide="code" style="width: 28px; height: 28px;"></i>
+          </div>
+          <h3>易於自訂</h3>
+          <p>使用 CSS 變數，輕鬆自訂顏色、間距等設計參數。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="cta-section">
+    <h2>準備開始了嗎？</h2>
+    <p style="margin-bottom: var(--spacing-6);">探索我們的完整元件庫與頁面範例</p>
+    <div style="display: flex; gap: var(--spacing-4); justify-content: center; flex-wrap: wrap;">
+      <a href="pricing.html" class="btn btn-solid-cyan">查看定價</a>
+      <a href="dashboard.html" class="btn btn-outline-cyan">進入儀表板</a>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div>
+        <h4>NexusAI</h4>
+        <p>現代化的深色科技主題設計系統</p>
+      </div>
+      <div>
+        <h4>導航</h4>
+        <ul>
+          <li><a href="index.html">首頁</a></li>
+          <li><a href="pricing.html">定價</a></li>
+          <li><a href="about.html">關於</a></li>
+          <li><a href="contact.html">聯繫</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>資源</h4>
+        <ul>
+          <li><a href="dashboard.html">儀表板</a></li>
+          <li><a href="#">GitHub</a></li>
+          <li><a href="#">部落格</a></li>
+          <li><a href="#">社群</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2025 NexusAI. 保留所有權利。</p>
+    </div>
+  </footer>
+
+  <script src="js/theme-toggle.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/sidebar.js"></script>
+  <script>
+    lucide.createIcons();
+
+    // 隨機背景圖片
+    (function() {
+      const backgrounds = [
+        'image/unnamed.jpg',
+        'image/unnamed (1).jpg'
+      ];
+      const randomBg = backgrounds[Math.floor(Math.random() * backgrounds.length)];
+      document.querySelector('.hero').style.backgroundImage = `url('${randomBg}')`;
+    })();
+  </script>
+</body>
+</html>

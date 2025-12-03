@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="zh-TW" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>設定 - NexusAI</title>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <link rel="stylesheet" href="css/design-tokens.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  <link rel="stylesheet" href="css/theme-light.css">
+  <style>
+    .page-header {
+      background: var(--color-bg-secondary);
+      padding: var(--spacing-8) 0;
+      border-bottom: 1px solid var(--color-border-default);
+      margin-top: 80px;
+      margin-left: 280px;
+    }
+
+    .page-header h1 {
+      margin: 0;
+      font-size: var(--font-size-2xl);
+    }
+
+    .page-layout {
+      padding: var(--spacing-8);
+      margin-left: 280px;
+      width: calc(100% - 280px);
+    }
+
+    .layout-inner {
+      display: grid;
+      grid-template-columns: 200px 1fr;
+      gap: var(--spacing-8);
+      width: 100%;
+      max-width: none;
+    }
+
+    .page-layout .container {
+      width: 100%;
+      max-width: none;
+      padding: 0;
+    }
+
+    .settings-sidebar {
+      display: flex;
+      flex-direction: column;
+      gap: var(--spacing-2);
+    }
+
+    .settings-nav {
+      display: flex;
+      flex-direction: column;
+      gap: var(--spacing-2);
+    }
+
+    .settings-nav-item {
+      padding: var(--spacing-3) var(--spacing-4);
+      border-radius: var(--radius-md);
+      color: var(--color-text-secondary);
+      cursor: pointer;
+      transition: all var(--transition-base);
+      text-decoration: none;
+      border-left: 3px solid transparent;
+      font-weight: var(--font-weight-semibold);
+      font-size: var(--font-size-sm);
+    }
+
+    .settings-nav-item:hover {
+      color: var(--color-cyan);
+      background: rgba(0, 217, 255, 0.1);
+    }
+
+    .settings-nav-item.active {
+      color: var(--color-cyan);
+      background: rgba(0, 217, 255, 0.1);
+      border-left-color: var(--color-cyan);
+    }
+
+    .settings-content {
+      background: var(--color-bg-card);
+      border: 1px solid var(--color-border-default);
+      border-radius: var(--radius-lg);
+      padding: var(--spacing-8);
+    }
+
+    .settings-section {
+      margin-bottom: var(--spacing-8);
+      padding-bottom: var(--spacing-8);
+      border-bottom: 1px solid var(--color-border-muted);
+    }
+
+    .settings-section:last-child {
+      margin-bottom: 0;
+      padding-bottom: 0;
+      border-bottom: none;
+    }
+
+    .settings-title {
+      font-size: var(--font-size-lg);
+      font-weight: var(--font-weight-semibold);
+      color: var(--color-text-primary);
+      margin-bottom: var(--spacing-6);
+    }
+
+    .form-group {
+      margin-bottom: var(--spacing-6);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .form-label {
+      font-size: var(--font-size-sm);
+      font-weight: var(--font-weight-semibold);
+      color: var(--color-text-primary);
+      margin-bottom: var(--spacing-2);
+    }
+
+    .form-control {
+      padding: var(--spacing-3) var(--spacing-4);
+      background: var(--color-bg-tertiary);
+      border: 1px solid var(--color-border-default);
+      border-radius: var(--radius-md);
+      color: var(--color-text-primary);
+      font-size: var(--font-size-sm);
+      transition: all var(--transition-base);
+    }
+
+    .form-control:focus {
+      outline: none;
+      border-color: var(--color-cyan);
+      box-shadow: 0 0 12px rgba(0, 217, 255, 0.2);
+    }
+
+    .form-description {
+      font-size: var(--font-size-xs);
+      color: var(--color-text-secondary);
+      margin-top: var(--spacing-2);
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--spacing-6);
+    }
+
+    .toggle-switch {
+      display: flex;
+      align-items: center;
+      gap: var(--spacing-3);
+    }
+
+    .toggle-input {
+      appearance: none;
+      width: 50px;
+      height: 28px;
+      background: var(--color-bg-tertiary);
+      border: 1px solid var(--color-border-default);
+      border-radius: 14px;
+      cursor: pointer;
+      position: relative;
+      transition: all var(--transition-base);
+    }
+
+    .toggle-input:checked {
+      background: var(--color-cyan);
+      border-color: var(--color-cyan);
+    }
+
+    .toggle-input::after {
+      content: '';
+      position: absolute;
+      width: 24px;
+      height: 24px;
+      background: white;
+      border-radius: 50%;
+      top: 2px;
+      left: 2px;
+      transition: left 0.3s;
+    }
+
+    .toggle-input:checked::after {
+      left: 24px;
+    }
+
+    .button-group {
+      display: flex;
+      gap: var(--spacing-4);
+      margin-top: var(--spacing-8);
+    }
+
+    .btn-save {
+      padding: var(--spacing-3) var(--spacing-6);
+      background: var(--color-cyan);
+      color: var(--color-bg-primary);
+      border: none;
+      border-radius: var(--radius-md);
+      font-weight: var(--font-weight-semibold);
+      cursor: pointer;
+      transition: all var(--transition-base);
+    }
+
+    .btn-save:hover {
+      background: var(--color-cyan);
+      box-shadow: 0 0 20px rgba(0, 217, 255, 0.4);
+    }
+
+    .btn-cancel {
+      padding: var(--spacing-3) var(--spacing-6);
+      background: transparent;
+      color: var(--color-text-secondary);
+      border: 1px solid var(--color-border-default);
+      border-radius: var(--radius-md);
+      font-weight: var(--font-weight-semibold);
+      cursor: pointer;
+      transition: all var(--transition-base);
+    }
+
+    .btn-cancel:hover {
+      border-color: var(--color-cyan);
+      color: var(--color-cyan);
+    }
+
+    @media (max-width: 768px) {
+      .layout-inner {
+        grid-template-columns: 1fr;
+      }
+
+      .settings-sidebar {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: var(--spacing-2);
+      }
+
+      .form-row {
+        grid-template-columns: 1fr;
+      }
+
+      .button-group {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Top Navigation -->
+  <nav class="top-nav">
+    <div class="top-nav-container">
+      <a href="index.html" class="logo">
+        <span style="font-size: 24px;">🚀</span>
+        <span>NexusAI</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="dashboard.html"><i data-lucide="layout-dashboard" class="nav-icon"></i>儀表板</a></li>
+        <li><a href="settings-general.html" class="active"><i data-lucide="settings" class="nav-icon"></i>設定</a></li>
+        <li><a href="pricing.html"><i data-lucide="credit-card" class="nav-icon"></i>定價</a></li>
+        <li><a href="about.html"><i data-lucide="users" class="nav-icon"></i>關於</a></li>
+      </ul>
+      <div class="nav-actions">
+        <button id="theme-toggle-btn" class="btn btn-outline-cyan btn-sm" title="切換主題" aria-label="切換至淺色主題">
+          <i data-lucide="sun"></i>
+        </button>
+      </div>
+      <button class="hamburger-menu">
+        <i data-lucide="menu"></i>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Page Header -->
+  <section class="page-header">
+    <div class="container">
+      <h1>設定</h1>
+    </div>
+  </section>
+
+  <!-- Sidebar Navigation -->
+  <!-- Sidebar Navigation (由 sidebar.js 動態載入) -->
+  <aside id="sidebar-container" class="sidebar dashboard-sidebar"></aside>
+
+  <!-- Main Content -->
+  <section class="page-layout">
+    <div class="container">
+      <div class="layout-inner">
+        <!-- Settings Sidebar -->
+        <div class="settings-sidebar">
+        <nav class="settings-nav">
+          <a href="settings-general.html" class="settings-nav-item active">一般</a>
+          <a href="settings-security.html" class="settings-nav-item">安全</a>
+          <a href="settings-billing.html" class="settings-nav-item">帳單</a>
+        </nav>
+      </div>
+
+      <!-- Settings Content -->
+      <div class="settings-content">
+        <!-- Personal Info Section -->
+        <div class="settings-section">
+          <div class="settings-title">個人資訊</div>
+          <form>
+            <div class="form-group">
+              <label class="form-label">姓名</label>
+              <input type="text" class="form-control" value="李明軒" placeholder="請輸入您的姓名">
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">電子郵件</label>
+              <input type="email" class="form-control" value="liming@example.com" placeholder="請輸入您的電子郵件">
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">頭像</label>
+              <input type="file" class="form-control">
+              <p class="form-description">建議尺寸: 400x400px，最大大小: 2MB</p>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">個人簡介</label>
+              <textarea class="form-control" rows="4" placeholder="分享一些關於您自己的信息...">產品經理 / 設計負責人，專注於用戶體驗和設計系統</textarea>
+            </div>
+          </form>
+        </div>
+
+        <!-- Preferences Section -->
+        <div class="settings-section">
+          <div class="settings-title">偏好設定</div>
+          <form>
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label">語言</label>
+                <select class="form-control">
+                  <option>繁體中文</option>
+                  <option>簡體中文</option>
+                  <option>English</option>
+                  <option>日本語</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">時區</label>
+                <select class="form-control">
+                  <option>UTC+8 (台北)</option>
+                  <option>UTC+9 (東京)</option>
+                  <option>UTC+0 (倫敦)</option>
+                  <option>UTC-5 (紐約)</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">通知偏好</label>
+            </div>
+
+            <div class="toggle-switch" style="margin-bottom: var(--spacing-4);">
+              <input type="checkbox" class="toggle-input" id="emailNotif" checked>
+              <label for="emailNotif" style="flex: 1; cursor: pointer;">
+                <div style="font-weight: var(--font-weight-semibold); color: var(--color-text-primary); margin-bottom: var(--spacing-1);">電子郵件通知</div>
+                <div style="font-size: var(--font-size-xs); color: var(--color-text-secondary);">接收重要更新和通知</div>
+              </label>
+            </div>
+
+            <div class="toggle-switch" style="margin-bottom: var(--spacing-4);">
+              <input type="checkbox" class="toggle-input" id="desktopNotif" checked>
+              <label for="desktopNotif" style="flex: 1; cursor: pointer;">
+                <div style="font-weight: var(--font-weight-semibold); color: var(--color-text-primary); margin-bottom: var(--spacing-1);">桌面通知</div>
+                <div style="font-size: var(--font-size-xs); color: var(--color-text-secondary);">接收即時桌面提醒</div>
+              </label>
+            </div>
+
+            <div class="toggle-switch">
+              <input type="checkbox" class="toggle-input" id="pushNotif">
+              <label for="pushNotif" style="flex: 1; cursor: pointer;">
+                <div style="font-weight: var(--font-weight-semibold); color: var(--color-text-primary); margin-bottom: var(--spacing-1);">推播通知</div>
+                <div style="font-size: var(--font-size-xs); color: var(--color-text-secondary);">接收行動應用推播通知</div>
+              </label>
+            </div>
+          </form>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="button-group">
+          <button class="btn-save">儲存變更</button>
+          <button class="btn-cancel">取消</button>
+        </div>
+      </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div>
+        <h4>NexusAI</h4>
+        <p>現代化的深色科技主題設計系統</p>
+      </div>
+      <div>
+        <h4>導航</h4>
+        <ul>
+          <li><a href="index.html">首頁</a></li>
+          <li><a href="dashboard.html">儀表板</a></li>
+          <li><a href="settings-general.html">設定</a></li>
+          <li><a href="pricing.html">定價</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>資源</h4>
+        <ul>
+          <li><a href="#">GitHub</a></li>
+          <li><a href="#">部落格</a></li>
+          <li><a href="#">社群</a></li>
+          <li><a href="#">文檔</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2025 NexusAI. 保留所有權利。</p>
+    </div>
+  </footer>
+
+  <script src="js/theme-toggle.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/sidebar.js"></script>
+  <script>
+    lucide.createIcons();
+  </script>
+</body>
+</html>

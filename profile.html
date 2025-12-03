@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="zh-TW" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>個人資料 - NexusAI</title>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <link rel="stylesheet" href="css/design-tokens.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  <link rel="stylesheet" href="css/theme-light.css">
+  <style>
+    .page-header {
+      background: var(--color-bg-secondary);
+      padding: var(--spacing-8) 0;
+      border-bottom: 1px solid var(--color-border-default);
+      margin-top: 80px;
+      margin-left: 280px;
+    }
+
+    .page-header h1 {
+      margin: 0;
+      font-size: var(--font-size-2xl);
+    }
+
+    .page-layout {
+      display: grid;
+      grid-template-columns: 1fr;
+      padding: var(--spacing-8);
+      margin-left: 280px;
+    }
+
+    .profile-container {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--spacing-8);
+    }
+
+    .profile-card {
+      background: var(--color-bg-card);
+      border: 1px solid var(--color-border-default);
+      border-radius: var(--radius-lg);
+      padding: var(--spacing-8);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .profile-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--color-cyan), transparent);
+    }
+
+    .profile-header {
+      text-align: center;
+      margin-bottom: var(--spacing-8);
+      padding-bottom: var(--spacing-8);
+      border-bottom: 1px solid var(--color-border-muted);
+    }
+
+    .profile-avatar {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--color-cyan), var(--color-purple));
+      margin: 0 auto var(--spacing-4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 48px;
+      color: white;
+      box-shadow: 0 0 30px rgba(0, 217, 255, 0.3);
+    }
+
+    .profile-name {
+      font-size: var(--font-size-2xl);
+      font-weight: var(--font-weight-bold);
+      color: var(--color-text-primary);
+      margin-bottom: var(--spacing-2);
+    }
+
+    .profile-role {
+      font-size: var(--font-size-base);
+      color: var(--color-text-secondary);
+      margin-bottom: var(--spacing-4);
+    }
+
+    .edit-btn {
+      padding: var(--spacing-2) var(--spacing-6);
+      background: rgba(0, 217, 255, 0.1);
+      border: 1px solid var(--color-cyan);
+      color: var(--color-cyan);
+      border-radius: var(--radius-md);
+      cursor: pointer;
+      transition: all var(--transition-base);
+      font-weight: var(--font-weight-semibold);
+    }
+
+    .edit-btn:hover {
+      background: var(--color-cyan);
+      color: var(--color-bg-primary);
+    }
+
+    .info-section {
+      margin-bottom: var(--spacing-8);
+    }
+
+    .info-title {
+      font-size: var(--font-size-lg);
+      font-weight: var(--font-weight-semibold);
+      color: var(--color-text-primary);
+      margin-bottom: var(--spacing-4);
+      padding-bottom: var(--spacing-3);
+      border-bottom: 1px solid var(--color-border-muted);
+    }
+
+    .info-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: var(--spacing-3) 0;
+      font-size: var(--font-size-sm);
+    }
+
+    .info-label {
+      color: var(--color-text-secondary);
+    }
+
+    .info-value {
+      color: var(--color-text-primary);
+      font-weight: var(--font-weight-semibold);
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--spacing-4);
+    }
+
+    .stat-card {
+      background: linear-gradient(180deg, rgba(0, 217, 255, 0.1) 0%, rgba(168, 85, 247, 0.1) 100%);
+      border: 1px solid var(--color-border-default);
+      border-radius: var(--radius-lg);
+      padding: var(--spacing-6);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .stat-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--color-cyan), transparent);
+    }
+
+    .stat-value {
+      font-size: 2rem;
+      font-weight: var(--font-weight-bold);
+      color: var(--color-cyan);
+      margin-bottom: var(--spacing-2);
+    }
+
+    .stat-label {
+      font-size: var(--font-size-sm);
+      color: var(--color-text-secondary);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .activity-timeline {
+      display: flex;
+      flex-direction: column;
+      gap: var(--spacing-4);
+    }
+
+    .activity-item {
+      display: flex;
+      gap: var(--spacing-4);
+      padding: var(--spacing-4);
+      background: var(--color-bg-tertiary);
+      border-radius: var(--radius-md);
+      border-left: 3px solid var(--color-cyan);
+    }
+
+    .activity-dot {
+      width: 8px;
+      height: 8px;
+      background: var(--color-cyan);
+      border-radius: 50%;
+      margin-top: 6px;
+      flex-shrink: 0;
+    }
+
+    .activity-content {
+      flex: 1;
+    }
+
+    .activity-title {
+      font-weight: var(--font-weight-semibold);
+      color: var(--color-text-primary);
+      margin-bottom: var(--spacing-1);
+      font-size: var(--font-size-sm);
+    }
+
+    .activity-time {
+      font-size: var(--font-size-xs);
+      color: var(--color-text-secondary);
+    }
+
+    @media (max-width: 1024px) {
+      .profile-container {
+        grid-template-columns: 1fr;
+      }
+
+      .stats-grid {
+        grid-template-columns: repeat(4, 1fr);
+      }
+    }
+
+    @media (max-width: 768px) {
+      .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .profile-card {
+        padding: var(--spacing-6);
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Top Navigation -->
+  <nav class="top-nav">
+    <div class="top-nav-container">
+      <a href="index.html" class="logo">
+        <span style="font-size: 24px;">🚀</span>
+        <span>NexusAI</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="dashboard.html"><i data-lucide="layout-dashboard" class="nav-icon"></i>儀表板</a></li>
+        <li><a href="profile.html" class="active"><i data-lucide="user" class="nav-icon"></i>個人資料</a></li>
+        <li><a href="pricing.html"><i data-lucide="credit-card" class="nav-icon"></i>定價</a></li>
+        <li><a href="about.html"><i data-lucide="users" class="nav-icon"></i>關於</a></li>
+      </ul>
+      <div class="nav-actions">
+        <button id="theme-toggle-btn" class="btn btn-outline-cyan btn-sm" title="切換主題" aria-label="切換至淺色主題">
+          <i data-lucide="sun"></i>
+        </button>
+      </div>
+      <button class="hamburger-menu">
+        <i data-lucide="menu"></i>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Sidebar Navigation -->
+  <!-- Sidebar Navigation (由 sidebar.js 動態載入) -->
+  <aside id="sidebar-container" class="sidebar dashboard-sidebar"></aside>
+
+  <!-- Page Header -->
+  <section class="page-header">
+    <div class="container">
+      <h1>個人資料</h1>
+    </div>
+  </section>
+
+  <!-- Main Content -->
+  <section class="page-layout">
+    <div class="container">
+      <div class="profile-container">
+        <!-- Left Column: Profile Info -->
+        <div>
+          <!-- Profile Card -->
+          <div class="profile-card">
+            <div class="profile-header">
+              <div class="profile-avatar">👤</div>
+              <div class="profile-name">李明軒</div>
+              <div class="profile-role">產品經理 / 設計負責人</div>
+              <button class="edit-btn">編輯個人資料</button>
+            </div>
+
+            <!-- Personal Info -->
+            <div class="info-section">
+              <div class="info-title">個人資訊</div>
+              <div class="info-item">
+                <span class="info-label">電子郵件</span>
+                <span class="info-value">liming@example.com</span>
+              </div>
+              <div class="info-item">
+                <span class="info-label">電話</span>
+                <span class="info-value">+886 9 1234 5678</span>
+              </div>
+              <div class="info-item">
+                <span class="info-label">地點</span>
+                <span class="info-value">台北, 台灣</span>
+              </div>
+              <div class="info-item">
+                <span class="info-label">加入日期</span>
+                <span class="info-value">2023年12月15日</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Column: Stats & Activity -->
+        <div>
+          <!-- Statistics Cards -->
+          <div class="info-section">
+            <div class="info-title">活動統計</div>
+            <div class="stats-grid">
+              <div class="stat-card">
+                <div class="stat-value">12</div>
+                <div class="stat-label">參與專案</div>
+              </div>
+              <div class="stat-card">
+                <div class="stat-value">48</div>
+                <div class="stat-label">完成任務</div>
+              </div>
+              <div class="stat-card">
+                <div class="stat-value">36</div>
+                <div class="stat-label">完成率</div>
+              </div>
+              <div class="stat-card">
+                <div class="stat-value">156</div>
+                <div class="stat-label">本月貢獻</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Recent Activity -->
+          <div class="info-section">
+            <div class="info-title">最近活動</div>
+            <div class="activity-timeline">
+              <div class="activity-item">
+                <div class="activity-dot"></div>
+                <div class="activity-content">
+                  <div class="activity-title">完成任務 "設計新首頁"</div>
+                  <div class="activity-time">2小時前</div>
+                </div>
+              </div>
+              <div class="activity-item">
+                <div class="activity-dot"></div>
+                <div class="activity-content">
+                  <div class="activity-title">評論了 "API 文檔" 專案</div>
+                  <div class="activity-time">5小時前</div>
+                </div>
+              </div>
+              <div class="activity-item">
+                <div class="activity-dot"></div>
+                <div class="activity-content">
+                  <div class="activity-title">加入新專案 "行動應用重構"</div>
+                  <div class="activity-time">1天前</div>
+                </div>
+              </div>
+              <div class="activity-item">
+                <div class="activity-dot"></div>
+                <div class="activity-content">
+                  <div class="activity-title">提交了設計文件審核</div>
+                  <div class="activity-time">2天前</div>
+                </div>
+              </div>
+              <div class="activity-item">
+                <div class="activity-dot"></div>
+                <div class="activity-content">
+                  <div class="activity-title">完成了季度評估</div>
+                  <div class="activity-time">5天前</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div>
+        <h4>NexusAI</h4>
+        <p>現代化的深色科技主題設計系統</p>
+      </div>
+      <div>
+        <h4>導航</h4>
+        <ul>
+          <li><a href="index.html">首頁</a></li>
+          <li><a href="dashboard.html">儀表板</a></li>
+          <li><a href="profile.html">個人資料</a></li>
+          <li><a href="pricing.html">定價</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>資源</h4>
+        <ul>
+          <li><a href="#">GitHub</a></li>
+          <li><a href="#">部落格</a></li>
+          <li><a href="#">社群</a></li>
+          <li><a href="#">文檔</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2025 NexusAI. 保留所有權利。</p>
+    </div>
+  </footer>
+
+  <script src="js/theme-toggle.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/sidebar.js"></script>
+  <script>
+    lucide.createIcons();
+  </script>
+</body>
+</html>

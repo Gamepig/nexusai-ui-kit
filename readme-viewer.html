@@ -1,0 +1,1167 @@
+<!DOCTYPE html>
+<html lang="zh-TW" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NexusAI Demo Site - README</title>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-bg: #0D1117;
+            --secondary-bg: #161B22;
+            --tertiary-bg: #21262D;
+            --card-bg: #1E293B;
+            --text-primary: #E6EDF3;
+            --text-secondary: #8B949E;
+            --border-color: #30363D;
+
+            --cyan: #00D9FF;
+            --green: #22C55E;
+            --purple: #A855F7;
+            --orange: #F97316;
+            --red: #EF4444;
+        }
+
+        body {
+            background: linear-gradient(135deg, var(--primary-bg) 0%, #1a1f2e 100%);
+            color: var(--text-primary);
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: var(--secondary-bg);
+            border-bottom: 1px solid var(--border-color);
+            padding: 20px 0;
+            margin-bottom: 30px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header-title {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .header-title h1 {
+            font-size: 24px;
+            background: linear-gradient(135deg, var(--cyan), var(--green));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        button {
+            padding: 8px 16px;
+            border: 1px solid var(--border-color);
+            background: var(--tertiary-bg);
+            color: var(--text-primary);
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+
+        button:hover {
+            background: var(--card-bg);
+            border-color: var(--cyan);
+            color: var(--cyan);
+            box-shadow: 0 0 12px rgba(0, 217, 255, 0.3);
+        }
+
+        .markdown-content {
+            background: var(--secondary-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 40px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        }
+
+        .markdown-content h1 {
+            font-size: 32px;
+            margin: 30px 0 20px 0;
+            color: var(--cyan);
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 10px;
+        }
+
+        .markdown-content h2 {
+            font-size: 24px;
+            margin: 25px 0 15px 0;
+            color: var(--green);
+            border-left: 4px solid var(--cyan);
+            padding-left: 12px;
+        }
+
+        .markdown-content h3 {
+            font-size: 18px;
+            margin: 20px 0 10px 0;
+            color: var(--purple);
+        }
+
+        .markdown-content h4,
+        .markdown-content h5,
+        .markdown-content h6 {
+            font-size: 16px;
+            margin: 15px 0 8px 0;
+            color: var(--text-primary);
+        }
+
+        .markdown-content p {
+            margin: 12px 0;
+            line-height: 1.8;
+            color: var(--text-primary);
+        }
+
+        .markdown-content ul,
+        .markdown-content ol {
+            margin: 15px 0;
+            padding-left: 30px;
+        }
+
+        .markdown-content li {
+            margin: 8px 0;
+            color: var(--text-secondary);
+        }
+
+        .markdown-content a {
+            color: var(--cyan);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--cyan);
+            transition: all 0.3s ease;
+        }
+
+        .markdown-content a:hover {
+            color: var(--green);
+            border-bottom-color: var(--green);
+            text-shadow: 0 0 8px rgba(0, 217, 255, 0.3);
+        }
+
+        .markdown-content code {
+            background: var(--tertiary-bg);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            color: var(--orange);
+            font-size: 14px;
+        }
+
+        .markdown-content pre {
+            background: var(--tertiary-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            padding: 16px;
+            overflow-x: auto;
+            margin: 15px 0;
+            box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.3);
+            position: relative;
+        }
+
+        .markdown-content pre code {
+            background: none;
+            padding: 0;
+            border-radius: 0;
+            color: var(--text-primary);
+            font-size: 13px;
+        }
+
+        .markdown-content blockquote {
+            border-left: 4px solid var(--purple);
+            padding-left: 16px;
+            margin: 15px 0;
+            color: var(--text-secondary);
+            font-style: italic;
+        }
+
+        .markdown-content table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            overflow: hidden;
+        }
+
+        .markdown-content table thead {
+            background: var(--tertiary-bg);
+        }
+
+        .markdown-content table th {
+            padding: 12px;
+            text-align: left;
+            color: var(--cyan);
+            font-weight: 600;
+            border-bottom: 2px solid var(--border-color);
+        }
+
+        .markdown-content table td {
+            padding: 10px 12px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .markdown-content table tr:hover {
+            background: var(--tertiary-bg);
+        }
+
+        .markdown-content hr {
+            border: none;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--border-color), transparent);
+            margin: 30px 0;
+        }
+
+        .success-toast {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: var(--card-bg);
+            border: 1px solid var(--green);
+            color: var(--green);
+            padding: 12px 20px;
+            border-radius: 6px;
+            box-shadow: 0 4px 12px rgba(34, 197, 94, 0.3);
+            animation: slideIn 0.3s ease;
+            z-index: 1000;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateX(400px);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            padding: 10px 16px;
+            background: var(--tertiary-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            color: var(--cyan);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .back-link:hover {
+            background: var(--card-bg);
+            border-color: var(--cyan);
+            box-shadow: 0 0 12px rgba(0, 217, 255, 0.3);
+        }
+
+        @media (max-width: 768px) {
+            header .container {
+                flex-direction: column;
+                gap: 12px;
+            }
+
+            .markdown-content {
+                padding: 20px;
+            }
+
+            .markdown-content h1 {
+                font-size: 24px;
+            }
+
+            .markdown-content h2 {
+                font-size: 20px;
+            }
+
+            .header-actions {
+                width: 100%;
+            }
+
+            button {
+                flex: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-title">
+                <span style="font-size: 24px;">📖</span>
+                <h1>NexusAI 文檔</h1>
+            </div>
+            <div class="header-actions">
+                <button onclick="goHome()">🏠 返回首頁</button>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <a href="index.html" class="back-link">← 返回首頁</a>
+        <div id="markdown-container" class="markdown-content"></div>
+    </div>
+
+    <!-- 嵌入的 Markdown 內容 -->
+    <script id="markdown-content" type="text/plain">
+# NexusAI - 深色科技主題 Demo Site
+
+**更新日期**: 2025-12-03
+**狀態**: ✅ 完全功能
+**版本**: v2.2 (Phase 4 完成)
+**代碼規模**: ~5,000 行 CSS + JS
+
+---
+
+## 📋 專案概述
+
+企業級深色科技主題完整 Demo Site，展示現代化的 UI 設計系統、響應式佈局和實用 JavaScript 功能。包含完整的應用頁面集合，適用於 AI 平台、SaaS 管理、數據分析、項目管理等現代 Web 應用。
+
+---
+
+## 🎯 核心特色
+
+### 設計系統
+- ✨ **發光效果**: Cyan、Green、Purple、Orange、Red、Yellow 主題色彩
+- 🎨 **完整色彩系統**: 背景、文字、邊框、語意色彩，共 338 行 CSS Token
+- 📏 **設計 Token**: CSS 變數化（間距、圓角、字型、陰影、過渡）
+- 📱 **響應式設計**: Mobile (< 768px) / Tablet (768-1279px) / Desktop (≥ 1280px)
+
+### 元件庫
+- 🧩 **60+ UI 元件**: 按鈕、卡片、表單、表格、Modal、Dropdown、Tabs、Alert 等
+- 🎯 **完整變體支援**: Solid、Outline、Pill、Ghost、Size (xs/sm/md/lg) 等
+- ⚡ **高效能**: 純 HTML + CSS（無框架依賴）
+- 📦 **模塊化設計**: components.css (1,006 行) 清晰的結構
+
+### JavaScript 功能展示
+- 🛠️ **DOM 工具**: 元素操作、類名管理、動態創建
+- 📡 **事件系統**: 監聽、移除、防抖、節流、自定義事件
+- 💾 **存儲管理**: localStorage 完整封裝
+- 🔄 **API 工具**: Fetch 包裝、HTTP 方法、錯誤處理
+- 📢 **通知系統**: Toast / Alert、多種類型 (success/error/warning/info)
+- 🎪 **Modal 系統**: 模態框管理、動畫、堆疊
+- 🧲 **Form 工具**: 驗證、數據序列化、錯誤顯示
+- 📜 **Scroll 工具**: 平滑滾動、視口檢測、Anchor 導航
+- 🎬 **動畫工具**: Fade、Slide、Scale 等過渡效果
+
+### ✨ 第一階段動畫效果展示
+- 🎬 **Anime.js 演示**: 進度條、計數、列表、Hover 效果 (4 個)
+- 🎭 **GSAP 演示**: 3D 翻轉、時間軸、文字、組合動畫 (4 個)
+- 🎨 **Canvas 演示**: 粒子系統、波形、網格、繪圖 (4 個)
+- 📊 **性能監測**: FPS 實時顯示、動畫耗時追蹤
+- 🔌 **完整集成**: Dashboard Tab 導航 + 側邊欄工具
+
+### 🌐 第二階段 Web API 實踐
+- 📡 **Fetch API 演示**: 模擬 API 調用、進度條、超時、重試機制
+- 💾 **Web Storage API**: LocalStorage/SessionStorage 本地存儲管理
+- 📍 **Geolocation API**: 位置請求、坐標顯示、距離計算
+- 🔔 **Notification API**: 系統通知、權限管理
+- 🎨 **Canvas API**: 繪圖工具、柱狀圖、折線圖
+- 👁️ **Observer API**: Intersection Observer、Resize Observer
+- 🔌 **完整集成**: Dashboard Web API Tab + 6 個演示區塊
+
+### ⚙️ 第三階段互動功能演示
+- 🎯 **拖拽排序**: Dashboard 小部件拖拽重排、視覺反饋
+- 👆 **手勢識別**: 左右滑動、長按上下文菜單、觸摸反饋
+- 🔍 **搜尋增強**: 實時模糊搜尋、自動完成、搜尋歷史
+- 📊 **表格互動**: 列頭點擊排序、行選擇、批量操作
+- ✓ **表單驗證**: 實時驗證、錯誤提示動畫、驗證狀態指示
+- ⌨️ **鍵盤快捷鍵**: Ctrl+K 搜尋、Esc 關閉、方向鍵導航
+- 🔌 **完整集成**: Dashboard 互動功能 Tab + 6 個演示區塊
+
+### ⚡ 第四階段 ES2024+ 特性演示 (新增)
+- 📦 **Array Grouping**: Object.groupBy 分組演示 + Polyfill
+- 🔄 **Promise.withResolvers**: 手動控制 Promise resolve/reject
+- 🕐 **Temporal API**: 日期時間操作模擬 (Stage 3 提案)
+- ❓ **可選鏈與空值合併**: `?.` 和 `??` 對比演示
+- 🔒 **Class 私有字段**: `#` 私有字段與靜態成員
+- 🔌 **完整集成**: Dashboard ES 特性 Tab + 5 個演示區塊
+
+---
+
+## 📁 完整專案結構
+
+```
+demo-site/
+├── 📄 頁面層級
+│   ├── index.html              # 首頁 (Landing Page)
+│   ├── dashboard.html          # 儀表板 (KPI、表格、圖表)
+│   ├── projects.html           # 項目列表
+│   ├── project-detail.html     # 項目詳情頁
+│   ├── calendar.html           # 日曆 (事件管理)
+│   ├── kanban.html             # 看板 (任務管理)
+│   ├── data-table.html         # 數據表格 (高級過濾、排序)
+│   ├── notifications.html      # 通知中心
+│   ├── profile.html            # 用戶資料
+│   ├── settings-general.html   # 設置 - 一般
+│   ├── settings-security.html  # 設置 - 安全
+│   ├── settings-billing.html   # 設置 - 計費
+│   ├── pricing.html            # 定價頁
+│   ├── about.html              # 關於頁
+│   ├── contact.html            # 聯繫頁
+│   └── readme-viewer.html      # 文檔查看器 (當前頁)
+│
+├── 🎨 樣式 (CSS)
+│   ├── design-tokens.css       # 設計變數 (338 行)
+│   │   └── 色彩、間距、字型、陰影、過渡、圓角
+│   ├── components.css          # 元件樣式 (1,006 行)
+│   │   └── 按鈕、卡片、表單、表格、Modal 等 60+ 元件
+│   ├── layout.css              # 全域佈局 (630 行)
+│   │   └── Grid、Flexbox、導航、頁腳、工具類
+│   ├── responsive.css          # 響應式樣式 (392 行)
+│   │   └── 三點斷點的 Media Query 優化
+│   ├── animations-showcase.css # 動畫演示樣式 (317 行)
+│   │   └── Tab、Card、Canvas 等演示元件樣式
+│   ├── web-api-showcase.css    # Web API 演示樣式
+│   │   └── Fetch、Storage、Observer 演示元件
+│   ├── interactions-showcase.css # 互動功能演示樣式
+│   │   └── 拖拽、搜尋、表單、表格互動樣式
+│   └── es-features-showcase.css  # ES 特性演示樣式 ✨ NEW
+│       └── Array Grouping、Promise、Temporal 樣式
+│
+├── 📦 JavaScript
+│   ├── main.js                 # 主 JavaScript 檔案 (543 行)
+│   │   ├── DOM 工具
+│   │   ├── Events 事件系統
+│   │   ├── Storage 存儲管理
+│   │   ├── API HTTP 工具
+│   │   ├── Toast 通知系統
+│   │   ├── Modal 模態框
+│   │   ├── Form 表單工具
+│   │   ├── Scroll 滾動工具
+│   │   ├── Animation 動畫工具
+│   │   ├── Utils 工具函數
+│   │   └── 初始化邏輯
+│   ├── animations.js           # 動畫演示模組 (579 行)
+│   │   ├── AnimeShowcase - Anime.js 4 個演示
+│   │   ├── GSAPShowcase - GSAP 4 個演示
+│   │   ├── CanvasShowcase - Canvas 4 個演示
+│   │   └── PerformanceMonitor - FPS 監測
+│   ├── web-api.js              # Web API 核心模組
+│   │   └── Fetch、Storage、Geolocation、Notification 管理器
+│   ├── web-api-showcase.js     # Web API UI 組件
+│   │   └── 6 個 Web API 演示區塊
+│   ├── interactions.js         # 互動功能模組
+│   │   ├── DragDropManager - 拖拽排序
+│   │   ├── SearchEnhancer - 搜尋增強
+│   │   ├── TableInteraction - 表格互動
+│   │   ├── FormValidator - 表單驗證
+│   │   └── KeyboardShortcuts - 鍵盤快捷鍵
+│   └── es-features.js          # ES2024+ 特性演示模組 ✨ NEW
+│       ├── ArrayGrouping - Object.groupBy 演示
+│       ├── PromiseAdvanced - Promise.withResolvers
+│       ├── TemporalDemo - Temporal API 模擬
+│       ├── SafeAccess - 可選鏈與空值合併
+│       └── ClassEncapsulation - Class 私有字段
+│
+├── 🧪 測試頁面
+│   └── test-animations.html    # 動畫演示測試頁面 ✨ NEW
+│
+├── 📄 文檔
+│   ├── README.md               # 項目說明書 (已更新 v1.1)
+│   ├── planning/
+│   │   ├── JAVASCRIPT_FEATURES_PLAN.md              # JavaScript 功能規劃
+│   │   └── IMPLEMENTATION_REPORT_PHASE_1.md         # 第一階段實施報告 ✨ NEW
+│   └── PHASE_1_SUMMARY.txt                          # 第一階段完成摘要 ✨ NEW
+```
+
+---
+
+## 🚀 快速開始
+
+### 1. 直接在瀏覽器中打開
+
+```bash
+# 方式1: 直接拖拽文件到瀏覽器
+# 在 Finder 中找到 index.html，拖到瀏覽器標籤頁
+
+# 方式2: 雙擊打開（推薦）
+# 在 Finder 中雙擊 index.html，瀏覽器會自動打開
+
+# 方式3: VS Code Live Server
+# 在 VS Code 中安裝 "Live Server" 擴充，右鍵 → Open with Live Server
+```
+
+### 2. 完整頁面導覽
+
+| 頁面 | URL | 功能描述 |
+|------|-----|---------|
+| **Landing** | `/index.html` | 首頁、特色展示、CTA 按鈕 |
+| **Dashboard** | `/dashboard.html` | KPI 卡片、數據表格、圖表、**動畫演示** ✨、快速操作 |
+| **Projects** | `/projects.html` | 項目列表、過濾、搜尋、狀態標籤 |
+| **Project Detail** | `/project-detail.html` | 項目詳情、進度、成員、活動時間線 |
+| **Calendar** | `/calendar.html` | 月度日曆、事件管理、時間提醒 |
+| **Kanban** | `/kanban.html` | 看板視圖、拖拽任務、列管理 |
+| **Data Table** | `/data-table.html` | 高級表格、排序、過濾、批量操作 |
+| **Notifications** | `/notifications.html` | 通知中心、消息列表、標記為已讀 |
+| **Profile** | `/profile.html` | 用戶資料、頭像、個人設置 |
+| **Settings - General** | `/settings-general.html` | 基本設置、語言、時區、通知偏好 |
+| **Settings - Security** | `/settings-security.html` | 密碼、2FA、設備管理、登入歷史 |
+| **Settings - Billing** | `/settings-billing.html` | 計費方案、發票、支付方法 |
+| **Pricing** | `/pricing.html` | 定價方案、功能對比、FAQ、月年切換 |
+| **About** | `/about.html` | 團隊、公司故事、統計數據 |
+| **Contact** | `/contact.html` | 聯繫表單、社交鏈接、地址資訊 |
+| **Animation Demo** | `/test-animations.html` | 動畫效果獨立演示頁面 ✨ |
+| **Documentation** | `/readme-viewer.html` | 此文檔、複製、下載功能 |
+
+---
+
+## 🎨 設計系統快速參考
+
+### 色彩系統 (CSS Variables)
+
+```css
+/* 主要語意色彩 */
+--color-cyan:     #00D9FF   (系統、連結、主要交互)
+--color-green:    #22C55E   (成功、確認、正面)
+--color-purple:   #A855F7   (次要、進階功能)
+--color-orange:   #F97316   (警告、需要注意)
+--color-red:      #EF4444   (錯誤、危險、刪除)
+--color-yellow:   #EAB308   (資訊、數據、提示)
+
+/* 背景層級 */
+--color-bg-primary:    #0D1117   (主背景)
+--color-bg-secondary:  #161B22   (次背景)
+--color-bg-tertiary:   #21262D   (第三層)
+--color-bg-card:       #1E293B   (卡片、容器)
+
+/* 文本色彩 */
+--color-text-primary:     #E6EDF3   (主文本)
+--color-text-secondary:   #8B949E   (次文本)
+--color-text-muted:       #6E7681   (淡文本)
+
+/* 邊框 & 分隔線 */
+--color-border-default:   #30363D
+--color-border-subtle:    #21262D
+--color-border-emphasis:  #444C56
+```
+
+### 間距系統 (8px 基準)
+
+```css
+--spacing-1:   4px    (圖示間距、微調整)
+--spacing-2:   8px    (按鈕內距、小邊距)
+--spacing-3:   12px   (列表項目間距)
+--spacing-4:   16px   (卡片內距、標準間距)
+--spacing-6:   24px   (區塊間距、組件分離)
+--spacing-8:   32px   (大區塊間距、頁面邊距)
+--spacing-12:  48px   (版塊分隔、大間距)
+--spacing-16:  64px   (頁面主要分隔)
+```
+
+### 字型系統
+
+```css
+--font-family-base:   System Font Stack
+--font-size-xs:       12px
+--font-size-sm:       14px
+--font-size-base:     16px
+--font-size-lg:       18px
+--font-size-xl:       20px
+--font-size-2xl:      24px
+--font-size-3xl:      32px
+```
+
+### 響應式斷點
+
+```css
+Mobile:    max-width: 767px         (單欄、漢堡選單)
+Tablet:    768px - 1279px           (雙欄、摺疊側邊欄)
+Desktop:   min-width: 1280px        (多欄、完整佈局)
+```
+
+### 圓角系統
+
+```css
+--radius-sm:   4px    (微圓角)
+--radius-md:   6px    (標準圓角)
+--radius-lg:   8px    (大圓角)
+--radius-xl:   12px   (超大圓角)
+--radius-full: 9999px (完全圓形)
+```
+
+### 陰影與過渡
+
+```css
+過渡效果:
+--transition-base: all 0.2s ease-in-out (標準過渡)
+
+陰影系統:
+- Subtle:  0 1px 3px rgba(0,0,0,0.12)
+- Base:    0 4px 6px rgba(0,0,0,0.1)
+- Large:   0 10px 15px rgba(0,0,0,0.1)
+```
+
+---
+
+## 💻 JavaScript 功能模組
+
+### 1. **DOM 工具** (`DOM`) - 元素操作
+
+```javascript
+DOM.select(selector)           // 選單個元素
+DOM.selectAll(selector)        // 選多個元素
+DOM.create(tag, classes, html) // 創建元素
+DOM.addClass(el, className)    // 加入類名
+DOM.removeClass(el, className) // 移除類名
+DOM.toggleClass(el, className) // 切換類名
+DOM.hasClass(el, className)    // 檢查是否有類名
+```
+
+### 2. **事件工具** (`Events`) - 事件管理
+
+```javascript
+Events.on(el, event, handler)          // 添加監聽
+Events.off(el, event, handler)         // 移除監聽
+Events.trigger(el, eventName, detail)  // 觸發自定義事件
+Events.debounce(func, delay = 300)     // 防抖 (延遲執行)
+Events.throttle(func, limit = 300)     // 節流 (限制頻率)
+```
+
+### 3. **存儲管理** (`Storage`) - LocalStorage
+
+```javascript
+Storage.get(key)           // 讀取 (自動 JSON 解析)
+Storage.set(key, value)    // 存儲 (自動 JSON 序列化)
+Storage.remove(key)        // 刪除單個
+Storage.clear()            // 清空全部
+```
+
+### 4. **HTTP 工具** (`API`) - Fetch 包裝
+
+```javascript
+API.get(url)                        // GET 請求
+API.post(url, data)                 // POST 請求
+API.put(url, data)                  // PUT 請求
+API.delete(url)                     // DELETE 請求
+// 自動處理 JSON、錯誤、超時
+```
+
+### 5. **通知系統** (`Toast`) - 浮動提示
+
+```javascript
+Toast.success(message, duration = 3000)  // 成功通知 (綠色)
+Toast.error(message, duration = 3000)    // 錯誤通知 (紅色)
+Toast.warning(message, duration = 3000)  // 警告通知 (橙色)
+Toast.info(message, duration = 3000)     // 資訊通知 (藍色)
+```
+
+### 6. **Modal 系統** (`Modal`) - 模態框
+
+```javascript
+Modal.show(selector)          // 顯示模態框
+Modal.hide(selector)          // 隱藏模態框
+Modal.toggle(selector)        // 切換模態框
+// 支援動畫、堆疊、關閉回調
+```
+
+### 7. **表單工具** (`Form`) - 表單操作
+
+```javascript
+Form.validateEmail(email)           // 郵件驗證
+Form.getFormData(formSelector)      // 取得表單數據 (Object)
+Form.setFormData(formSelector, data) // 設定表單值
+Form.clearForm(formSelector)        // 清空表單
+Form.disable(formSelector)          // 禁用表單
+Form.enable(formSelector)           // 啟用表單
+```
+
+### 8. **滾動工具** (`Scroll`) - 頁面滾動
+
+```javascript
+Scroll.to(selector)        // 平滑滾動至元素
+Scroll.toTop(duration)     // 滾到頁面頂部
+Scroll.isInViewport(el)    // 檢查元素是否在視口內
+Scroll.onScroll(callback)  // 監聽滾動事件
+```
+
+### 9. **動畫工具** (`Animation`) - CSS 動畫
+
+```javascript
+Animation.fadeIn(el, duration = 300)     // 淡入
+Animation.fadeOut(el, duration = 300)    // 淡出
+Animation.slideDown(el, duration = 300)  // 向下滑動
+Animation.slideUp(el, duration = 300)    // 向上滑動
+Animation.scaleIn(el, duration = 300)    // 縮放淡入
+```
+
+### 10. **工具函數** (`Utils`) - 通用工具
+
+```javascript
+Utils.randomId()                      // 生成隨機 ID
+Utils.formatDate(date, 'YYYY-MM-DD') // 格式化日期
+Utils.clone(obj)                      // 深度複製對象
+Utils.getQueryParam(param)            // 取得 URL 參數
+Utils.debounceInput(input, callback)  // 輸入框防抖
+Utils.isEmpty(value)                  // 檢查是否為空
+Utils.throttledScroll(callback)       // 節流滾動事件
+```
+
+---
+
+## 🛠️ 實際使用範例
+
+### 1. 顯示通知 (Toast)
+```javascript
+// 成功操作
+Toast.success('數據已保存！');
+
+// 錯誤處理
+Toast.error('連接失敗，請重試');
+
+// 警告提示
+Toast.warning('您有未保存的更改');
+
+// 資訊提示
+Toast.info('新版本已推送');
+```
+
+### 2. 表單驗證與提交
+```javascript
+// 驗證郵件
+if (Form.validateEmail('user@example.com')) {
+  Toast.success('郵件格式正確');
+}
+
+// 取得表單數據
+const formData = Form.getFormData('#contact-form');
+console.log(formData); // { name: '...', email: '...' }
+
+// 清空表單
+Form.clearForm('#contact-form');
+```
+
+### 3. API 調用
+```javascript
+// 獲取用戶列表
+const users = await API.get('/api/users');
+
+// 創建新數據
+await API.post('/api/users', {
+  name: 'John',
+  email: 'john@example.com'
+});
+
+// 更新數據
+await API.put('/api/users/1', { name: 'Jane' });
+
+// 刪除數據
+await API.delete('/api/users/1');
+```
+
+### 4. 防抖搜尋 (搜尋框)
+```javascript
+const searchInput = DOM.select('#search');
+const handleSearch = Events.debounce((value) => {
+  console.log('搜尋:', value);
+  // 發送搜尋請求
+}, 300);
+
+Events.on(searchInput, 'input', (e) => {
+  handleSearch(e.target.value);
+});
+```
+
+### 5. 平滑滾動
+```javascript
+// 滾動至特定元素
+Scroll.to('#features-section');
+
+// 滾回頂部
+Scroll.toTop();
+
+// 檢查元素是否在視口內 (用於懶載入)
+if (Scroll.isInViewport(imageEl)) {
+  loadImage();
+}
+```
+
+### 6. 存儲用戶偏好
+```javascript
+// 存儲
+Storage.set('theme', 'dark');
+Storage.set('userSettings', { language: 'zh-TW' });
+
+// 讀取
+const theme = Storage.get('theme'); // 'dark'
+const settings = Storage.get('userSettings');
+
+// 刪除
+Storage.remove('theme');
+```
+
+---
+
+## 📱 響應式設計測試
+
+### 推薦斷點測試
+- **Mobile (375px)**: iPhone SE、小型手機
+- **Tablet (768px)**: iPad、平板設備
+- **Desktop (1280px)**: MacBook、桌面螢幕
+
+### 開發者工具測試
+```
+Chrome DevTools:
+1. 按 F12 開啟開發者工具
+2. 按 Ctrl+Shift+M (或 Cmd+Shift+M) 啟用設備模擬
+3. 選擇設備或自訂寬度
+4. 檢查各斷點下的佈局
+```
+
+---
+
+## 🎨 完整頁面功能清單
+
+### 核心應用頁面
+| 頁面 | 關鍵功能 | JS 工具 | 樣式特性 |
+|------|---------|--------|---------|
+| **Dashboard** | KPI 卡片、圖表、表格 | Storage、Toast | Grid、彩色卡片 |
+| **Projects** | 列表、過濾、搜尋 | Events (debounce) | 響應式卡片陣列 |
+| **Calendar** | 月度日曆、事件 | Events、Modal | Grid 日期、突出顯示 |
+| **Kanban** | 拖拽任務、列管理 | DOM、Events | Drag & Drop 樣式 |
+| **Data Table** | 排序、過濾、分頁 | Events (throttle) | 高級表格樣式 |
+
+### 信息與設置
+| 頁面 | 關鍵功能 | 交互 |
+|------|---------|------|
+| **Notifications** | 消息列表、標記已讀 | Toast 觸發 |
+| **Profile** | 用戶信息、頭像上傳 | Form 驗證 |
+| **Settings (3 頁)** | 偏好、安全、計費 | API、Storage |
+
+### 營銷頁面
+| 頁面 | 特色 |
+|------|------|
+| **Landing** | Hero、特色、CTA、動畫背景 |
+| **Pricing** | 方案卡片、月年切換、FAQ 手風琴 |
+| **About** | 團隊、統計、時間線 |
+| **Contact** | 表單驗證、社交鏈接、地圖 |
+
+---
+
+## 💡 效能最佳實踐
+
+### 代碼結構
+```
+✅ 優點:
+- 純 HTML/CSS/JS，無框架依賴
+- CSS 變數集中管理，易於维護
+- JavaScript 模塊化，單一職責
+- 響應式 Flexbox/Grid，無冗余
+
+❌ 避免:
+- 複雜的 CSS 嵌套
+- 重複的 JS 邏輯
+- 行內樣式
+- 全局變數污染
+```
+
+### 性能優化策略
+- **防抖 & 節流**: 搜尋、滾動、調整大小
+- **事件委派**: 減少監聽器數量
+- **CSS 工具類**: 避免重複規則
+- **延遲載入**: 圖片、字體、腳本
+
+### 可訪問性標準
+- ✅ 語意化 HTML5 標籤
+- ✅ 充分的色彩對比 (WCAG AA)
+- ✅ 鍵盤導航支援
+- ✅ ARIA 標籤 (必要時)
+
+---
+
+## 📚 文件與資源
+
+### 內置資源
+- **CSS 變數**: `css/design-tokens.css`
+- **元件庫**: `css/components.css`
+- **佈局系統**: `css/layout.css`
+- **JavaScript 工具**: `js/main.js` (543 行)
+
+### 外部參考
+- **圖示庫**: [Lucide Icons](https://lucide.dev/)
+- **Web 標準**: [MDN Web Docs](https://developer.mozilla.org/)
+- **CSS 技巧**: [CSS-Tricks](https://css-tricks.com/)
+- **JavaScript**: [JavaScript.info](https://javascript.info/)
+
+---
+
+## 🚀 擴展建議
+
+### 已實現的功能 ✅
+- [x] 16 個完整頁面
+- [x] 60+ UI 元件
+- [x] 10+ JavaScript 功能模組
+- [x] 完整響應式設計
+- [x] 深色主題設計系統
+- [x] **第 1 優先級 - 動畫效果展示** (2025-12-03)
+  - [x] Anime.js 4 個演示
+  - [x] GSAP 4 個演示
+  - [x] Canvas 4 個演示
+  - [x] 性能監測系統 (FPS)
+  - [x] Dashboard 完整集成
+- [x] **第 2 優先級 - Web API 實踐** (2025-12-03)
+  - [x] Fetch API + 進度監測
+  - [x] LocalStorage & SessionStorage
+  - [x] Geolocation & Notification
+  - [x] Canvas 繪圖工具 & 圖表生成
+  - [x] Intersection & Resize Observer
+- [x] **第 3 優先級 - 互動功能演示** (2025-12-03) ✨ NEW
+  - [x] 拖拽排序 (Dashboard 小部件)
+  - [x] 搜尋增強 (Debounce + Autocomplete)
+  - [x] 表格互動 (排序、選擇)
+  - [x] 表單驗證 (實時反饋)
+  - [x] 鍵盤快捷鍵 (Ctrl+K、Esc)
+  - [x] 手勢識別說明 (Touch Events)
+
+### 已完成 ✅ (Phase 4)
+- [x] **第 4 優先級 - ES2024+ 特性** (2025-12-03)
+  - [x] Array Grouping (Object.groupBy + Polyfill)
+  - [x] Promise.withResolvers (手動控制)
+  - [x] Temporal API (模擬演示)
+  - [x] 可選鏈 `?.` 與空值合併 `??`
+  - [x] Class 私有字段 `#` 與靜態成員
+
+### 潛在擴展 🔮
+- [ ] 暗亮主題切換
+- [ ] 國際化 (i18n) - 多語言支援
+- [ ] 後端 API 整合示例
+- [ ] OAuth / 身份驗證系統
+- [ ] PWA 支援 (離線、應用安裝)
+- [ ] 性能監測 (Lighthouse、Core Web Vitals)
+- [ ] 自動化測試 (Jest、Cypress)
+
+---
+
+## 📞 關於此項目
+
+**項目名稱**: NexusAI Demo Site
+**版本**: v2.2 (第四階段 ES 特性完成)
+**最後更新**: 2025-12-03
+**代碼規模**: ~5,300+ 行 (CSS + JS)
+**頁面總數**: 16 個完整頁面 + 1 個動畫測試頁面
+**組件總數**: 60+ UI 元件
+**演示功能**: 動畫效果 (12個) + Web API (6個) + 互動功能 (6個) + ES特性 (5個)
+
+---
+
+## 📊 第一階段完成狀況
+
+### Phase 1 Summary (2025-12-03)
+
+**狀態**: ✅ 100% 完成並驗收
+
+**交付成果**:
+- ✨ 新增 3 個文件 (animations.js, animations-showcase.css, IMPLEMENTATION_REPORT_PHASE_1.md)
+- 🔧 修改 dashboard.html 集成演示區塊
+- 📝 共計 1,408+ 行代碼 (~39.6 KB)
+
+**實現功能**:
+- ✅ Anime.js 演示 (4 個效果)
+- ✅ GSAP 演示 (4 個效果)
+- ✅ Canvas 演示 (4 個效果)
+- ✅ 性能監測系統 (FPS + 耗時)
+- ✅ Dashboard 完整集成 + 側邊欄工具
+
+**驗收標準**: 全部達成 ✅
+
+詳見: `/planning/IMPLEMENTATION_REPORT_PHASE_1.md`
+
+---
+
+## 📊 第二階段完成狀況
+
+### Phase 2 Summary (2025-12-03)
+
+**狀態**: ✅ 100% 完成並驗收
+
+**交付成果**:
+- ✨ 新增 4 個檔案 (web-api.js, web-api-showcase.js, web-api-showcase.css, mock-api.json)
+- 🔧 修改 dashboard.html 集成 Web API 演示區塊
+- 📝 共計 ~1,790 行代碼
+
+**實現功能**:
+- ✅ Fetch API 演示 (模擬 API、進度條、超時、重試)
+- ✅ Web Storage 演示 (LocalStorage、SessionStorage)
+- ✅ Geolocation 演示 (位置請求、距離計算)
+- ✅ Notification 演示 (系統通知、權限管理)
+- ✅ Canvas 演示 (繪圖工具、圖表生成)
+- ✅ Observer 演示 (Intersection & Resize)
+
+**驗收標準**: 全部達成 ✅
+
+---
+
+## 📊 第三階段完成狀況
+
+### Phase 3 Summary (2025-12-03)
+
+**狀態**: ✅ 100% 完成並驗收
+
+**交付成果**:
+- ✨ 新增 2 個檔案 (interactions.js, interactions-showcase.css)
+- 🔧 修改 dashboard.html 集成互動功能演示區塊
+- 📝 共計 ~1,000 行代碼
+
+**實現功能**:
+- ✅ 拖拽排序演示 (Drag & Drop API)
+- ✅ 搜尋增強演示 (Debounce + Autocomplete + 歷史)
+- ✅ 表格互動演示 (排序、選擇)
+- ✅ 表單驗證演示 (實時反饋、錯誤動畫)
+- ✅ 鍵盤快捷鍵演示 (全局快捷鍵)
+- ✅ 手勢識別說明 (Touch Events)
+
+**驗收標準**: 全部達成 ✅
+
+---
+
+## 📊 第四階段完成狀況
+
+### Phase 4 Summary (2025-12-03)
+
+**狀態**: ✅ 100% 完成並驗收
+
+**交付成果**:
+- ✨ 新增 2 個檔案 (es-features.js, es-features-showcase.css)
+- 🔧 修改 dashboard.html 集成 ES 特性演示區塊
+- 📝 共計 ~800 行代碼
+
+**實現功能**:
+- ✅ Array Grouping 演示 (Object.groupBy + Polyfill)
+- ✅ Promise.withResolvers 演示 (手動控制)
+- ✅ Temporal API 演示 (日期時間操作模擬)
+- ✅ 可選鏈與空值合併演示 (`?.` 和 `??` 對比)
+- ✅ Class 私有字段演示 (`#` 私有字段與靜態成員)
+
+**驗收標準**: 全部達成 ✅
+
+---
+
+## 📄 授權
+
+本專案採用 **MIT 授權**。您可自由使用、修改和分發。
+
+---
+
+## 🎉 技術棧致謝
+
+感謝以下優秀項目的貢獻：
+- **Lucide Icons** - 現代化的圖示庫
+- **System Fonts** - 原生字型堆棧
+- **CSS Grid & Flexbox** - 現代佈局技術
+- **Vanilla JavaScript** - 純 JS 的強大功能
+
+---
+
+**項目狀態**: 🟢 完全運作中
+**最後維護**: 2025-12-03
+**當前進度**: Phase 1 ✅ + Phase 2 ✅ + Phase 3 ✅ + Phase 4 ✅
+**推薦用途**:
+- 🎨 設計系統參考
+- 🏗️ 項目樣板
+- 📚 前端學習資料
+- 🔧 元件庫範例
+- ⚡ ES2024+ 特性學習
+    </script>
+
+    <script>
+        const marked = window.marked;
+
+        // 設置 marked 選項
+        marked.setOptions({
+            breaks: true,
+            gfm: true
+        });
+
+        // 頁面載入時渲染 Markdown
+        document.addEventListener('DOMContentLoaded', function() {
+            const markdownText = document.getElementById('markdown-content').textContent;
+            const html = marked.parse(markdownText);
+            document.getElementById('markdown-container').innerHTML = html;
+
+            // 為外部鏈接添加新標籤頁打開
+            document.querySelectorAll('.markdown-content a').forEach(link => {
+                if (link.href.startsWith('http')) {
+                    link.target = '_blank';
+                    link.rel = 'noopener noreferrer';
+                }
+            });
+
+            // 為代碼塊添加複製按鈕
+            addCodeCopyButtons();
+        });
+
+        // 為代碼塊添加複製按鈕
+        function addCodeCopyButtons() {
+            document.querySelectorAll('pre').forEach(pre => {
+                const code = pre.querySelector('code');
+                const copyBtn = document.createElement('button');
+                copyBtn.textContent = '📋 複製代碼';
+                copyBtn.style.position = 'absolute';
+                copyBtn.style.top = '10px';
+                copyBtn.style.right = '10px';
+                copyBtn.style.padding = '6px 12px';
+                copyBtn.style.fontSize = '12px';
+                copyBtn.style.background = 'var(--tertiary-bg)';
+                copyBtn.style.border = '1px solid var(--border-color)';
+                copyBtn.style.color = 'var(--text-secondary)';
+                copyBtn.style.borderRadius = '4px';
+                copyBtn.style.cursor = 'pointer';
+
+                copyBtn.addEventListener('click', () => {
+                    navigator.clipboard.writeText(code.textContent);
+                    copyBtn.textContent = '✓ 已複製';
+                    setTimeout(() => {
+                        copyBtn.textContent = '📋 複製代碼';
+                    }, 2000);
+                });
+
+                pre.style.position = 'relative';
+                pre.appendChild(copyBtn);
+            });
+        }
+
+        // 返回首頁
+        function goHome() {
+            window.location.href = 'index.html';
+        }
+
+        // 顯示提示訊息
+        function showToast(message) {
+            const toast = document.createElement('div');
+            toast.className = 'success-toast';
+            toast.textContent = message;
+            document.body.appendChild(toast);
+
+            setTimeout(() => {
+                toast.style.animation = 'slideIn 0.3s ease reverse';
+                setTimeout(() => toast.remove(), 300);
+            }, 2000);
+        }
+    </script>
+    <script src="js/theme-toggle.js"></script>
+</body>
+</html>

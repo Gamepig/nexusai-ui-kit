@@ -1,0 +1,299 @@
+/**
+ * Chart.js 數據可視化樣式
+ * Phase 5.3
+ */
+
+/* ============================================
+   圖表展示區容器
+   ============================================ */
+.charts-showcase {
+  padding: var(--spacing-6);
+}
+
+.charts-showcase .showcase-header {
+  text-align: center;
+  margin-bottom: var(--spacing-8);
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: var(--spacing-6);
+  background: var(--color-bg-tertiary);
+  border: 1px solid var(--color-border-default);
+  border-radius: var(--radius-lg);
+}
+
+.charts-showcase .showcase-header h2 {
+  font-size: var(--font-size-2xl);
+  color: var(--color-text-primary);
+  margin-bottom: var(--spacing-2);
+}
+
+.charts-showcase .showcase-header p {
+  color: var(--color-text-secondary);
+  margin-bottom: var(--spacing-4);
+}
+
+.chart-controls {
+  display: flex;
+  gap: var(--spacing-3);
+  flex-wrap: wrap;
+}
+
+/* ============================================
+   圖表網格布局
+   ============================================ */
+.charts-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--spacing-6);
+  margin-bottom: var(--spacing-8);
+}
+
+/* 大型圖表卡片（跨兩列） */
+.chart-card-large {
+  grid-column: span 2;
+}
+
+/* ============================================
+   圖表卡片樣式
+   ============================================ */
+.chart-card {
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border-default);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-5);
+  position: relative;
+  overflow: hidden;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.chart-card:hover {
+  border-color: var(--color-cyan);
+  box-shadow: 0 0 20px rgba(0, 217, 255, 0.1);
+}
+
+.chart-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--color-cyan), transparent);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.chart-card:hover::before {
+  opacity: 1;
+}
+
+/* ============================================
+   圖表卡片標題
+   ============================================ */
+.chart-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--spacing-4);
+}
+
+.chart-card-header h3 {
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-primary);
+  margin: 0;
+}
+
+.chart-badge {
+  font-size: var(--font-size-xs);
+  padding: var(--spacing-1) var(--spacing-2);
+  background: rgba(0, 217, 255, 0.1);
+  color: var(--color-cyan);
+  border-radius: var(--radius-sm);
+  font-weight: var(--font-weight-medium);
+}
+
+/* ============================================
+   圖表容器
+   ============================================ */
+.chart-wrapper {
+  position: relative;
+  height: 280px;
+  width: 100%;
+}
+
+.chart-card-large .chart-wrapper {
+  height: 320px;
+}
+
+/* Canvas 自適應 */
+.chart-wrapper canvas {
+  max-width: 100%;
+  max-height: 100%;
+}
+
+/* ============================================
+   功能說明區
+   ============================================ */
+.chart-features {
+  background: var(--color-bg-tertiary);
+  border: 1px solid var(--color-border-default);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-6);
+}
+
+.chart-features h3 {
+  font-size: var(--font-size-lg);
+  color: var(--color-text-primary);
+  margin-bottom: var(--spacing-4);
+}
+
+.chart-features ul {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--spacing-3);
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.chart-features li {
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-sm);
+  padding: var(--spacing-2);
+  background: var(--color-bg-card);
+  border-radius: var(--radius-md);
+  text-align: center;
+}
+
+/* ============================================
+   響應式設計
+   ============================================ */
+@media (max-width: 1279px) {
+  .charts-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .chart-card-large {
+    grid-column: span 2;
+  }
+
+  .chart-features ul {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .charts-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .chart-card-large {
+    grid-column: span 1;
+  }
+
+  .chart-wrapper {
+    height: 240px;
+  }
+
+  .chart-card-large .chart-wrapper {
+    height: 280px;
+  }
+
+  .chart-features ul {
+    grid-template-columns: 1fr;
+  }
+
+  .chart-controls {
+    flex-direction: column;
+  }
+
+  .chart-controls button {
+    width: 100%;
+  }
+}
+
+/* ============================================
+   動畫效果
+   ============================================ */
+@keyframes chartFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.chart-card {
+  animation: chartFadeIn 0.5s ease forwards;
+}
+
+.chart-card:nth-child(1) { animation-delay: 0s; }
+.chart-card:nth-child(2) { animation-delay: 0.1s; }
+.chart-card:nth-child(3) { animation-delay: 0.15s; }
+.chart-card:nth-child(4) { animation-delay: 0.2s; }
+.chart-card:nth-child(5) { animation-delay: 0.25s; }
+.chart-card:nth-child(6) { animation-delay: 0.3s; }
+.chart-card:nth-child(7) { animation-delay: 0.35s; }
+.chart-card:nth-child(8) { animation-delay: 0.4s; }
+
+/* ============================================
+   Tooltip 自訂樣式（覆蓋 Chart.js 預設）
+   ============================================ */
+.chartjs-tooltip {
+  background: rgba(15, 23, 42, 0.95) !important;
+  border: 1px solid var(--color-cyan) !important;
+  border-radius: var(--radius-md) !important;
+  padding: var(--spacing-3) !important;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3) !important;
+}
+
+/* ============================================
+   圖表載入狀態
+   ============================================ */
+.chart-loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 280px;
+  color: var(--color-text-tertiary);
+}
+
+.chart-loading::after {
+  content: '載入中...';
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 0.5; }
+  50% { opacity: 1; }
+}
+
+/* ============================================
+   實時更新指示器
+   ============================================ */
+.realtime-indicator {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-2);
+  font-size: var(--font-size-xs);
+  color: var(--color-green);
+}
+
+.realtime-indicator::before {
+  content: '';
+  width: 8px;
+  height: 8px;
+  background: var(--color-green);
+  border-radius: 50%;
+  animation: blink 1s ease-in-out infinite;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}

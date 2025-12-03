@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="zh-TW" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>儀表板 - NexusAI</title>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <link rel="stylesheet" href="css/design-tokens.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  <link rel="stylesheet" href="css/theme-light.css">
+  <style>
+    .dashboard-header {
+      background: var(--color-bg-secondary);
+      padding: var(--spacing-8) 0;
+      border-bottom: 1px solid var(--color-border-default);
+      margin-top: 80px;
+      margin-left: 280px;
+    }
+
+    .dashboard-header h1 {
+      margin: 0;
+      font-size: var(--font-size-2xl);
+    }
+
+    .dashboard-layout {
+      display: grid;
+      grid-template-columns: 1fr;
+      padding: var(--spacing-8);
+      margin-left: 280px;
+    }
+
+    .kpi-cards {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: var(--spacing-6);
+      margin-bottom: var(--spacing-8);
+    }
+
+    .kpi-card {
+      background: linear-gradient(180deg, #1E293B 0%, #0F172A 100%);
+      border: 1px solid var(--color-border-default);
+      border-radius: var(--radius-lg);
+      padding: var(--spacing-6);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .kpi-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--color-cyan), transparent);
+    }
+
+    .icon-square {
+      width: 48px;
+      height: 48px;
+      border-radius: var(--radius-lg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: var(--spacing-3);
+      color: white;
+    }
+
+    .icon-square-cyan {
+      background: rgba(0, 217, 255, 0.1);
+      color: var(--color-cyan);
+    }
+
+    .icon-square-green {
+      background: rgba(34, 197, 94, 0.1);
+      color: var(--color-green);
+    }
+
+    .icon-square-purple {
+      background: rgba(168, 85, 247, 0.1);
+      color: var(--color-purple);
+    }
+
+    .icon-square-orange {
+      background: rgba(249, 115, 22, 0.1);
+      color: var(--color-orange);
+    }
+
+    .kpi-value {
+      font-size: 1.75rem;
+      font-weight: var(--font-weight-bold);
+      color: var(--color-text-primary);
+      margin-bottom: var(--spacing-1);
+    }
+
+    .kpi-label {
+      font-size: var(--font-size-sm);
+      color: var(--color-text-secondary);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: var(--spacing-3);
+    }
+
+    .kpi-change {
+      display: flex;
+      align-items: center;
+      gap: var(--spacing-1);
+      font-size: var(--font-size-xs);
+    }
+
+    .kpi-change.positive {
+      color: var(--color-green);
+    }
+
+    .kpi-change.negative {
+      color: var(--color-red);
+    }
+
+    .dashboard-content {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: var(--spacing-8);
+    }
+
+    .card-large {
+      background: var(--color-bg-card);
+      border: 1px solid var(--color-border-default);
+      border-radius: var(--radius-lg);
+      padding: var(--spacing-6);
+    }
+
+    .table-container {
+      overflow-x: auto;
+    }
+
+    .data-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .data-table th {
+      background: var(--color-bg-tertiary);
+      padding: var(--spacing-3) var(--spacing-4);
+      text-align: left;
+      font-weight: var(--font-weight-semibold);
+      color: var(--color-text-primary);
+      border-bottom: 1px solid var(--color-border-default);
+      font-size: var(--font-size-sm);
+    }
+
+    .data-table td {
+      padding: var(--spacing-3) var(--spacing-4);
+      border-bottom: 1px solid var(--color-border-muted);
+      color: var(--color-text-secondary);
+      font-size: var(--font-size-sm);
+    }
+
+    .data-table tbody tr:hover {
+      background: var(--color-bg-tertiary);
+    }
+
+    .status-badge {
+      display: inline-block;
+      padding: var(--spacing-1) var(--spacing-3);
+      border-radius: var(--radius-full);
+      font-size: var(--font-size-xs);
+      font-weight: var(--font-weight-semibold);
+    }
+
+    .status-active {
+      background: rgba(34, 197, 94, 0.1);
+      color: var(--color-green);
+    }
+
+    .status-pending {
+      background: rgba(249, 115, 22, 0.1);
+      color: var(--color-orange);
+    }
+
+    .status-inactive {
+      background: rgba(107, 114, 128, 0.1);
+      color: var(--color-text-secondary);
+    }
+
+    .chart-container {
+      height: 280px;
+      background: linear-gradient(180deg, rgba(0, 217, 255, 0.03) 0%, rgba(168, 85, 247, 0.03) 100%);
+      border-radius: var(--radius-lg);
+      padding: var(--spacing-4);
+      margin-bottom: var(--spacing-6);
+      position: relative;
+    }
+
+    .chart-svg {
+      width: 100%;
+      height: 100%;
+    }
+
+    .chart-line {
+      fill: none;
+      stroke: url(#lineGradient);
+      stroke-width: 3;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .chart-area {
+      fill: url(#areaGradient);
+    }
+
+    .chart-grid line {
+      stroke: var(--color-border-muted);
+      stroke-dasharray: 4;
+    }
+
+    .chart-dot {
+      fill: var(--color-cyan);
+      stroke: var(--color-bg-primary);
+      stroke-width: 2;
+    }
+
+    .chart-labels text {
+      fill: var(--color-text-tertiary);
+      font-size: 11px;
+    }
+
+    .sidebar-card {
+      background: var(--color-bg-card);
+      border: 1px solid var(--color-border-default);
+      border-radius: var(--radius-lg);
+      padding: var(--spacing-6);
+      margin-bottom: var(--spacing-6);
+    }
+
+    .sidebar-card h3 {
+      margin-bottom: var(--spacing-4);
+      font-size: var(--font-size-base);
+    }
+
+    .activity-item {
+      padding: var(--spacing-3) 0;
+      border-bottom: 1px solid var(--color-border-muted);
+      display: flex;
+      gap: var(--spacing-3);
+      font-size: var(--font-size-sm);
+    }
+
+    .activity-item:last-child {
+      border-bottom: none;
+    }
+
+    .activity-dot {
+      width: 8px;
+      height: 8px;
+      background: var(--color-cyan);
+      border-radius: 50%;
+      margin-top: 5px;
+      flex-shrink: 0;
+    }
+
+    @media (max-width: 1279px) {
+      .kpi-cards {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .dashboard-content {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .dashboard-header {
+        margin-top: 64px;
+      }
+
+      .kpi-cards {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Top Navigation -->
+  <nav class="top-nav">
+    <div class="top-nav-container">
+      <a href="index.html" class="logo">
+        <span style="font-size: 24px;">🚀</span>
+        <span>NexusAI</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="index.html#features"><i data-lucide="star" class="nav-icon"></i>特色</a></li>
+        <li><a href="pricing.html"><i data-lucide="credit-card" class="nav-icon"></i>定價</a></li>
+        <li><a href="about.html"><i data-lucide="users" class="nav-icon"></i>關於</a></li>
+        <li><a href="contact.html"><i data-lucide="mail" class="nav-icon"></i>聯繫</a></li>
+      </ul>
+      <div class="nav-actions">
+        <button id="theme-toggle-btn" class="btn btn-outline-cyan btn-sm" title="切換主題" aria-label="切換至淺色主題">
+          <i data-lucide="sun"></i>
+        </button>
+      </div>
+      <button class="hamburger-menu">
+        <i data-lucide="menu"></i>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Sidebar Navigation (由 sidebar.js 動態載入) -->
+  <aside id="sidebar-container" class="sidebar dashboard-sidebar"></aside>
+
+  <!-- Dashboard Header -->
+  <section class="dashboard-header">
+    <div class="container">
+      <h1>儀表板</h1>
+      <p style="color: var(--color-text-secondary); margin: var(--spacing-2) 0 0 0;">歡迎回來！這是你的分析概覽。</p>
+    </div>
+  </section>
+
+  <!-- Dashboard Content -->
+  <section class="dashboard-layout">
+    <div class="container">
+      <!-- KPI Cards -->
+      <div class="kpi-cards">
+        <div class="kpi-card">
+          <div class="icon-square icon-square-cyan">
+            <i data-lucide="users" style="width: 24px; height: 24px;"></i>
+          </div>
+          <div class="kpi-label">總使用者</div>
+          <div class="kpi-value">24,583</div>
+          <div class="kpi-change positive">
+            <i data-lucide="trending-up" style="width: 14px; height: 14px;"></i>
+            <span>12.5% vs 上月</span>
+          </div>
+        </div>
+
+        <div class="kpi-card">
+          <div class="icon-square icon-square-green">
+            <i data-lucide="activity" style="width: 24px; height: 24px;"></i>
+          </div>
+          <div class="kpi-label">活躍工作階段</div>
+          <div class="kpi-value">1,234</div>
+          <div class="kpi-change positive">
+            <i data-lucide="trending-up" style="width: 14px; height: 14px;"></i>
+            <span>8.2% vs 昨天</span>
+          </div>
+        </div>
+
+        <div class="kpi-card">
+          <div class="icon-square icon-square-purple">
+            <i data-lucide="dollar-sign" style="width: 24px; height: 24px;"></i>
+          </div>
+          <div class="kpi-label">總營收</div>
+          <div class="kpi-value">NT$456,789</div>
+          <div class="kpi-change positive">
+            <i data-lucide="trending-up" style="width: 14px; height: 14px;"></i>
+            <span>23.1% vs 上月</span>
+          </div>
+        </div>
+
+        <div class="kpi-card">
+          <div class="icon-square icon-square-orange">
+            <i data-lucide="package" style="width: 24px; height: 24px;"></i>
+          </div>
+          <div class="kpi-label">專案數量</div>
+          <div class="kpi-value">89</div>
+          <div class="kpi-change negative">
+            <i data-lucide="trending-down" style="width: 14px; height: 14px;"></i>
+            <span>2.3% vs 上月</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Main Content -->
+      <div class="dashboard-content">
+        <!-- Chart Section -->
+        <div>
+          <div class="card-large">
+            <h2 style="margin-bottom: var(--spacing-6); font-size: var(--font-size-xl);">收入趨勢</h2>
+            <div class="chart-container">
+              <svg class="chart-svg" viewBox="0 0 600 220" preserveAspectRatio="xMidYMid meet">
+                <defs>
+                  <linearGradient id="lineGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                    <stop offset="0%" stop-color="#A855F7"/>
+                    <stop offset="50%" stop-color="#00D9FF"/>
+                    <stop offset="100%" stop-color="#22C55E"/>
+                  </linearGradient>
+                  <linearGradient id="areaGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                    <stop offset="0%" stop-color="rgba(0, 217, 255, 0.3)"/>
+                    <stop offset="100%" stop-color="rgba(0, 217, 255, 0)"/>
+                  </linearGradient>
+                </defs>
+                <!-- Grid lines -->
+                <g class="chart-grid">
+                  <line x1="50" y1="40" x2="580" y2="40"/>
+                  <line x1="50" y1="85" x2="580" y2="85"/>
+                  <line x1="50" y1="130" x2="580" y2="130"/>
+                  <line x1="50" y1="175" x2="580" y2="175"/>
+                </g>
+                <!-- Y-axis labels -->
+                <g class="chart-labels">
+                  <text x="40" y="44" text-anchor="end">500K</text>
+                  <text x="40" y="89" text-anchor="end">375K</text>
+                  <text x="40" y="134" text-anchor="end">250K</text>
+                  <text x="40" y="179" text-anchor="end">125K</text>
+                </g>
+                <!-- Area fill -->
+                <path class="chart-area" d="M80,160 L140,140 L200,150 L260,110 L320,95 L380,100 L440,70 L500,55 L560,45 L560,190 L80,190 Z"/>
+                <!-- Line -->
+                <path class="chart-line" d="M80,160 L140,140 L200,150 L260,110 L320,95 L380,100 L440,70 L500,55 L560,45"/>
+                <!-- Data points -->
+                <circle class="chart-dot" cx="80" cy="160" r="5"/>
+                <circle class="chart-dot" cx="140" cy="140" r="5"/>
+                <circle class="chart-dot" cx="200" cy="150" r="5"/>
+                <circle class="chart-dot" cx="260" cy="110" r="5"/>
+                <circle class="chart-dot" cx="320" cy="95" r="5"/>
+                <circle class="chart-dot" cx="380" cy="100" r="5"/>
+                <circle class="chart-dot" cx="440" cy="70" r="5"/>
+                <circle class="chart-dot" cx="500" cy="55" r="5"/>
+                <circle class="chart-dot" cx="560" cy="45" r="5"/>
+                <!-- X-axis labels -->
+                <g class="chart-labels">
+                  <text x="80" y="210" text-anchor="middle">4月</text>
+                  <text x="140" y="210" text-anchor="middle">5月</text>
+                  <text x="200" y="210" text-anchor="middle">6月</text>
+                  <text x="260" y="210" text-anchor="middle">7月</text>
+                  <text x="320" y="210" text-anchor="middle">8月</text>
+                  <text x="380" y="210" text-anchor="middle">9月</text>
+                  <text x="440" y="210" text-anchor="middle">10月</text>
+                  <text x="500" y="210" text-anchor="middle">11月</text>
+                  <text x="560" y="210" text-anchor="middle">12月</text>
+                </g>
+              </svg>
+            </div>
+          </div>
+
+          <!-- Table Section -->
+          <div class="card-large" style="margin-top: var(--spacing-8);">
+            <h2 style="margin-bottom: var(--spacing-6); font-size: var(--font-size-xl);">最近交易</h2>
+            <div class="table-container">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>交易 ID</th>
+                    <th>使用者</th>
+                    <th>金額</th>
+                    <th>狀態</th>
+                    <th>日期</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>#TRX001</td>
+                    <td>Alice Chen</td>
+                    <td>NT$5,000</td>
+                    <td><span class="status-badge status-active">已完成</span></td>
+                    <td>2025-12-03</td>
+                  </tr>
+                  <tr>
+                    <td>#TRX002</td>
+                    <td>Bob Lee</td>
+                    <td>NT$3,500</td>
+                    <td><span class="status-badge status-active">已完成</span></td>
+                    <td>2025-12-02</td>
+                  </tr>
+                  <tr>
+                    <td>#TRX003</td>
+                    <td>Carol Wang</td>
+                    <td>NT$2,200</td>
+                    <td><span class="status-badge status-pending">處理中</span></td>
+                    <td>2025-12-02</td>
+                  </tr>
+                  <tr>
+                    <td>#TRX004</td>
+                    <td>David Liu</td>
+                    <td>NT$7,800</td>
+                    <td><span class="status-badge status-active">已完成</span></td>
+                    <td>2025-12-01</td>
+                  </tr>
+                  <tr>
+                    <td>#TRX005</td>
+                    <td>Emma Zhou</td>
+                    <td>NT$1,500</td>
+                    <td><span class="status-badge status-inactive">取消</span></td>
+                    <td>2025-11-30</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- Sidebar -->
+        <div>
+          <!-- Quick Stats -->
+          <div class="sidebar-card">
+            <h3>快速統計</h3>
+            <div style="display: flex; flex-direction: column; gap: var(--spacing-4);">
+              <div style="display: flex; justify-content: space-between;">
+                <span style="color: var(--color-text-secondary); font-size: var(--font-size-sm);">轉換率</span>
+                <span style="color: var(--color-cyan); font-weight: var(--font-weight-bold);">3.45%</span>
+              </div>
+              <div style="display: flex; justify-content: space-between;">
+                <span style="color: var(--color-text-secondary); font-size: var(--font-size-sm);">平均訂單值</span>
+                <span style="color: var(--color-cyan); font-weight: var(--font-weight-bold);">NT$4,250</span>
+              </div>
+              <div style="display: flex; justify-content: space-between;">
+                <span style="color: var(--color-text-secondary); font-size: var(--font-size-sm);">退貨率</span>
+                <span style="color: var(--color-orange); font-weight: var(--font-weight-bold);">2.1%</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Recent Activity -->
+          <div class="sidebar-card">
+            <h3>最近活動</h3>
+            <div class="activity-item">
+              <div class="activity-dot"></div>
+              <div>
+                <div style="color: var(--color-text-primary);">新使用者註冊</div>
+                <div style="color: var(--color-text-tertiary); font-size: var(--font-size-xs); margin-top: 2px;">2 分鐘前</div>
+              </div>
+            </div>
+            <div class="activity-item">
+              <div class="activity-dot"></div>
+              <div>
+                <div style="color: var(--color-text-primary);">交易已完成</div>
+                <div style="color: var(--color-text-tertiary); font-size: var(--font-size-xs); margin-top: 2px;">15 分鐘前</div>
+              </div>
+            </div>
+            <div class="activity-item">
+              <div class="activity-dot"></div>
+              <div>
+                <div style="color: var(--color-text-primary);">系統更新部署</div>
+                <div style="color: var(--color-text-tertiary); font-size: var(--font-size-xs); margin-top: 2px;">1 小時前</div>
+              </div>
+            </div>
+            <div class="activity-item">
+              <div class="activity-dot"></div>
+              <div>
+                <div style="color: var(--color-text-primary);">安全警告已解決</div>
+                <div style="color: var(--color-text-tertiary); font-size: var(--font-size-xs); margin-top: 2px;">3 小時前</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Quick Actions -->
+          <div class="sidebar-card">
+            <h3>快速操作</h3>
+            <div style="display: flex; flex-direction: column; gap: var(--spacing-3);">
+              <button class="btn btn-solid-cyan" style="width: 100%;">
+                <i data-lucide="plus" style="width: 16px; height: 16px;"></i>
+                新增交易
+              </button>
+              <button class="btn btn-outline-cyan" style="width: 100%;">
+                <i data-lucide="download" style="width: 16px; height: 16px;"></i>
+                匯出報告
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script src="js/theme-toggle.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/sidebar.js"></script>
+  <script>
+    lucide.createIcons();
+
+    // Dashboard interactions
+    console.log('Dashboard loaded successfully');
+
+    // Show toast on page load
+    Toast.success('儀表板已載入');
+  </script>
+</body>
+</html>

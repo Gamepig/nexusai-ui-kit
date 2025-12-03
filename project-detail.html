@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="zh-TW" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>專案詳情 - NexusAI</title>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <link rel="stylesheet" href="css/design-tokens.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  <link rel="stylesheet" href="css/theme-light.css">
+  <style>
+    .page-header {
+      background: var(--color-bg-secondary);
+      padding: var(--spacing-8) 0;
+      border-bottom: 1px solid var(--color-border-default);
+      margin-top: 80px;
+      margin-left: 280px;
+    }
+
+    .breadcrumb {
+      display: flex;
+      align-items: center;
+      gap: var(--spacing-3);
+      font-size: var(--font-size-sm);
+      color: var(--color-text-secondary);
+    }
+
+    .breadcrumb a {
+      color: var(--color-cyan);
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    .breadcrumb a:hover {
+      text-decoration: underline;
+    }
+
+    .page-layout {
+      padding: var(--spacing-8);
+      margin-left: 280px;
+    }
+
+    .project-header {
+      background: var(--color-bg-card);
+      border: 1px solid var(--color-border-default);
+      border-radius: var(--radius-lg);
+      padding: var(--spacing-8);
+      margin-bottom: var(--spacing-8);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .project-header::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--color-cyan), transparent);
+    }
+
+    .project-title-section {
+      display: flex;
+      justify-content: space-between;
+      align-items: start;
+      margin-bottom: var(--spacing-6);
+    }
+
+    .project-title {
+      font-size: var(--font-size-2xl);
+      font-weight: var(--font-weight-bold);
+      color: var(--color-text-primary);
+      margin-bottom: var(--spacing-2);
+    }
+
+    .project-meta {
+      display: flex;
+      gap: var(--spacing-4);
+      align-items: center;
+    }
+
+    .status-badge {
+      display: inline-block;
+      padding: var(--spacing-2) var(--spacing-4);
+      border-radius: var(--radius-full);
+      font-size: var(--font-size-xs);
+      font-weight: var(--font-weight-semibold);
+      background: rgba(0, 217, 255, 0.1);
+      color: var(--color-cyan);
+    }
+
+    .project-description {
+      color: var(--color-text-secondary);
+      margin-bottom: var(--spacing-4);
+      padding-bottom: var(--spacing-4);
+      border-bottom: 1px solid var(--color-border-muted);
+    }
+
+    .project-stats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: var(--spacing-4);
+    }
+
+    .stat-item {
+      text-align: center;
+    }
+
+    .stat-value {
+      font-size: 1.5rem;
+      font-weight: var(--font-weight-bold);
+      color: var(--color-cyan);
+    }
+
+    .stat-label {
+      font-size: var(--font-size-sm);
+      color: var(--color-text-secondary);
+      margin-top: var(--spacing-1);
+    }
+
+    .content-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: var(--spacing-8);
+    }
+
+    .content-card {
+      background: var(--color-bg-card);
+      border: 1px solid var(--color-border-default);
+      border-radius: var(--radius-lg);
+      padding: var(--spacing-6);
+      margin-bottom: var(--spacing-8);
+    }
+
+    .card-title {
+      font-size: var(--font-size-lg);
+      font-weight: var(--font-weight-semibold);
+      color: var(--color-text-primary);
+      margin-bottom: var(--spacing-4);
+      padding-bottom: var(--spacing-3);
+      border-bottom: 1px solid var(--color-border-muted);
+    }
+
+    .team-member {
+      display: flex;
+      align-items: center;
+      gap: var(--spacing-3);
+      padding: var(--spacing-3) 0;
+    }
+
+    .member-avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--color-cyan), var(--color-purple));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: var(--font-weight-semibold);
+      flex-shrink: 0;
+    }
+
+    .member-info {
+      flex: 1;
+    }
+
+    .member-name {
+      font-weight: var(--font-weight-semibold);
+      color: var(--color-text-primary);
+      font-size: var(--font-size-sm);
+    }
+
+    .member-role {
+      font-size: var(--font-size-xs);
+      color: var(--color-text-secondary);
+    }
+
+    .activity-item {
+      display: flex;
+      gap: var(--spacing-4);
+      padding: var(--spacing-4);
+      background: var(--color-bg-tertiary);
+      border-radius: var(--radius-md);
+      margin-bottom: var(--spacing-3);
+    }
+
+    .activity-dot {
+      width: 8px;
+      height: 8px;
+      background: var(--color-cyan);
+      border-radius: 50%;
+      margin-top: 6px;
+      flex-shrink: 0;
+    }
+
+    .activity-content {
+      flex: 1;
+    }
+
+    .activity-title {
+      font-weight: var(--font-weight-semibold);
+      color: var(--color-text-primary);
+      margin-bottom: var(--spacing-1);
+      font-size: var(--font-size-sm);
+    }
+
+    .activity-time {
+      font-size: var(--font-size-xs);
+      color: var(--color-text-secondary);
+    }
+
+    .task-item {
+      display: flex;
+      align-items: center;
+      gap: var(--spacing-3);
+      padding: var(--spacing-3) 0;
+      border-bottom: 1px solid var(--color-border-muted);
+    }
+
+    .task-item:last-child {
+      border-bottom: none;
+    }
+
+    .task-checkbox {
+      width: 18px;
+      height: 18px;
+      cursor: pointer;
+      accent-color: var(--color-cyan);
+    }
+
+    .task-name {
+      flex: 1;
+      color: var(--color-text-primary);
+      font-size: var(--font-size-sm);
+    }
+
+    .task-priority {
+      padding: var(--spacing-1) var(--spacing-2);
+      background: rgba(0, 217, 255, 0.1);
+      color: var(--color-cyan);
+      border-radius: var(--radius-full);
+      font-size: var(--font-size-xs);
+      font-weight: var(--font-weight-semibold);
+    }
+
+    @media (max-width: 1024px) {
+      .content-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .project-stats {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 768px) {
+      .project-title-section {
+        flex-direction: column;
+      }
+
+      .project-meta {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .project-stats {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Top Navigation -->
+  <nav class="top-nav">
+    <div class="top-nav-container">
+      <a href="index.html" class="logo">
+        <span style="font-size: 24px;">🚀</span>
+        <span>NexusAI</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="dashboard.html"><i data-lucide="layout-dashboard" class="nav-icon"></i>儀表板</a></li>
+        <li><a href="projects.html" class="active"><i data-lucide="folder" class="nav-icon"></i>專案</a></li>
+        <li><a href="pricing.html"><i data-lucide="credit-card" class="nav-icon"></i>定價</a></li>
+        <li><a href="about.html"><i data-lucide="users" class="nav-icon"></i>關於</a></li>
+      </ul>
+      <div class="nav-actions">
+        <button id="theme-toggle-btn" class="btn btn-outline-cyan btn-sm" title="切換主題" aria-label="切換至淺色主題">
+          <i data-lucide="sun"></i>
+        </button>
+      </div>
+      <button class="hamburger-menu">
+        <i data-lucide="menu"></i>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Sidebar Navigation -->
+  <!-- Sidebar Navigation (由 sidebar.js 動態載入) -->
+  <aside id="sidebar-container" class="sidebar dashboard-sidebar"></aside>
+
+  <!-- Page Header -->
+  <section class="page-header">
+    <div class="container">
+      <div class="breadcrumb">
+        <a href="projects.html">專案</a>
+        <span>/</span>
+        <span>NexusAI 平台開發</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Main Content -->
+  <section class="page-layout">
+    <div class="container">
+      <!-- Project Header -->
+      <div class="project-header">
+        <div class="project-title-section">
+          <div>
+            <div class="project-title">NexusAI 平台開發</div>
+            <div class="project-description">完整重構 NexusAI 平台，提升用戶體驗和系統效能，引入最新技術棧。</div>
+          </div>
+          <div style="display: flex; gap: var(--spacing-3); flex-shrink: 0;">
+            <span class="status-badge">進行中</span>
+            <button style="padding: var(--spacing-2) var(--spacing-4); background: var(--color-bg-tertiary); border: 1px solid var(--color-border-default); border-radius: var(--radius-md); color: var(--color-text-secondary); cursor: pointer; transition: all var(--transition-base);">⋮</button>
+          </div>
+        </div>
+
+        <div class="project-stats">
+          <div class="stat-item">
+            <div class="stat-value">12</div>
+            <div class="stat-label">完成任務</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-value">8</div>
+            <div class="stat-label">進行中</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-value">5</div>
+            <div class="stat-label">團隊成員</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-value">2025-02-28</div>
+            <div class="stat-label">截止日期</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Content Grid -->
+      <div class="content-grid">
+        <!-- Left Column -->
+        <div>
+          <!-- Project Info -->
+          <div class="content-card">
+            <div class="card-title">專案資訊</div>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--spacing-6);">
+              <div>
+                <div style="font-size: var(--font-size-xs); color: var(--color-text-secondary); margin-bottom: var(--spacing-2); text-transform: uppercase;">開始日期</div>
+                <div style="color: var(--color-text-primary); font-weight: var(--font-weight-semibold);">2024-09-15</div>
+              </div>
+              <div>
+                <div style="font-size: var(--font-size-xs); color: var(--color-text-secondary); margin-bottom: var(--spacing-2); text-transform: uppercase;">進度</div>
+                <div style="color: var(--color-text-primary); font-weight: var(--font-weight-semibold);">75%</div>
+              </div>
+              <div>
+                <div style="font-size: var(--font-size-xs); color: var(--color-text-secondary); margin-bottom: var(--spacing-2); text-transform: uppercase;">預算</div>
+                <div style="color: var(--color-text-primary); font-weight: var(--font-weight-semibold);">NT$150,000</div>
+              </div>
+              <div>
+                <div style="font-size: var(--font-size-xs); color: var(--color-text-secondary); margin-bottom: var(--spacing-2); text-transform: uppercase;">優先級</div>
+                <div style="color: var(--color-red); font-weight: var(--font-weight-semibold);">高</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Recent Activity -->
+          <div class="content-card">
+            <div class="card-title">最近活動</div>
+            <div class="activity-item">
+              <div class="activity-dot"></div>
+              <div class="activity-content">
+                <div class="activity-title">完成任務 "前端頁面設計"</div>
+                <div class="activity-time">2小時前 • 李明軒</div>
+              </div>
+            </div>
+            <div class="activity-item">
+              <div class="activity-dot"></div>
+              <div class="activity-content">
+                <div class="activity-title">新增評論於 "API 設計"</div>
+                <div class="activity-time">5小時前 • 王小美</div>
+              </div>
+            </div>
+            <div class="activity-item">
+              <div class="activity-dot"></div>
+              <div class="activity-content">
+                <div class="activity-title">完成程式碼審查</div>
+                <div class="activity-time">1天前 • 陳大衛</div>
+              </div>
+            </div>
+            <div class="activity-item">
+              <div class="activity-dot"></div>
+              <div class="activity-content">
+                <div class="activity-title">發佈新版本 v1.2.0</div>
+                <div class="activity-time">2天前 • 系統</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Tasks -->
+          <div class="content-card">
+            <div class="card-title">任務列表</div>
+            <div class="task-item">
+              <input type="checkbox" class="task-checkbox" checked>
+              <div class="task-name">前端頁面設計</div>
+              <div class="task-priority">高</div>
+            </div>
+            <div class="task-item">
+              <input type="checkbox" class="task-checkbox" checked>
+              <div class="task-name">後端 API 開發</div>
+              <div class="task-priority">高</div>
+            </div>
+            <div class="task-item">
+              <input type="checkbox" class="task-checkbox">
+              <div class="task-name">資料庫優化</div>
+              <div class="task-priority">中</div>
+            </div>
+            <div class="task-item">
+              <input type="checkbox" class="task-checkbox">
+              <div class="task-name">使用者測試</div>
+              <div class="task-priority">中</div>
+            </div>
+            <div class="task-item">
+              <input type="checkbox" class="task-checkbox">
+              <div class="task-name">文檔撰寫</div>
+              <div class="task-priority">低</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Column -->
+        <div>
+          <!-- Team Members -->
+          <div class="content-card">
+            <div class="card-title">團隊成員</div>
+            <div class="team-member">
+              <div class="member-avatar">LM</div>
+              <div class="member-info">
+                <div class="member-name">李明軒</div>
+                <div class="member-role">專案經理</div>
+              </div>
+            </div>
+            <div class="team-member">
+              <div class="member-avatar" style="background: linear-gradient(135deg, var(--color-green), var(--color-cyan));">WX</div>
+              <div class="member-info">
+                <div class="member-name">王小美</div>
+                <div class="member-role">前端工程師</div>
+              </div>
+            </div>
+            <div class="team-member">
+              <div class="member-avatar" style="background: linear-gradient(135deg, var(--color-purple), var(--color-orange));">CD</div>
+              <div class="member-info">
+                <div class="member-name">陳大衛</div>
+                <div class="member-role">後端工程師</div>
+              </div>
+            </div>
+            <div class="team-member">
+              <div class="member-avatar" style="background: linear-gradient(135deg, var(--color-orange), var(--color-cyan));">ZJ</div>
+              <div class="member-info">
+                <div class="member-name">張敬</div>
+                <div class="member-role">設計師</div>
+              </div>
+            </div>
+            <div class="team-member">
+              <div class="member-avatar" style="background: linear-gradient(135deg, var(--color-cyan), var(--color-green));">HM</div>
+              <div class="member-info">
+                <div class="member-name">何美麗</div>
+                <div class="member-role">QA 工程師</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Progress -->
+          <div class="content-card">
+            <div class="card-title">進度概況</div>
+            <div style="margin-bottom: var(--spacing-6);">
+              <div style="display: flex; justify-content: space-between; margin-bottom: var(--spacing-2);">
+                <span style="font-size: var(--font-size-sm); color: var(--color-text-secondary);">整體進度</span>
+                <span style="font-size: var(--font-size-sm); font-weight: var(--font-weight-semibold); color: var(--color-cyan);">75%</span>
+              </div>
+              <div style="height: 8px; background: var(--color-bg-tertiary); border-radius: var(--radius-full); overflow: hidden;">
+                <div style="height: 100%; width: 75%; background: linear-gradient(90deg, var(--color-cyan), var(--color-purple)); border-radius: var(--radius-full);"></div>
+              </div>
+            </div>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--spacing-4); font-size: var(--font-size-sm);">
+              <div>
+                <div style="color: var(--color-text-secondary); margin-bottom: var(--spacing-1);">已完成</div>
+                <div style="color: var(--color-green); font-weight: var(--font-weight-semibold); font-size: 1.25rem;">12/20</div>
+              </div>
+              <div>
+                <div style="color: var(--color-text-secondary); margin-bottom: var(--spacing-1);">進行中</div>
+                <div style="color: var(--color-cyan); font-weight: var(--font-weight-semibold); font-size: 1.25rem;">8/20</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div>
+        <h4>NexusAI</h4>
+        <p>現代化的深色科技主題設計系統</p>
+      </div>
+      <div>
+        <h4>導航</h4>
+        <ul>
+          <li><a href="index.html">首頁</a></li>
+          <li><a href="dashboard.html">儀表板</a></li>
+          <li><a href="projects.html">專案</a></li>
+          <li><a href="pricing.html">定價</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>資源</h4>
+        <ul>
+          <li><a href="#">GitHub</a></li>
+          <li><a href="#">部落格</a></li>
+          <li><a href="#">社群</a></li>
+          <li><a href="#">文檔</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2025 NexusAI. 保留所有權利。</p>
+    </div>
+  </footer>
+
+  <script src="js/theme-toggle.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/sidebar.js"></script>
+  <script>
+    lucide.createIcons();
+  </script>
+</body>
+</html>

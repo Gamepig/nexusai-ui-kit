@@ -1,0 +1,336 @@
+/**
+ * 擴展動畫庫樣式
+ * Phase 5.1
+ */
+
+/* ============================================
+   容器樣式
+   ============================================ */
+.animations-extended-showcase {
+  padding: var(--spacing-6);
+}
+
+.animations-extended-showcase .showcase-header {
+  text-align: center;
+  margin-bottom: var(--spacing-8);
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: var(--spacing-6);
+  background: var(--color-bg-tertiary);
+  border: 1px solid var(--color-border-default);
+  border-radius: var(--radius-lg);
+}
+
+.animations-extended-showcase .showcase-header h2 {
+  font-size: var(--font-size-2xl);
+  color: var(--color-text-primary);
+  margin-bottom: var(--spacing-2);
+}
+
+.section-desc {
+  color: var(--color-text-secondary);
+  margin-bottom: var(--spacing-4);
+  font-size: var(--font-size-sm);
+}
+
+/* ============================================
+   Demo Grid
+   ============================================ */
+.demo-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--spacing-4);
+  margin-bottom: var(--spacing-6);
+}
+
+.demo-card {
+  background: var(--color-bg-tertiary);
+  border: 1px solid var(--color-border-default);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-4);
+  text-align: center;
+}
+
+.demo-preview {
+  height: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-2);
+  margin-bottom: var(--spacing-3);
+  background: var(--color-bg-card);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+}
+
+.demo-label {
+  display: block;
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+  margin-top: var(--spacing-2);
+}
+
+/* ============================================
+   Motion One 演示
+   ============================================ */
+.motion-box {
+  width: 80px;
+  height: 80px;
+  background: linear-gradient(135deg, var(--color-cyan), var(--color-purple));
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-semibold);
+}
+
+.motion-box-sm {
+  width: 40px;
+  height: 40px;
+  background: var(--color-cyan);
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-bg-primary);
+  font-weight: var(--font-weight-bold);
+  transform: translateY(20px);
+}
+
+/* ============================================
+   Lottie 演示
+   ============================================ */
+.lottie-preview {
+  flex-direction: column;
+}
+
+.lottie-container {
+  width: 80px;
+  height: 80px;
+}
+
+.lottie-controls {
+  display: flex;
+  gap: var(--spacing-2);
+  justify-content: center;
+  margin-bottom: var(--spacing-2);
+}
+
+.lottie-controls .btn {
+  padding: var(--spacing-1) var(--spacing-2);
+  font-size: var(--font-size-sm);
+  background: var(--color-bg-tertiary);
+  border: 1px solid var(--color-border-default);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.lottie-controls .btn:hover {
+  border-color: var(--color-cyan);
+}
+
+.lottie-placeholder {
+  width: 80px;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-bg-tertiary);
+  border-radius: 50%;
+  font-size: var(--font-size-xs);
+  color: var(--color-text-tertiary);
+}
+
+.speed-control {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-3);
+  padding: var(--spacing-4);
+  background: var(--color-bg-tertiary);
+  border-radius: var(--radius-md);
+}
+
+.speed-control label {
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-sm);
+}
+
+.speed-control input[type="range"] {
+  flex: 1;
+  max-width: 200px;
+}
+
+.speed-control span {
+  color: var(--color-cyan);
+  font-weight: var(--font-weight-semibold);
+  min-width: 40px;
+}
+
+/* ============================================
+   Mo.js 演示
+   ============================================ */
+.mojs-demo-area {
+  position: relative;
+  height: 200px;
+  background: linear-gradient(180deg, var(--color-bg-tertiary), var(--color-bg-card));
+  border: 1px solid var(--color-border-default);
+  border-radius: var(--radius-lg);
+  margin-bottom: var(--spacing-4);
+  overflow: hidden;
+  cursor: crosshair;
+}
+
+.mojs-hint {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: var(--color-text-tertiary);
+  font-size: var(--font-size-sm);
+  pointer-events: none;
+}
+
+.mojs-buttons {
+  display: flex;
+  gap: var(--spacing-3);
+  flex-wrap: wrap;
+}
+
+/* CSS 後備粒子動畫 */
+.css-particle {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  animation: particle-burst 0.8s ease-out forwards;
+  pointer-events: none;
+}
+
+@keyframes particle-burst {
+  0% {
+    transform: translate(-50%, -50%) translateX(0) translateY(0) scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(-50%, -50%)
+               translateX(calc(cos(var(--angle)) * 80px))
+               translateY(calc(sin(var(--angle)) * 80px))
+               scale(0);
+    opacity: 0;
+  }
+}
+
+/* CSS 後備漣漪動畫 */
+.css-ripple {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  border: 3px solid var(--color-cyan);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  animation: ripple-expand 0.8s ease-out forwards;
+  pointer-events: none;
+}
+
+@keyframes ripple-expand {
+  0% {
+    width: 10px;
+    height: 10px;
+    opacity: 1;
+  }
+  100% {
+    width: 200px;
+    height: 200px;
+    opacity: 0;
+  }
+}
+
+/* 心形爆發 */
+.heart-burst {
+  position: absolute;
+  font-size: 40px;
+  transform: translate(-50%, -50%);
+  animation: heart-pop 1s ease-out forwards;
+  pointer-events: none;
+}
+
+@keyframes heart-pop {
+  0% {
+    transform: translate(-50%, -50%) scale(0);
+    opacity: 1;
+  }
+  50% {
+    transform: translate(-50%, -50%) scale(1.5);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(1) translateY(-50px);
+    opacity: 0;
+  }
+}
+
+/* ============================================
+   對比表格
+   ============================================ */
+.comparison-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--font-size-sm);
+}
+
+.comparison-table th,
+.comparison-table td {
+  padding: var(--spacing-3) var(--spacing-4);
+  text-align: left;
+  border-bottom: 1px solid var(--color-border-muted);
+}
+
+.comparison-table th {
+  background: var(--color-bg-tertiary);
+  color: var(--color-text-primary);
+  font-weight: var(--font-weight-semibold);
+}
+
+.comparison-table td {
+  color: var(--color-text-secondary);
+}
+
+.comparison-table tr:hover td {
+  background: var(--color-bg-tertiary);
+}
+
+/* ============================================
+   響應式
+   ============================================ */
+@media (max-width: 768px) {
+  .demo-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .mojs-buttons {
+    flex-direction: column;
+  }
+
+  .mojs-buttons button {
+    width: 100%;
+  }
+
+  .speed-control {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .speed-control input[type="range"] {
+    width: 100%;
+    max-width: none;
+  }
+
+  .comparison-table {
+    display: block;
+    overflow-x: auto;
+  }
+}

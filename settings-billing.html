@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="zh-TW" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>帳單設定 - NexusAI</title>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <link rel="stylesheet" href="css/design-tokens.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  <link rel="stylesheet" href="css/theme-light.css">
+  <style>
+    .page-header {
+      background: var(--color-bg-secondary);
+      padding: var(--spacing-8) 0;
+      border-bottom: 1px solid var(--color-border-default);
+      margin-top: 80px;
+      margin-left: 280px;
+    }
+
+    .page-header h1 {
+      margin: 0;
+      font-size: var(--font-size-2xl);
+    }
+
+    .page-layout {
+      padding: var(--spacing-8);
+      margin-left: 280px;
+      width: calc(100% - 280px);
+    }
+
+    .layout-inner {
+      display: grid;
+      grid-template-columns: 200px 1fr;
+      gap: var(--spacing-8);
+      width: 100%;
+      max-width: none;
+    }
+
+    .page-layout .container {
+      width: 100%;
+      max-width: none;
+      padding: 0;
+    }
+
+    .settings-sidebar {
+      display: flex;
+      flex-direction: column;
+      gap: var(--spacing-2);
+    }
+
+    .settings-nav {
+      display: flex;
+      flex-direction: column;
+      gap: var(--spacing-2);
+    }
+
+    .settings-nav-item {
+      padding: var(--spacing-3) var(--spacing-4);
+      border-radius: var(--radius-md);
+      color: var(--color-text-secondary);
+      cursor: pointer;
+      transition: all var(--transition-base);
+      text-decoration: none;
+      border-left: 3px solid transparent;
+      font-weight: var(--font-weight-semibold);
+      font-size: var(--font-size-sm);
+    }
+
+    .settings-nav-item:hover {
+      color: var(--color-cyan);
+      background: rgba(0, 217, 255, 0.1);
+    }
+
+    .settings-nav-item.active {
+      color: var(--color-cyan);
+      background: rgba(0, 217, 255, 0.1);
+      border-left-color: var(--color-cyan);
+    }
+
+    .settings-content {
+      background: var(--color-bg-card);
+      border: 1px solid var(--color-border-default);
+      border-radius: var(--radius-lg);
+      padding: var(--spacing-8);
+    }
+
+    .settings-section {
+      margin-bottom: var(--spacing-8);
+      padding-bottom: var(--spacing-8);
+      border-bottom: 1px solid var(--color-border-muted);
+    }
+
+    .settings-section:last-child {
+      margin-bottom: 0;
+      padding-bottom: 0;
+      border-bottom: none;
+    }
+
+    .settings-title {
+      font-size: var(--font-size-lg);
+      font-weight: var(--font-weight-semibold);
+      color: var(--color-text-primary);
+      margin-bottom: var(--spacing-6);
+    }
+
+    .plan-card {
+      background: linear-gradient(180deg, rgba(0, 217, 255, 0.1) 0%, rgba(168, 85, 247, 0.1) 100%);
+      border: 1px solid var(--color-cyan);
+      border-radius: var(--radius-lg);
+      padding: var(--spacing-6);
+      margin-bottom: var(--spacing-6);
+    }
+
+    .plan-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: var(--spacing-4);
+    }
+
+    .plan-name {
+      font-size: var(--font-size-lg);
+      font-weight: var(--font-weight-semibold);
+      color: var(--color-text-primary);
+    }
+
+    .plan-price {
+      font-size: 1.5rem;
+      font-weight: var(--font-weight-bold);
+      color: var(--color-cyan);
+    }
+
+    .plan-price-period {
+      font-size: var(--font-size-sm);
+      color: var(--color-text-secondary);
+    }
+
+    .plan-info {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--spacing-4);
+      margin-bottom: var(--spacing-4);
+    }
+
+    .plan-item {
+      display: flex;
+      align-items: center;
+      gap: var(--spacing-2);
+      font-size: var(--font-size-sm);
+      color: var(--color-text-secondary);
+    }
+
+    .plan-item-check {
+      color: var(--color-green);
+    }
+
+    .plan-actions {
+      display: flex;
+      gap: var(--spacing-3);
+    }
+
+    .btn-primary {
+      padding: var(--spacing-3) var(--spacing-6);
+      background: var(--color-cyan);
+      color: var(--color-bg-primary);
+      border: none;
+      border-radius: var(--radius-md);
+      font-weight: var(--font-weight-semibold);
+      cursor: pointer;
+      transition: all var(--transition-base);
+      flex: 1;
+    }
+
+    .btn-primary:hover {
+      box-shadow: 0 0 20px rgba(0, 217, 255, 0.4);
+    }
+
+    .btn-secondary {
+      padding: var(--spacing-3) var(--spacing-6);
+      background: transparent;
+      color: var(--color-red);
+      border: 1px solid var(--color-red);
+      border-radius: var(--radius-md);
+      font-weight: var(--font-weight-semibold);
+      cursor: pointer;
+      transition: all var(--transition-base);
+      flex: 1;
+    }
+
+    .btn-secondary:hover {
+      background: rgba(239, 68, 68, 0.1);
+    }
+
+    .payment-card {
+      background: var(--color-bg-tertiary);
+      border: 1px solid var(--color-border-muted);
+      border-radius: var(--radius-lg);
+      padding: var(--spacing-6);
+      margin-bottom: var(--spacing-4);
+    }
+
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: var(--spacing-4);
+    }
+
+    .card-number {
+      font-size: var(--font-size-base);
+      font-weight: var(--font-weight-semibold);
+      color: var(--color-text-primary);
+      letter-spacing: 0.2em;
+    }
+
+    .card-info {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--spacing-4);
+      font-size: var(--font-size-sm);
+      color: var(--color-text-secondary);
+      margin-bottom: var(--spacing-4);
+    }
+
+    .btn-outline {
+      padding: var(--spacing-2) var(--spacing-4);
+      background: transparent;
+      color: var(--color-cyan);
+      border: 1px solid var(--color-cyan);
+      border-radius: var(--radius-md);
+      font-weight: var(--font-weight-semibold);
+      cursor: pointer;
+      transition: all var(--transition-base);
+      font-size: var(--font-size-sm);
+    }
+
+    .btn-outline:hover {
+      background: rgba(0, 217, 255, 0.1);
+    }
+
+    .invoice-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .invoice-table th {
+      background: var(--color-bg-tertiary);
+      padding: var(--spacing-4) var(--spacing-6);
+      text-align: left;
+      font-weight: var(--font-weight-semibold);
+      color: var(--color-text-primary);
+      border-bottom: 1px solid var(--color-border-default);
+      font-size: var(--font-size-sm);
+    }
+
+    .invoice-table td {
+      padding: var(--spacing-4) var(--spacing-6);
+      border-bottom: 1px solid var(--color-border-muted);
+      color: var(--color-text-secondary);
+      font-size: var(--font-size-sm);
+    }
+
+    .invoice-table tbody tr:hover {
+      background: var(--color-bg-tertiary);
+    }
+
+    .status-paid {
+      color: var(--color-green);
+      font-weight: var(--font-weight-semibold);
+    }
+
+    @media (max-width: 768px) {
+      .layout-inner {
+        grid-template-columns: 1fr;
+      }
+
+      .settings-sidebar {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: var(--spacing-2);
+      }
+
+      .plan-info {
+        grid-template-columns: 1fr;
+      }
+
+      .plan-actions {
+        flex-direction: column;
+      }
+
+      .card-info {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Top Navigation -->
+  <nav class="top-nav">
+    <div class="top-nav-container">
+      <a href="index.html" class="logo">
+        <span style="font-size: 24px;">🚀</span>
+        <span>NexusAI</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="dashboard.html"><i data-lucide="layout-dashboard" class="nav-icon"></i>儀表板</a></li>
+        <li><a href="settings-billing.html" class="active"><i data-lucide="settings" class="nav-icon"></i>設定</a></li>
+        <li><a href="pricing.html"><i data-lucide="credit-card" class="nav-icon"></i>定價</a></li>
+        <li><a href="about.html"><i data-lucide="users" class="nav-icon"></i>關於</a></li>
+      </ul>
+      <div class="nav-actions">
+        <button id="theme-toggle-btn" class="btn btn-outline-cyan btn-sm" title="切換主題" aria-label="切換至淺色主題">
+          <i data-lucide="sun"></i>
+        </button>
+      </div>
+      <button class="hamburger-menu">
+        <i data-lucide="menu"></i>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Page Header -->
+  <section class="page-header">
+    <div class="container">
+      <h1>設定</h1>
+    </div>
+  </section>
+
+  <!-- Sidebar Navigation -->
+  <!-- Sidebar Navigation (由 sidebar.js 動態載入) -->
+  <aside id="sidebar-container" class="sidebar dashboard-sidebar"></aside>
+
+  <!-- Main Content -->
+  <section class="page-layout">
+    <div class="container">
+      <div class="layout-inner">
+        <!-- Settings Sidebar -->
+        <div class="settings-sidebar">
+        <nav class="settings-nav">
+          <a href="settings-general.html" class="settings-nav-item">一般</a>
+          <a href="settings-security.html" class="settings-nav-item">安全</a>
+          <a href="settings-billing.html" class="settings-nav-item active">帳單</a>
+        </nav>
+      </div>
+
+      <!-- Settings Content -->
+      <div class="settings-content">
+        <!-- Current Plan Section -->
+        <div class="settings-section">
+          <div class="settings-title">目前方案</div>
+
+          <div class="plan-card">
+            <div class="plan-header">
+              <div>
+                <div class="plan-name">專業版</div>
+                <div style="font-size: var(--font-size-sm); color: var(--color-text-secondary); margin-top: var(--spacing-1);">最適合成長中的團隊</div>
+              </div>
+              <div style="text-align: right;">
+                <div class="plan-price">NT$999<span class="plan-price-period">/月</span></div>
+              </div>
+            </div>
+
+            <div class="plan-info">
+              <div class="plan-item">
+                <span class="plan-item-check">✓</span>
+                <span>100 個專案</span>
+              </div>
+              <div class="plan-item">
+                <span class="plan-item-check">✓</span>
+                <span>無限團隊成員</span>
+              </div>
+              <div class="plan-item">
+                <span class="plan-item-check">✓</span>
+                <span>進階分析</span>
+              </div>
+              <div class="plan-item">
+                <span class="plan-item-check">✓</span>
+                <span>API 存取</span>
+              </div>
+            </div>
+
+            <div style="background: var(--color-bg-tertiary); padding: var(--spacing-3) var(--spacing-4); border-radius: var(--radius-md); margin-bottom: var(--spacing-4);">
+              <div style="font-size: var(--font-size-sm); color: var(--color-text-secondary);">下次收費: <span style="color: var(--color-text-primary); font-weight: var(--font-weight-semibold);">2025年1月3日</span></div>
+            </div>
+
+            <div class="plan-actions">
+              <button class="btn-primary">變更方案</button>
+              <button class="btn-secondary">取消訂閱</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Payment Method Section -->
+        <div class="settings-section">
+          <div class="settings-title">付款方式</div>
+
+          <div class="payment-card">
+            <div class="card-header">
+              <div style="display: flex; align-items: center; gap: var(--spacing-3);">
+                <i data-lucide="credit-card" style="width: 24px; height: 24px; color: var(--color-cyan);"></i>
+                <div>
+                  <div style="font-weight: var(--font-weight-semibold); color: var(--color-text-primary);">Visa</div>
+                  <div class="card-number">•••• •••• •••• 4242</div>
+                </div>
+              </div>
+              <span style="background: rgba(34, 197, 94, 0.1); color: var(--color-green); padding: var(--spacing-1) var(--spacing-3); border-radius: var(--radius-full); font-size: var(--font-size-xs); font-weight: var(--font-weight-semibold);">預設</span>
+            </div>
+
+            <div class="card-info">
+              <div>
+                <div style="color: var(--color-text-secondary); font-size: var(--font-size-xs); margin-bottom: var(--spacing-1);">持卡人</div>
+                <div style="color: var(--color-text-primary); font-weight: var(--font-weight-semibold);">李明軒</div>
+              </div>
+              <div>
+                <div style="color: var(--color-text-secondary); font-size: var(--font-size-xs); margin-bottom: var(--spacing-1);">到期日</div>
+                <div style="color: var(--color-text-primary); font-weight: var(--font-weight-semibold);">12/28</div>
+              </div>
+            </div>
+
+            <button class="btn-outline">更換卡片</button>
+          </div>
+
+          <button class="btn-outline" style="margin-top: var(--spacing-4);">新增付款方式</button>
+        </div>
+
+        <!-- Billing History Section -->
+        <div class="settings-section">
+          <div class="settings-title">帳單歷史</div>
+
+          <div style="overflow-x: auto;">
+            <table class="invoice-table">
+              <thead>
+                <tr>
+                  <th>日期</th>
+                  <th>金額</th>
+                  <th>狀態</th>
+                  <th style="text-align: right;">操作</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>2025-12-03</td>
+                  <td>NT$999</td>
+                  <td><span class="status-paid">已支付</span></td>
+                  <td style="text-align: right;"><button class="btn-outline">下載</button></td>
+                </tr>
+                <tr>
+                  <td>2025-11-03</td>
+                  <td>NT$999</td>
+                  <td><span class="status-paid">已支付</span></td>
+                  <td style="text-align: right;"><button class="btn-outline">下載</button></td>
+                </tr>
+                <tr>
+                  <td>2025-10-03</td>
+                  <td>NT$999</td>
+                  <td><span class="status-paid">已支付</span></td>
+                  <td style="text-align: right;"><button class="btn-outline">下載</button></td>
+                </tr>
+                <tr>
+                  <td>2025-09-03</td>
+                  <td>NT$999</td>
+                  <td><span class="status-paid">已支付</span></td>
+                  <td style="text-align: right;"><button class="btn-outline">下載</button></td>
+                </tr>
+                <tr>
+                  <td>2025-08-03</td>
+                  <td>NT$999</td>
+                  <td><span class="status-paid">已支付</span></td>
+                  <td style="text-align: right;"><button class="btn-outline">下載</button></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div>
+        <h4>NexusAI</h4>
+        <p>現代化的深色科技主題設計系統</p>
+      </div>
+      <div>
+        <h4>導航</h4>
+        <ul>
+          <li><a href="index.html">首頁</a></li>
+          <li><a href="dashboard.html">儀表板</a></li>
+          <li><a href="settings-billing.html">設定</a></li>
+          <li><a href="pricing.html">定價</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>資源</h4>
+        <ul>
+          <li><a href="#">GitHub</a></li>
+          <li><a href="#">部落格</a></li>
+          <li><a href="#">社群</a></li>
+          <li><a href="#">文檔</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2025 NexusAI. 保留所有權利。</p>
+    </div>
+  </footer>
+
+  <script src="js/theme-toggle.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/sidebar.js"></script>
+  <script>
+    lucide.createIcons();
+  </script>
+</body>
+</html>

@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="zh-TW" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>行事曆 - NexusAI</title>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <link rel="stylesheet" href="css/design-tokens.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  <link rel="stylesheet" href="css/theme-light.css">
+  <style>
+    .page-header {
+      background: var(--color-bg-secondary);
+      padding: var(--spacing-8) 0;
+      border-bottom: 1px solid var(--color-border-default);
+      margin-top: 80px;
+      margin-left: 280px;
+    }
+
+    .page-header h1 {
+      margin: 0;
+      font-size: var(--font-size-2xl);
+    }
+
+    .page-layout {
+      padding: var(--spacing-8);
+      margin-left: 280px;
+    }
+
+    .calendar-container {
+      display: grid;
+      grid-template-columns: 1fr 320px;
+      gap: var(--spacing-8);
+    }
+
+    .calendar-card {
+      background: var(--color-bg-card);
+      border: 1px solid var(--color-border-default);
+      border-radius: var(--radius-lg);
+      padding: var(--spacing-8);
+    }
+
+    .calendar-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: var(--spacing-6);
+      padding-bottom: var(--spacing-4);
+      border-bottom: 1px solid var(--color-border-muted);
+    }
+
+    .month-title {
+      font-size: var(--font-size-2xl);
+      font-weight: var(--font-weight-bold);
+      color: var(--color-text-primary);
+    }
+
+    .calendar-controls {
+      display: flex;
+      gap: var(--spacing-3);
+    }
+
+    .nav-button {
+      padding: var(--spacing-2) var(--spacing-3);
+      background: var(--color-bg-tertiary);
+      border: 1px solid var(--color-border-default);
+      border-radius: var(--radius-md);
+      color: var(--color-text-secondary);
+      cursor: pointer;
+      transition: all var(--transition-base);
+      font-weight: var(--font-weight-semibold);
+      font-size: var(--font-size-sm);
+    }
+
+    .nav-button:hover {
+      border-color: var(--color-cyan);
+      color: var(--color-cyan);
+    }
+
+    .nav-button.active {
+      background: var(--color-cyan);
+      color: var(--color-bg-primary);
+      border-color: var(--color-cyan);
+    }
+
+    .view-toggle {
+      display: flex;
+      gap: var(--spacing-2);
+    }
+
+    .calendar-grid {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: var(--spacing-2);
+    }
+
+    .weekday-header {
+      text-align: center;
+      padding: var(--spacing-2);
+      font-weight: var(--font-weight-semibold);
+      color: var(--color-text-secondary);
+      font-size: var(--font-size-sm);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .calendar-day {
+      aspect-ratio: 1;
+      padding: var(--spacing-3);
+      background: var(--color-bg-tertiary);
+      border: 1px solid var(--color-border-muted);
+      border-radius: var(--radius-md);
+      display: flex;
+      flex-direction: column;
+      cursor: pointer;
+      transition: all var(--transition-base);
+      min-height: 80px;
+      position: relative;
+    }
+
+    .calendar-day:hover {
+      background: rgba(0, 217, 255, 0.05);
+      border-color: var(--color-cyan);
+    }
+
+    .calendar-day.today {
+      background: rgba(0, 217, 255, 0.1);
+      border-color: var(--color-cyan);
+    }
+
+    .calendar-day.today .day-number {
+      background: var(--color-cyan);
+      color: var(--color-bg-primary);
+      border-radius: 50%;
+      width: 28px;
+      height: 28px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: var(--font-weight-bold);
+    }
+
+    .calendar-day.other-month {
+      background: transparent;
+      border-color: transparent;
+      opacity: 0.4;
+    }
+
+    .day-number {
+      font-size: var(--font-size-sm);
+      font-weight: var(--font-weight-semibold);
+      color: var(--color-text-primary);
+      margin-bottom: var(--spacing-1);
+    }
+
+    .day-events {
+      flex: 1;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      gap: var(--spacing-1);
+    }
+
+    .day-event {
+      font-size: var(--font-size-xs);
+      padding: var(--spacing-1) var(--spacing-2);
+      border-radius: var(--radius-sm);
+      background: rgba(0, 217, 255, 0.15);
+      color: var(--color-cyan);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      font-weight: var(--font-weight-semibold);
+    }
+
+    .day-event.event-type-1 {
+      background: rgba(34, 197, 94, 0.15);
+      color: var(--color-green);
+    }
+
+    .day-event.event-type-2 {
+      background: rgba(249, 115, 22, 0.15);
+      color: var(--color-orange);
+    }
+
+    .day-event.event-type-3 {
+      background: rgba(168, 85, 247, 0.15);
+      color: var(--color-purple);
+    }
+
+    .sidebar-card {
+      background: var(--color-bg-card);
+      border: 1px solid var(--color-border-default);
+      border-radius: var(--radius-lg);
+      padding: var(--spacing-6);
+    }
+
+    .sidebar-title {
+      font-size: var(--font-size-lg);
+      font-weight: var(--font-weight-semibold);
+      color: var(--color-text-primary);
+      margin-bottom: var(--spacing-4);
+      padding-bottom: var(--spacing-3);
+      border-bottom: 1px solid var(--color-border-muted);
+    }
+
+    .event-item {
+      padding: var(--spacing-4);
+      background: var(--color-bg-tertiary);
+      border-radius: var(--radius-md);
+      margin-bottom: var(--spacing-3);
+      border-left: 3px solid var(--color-cyan);
+    }
+
+    .event-item.event-type-1 {
+      border-left-color: var(--color-green);
+    }
+
+    .event-item.event-type-2 {
+      border-left-color: var(--color-orange);
+    }
+
+    .event-item.event-type-3 {
+      border-left-color: var(--color-purple);
+    }
+
+    .event-date {
+      font-size: var(--font-size-xs);
+      color: var(--color-text-secondary);
+      margin-bottom: var(--spacing-1);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .event-title {
+      font-weight: var(--font-weight-semibold);
+      color: var(--color-text-primary);
+      font-size: var(--font-size-sm);
+      margin-bottom: var(--spacing-1);
+    }
+
+    .event-time {
+      font-size: var(--font-size-xs);
+      color: var(--color-text-secondary);
+    }
+
+    @media (max-width: 1024px) {
+      .calendar-container {
+        grid-template-columns: 1fr;
+      }
+
+      .calendar-day {
+        min-height: 60px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .calendar-header {
+        flex-direction: column;
+        gap: var(--spacing-4);
+      }
+
+      .calendar-controls {
+        width: 100%;
+        justify-content: space-between;
+      }
+
+      .calendar-day {
+        min-height: 50px;
+        padding: var(--spacing-2);
+      }
+
+      .day-number {
+        font-size: var(--font-size-xs);
+      }
+
+      .day-event {
+        font-size: var(--font-size-2xs);
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Top Navigation -->
+  <nav class="top-nav">
+    <div class="top-nav-container">
+      <a href="index.html" class="logo">
+        <span style="font-size: 24px;">🚀</span>
+        <span>NexusAI</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="dashboard.html"><i data-lucide="layout-dashboard" class="nav-icon"></i>儀表板</a></li>
+        <li><a href="calendar.html" class="active"><i data-lucide="calendar" class="nav-icon"></i>行事曆</a></li>
+        <li><a href="pricing.html"><i data-lucide="credit-card" class="nav-icon"></i>定價</a></li>
+        <li><a href="about.html"><i data-lucide="users" class="nav-icon"></i>關於</a></li>
+      </ul>
+      <div class="nav-actions">
+        <button id="theme-toggle-btn" class="btn btn-outline-cyan btn-sm" title="切換主題" aria-label="切換至淺色主題">
+          <i data-lucide="sun"></i>
+        </button>
+      </div>
+      <button class="hamburger-menu">
+        <i data-lucide="menu"></i>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Sidebar Navigation -->
+  <!-- Sidebar Navigation (由 sidebar.js 動態載入) -->
+  <aside id="sidebar-container" class="sidebar dashboard-sidebar"></aside>
+
+  <!-- Page Header -->
+  <section class="page-header">
+    <div class="container">
+      <h1>行事曆</h1>
+    </div>
+  </section>
+
+  <!-- Main Content -->
+  <section class="page-layout">
+    <div class="container">
+      <div class="calendar-container">
+        <!-- Calendar -->
+        <div class="calendar-card">
+          <div class="calendar-header">
+            <div>
+              <div class="month-title">2025年12月</div>
+            </div>
+            <div class="calendar-controls">
+              <button class="nav-button">← 上月</button>
+              <button class="nav-button active">今天</button>
+              <button class="nav-button">下月 →</button>
+              <div class="view-toggle">
+                <button class="nav-button">月</button>
+                <button class="nav-button">週</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Calendar Grid -->
+          <div class="calendar-grid">
+            <!-- Weekday Headers -->
+            <div class="weekday-header">日</div>
+            <div class="weekday-header">一</div>
+            <div class="weekday-header">二</div>
+            <div class="weekday-header">三</div>
+            <div class="weekday-header">四</div>
+            <div class="weekday-header">五</div>
+            <div class="weekday-header">六</div>
+
+            <!-- Calendar Days -->
+            <div class="calendar-day other-month"><div class="day-number">30</div></div>
+            <div class="calendar-day other-month"><div class="day-number">31</div></div>
+            <div class="calendar-day"><div class="day-number">1</div></div>
+            <div class="calendar-day"><div class="day-number">2</div></div>
+            <div class="calendar-day">
+              <div class="day-number">3</div>
+              <div class="day-events"><div class="day-event event-type-1">專案啟動會</div></div>
+            </div>
+            <div class="calendar-day"><div class="day-number">4</div></div>
+            <div class="calendar-day"><div class="day-number">5</div></div>
+
+            <div class="calendar-day"><div class="day-number">6</div></div>
+            <div class="calendar-day"><div class="day-number">7</div></div>
+            <div class="calendar-day">
+              <div class="day-number">8</div>
+              <div class="day-events">
+                <div class="day-event">設計評審</div>
+                <div class="day-event event-type-2">團隊會議</div>
+              </div>
+            </div>
+            <div class="calendar-day"><div class="day-number">9</div></div>
+            <div class="calendar-day"><div class="day-number">10</div></div>
+            <div class="calendar-day"><div class="day-number">11</div></div>
+            <div class="calendar-day"><div class="day-number">12</div></div>
+
+            <div class="calendar-day"><div class="day-number">13</div></div>
+            <div class="calendar-day"><div class="day-number">14</div></div>
+            <div class="calendar-day">
+              <div class="day-number">15</div>
+              <div class="day-events"><div class="day-event event-type-3">程式碼審查</div></div>
+            </div>
+            <div class="calendar-day"><div class="day-number">16</div></div>
+            <div class="calendar-day"><div class="day-number">17</div></div>
+            <div class="calendar-day"><div class="day-number">18</div></div>
+            <div class="calendar-day"><div class="day-number">19</div></div>
+
+            <div class="calendar-day"><div class="day-number">20</div></div>
+            <div class="calendar-day"><div class="day-number">21</div></div>
+            <div class="calendar-day">
+              <div class="day-number">22</div>
+              <div class="day-events">
+                <div class="day-event event-type-1">使用者測試</div>
+                <div class="day-event">完成截止</div>
+              </div>
+            </div>
+            <div class="calendar-day"><div class="day-number">23</div></div>
+            <div class="calendar-day"><div class="day-number">24</div></div>
+            <div class="calendar-day"><div class="day-number">25</div></div>
+            <div class="calendar-day"><div class="day-number">26</div></div>
+
+            <div class="calendar-day"><div class="day-number">27</div></div>
+            <div class="calendar-day today">
+              <div class="day-number">28</div>
+              <div class="day-events"><div class="day-event">進度評估</div></div>
+            </div>
+            <div class="calendar-day">
+              <div class="day-number">29</div>
+              <div class="day-events"><div class="day-event event-type-3">發佈準備</div></div>
+            </div>
+            <div class="calendar-day"><div class="day-number">30</div></div>
+            <div class="calendar-day"><div class="day-number">31</div></div>
+            <div class="calendar-day other-month"><div class="day-number">1</div></div>
+            <div class="calendar-day other-month"><div class="day-number">2</div></div>
+          </div>
+        </div>
+
+        <!-- Sidebar: Upcoming Events -->
+        <div>
+          <div class="sidebar-card">
+            <div class="sidebar-title">即將到來的事件</div>
+
+            <div class="event-item event-type-1">
+              <div class="event-date">2025-12-03</div>
+              <div class="event-title">專案啟動會</div>
+              <div class="event-time">09:00 - 10:00</div>
+            </div>
+
+            <div class="event-item">
+              <div class="event-date">2025-12-08</div>
+              <div class="event-title">設計評審</div>
+              <div class="event-time">14:00 - 15:30</div>
+            </div>
+
+            <div class="event-item event-type-2">
+              <div class="event-date">2025-12-08</div>
+              <div class="event-title">團隊會議</div>
+              <div class="event-time">16:00 - 17:00</div>
+            </div>
+
+            <div class="event-item event-type-3">
+              <div class="event-date">2025-12-15</div>
+              <div class="event-title">程式碼審查</div>
+              <div class="event-time">10:00 - 11:30</div>
+            </div>
+
+            <div class="event-item event-type-1">
+              <div class="event-date">2025-12-22</div>
+              <div class="event-title">使用者測試</div>
+              <div class="event-time">13:00 - 15:00</div>
+            </div>
+
+            <div class="event-item">
+              <div class="event-date">2025-12-22</div>
+              <div class="event-title">完成截止</div>
+              <div class="event-time">18:00</div>
+            </div>
+
+            <div class="event-item">
+              <div class="event-date">2025-12-28</div>
+              <div class="event-title">進度評估</div>
+              <div class="event-time">11:00 - 12:00</div>
+            </div>
+
+            <div class="event-item event-type-3">
+              <div class="event-date">2025-12-29</div>
+              <div class="event-title">發佈準備</div>
+              <div class="event-time">09:00 - 12:00</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div>
+        <h4>NexusAI</h4>
+        <p>現代化的深色科技主題設計系統</p>
+      </div>
+      <div>
+        <h4>導航</h4>
+        <ul>
+          <li><a href="index.html">首頁</a></li>
+          <li><a href="dashboard.html">儀表板</a></li>
+          <li><a href="calendar.html">行事曆</a></li>
+          <li><a href="pricing.html">定價</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>資源</h4>
+        <ul>
+          <li><a href="#">GitHub</a></li>
+          <li><a href="#">部落格</a></li>
+          <li><a href="#">社群</a></li>
+          <li><a href="#">文檔</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2025 NexusAI. 保留所有權利。</p>
+    </div>
+  </footer>
+
+  <script src="js/theme-toggle.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/sidebar.js"></script>
+  <script>
+    lucide.createIcons();
+  </script>
+</body>
+</html>

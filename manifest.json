@@ -1,0 +1,21 @@
+{
+  "name": "NexusAI Demo Site",
+  "short_name": "NexusAI",
+  "description": "NexusAI 前端技術展示平台",
+  "start_url": "/dashboard.html",
+  "display": "standalone",
+  "background_color": "#0F172A",
+  "theme_color": "#00D9FF",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🚀</text></svg>",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ],
+  "categories": ["productivity", "utilities"],
+  "lang": "zh-TW",
+  "dir": "ltr"
+}

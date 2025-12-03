@@ -1,0 +1,139 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "name": "Alex Johnson",
+      "email": "alex@nexusai.com",
+      "role": "Product Manager",
+      "avatar": "👨‍💼",
+      "status": "active"
+    },
+    {
+      "id": 2,
+      "name": "Sarah Chen",
+      "email": "sarah@nexusai.com",
+      "role": "Senior Developer",
+      "avatar": "👩‍💻",
+      "status": "active"
+    },
+    {
+      "id": 3,
+      "name": "Mike Wilson",
+      "email": "mike@nexusai.com",
+      "role": "Designer",
+      "avatar": "🎨",
+      "status": "away"
+    },
+    {
+      "id": 4,
+      "name": "Emma Davis",
+      "email": "emma@nexusai.com",
+      "role": "Marketing Manager",
+      "avatar": "📊",
+      "status": "active"
+    },
+    {
+      "id": 5,
+      "name": "James Brown",
+      "email": "james@nexusai.com",
+      "role": "QA Engineer",
+      "avatar": "🧪",
+      "status": "active"
+    }
+  ],
+  "transactions": [
+    {
+      "id": "TXN001",
+      "date": "2025-12-03",
+      "type": "revenue",
+      "amount": 5000,
+      "category": "Subscription",
+      "description": "Monthly subscription payment",
+      "status": "completed"
+    },
+    {
+      "id": "TXN002",
+      "date": "2025-12-02",
+      "type": "expense",
+      "amount": 1200,
+      "category": "Infrastructure",
+      "description": "Cloud hosting fee",
+      "status": "completed"
+    },
+    {
+      "id": "TXN003",
+      "date": "2025-12-01",
+      "type": "revenue",
+      "amount": 3500,
+      "category": "Service",
+      "description": "Consulting services",
+      "status": "completed"
+    },
+    {
+      "id": "TXN004",
+      "date": "2025-11-30",
+      "type": "expense",
+      "amount": 850,
+      "category": "Marketing",
+      "description": "Ad campaign",
+      "status": "completed"
+    },
+    {
+      "id": "TXN005",
+      "date": "2025-11-29",
+      "type": "revenue",
+      "amount": 7200,
+      "category": "Product Sales",
+      "description": "License sales",
+      "status": "pending"
+    }
+  ],
+  "notifications": [
+    {
+      "id": 1,
+      "title": "New Task Assigned",
+      "message": "You have been assigned to review the API documentation",
+      "type": "task",
+      "timestamp": "2025-12-03T10:30:00Z",
+      "read": false
+    },
+    {
+      "id": 2,
+      "title": "System Update",
+      "message": "System maintenance completed successfully",
+      "type": "system",
+      "timestamp": "2025-12-03T09:15:00Z",
+      "read": false
+    },
+    {
+      "id": 3,
+      "title": "Meeting Reminder",
+      "message": "Team standup meeting in 15 minutes",
+      "type": "reminder",
+      "timestamp": "2025-12-03T08:45:00Z",
+      "read": true
+    },
+    {
+      "id": 4,
+      "title": "Project Milestone",
+      "message": "Phase 1 of the project has been completed",
+      "type": "achievement",
+      "timestamp": "2025-12-02T15:20:00Z",
+      "read": true
+    },
+    {
+      "id": 5,
+      "title": "Security Alert",
+      "message": "Unusual login activity detected. Please verify",
+      "type": "alert",
+      "timestamp": "2025-12-02T12:00:00Z",
+      "read": true
+    }
+  ],
+  "settings": {
+    "theme": "dark",
+    "language": "zh-TW",
+    "notifications_enabled": true,
+    "auto_save": true
+  }
+}
