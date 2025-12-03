@@ -53,19 +53,27 @@ h3 {
   display: none;
 }
 
-/* 主題切換按鈕在手機版強制顯示（不受 nav-actions 影響） */
+/* 導航容器需要 position relative */
+.top-nav-container {
+  position: relative;
+}
+
+/* 主題切換按鈕在手機版強制顯示 */
 #theme-toggle-btn,
 .mobile-theme-toggle {
   display: flex !important;
   position: absolute;
-  right: 60px;
+  right: 56px;
   top: 50%;
   transform: translateY(-50%);
 }
 
-/* 導航容器需要 position relative */
-.top-nav-container {
-  position: relative;
+/* 漢堡選單按鈕固定在右側 */
+.hamburger-menu {
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
 }
 
 /* Sidebar - Mobile: 預設隱藏在左側 */
