@@ -3,17 +3,233 @@
    ============================================ */
 
 /* ============================================
-   Mobile: < 768px
+   Base (Mobile): < 480px
+   Mobile-First 預設樣式
    ============================================ */
 
-@media (max-width: 767px) {
+/* Typography - Mobile defaults */
+h1 {
+  font-size: var(--font-size-2xl);
+}
+
+h2 {
+  font-size: var(--font-size-xl);
+}
+
+h3 {
+  font-size: var(--font-size-lg);
+}
+
+/* Container - Mobile defaults */
+.container,
+.container-small,
+.container-large {
+  padding: 0 var(--spacing-4);
+}
+
+/* Grid - Mobile: 全部單欄 */
+.grid-2,
+.grid-3,
+.grid-4 {
+  grid-template-columns: 1fr;
+  gap: var(--spacing-4);
+}
+
+/* Navigation - Mobile defaults */
+.top-nav {
+  height: 64px;
+}
+
+.nav-links {
+  display: none !important;
+}
+
+.hamburger-menu {
+  display: block !important;
+}
+
+.nav-actions {
+  display: none;
+}
+
+/* Sidebar - Mobile: 預設隱藏在左側 */
+.sidebar {
+  position: fixed;
+  left: -240px;
+  top: 64px;
+  width: 240px;
+  height: calc(100vh - 64px);
+  background: var(--color-bg-secondary);
+  border-right: 1px solid var(--color-border-default);
+  z-index: 999;
+  transition: left var(--transition-base);
+}
+
+.sidebar.active {
+  left: 0;
+}
+
+/* Sidebar overlay for mobile */
+.sidebar-overlay {
+  position: fixed;
+  inset: 0;
+  top: 64px;
+  background: rgba(0, 0, 0, 0.5);
+  opacity: 0;
+  visibility: hidden;
+  z-index: 998;
+  transition: opacity 0.3s, visibility 0.3s;
+}
+
+.sidebar-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Prevent body scroll when sidebar open */
+body.sidebar-open {
+  overflow: hidden;
+}
+
+/* Page Layout - Mobile: 單欄 */
+.page-layout {
+  grid-template-columns: 1fr;
+  margin-top: 64px;
+}
+
+.page-layout main {
+  grid-column: 1;
+  padding: var(--spacing-4);
+}
+
+/* Section Spacing - Mobile */
+section {
+  padding: var(--spacing-10) 0;
+}
+
+section.section-spacious {
+  padding: var(--spacing-12) 0;
+}
+
+/* Footer - Mobile: 單欄 */
+footer .container {
+  grid-template-columns: 1fr;
+  gap: var(--spacing-6);
+}
+
+/* Buttons - Mobile: 特定場景全寬 */
+.form-actions .btn,
+.modal-footer .btn {
+  width: 100%;
+}
+
+/* Hero buttons: 手機版垂直排列 */
+.hero-buttons {
+  flex-direction: column;
+  align-items: center;
+}
+
+.hero-buttons .btn {
+  width: auto;
+  min-width: 200px;
+}
+
+.btn-sm {
+  padding: var(--spacing-2) var(--spacing-3);
+  font-size: var(--font-size-xs);
+}
+
+.btn-lg {
+  padding: var(--spacing-3) var(--spacing-6);
+}
+
+/* Forms - Mobile */
+.form-group {
+  margin-bottom: var(--spacing-3);
+}
+
+/* Table - Mobile */
+.table-container {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.data-table {
+  font-size: var(--font-size-xs);
+}
+
+.data-table th,
+.data-table td {
+  padding: var(--spacing-2) var(--spacing-3);
+}
+
+/* Cards - Mobile */
+.card {
+  border-radius: var(--radius-md);
+}
+
+/* Modal - Mobile */
+.modal {
+  width: 95%;
+  max-width: 100%;
+}
+
+/* Utilities - Mobile */
+.flex-between {
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.gap-6 {
+  gap: var(--spacing-4);
+}
+
+.gap-8 {
+  gap: var(--spacing-4);
+}
+
+/* Hide elements on mobile */
+.hide-mobile {
+  display: none;
+}
+
+/* ============================================
+   Large Phone: >= 480px
+   ============================================ */
+
+@media (min-width: 480px) {
+  /* Grid: 2 欄開始 */
+  .grid-2 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  /* Hero buttons: 水平排列 */
+  .hero-buttons {
+    flex-direction: row;
+  }
+
+  .hero-buttons .btn {
+    min-width: auto;
+  }
+
+  /* Footer: 2 欄 */
+  footer .container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* ============================================
+   Tablet: >= 768px
+   ============================================ */
+
+@media (min-width: 768px) {
   /* Typography */
   h1 {
-    font-size: var(--font-size-3xl);
+    font-size: var(--font-size-4xl);
   }
 
   h2 {
-    font-size: var(--font-size-2xl);
+    font-size: var(--font-size-3xl);
   }
 
   h3 {
@@ -24,150 +240,7 @@
   .container,
   .container-small,
   .container-large {
-    padding: 0 var(--spacing-4);
-  }
-
-  /* Grid */
-  .grid-2,
-  .grid-3,
-  .grid-4 {
-    grid-template-columns: 1fr;
-    gap: var(--spacing-4);
-  }
-
-  /* Navigation */
-  .top-nav {
-    height: 64px;
-  }
-
-  .nav-links {
-    display: none !important;
-  }
-
-  .hamburger-menu {
-    display: block !important;
-  }
-
-  .nav-actions {
-    display: none;
-  }
-
-  /* Sidebar */
-  .sidebar {
-    position: fixed;
-    left: -240px;
-    top: 64px;
-    width: 240px;
-    height: calc(100vh - 64px);
-    background: var(--color-bg-secondary);
-    border-right: 1px solid var(--color-border-default);
-    z-index: 999;
-    transition: left var(--transition-base);
-  }
-
-  .sidebar.active {
-    left: 0;
-  }
-
-  /* Page Layout */
-  .page-layout {
-    grid-template-columns: 1fr;
-    margin-top: 64px;
-  }
-
-  .page-layout main {
-    grid-column: 1;
-    padding: var(--spacing-4);
-  }
-
-  /* Section Spacing */
-  section {
-    padding: var(--spacing-12) 0;
-  }
-
-  section.section-spacious {
-    padding: var(--spacing-16) 0;
-  }
-
-  /* Footer */
-  footer .container {
-    grid-template-columns: 1fr;
-    gap: var(--spacing-6);
-  }
-
-  /* Buttons */
-  .btn {
-    width: 100%;
-  }
-
-  .btn-sm {
-    padding: var(--spacing-2) var(--spacing-3);
-    font-size: var(--font-size-xs);
-  }
-
-  .btn-lg {
-    padding: var(--spacing-3) var(--spacing-6);
-  }
-
-  /* Forms */
-  .form-group {
-    margin-bottom: var(--spacing-3);
-  }
-
-  /* Table */
-  .table-container {
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-  }
-
-  .data-table {
-    font-size: var(--font-size-xs);
-  }
-
-  .data-table th,
-  .data-table td {
-    padding: var(--spacing-2) var(--spacing-3);
-  }
-
-  /* Cards */
-  .card {
-    border-radius: var(--radius-md);
-  }
-
-  /* Modal */
-  .modal {
-    width: 95%;
-    max-width: 100%;
-  }
-
-  /* Utilities */
-  .flex-between {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  .gap-6 {
-    gap: var(--spacing-4);
-  }
-
-  .gap-8 {
-    gap: var(--spacing-4);
-  }
-
-  /* Hide elements on mobile */
-  .hide-mobile {
-    display: none;
-  }
-}
-
-/* ============================================
-   Tablet: 768px - 1279px
-   ============================================ */
-
-@media (min-width: 768px) and (max-width: 1279px) {
-  /* Container */
-  .container-large {
-    max-width: 1024px;
+    padding: 0 var(--spacing-6);
   }
 
   /* Grid */
@@ -180,22 +253,43 @@
   }
 
   /* Navigation */
+  .top-nav {
+    height: 80px;
+  }
+
+  .nav-links {
+    display: flex !important;
+  }
+
+  .hamburger-menu {
+    display: none !important;
+  }
+
   .nav-actions {
+    display: flex;
     gap: var(--spacing-2);
   }
 
   .nav-actions .btn {
-    padding: var(--spacing-2) var(--spacing-3);
-    font-size: var(--font-size-sm);
+    padding: var(--spacing-2) var(--spacing-4);
+    font-size: var(--font-size-base);
   }
 
   /* Sidebar */
   .sidebar {
+    top: 80px;
     width: 200px;
+    height: calc(100vh - 80px);
   }
 
+  .sidebar-overlay {
+    top: 80px;
+  }
+
+  /* Page Layout */
   .page-layout {
     grid-template-columns: 200px 1fr;
+    margin-top: 80px;
   }
 
   /* Section */
@@ -205,7 +299,21 @@
 
   /* Footer */
   footer .container {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  /* Utilities */
+  .flex-between {
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .gap-6 {
+    gap: var(--spacing-6);
+  }
+
+  .gap-8 {
+    gap: var(--spacing-6);
   }
 
   /* Hide elements on tablet */
@@ -215,11 +323,61 @@
 }
 
 /* ============================================
-   Desktop: >= 1280px
+   Desktop: >= 1024px
+   ============================================ */
+
+@media (min-width: 1024px) {
+  /* Grid */
+  .grid-3 {
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--spacing-6);
+  }
+
+  .grid-4 {
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--spacing-6);
+  }
+
+  /* Sidebar - Desktop: 永遠可見 */
+  .sidebar {
+    left: 0;
+    width: 240px;
+  }
+
+  .sidebar.dashboard-sidebar {
+    display: block;
+  }
+
+  /* Page Layout */
+  .page-layout {
+    grid-template-columns: 240px 1fr;
+  }
+
+  .page-layout main {
+    padding: var(--spacing-8);
+  }
+
+  /* Section */
+  section {
+    padding: var(--spacing-20) 0;
+  }
+
+  section.section-compact {
+    padding: var(--spacing-16) 0;
+  }
+
+  /* Utilities */
+  .gap-8 {
+    gap: var(--spacing-8);
+  }
+}
+
+/* ============================================
+   Large Desktop: >= 1280px
    ============================================ */
 
 @media (min-width: 1280px) {
-  /* Typography - Desktop optimized */
+  /* Typography */
   h1 {
     font-size: var(--font-size-6xl);
   }
@@ -241,47 +399,9 @@
     max-width: 1536px;
   }
 
-  /* Grid */
-  .grid-4 {
-    grid-template-columns: repeat(4, 1fr);
-  }
-
-  /* Navigation */
-  .hamburger-menu {
-    display: none !important;
-  }
-
-  .nav-links {
-    display: flex !important;
-  }
-
-  .nav-actions {
-    display: flex;
-  }
-
-  /* Sidebar */
-  .sidebar {
-    position: fixed;
-    left: 0;
-    width: 240px;
-  }
-
-  .page-layout {
-    grid-template-columns: 240px 1fr;
-  }
-
   /* Section */
   section {
     padding: var(--spacing-24) 0;
-  }
-
-  section.section-compact {
-    padding: var(--spacing-16) 0;
-  }
-
-  /* Footer */
-  footer .container {
-    grid-template-columns: repeat(3, 1fr);
   }
 
   /* Show elements on desktop only */
@@ -295,16 +415,12 @@
 }
 
 /* ============================================
-   Large Desktop: >= 1536px
+   Extra Large Desktop: >= 1536px
    ============================================ */
 
 @media (min-width: 1536px) {
   .container-large {
     max-width: 1536px;
-  }
-
-  .grid-4 {
-    grid-template-columns: repeat(4, 1fr);
   }
 }
 
@@ -333,7 +449,6 @@
    ============================================ */
 
 @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
-  /* Subtle adjustments for high DPI */
   .card {
     border-width: 1px;
   }
@@ -366,9 +481,13 @@
    ============================================ */
 
 @media (prefers-reduced-motion: reduce) {
-  * {
-    animation: none !important;
-    transition: none !important;
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
 }
 
@@ -381,12 +500,4 @@
     background-color: var(--color-bg-primary);
     color: var(--color-text-primary);
   }
-}
-
-/* ============================================
-   Light Colors (System Preference - if needed)
-   ============================================ */
-
-@media (prefers-color-scheme: light) {
-  /* Can override colors for light mode here */
 }

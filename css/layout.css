@@ -503,11 +503,12 @@ section.section-spacious {
    Page Layout (Top Nav + Sidebar)
    ============================================ */
 
+/* Mobile-First: 預設單欄 */
 .page-layout {
   display: grid;
-  grid-template-columns: 240px 1fr;
+  grid-template-columns: 1fr;
   min-height: 100vh;
-  margin-top: 80px;
+  margin-top: 64px;
 }
 
 .page-layout.with-sidebar aside {
@@ -552,8 +553,8 @@ footer::before {
 
 footer .container {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: var(--spacing-8);
+  grid-template-columns: 1fr;
+  gap: var(--spacing-6);
   margin-bottom: var(--spacing-8);
 }
 

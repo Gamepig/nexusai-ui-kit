@@ -233,28 +233,77 @@ const Modal = {
 };
 
 // ============================================
-// 7. Navigation - Hamburger Menu
+// 7. Navigation - Hamburger Menu with Mobile Improvements
 // ============================================
 
 const Navigation = {
+  overlay: null,
+
   init: () => {
     const hamburgerBtn = DOM.select('.hamburger-menu');
     const sidebar = DOM.select('.sidebar');
 
-    if (hamburgerBtn && sidebar) {
-      Events.on(hamburgerBtn, 'click', () => {
-        DOM.toggleClass(sidebar, 'active');
-      });
+    if (!hamburgerBtn || !sidebar) return;
 
-      // Close sidebar on mobile nav link click
-      sidebar.querySelectorAll('a').forEach((link) => {
-        Events.on(link, 'click', () => {
-          if (window.innerWidth < 768) {
-            DOM.removeClass(sidebar, 'active');
-          }
-        });
-      });
+    // Create overlay element if it doesn't exist
+    Navigation.overlay = DOM.select('.sidebar-overlay');
+    if (!Navigation.overlay) {
+      Navigation.overlay = DOM.create('div', 'sidebar-overlay');
+      document.body.appendChild(Navigation.overlay);
     }
+
+    // Hamburger click handler
+    Events.on(hamburgerBtn, 'click', () => {
+      Navigation.toggleSidebar(sidebar);
+    });
+
+    // Overlay click handler - close sidebar
+    Events.on(Navigation.overlay, 'click', () => {
+      Navigation.closeSidebar(sidebar);
+    });
+
+    // ESC key handler - close sidebar
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && DOM.hasClass(sidebar, 'active')) {
+        Navigation.closeSidebar(sidebar);
+      }
+    });
+
+    // Close sidebar on mobile nav link click
+    sidebar.querySelectorAll('a').forEach((link) => {
+      Events.on(link, 'click', () => {
+        if (window.innerWidth < 1024) {
+          Navigation.closeSidebar(sidebar);
+        }
+      });
+    });
+
+    // Close sidebar on window resize to desktop
+    window.addEventListener('resize', Events.debounce(() => {
+      if (window.innerWidth >= 1024 && DOM.hasClass(sidebar, 'active')) {
+        Navigation.closeSidebar(sidebar);
+      }
+    }, 100));
+  },
+
+  toggleSidebar: (sidebar) => {
+    if (DOM.hasClass(sidebar, 'active')) {
+      Navigation.closeSidebar(sidebar);
+    } else {
+      Navigation.openSidebar(sidebar);
+    }
+  },
+
+  openSidebar: (sidebar) => {
+    DOM.addClass(sidebar, 'active');
+    DOM.addClass(Navigation.overlay, 'active');
+    DOM.addClass(document.body, 'sidebar-open');
+  },
+
+  closeSidebar: (sidebar) => {
+    DOM.removeClass(sidebar, 'active');
+    DOM.removeClass(Navigation.overlay, 'active');
+    DOM.removeClass(document.body, 'sidebar-open');
   },
 };
 

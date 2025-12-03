@@ -61,8 +61,8 @@
     }
 
     .hero h1 {
-      font-size: 4rem;
-      margin-bottom: var(--spacing-6);
+      font-size: clamp(1.75rem, 1rem + 5vw, 4rem);
+      margin-bottom: var(--spacing-4);
       background: linear-gradient(135deg, #00D9FF 0%, #A855F7 100%);
       background-clip: text;
       -webkit-background-clip: text;
@@ -71,9 +71,18 @@
     }
 
     .hero p {
-      font-size: 1.25rem;
+      font-size: clamp(1rem, 0.9rem + 0.5vw, 1.25rem);
       color: var(--color-text-secondary);
-      margin-bottom: var(--spacing-8);
+      margin-bottom: var(--spacing-6);
+    }
+
+    @media (min-width: 768px) {
+      .hero h1 {
+        margin-bottom: var(--spacing-6);
+      }
+      .hero p {
+        margin-bottom: var(--spacing-8);
+      }
     }
 
     .hero-buttons {
