@@ -48,8 +48,14 @@ h3 {
   display: block !important;
 }
 
-.nav-actions {
+/* 手機版：只隱藏 nav-actions 中的文字按鈕，保留主題切換 */
+.nav-actions .btn:not(#theme-toggle-btn) {
   display: none;
+}
+
+.nav-actions {
+  display: flex;
+  gap: var(--spacing-2);
 }
 
 /* Sidebar - Mobile: 預設隱藏在左側 */
