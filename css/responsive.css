@@ -48,16 +48,24 @@ h3 {
   display: block !important;
 }
 
-/* 手機版：nav-actions 保持顯示，主題切換按鈕可見 */
+/* 手機版：隱藏 nav-actions，但主題切換按鈕獨立顯示 */
 .nav-actions {
-  display: flex !important;
-  align-items: center;
-  gap: var(--spacing-2);
+  display: none;
 }
 
-/* 主題切換按鈕在手機版強制顯示 */
-#theme-toggle-btn {
+/* 主題切換按鈕在手機版強制顯示（不受 nav-actions 影響） */
+#theme-toggle-btn,
+.mobile-theme-toggle {
   display: flex !important;
+  position: absolute;
+  right: 60px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+/* 導航容器需要 position relative */
+.top-nav-container {
+  position: relative;
 }
 
 /* Sidebar - Mobile: 預設隱藏在左側 */
@@ -281,6 +289,13 @@ footer .container > div {
   .nav-actions {
     display: flex;
     gap: var(--spacing-2);
+  }
+
+  /* 平板版：主題按鈕恢復正常定位 */
+  #theme-toggle-btn,
+  .mobile-theme-toggle {
+    position: static;
+    transform: none;
   }
 
   .nav-actions .btn {
