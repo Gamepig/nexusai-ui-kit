@@ -367,8 +367,6 @@ class NotificationManager {
     }
 
     const defaultOptions = {
-      icon: '🚀',
-      badge: '📢',
       tag: 'nexusai-notification',
       ...options,
     };
