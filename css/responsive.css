@@ -93,12 +93,12 @@ body.sidebar-open {
 
 /* Page Layout - Mobile: 單欄 */
 .page-layout {
-  grid-template-columns: 1fr;
+  display: block;
   margin-top: 64px;
 }
 
 .page-layout main {
-  grid-column: 1;
+  width: 100%;
   padding: var(--spacing-4);
 }
 
@@ -111,10 +111,14 @@ section.section-spacious {
   padding: var(--spacing-12) 0;
 }
 
-/* Footer - Mobile: 單欄 */
+/* Footer - Mobile: 單欄，全寬 */
 footer .container {
-  grid-template-columns: 1fr;
-  gap: var(--spacing-6);
+  display: block;
+  width: 100%;
+}
+
+footer .container > div {
+  margin-bottom: var(--spacing-6);
 }
 
 /* Buttons - Mobile: 特定場景全寬 */
@@ -214,6 +218,7 @@ footer .container {
 
   /* Footer: 2 欄 */
   footer .container {
+    display: grid;
     grid-template-columns: repeat(2, 1fr);
   }
 }
@@ -288,8 +293,14 @@ footer .container {
 
   /* Page Layout */
   .page-layout {
+    display: grid;
     grid-template-columns: 200px 1fr;
     margin-top: 80px;
+  }
+
+  .page-layout main {
+    width: auto;
+    padding: var(--spacing-6);
   }
 
   /* Section */
@@ -299,7 +310,12 @@ footer .container {
 
   /* Footer */
   footer .container {
+    display: grid;
     grid-template-columns: repeat(3, 1fr);
+  }
+
+  footer .container > div {
+    margin-bottom: 0;
   }
 
   /* Utilities */

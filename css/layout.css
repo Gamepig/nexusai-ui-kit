@@ -505,19 +505,14 @@ section.section-spacious {
 
 /* Mobile-First: 預設單欄 */
 .page-layout {
-  display: grid;
-  grid-template-columns: 1fr;
+  display: block;
   min-height: 100vh;
   margin-top: 64px;
 }
 
-.page-layout.with-sidebar aside {
-  grid-column: 1;
-}
-
 .page-layout main {
-  grid-column: 2;
-  padding: var(--spacing-8);
+  width: 100%;
+  padding: var(--spacing-4);
   overflow-y: auto;
 }
 
