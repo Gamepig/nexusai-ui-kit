@@ -6,69 +6,93 @@
  */
 
 [data-theme="light"] {
-  /* 背景色 */
-  --color-bg-primary: #FFFFFF;
-  --color-bg-secondary: #F8FAFC;
-  --color-bg-tertiary: #F1F5F9;
-  --color-bg-elevated: #FFFFFF;
-  --color-bg-card: #FFFFFF;
-  --color-bg-card-hover: #F8FAFC;
+  /* 中性色調色板 - 淺色模式（Hue 250，加入 2-3% 藍色色調） */
+  --neutral-50: oklch(98% 0.002 250);
+  --neutral-100: oklch(95% 0.002 250);
+  --neutral-200: oklch(90% 0.002 250);
+  --neutral-300: oklch(80% 0.002 250);
+  --neutral-400: oklch(65% 0.002 250);
+  --neutral-500: oklch(50% 0.002 250);
+  --neutral-600: oklch(40% 0.002 250);
+  --neutral-700: oklch(30% 0.002 250);
+  --neutral-800: oklch(20% 0.002 250);
+  --neutral-900: oklch(10% 0.002 250);
 
-  /* 文字色 */
-  --color-text-primary: #0F172A;
-  --color-text-secondary: #475569;
-  --color-text-tertiary: #64748B;
-  --color-text-muted: #94A3B8;
+  /* 四層背景結構 - 淺色模式 */
+  --bg-level-1: oklch(100% 0 0);  /* 最深 - 基礎背景（白色） */
+  --bg-level-2: oklch(98% 0.002 250);  /* 第二層 - 稍淺背景 */
+  --bg-level-3: oklch(100% 0 0);  /* 第三層 - 卡片容器（白色） */
+  --bg-level-4: oklch(98% 0.002 250);  /* 最淺 - 互動元素 */
 
-  /* 邊框色 */
-  --color-border-default: rgba(15, 23, 42, 0.1);
-  --color-border-muted: rgba(15, 23, 42, 0.05);
-  --color-border-emphasis: rgba(15, 23, 42, 0.15);
+  /* 背景色（向後兼容，映射到四層結構） */
+  --color-bg-primary: var(--bg-level-1);
+  --color-bg-secondary: var(--bg-level-2);
+  --color-bg-tertiary: oklch(96% 0.002 250);
+  --color-bg-elevated: var(--bg-level-1);
+  --color-bg-card: var(--bg-level-3);
+  --color-bg-card-hover: var(--bg-level-4);
 
-  /* 強調色（加深版本） */
-  --color-cyan: #0891B2;
-  --color-cyan-light: #06B6D4;
-  --color-cyan-dark: #0E7490;
+  /* 文字色 - OKLCH 格式 */
+  --color-text-primary: oklch(20% 0.002 250);
+  --color-text-secondary: oklch(40% 0.002 250);
+  --color-text-tertiary: oklch(50% 0.002 250);
+  --color-text-muted: oklch(65% 0.002 250);
 
-  --color-green: #16A34A;
-  --color-green-light: #22C55E;
-  --color-green-dark: #15803D;
+  /* 邊框色 - OKLCH 格式 */
+  --color-border-default: oklch(20% 0.002 250 / 0.1);
+  --color-border-muted: oklch(20% 0.002 250 / 0.05);
+  --color-border-emphasis: oklch(20% 0.002 250 / 0.15);
 
-  --color-purple: #7C3AED;
-  --color-purple-light: #A855F7;
-  --color-purple-dark: #6D28D9;
+  /* 強調色（加深版本）- OKLCH 格式 */
+  --color-cyan: oklch(50% 0.25 220);
+  --color-cyan-light: oklch(55% 0.3 220);
+  --color-cyan-dark: oklch(45% 0.25 220);
 
-  --color-orange: #EA580C;
-  --color-orange-light: #F97316;
-  --color-orange-dark: #C2410C;
+  --color-green: oklch(50% 0.2 145);
+  --color-green-light: oklch(60% 0.2 145);
+  --color-green-dark: oklch(40% 0.18 145);
 
-  --color-red: #DC2626;
-  --color-red-light: #EF4444;
-  --color-red-dark: #B91C1C;
+  --color-purple: oklch(45% 0.28 280);
+  --color-purple-light: oklch(55% 0.3 280);
+  --color-purple-dark: oklch(40% 0.25 280);
 
-  --color-yellow: #CA8A04;
-  --color-yellow-light: #EAB308;
-  --color-yellow-dark: #A16207;
+  --color-orange: oklch(55% 0.2 70);
+  --color-orange-light: oklch(65% 0.2 70);
+  --color-orange-dark: oklch(45% 0.2 70);
 
-  /* 陰影（減輕） */
-  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.07);
-  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+  --color-red: oklch(45% 0.25 25);
+  --color-red-light: oklch(55% 0.25 25);
+  --color-red-dark: oklch(35% 0.2 25);
 
-  /* 發光效果（減弱） */
-  --glow-cyan: 0 0 20px rgba(8, 145, 178, 0.15);
-  --glow-cyan-strong: 0 0 30px rgba(8, 145, 178, 0.25);
-  --glow-green: 0 0 20px rgba(22, 163, 74, 0.15);
-  --glow-green-strong: 0 0 30px rgba(22, 163, 74, 0.25);
-  --glow-purple: 0 0 20px rgba(124, 58, 237, 0.15);
-  --glow-purple-strong: 0 0 30px rgba(124, 58, 237, 0.25);
-  --glow-orange: 0 0 20px rgba(234, 88, 12, 0.15);
-  --glow-orange-strong: 0 0 30px rgba(234, 88, 12, 0.25);
-  --glow-red: 0 0 20px rgba(220, 38, 38, 0.15);
-  --glow-red-strong: 0 0 30px rgba(220, 38, 38, 0.25);
-  --glow-yellow: 0 0 20px rgba(202, 138, 4, 0.15);
-  --glow-yellow-strong: 0 0 30px rgba(202, 138, 4, 0.25);
+  --color-yellow: oklch(60% 0.2 85);
+  --color-yellow-light: oklch(70% 0.2 85);
+  --color-yellow-dark: oklch(50% 0.18 85);
+
+  /* 陰影（減輕）- OKLCH 格式 */
+  --shadow-sm: 0 1px 2px 0 oklch(0% 0 0 / 0.05);
+  --shadow-md: 
+    0 4px 6px -1px oklch(0% 0 0 / 0.07),
+    0 2px 4px -2px oklch(0% 0 0 / 0.05);
+  --shadow-lg: 
+    0 10px 15px -3px oklch(0% 0 0 / 0.1),
+    0 4px 6px -4px oklch(0% 0 0 / 0.05);
+  --shadow-xl: 
+    0 20px 25px -5px oklch(0% 0 0 / 0.1),
+    0 10px 10px -5px oklch(0% 0 0 / 0.04);
+
+  /* 發光效果（減弱）- OKLCH 格式 */
+  --glow-cyan: 0 0 20px oklch(50% 0.25 220 / 0.15);
+  --glow-cyan-strong: 0 0 30px oklch(50% 0.25 220 / 0.25);
+  --glow-green: 0 0 20px oklch(50% 0.2 145 / 0.15);
+  --glow-green-strong: 0 0 30px oklch(50% 0.2 145 / 0.25);
+  --glow-purple: 0 0 20px oklch(45% 0.28 280 / 0.15);
+  --glow-purple-strong: 0 0 30px oklch(45% 0.28 280 / 0.25);
+  --glow-orange: 0 0 20px oklch(55% 0.2 70 / 0.15);
+  --glow-orange-strong: 0 0 30px oklch(55% 0.2 70 / 0.25);
+  --glow-red: 0 0 20px oklch(45% 0.25 25 / 0.15);
+  --glow-red-strong: 0 0 30px oklch(45% 0.25 25 / 0.25);
+  --glow-yellow: 0 0 20px oklch(60% 0.2 85 / 0.15);
+  --glow-yellow-strong: 0 0 30px oklch(60% 0.2 85 / 0.25);
 
   /* 漸變背景 */
   --gradient-bg-card: linear-gradient(180deg, #FFFFFF 0%, #F8FAFC 100%);
@@ -115,30 +139,30 @@
 }
 
 [data-theme="light"] .top-nav {
-  background: linear-gradient(180deg, rgba(248, 250, 252, 0.98) 0%, rgba(255, 255, 255, 0.95) 100%);
-  border-bottom-color: rgba(8, 145, 178, 0.1);
+  background: linear-gradient(180deg, oklch(98% 0.002 250 / 0.98) 0%, oklch(100% 0 0 / 0.95) 100%);
+  border-bottom-color: oklch(50% 0.25 220 / 0.1);
 }
 
 [data-theme="light"] .sidebar {
-  background: linear-gradient(180deg, rgba(248, 250, 252, 0.98) 0%, rgba(255, 255, 255, 0.95) 100%);
-  border-right-color: rgba(8, 145, 178, 0.1);
+  background: linear-gradient(180deg, oklch(98% 0.002 250 / 0.98) 0%, oklch(100% 0 0 / 0.95) 100%);
+  border-right-color: oklch(50% 0.25 220 / 0.1);
 }
 
 [data-theme="light"] footer {
   background: linear-gradient(180deg, var(--color-bg-secondary) 0%, var(--color-bg-primary) 100%);
-  border-top-color: rgba(8, 145, 178, 0.1);
+  border-top-color: oklch(50% 0.25 220 / 0.1);
 }
 
 [data-theme="light"] .hero::after {
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.7) 0%, rgba(248, 250, 252, 0.9) 100%);
+  background: linear-gradient(180deg, oklch(100% 0 0 / 0.7) 0%, oklch(98% 0.002 250 / 0.9) 100%);
 }
 
 [data-theme="light"] .hero::before {
-  background: radial-gradient(circle, rgba(8, 145, 178, 0.1) 0%, transparent 70%);
+  background: radial-gradient(circle, oklch(50% 0.25 220 / 0.1) 0%, transparent 70%);
 }
 
 [data-theme="light"] ::selection {
-  background-color: rgba(8, 145, 178, 0.3);
+  background-color: oklch(50% 0.25 220 / 0.3);
   color: var(--color-text-primary);
 }
 
@@ -160,7 +184,7 @@
 [data-theme="light"] .btn-solid-purple,
 [data-theme="light"] .btn-solid-orange,
 [data-theme="light"] .btn-solid-red {
-  color: #FFFFFF;
+  color: oklch(100% 0 0);
 }
 
 /* 標籤文字色修正 */
@@ -168,19 +192,19 @@
 [data-theme="light"] .tag-tip-purple,
 [data-theme="light"] .tag-priority-high,
 [data-theme="light"] .tag-priority-low {
-  color: #FFFFFF;
+  color: oklch(100% 0 0);
 }
 
 [data-theme="light"] .tag-tip-orange,
 [data-theme="light"] .tag-priority-medium {
-  color: #0F172A;
+  color: oklch(20% 0.002 250);
 }
 
 /* Dashboard KPI 卡片（硬編碼背景色覆蓋） */
 [data-theme="light"] .kpi-card {
-  background: linear-gradient(180deg, #FFFFFF 0%, #F8FAFC 100%);
+  background: linear-gradient(180deg, oklch(100% 0 0) 0%, oklch(98% 0.002 250) 100%);
   border-color: var(--color-border-default);
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 1px 3px oklch(0% 0 0 / 0.05);
 }
 
 [data-theme="light"] .kpi-card::before {
@@ -189,7 +213,7 @@
 
 /* 統計卡片 */
 [data-theme="light"] .stat-card {
-  background: linear-gradient(180deg, #FFFFFF 0%, #F8FAFC 100%);
+  background: linear-gradient(180deg, oklch(100% 0 0) 0%, oklch(98% 0.002 250) 100%);
 }
 
 /* 圖表區域 */

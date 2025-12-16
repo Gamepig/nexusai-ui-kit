@@ -11,147 +11,170 @@
 
 :root {
   /* ========================================
-     1. 基礎色彩 (Base Colors)
+     1. 基礎色彩 (Base Colors) - OKLCH 格式
      ======================================== */
 
-  /* 背景色 */
-  --color-bg-primary: #0D1117;
-  --color-bg-secondary: #161B22;
-  --color-bg-tertiary: #21262D;
-  --color-bg-elevated: #1A1F2E;
-  --color-bg-card: #1E293B;
-  --color-bg-card-hover: #242D3D;
+  /* 中性色調色板 - 深色模式（Hue 250，加入 2-3% 藍色色調） */
+  --neutral-50: oklch(98% 0.002 250);
+  --neutral-100: oklch(95% 0.002 250);
+  --neutral-200: oklch(90% 0.002 250);
+  --neutral-300: oklch(80% 0.002 250);
+  --neutral-400: oklch(65% 0.002 250);
+  --neutral-500: oklch(50% 0.002 250);
+  --neutral-600: oklch(40% 0.002 250);
+  --neutral-700: oklch(30% 0.002 250);
+  --neutral-800: oklch(20% 0.002 250);
+  --neutral-900: oklch(10% 0.002 250);
 
-  /* 文字色 */
-  --color-text-primary: #FFFFFF;
-  --color-text-secondary: #8B949E;
-  --color-text-tertiary: #6B7280;
-  --color-text-muted: #484F58;
+  /* 四層背景結構 - 深色模式 */
+  --bg-level-1: oklch(15% 0.002 250);  /* 最深 - 基礎背景 */
+  --bg-level-2: oklch(20% 0.002 250);  /* 第二層 - 稍淺背景 */
+  --bg-level-3: oklch(25% 0.002 250);  /* 第三層 - 卡片容器 */
+  --bg-level-4: oklch(30% 0.002 250);  /* 最淺 - 互動元素 */
 
-  /* 邊框色 */
-  --color-border-default: rgba(255, 255, 255, 0.1);
-  --color-border-muted: rgba(255, 255, 255, 0.05);
-  --color-border-emphasis: rgba(255, 255, 255, 0.2);
+  /* 背景色（向後兼容，映射到四層結構） */
+  --color-bg-primary: var(--bg-level-1);
+  --color-bg-secondary: var(--bg-level-2);
+  --color-bg-tertiary: oklch(22% 0.002 250);
+  --color-bg-elevated: var(--bg-level-2);
+  --color-bg-card: var(--bg-level-3);
+  --color-bg-card-hover: var(--bg-level-4);
+
+  /* 文字色 - OKLCH 格式 */
+  --color-text-primary: oklch(100% 0 0);
+  --color-text-secondary: oklch(65% 0.002 250);
+  --color-text-tertiary: oklch(55% 0.002 250);
+  --color-text-muted: oklch(40% 0.002 250);
+
+  /* 邊框色 - OKLCH 格式 */
+  --color-border-default: oklch(50% 0.002 250 / 0.1);
+  --color-border-muted: oklch(50% 0.002 250 / 0.05);
+  --color-border-emphasis: oklch(50% 0.002 250 / 0.2);
 
   /* ========================================
-     2. 主題色彩 (Theme Colors)
+     2. 主題色彩 (Theme Colors) - OKLCH 格式
      ======================================== */
 
-  /* Cyan 青色 - 系統、連結、主要強調 */
-  --color-cyan-50: #ECFEFF;
-  --color-cyan-100: #CFFAFE;
-  --color-cyan-200: #A5F3FC;
-  --color-cyan-300: #67E8F9;
-  --color-cyan-400: #22D3EE;
-  --color-cyan-500: #06B6D4;
-  --color-cyan-600: #0891B2;
-  --color-cyan-700: #0E7490;
-  --color-cyan: #00D9FF;
-  --color-cyan-light: #67E8F9;
-  --color-cyan-dark: #0EA5E9;
+  /* Cyan 青色 - 系統、連結、主要強調（Hue 220） */
+  --color-cyan-50: oklch(95% 0.05 220);
+  --color-cyan-100: oklch(90% 0.1 220);
+  --color-cyan-200: oklch(85% 0.15 220);
+  --color-cyan-300: oklch(75% 0.2 220);
+  --color-cyan-400: oklch(65% 0.25 220);
+  --color-cyan-500: oklch(55% 0.3 220);
+  --color-cyan-600: oklch(45% 0.25 220);
+  --color-cyan-700: oklch(35% 0.2 220);
+  --color-cyan: oklch(60% 0.35 220);
+  --color-cyan-light: oklch(75% 0.2 220);
+  --color-cyan-dark: oklch(50% 0.3 220);
 
-  /* Green 綠色 - 成功、Production、CTA */
-  --color-green-50: #F0FDF4;
-  --color-green-100: #DCFCE7;
-  --color-green-200: #BBF7D0;
-  --color-green-300: #86EFAC;
-  --color-green-400: #4ADE80;
-  --color-green-500: #22C55E;
-  --color-green-600: #16A34A;
-  --color-green-700: #15803D;
-  --color-green: #22C55E;
-  --color-green-light: #4ADE80;
-  --color-green-dark: #10B981;
+  /* Green 綠色 - 成功、Production、CTA（Hue 145） */
+  --color-green-50: oklch(95% 0.05 145);
+  --color-green-100: oklch(90% 0.1 145);
+  --color-green-200: oklch(85% 0.15 145);
+  --color-green-300: oklch(75% 0.2 145);
+  --color-green-400: oklch(65% 0.2 145);
+  --color-green-500: oklch(60% 0.2 145);
+  --color-green-600: oklch(50% 0.2 145);
+  --color-green-700: oklch(40% 0.18 145);
+  --color-green: oklch(60% 0.2 145);
+  --color-green-light: oklch(65% 0.2 145);
+  --color-green-dark: oklch(55% 0.2 145);
 
-  /* Purple 紫色 - 次要、Evaluate、專家 */
-  --color-purple-50: #FAF5FF;
-  --color-purple-100: #F3E8FF;
-  --color-purple-200: #E9D5FF;
-  --color-purple-300: #D8B4FE;
-  --color-purple-400: #C084FC;
-  --color-purple-500: #A855F7;
-  --color-purple-600: #9333EA;
-  --color-purple-700: #7C3AED;
-  --color-purple: #A855F7;
-  --color-purple-light: #C084FC;
-  --color-purple-dark: #8B5CF6;
+  /* Purple 紫色 - 次要、Evaluate、專家（Hue 280） */
+  --color-purple-50: oklch(95% 0.05 280);
+  --color-purple-100: oklch(90% 0.1 280);
+  --color-purple-200: oklch(85% 0.15 280);
+  --color-purple-300: oklch(75% 0.2 280);
+  --color-purple-400: oklch(65% 0.25 280);
+  --color-purple-500: oklch(55% 0.3 280);
+  --color-purple-600: oklch(45% 0.28 280);
+  --color-purple-700: oklch(40% 0.25 280);
+  --color-purple: oklch(55% 0.3 280);
+  --color-purple-light: oklch(65% 0.25 280);
+  --color-purple-dark: oklch(50% 0.3 280);
 
-  /* Orange 橙色 - 警告、Tip、能量 */
-  --color-orange-50: #FFF7ED;
-  --color-orange-100: #FFEDD5;
-  --color-orange-200: #FED7AA;
-  --color-orange-300: #FDBA74;
-  --color-orange-400: #FB923C;
-  --color-orange-500: #F97316;
-  --color-orange-600: #EA580C;
-  --color-orange-700: #C2410C;
-  --color-orange: #F97316;
-  --color-orange-light: #FB923C;
-  --color-orange-dark: #EA580C;
+  /* Orange 橙色 - 警告、Tip、能量（Hue 70） */
+  --color-orange-50: oklch(95% 0.05 70);
+  --color-orange-100: oklch(90% 0.1 70);
+  --color-orange-200: oklch(85% 0.15 70);
+  --color-orange-300: oklch(75% 0.2 70);
+  --color-orange-400: oklch(70% 0.2 70);
+  --color-orange-500: oklch(65% 0.2 70);
+  --color-orange-600: oklch(55% 0.2 70);
+  --color-orange-700: oklch(45% 0.2 70);
+  --color-orange: oklch(65% 0.2 70);
+  --color-orange-light: oklch(70% 0.2 70);
+  --color-orange-dark: oklch(55% 0.2 70);
 
-  /* Red 紅色 - 錯誤、Failure、警示 */
-  --color-red-50: #FEF2F2;
-  --color-red-100: #FEE2E2;
-  --color-red-200: #FECACA;
-  --color-red-300: #FCA5A5;
-  --color-red-400: #F87171;
-  --color-red-500: #EF4444;
-  --color-red-600: #DC2626;
-  --color-red-700: #B91C1C;
-  --color-red: #EF4444;
-  --color-red-light: #F87171;
-  --color-red-dark: #DC2626;
+  /* Red 紅色 - 錯誤、Failure、警示（Hue 25） */
+  --color-red-50: oklch(95% 0.05 25);
+  --color-red-100: oklch(90% 0.1 25);
+  --color-red-200: oklch(85% 0.15 25);
+  --color-red-300: oklch(75% 0.2 25);
+  --color-red-400: oklch(65% 0.25 25);
+  --color-red-500: oklch(55% 0.25 25);
+  --color-red-600: oklch(45% 0.25 25);
+  --color-red-700: oklch(35% 0.2 25);
+  --color-red: oklch(55% 0.25 25);
+  --color-red-light: oklch(65% 0.25 25);
+  --color-red-dark: oklch(45% 0.25 25);
 
-  /* Yellow/Gold 金色 - 數據、價值 */
-  --color-yellow-50: #FEFCE8;
-  --color-yellow-100: #FEF9C3;
-  --color-yellow-200: #FEF08A;
-  --color-yellow-300: #FDE047;
-  --color-yellow-400: #FACC15;
-  --color-yellow-500: #EAB308;
-  --color-yellow-600: #CA8A04;
-  --color-yellow-700: #A16207;
-  --color-yellow: #EAB308;
-  --color-yellow-light: #FDE047;
-  --color-yellow-dark: #CA8A04;
-  --color-gold: #FFD700;
+  /* Yellow/Gold 金色 - 數據、價值（Hue 85） */
+  --color-yellow-50: oklch(95% 0.05 85);
+  --color-yellow-100: oklch(90% 0.1 85);
+  --color-yellow-200: oklch(85% 0.15 85);
+  --color-yellow-300: oklch(80% 0.2 85);
+  --color-yellow-400: oklch(75% 0.2 85);
+  --color-yellow-500: oklch(70% 0.2 85);
+  --color-yellow-600: oklch(60% 0.2 85);
+  --color-yellow-700: oklch(50% 0.18 85);
+  --color-yellow: oklch(70% 0.2 85);
+  --color-yellow-light: oklch(80% 0.2 85);
+  --color-yellow-dark: oklch(60% 0.2 85);
+  --color-gold: oklch(75% 0.25 85);
 
-  /* Teal 青綠色 - 信任、穩定 */
-  --color-teal-50: #F0FDFA;
-  --color-teal-100: #CCFBF1;
-  --color-teal-200: #99F6E4;
-  --color-teal-300: #5EEAD4;
-  --color-teal-400: #2DD4BF;
-  --color-teal-500: #14B8A6;
-  --color-teal-600: #0D9488;
-  --color-teal-700: #0F766E;
-  --color-teal: #14B8A6;
-  --color-teal-light: #2DD4BF;
-  --color-teal-dark: #0D9488;
+  /* Teal 青綠色 - 信任、穩定（Hue 180） */
+  --color-teal-50: oklch(95% 0.05 180);
+  --color-teal-100: oklch(90% 0.1 180);
+  --color-teal-200: oklch(85% 0.15 180);
+  --color-teal-300: oklch(75% 0.2 180);
+  --color-teal-400: oklch(65% 0.2 180);
+  --color-teal-500: oklch(60% 0.2 180);
+  --color-teal-600: oklch(50% 0.18 180);
+  --color-teal-700: oklch(40% 0.15 180);
+  --color-teal: oklch(60% 0.2 180);
+  --color-teal-light: oklch(65% 0.2 180);
+  --color-teal-dark: oklch(50% 0.18 180);
 
   /* ========================================
-     3. 語意色彩 (Semantic Colors)
+     3. 語意色彩 (Semantic Colors) - OKLCH 格式
      ======================================== */
 
-  --color-success: var(--color-green);
-  --color-success-light: var(--color-green-light);
-  --color-success-dark: var(--color-green-dark);
+  /* Success - 綠色（Hue 145） */
+  --color-success: oklch(60% 0.2 145);
+  --color-success-light: oklch(65% 0.2 145);
+  --color-success-dark: oklch(55% 0.2 145);
 
-  --color-warning: var(--color-orange);
-  --color-warning-light: var(--color-orange-light);
-  --color-warning-dark: var(--color-orange-dark);
+  /* Warning - 橙色（Hue 70） */
+  --color-warning: oklch(70% 0.2 70);
+  --color-warning-light: oklch(70% 0.2 70);
+  --color-warning-dark: oklch(55% 0.2 70);
 
-  --color-error: var(--color-red);
-  --color-error-light: var(--color-red-light);
-  --color-error-dark: var(--color-red-dark);
+  /* Error - 紅色（Hue 25） */
+  --color-error: oklch(55% 0.25 25);
+  --color-error-light: oklch(65% 0.25 25);
+  --color-error-dark: oklch(45% 0.25 25);
 
-  --color-info: var(--color-cyan);
-  --color-info-light: var(--color-cyan-light);
-  --color-info-dark: var(--color-cyan-dark);
+  /* Info - 藍色（Hue 220） */
+  --color-info: oklch(60% 0.2 220);
+  --color-info-light: oklch(75% 0.2 220);
+  --color-info-dark: oklch(50% 0.3 220);
 
-  --color-accent: var(--color-purple);
-  --color-accent-light: var(--color-purple-light);
-  --color-accent-dark: var(--color-purple-dark);
+  /* Accent - 紫色（Hue 280） */
+  --color-accent: oklch(55% 0.3 280);
+  --color-accent-light: oklch(65% 0.25 280);
+  --color-accent-dark: oklch(50% 0.3 280);
 
   /* ========================================
      4. 漸變效果 (Gradients) - 柔和變化
@@ -200,27 +223,40 @@
   --gradient-cycle-soft: conic-gradient(from 0deg, #C084FC, #60A5FA, #22D3EE, #2DD4BF, #4ADE80, #FB923C, #C084FC);
 
   /* ========================================
-     5. 陰影效果 (Shadows)
+     5. 陰影效果 (Shadows) - 三陰影法則（OKLCH 格式）
      ======================================== */
 
-  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.3);
-  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.4);
-  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.5);
-  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.5);
+  /* 小陰影 - 輕微的凸起效果、按鈕懸停狀態 */
+  --shadow-sm: 0 1px 2px 0 oklch(0% 0 0 / 0.05);
 
-  /* 發光效果 */
-  --glow-cyan: 0 0 20px rgba(0, 217, 255, 0.3);
-  --glow-cyan-strong: 0 0 30px rgba(0, 217, 255, 0.5);
-  --glow-green: 0 0 20px rgba(34, 197, 94, 0.3);
-  --glow-green-strong: 0 0 30px rgba(34, 197, 94, 0.5);
-  --glow-purple: 0 0 20px rgba(168, 85, 247, 0.3);
-  --glow-purple-strong: 0 0 30px rgba(168, 85, 247, 0.5);
-  --glow-orange: 0 0 20px rgba(249, 115, 22, 0.3);
-  --glow-orange-strong: 0 0 30px rgba(249, 115, 22, 0.5);
-  --glow-red: 0 0 20px rgba(239, 68, 68, 0.3);
-  --glow-red-strong: 0 0 30px rgba(239, 68, 68, 0.5);
-  --glow-yellow: 0 0 20px rgba(234, 179, 8, 0.3);
-  --glow-yellow-strong: 0 0 30px rgba(234, 179, 8, 0.5);
+  /* 中等陰影 - 卡片容器、下拉選單、模態框 */
+  --shadow-md: 
+    0 4px 6px -1px oklch(0% 0 0 / 0.1),
+    0 2px 4px -2px oklch(0% 0 0 / 0.1);
+
+  /* 大陰影 - 浮動操作按鈕、重要的模態框、頂層元素 */
+  --shadow-lg: 
+    0 10px 15px -3px oklch(0% 0 0 / 0.1),
+    0 4px 6px -4px oklch(0% 0 0 / 0.1);
+
+  /* 超大陰影 */
+  --shadow-xl: 
+    0 20px 25px -5px oklch(0% 0 0 / 0.1),
+    0 10px 10px -5px oklch(0% 0 0 / 0.04);
+
+  /* 發光效果 - OKLCH 格式 */
+  --glow-cyan: 0 0 20px oklch(60% 0.35 220 / 0.3);
+  --glow-cyan-strong: 0 0 30px oklch(60% 0.35 220 / 0.5);
+  --glow-green: 0 0 20px oklch(60% 0.2 145 / 0.3);
+  --glow-green-strong: 0 0 30px oklch(60% 0.2 145 / 0.5);
+  --glow-purple: 0 0 20px oklch(55% 0.3 280 / 0.3);
+  --glow-purple-strong: 0 0 30px oklch(55% 0.3 280 / 0.5);
+  --glow-orange: 0 0 20px oklch(65% 0.2 70 / 0.3);
+  --glow-orange-strong: 0 0 30px oklch(65% 0.2 70 / 0.5);
+  --glow-red: 0 0 20px oklch(55% 0.25 25 / 0.3);
+  --glow-red-strong: 0 0 30px oklch(55% 0.25 25 / 0.5);
+  --glow-yellow: 0 0 20px oklch(70% 0.2 85 / 0.3);
+  --glow-yellow-strong: 0 0 30px oklch(70% 0.2 85 / 0.5);
 
   /* ========================================
      6. 間距系統 (Spacing)

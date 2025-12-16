@@ -10,12 +10,16 @@
    1. 卡片元件 (Cards)
    ======================================== */
 
-/* 基礎卡片 */
+/* 基礎卡片 - 應用四層結構和光照效果 */
 .card {
-  background: var(--gradient-bg-card);
-  border: var(--border-width-1) solid var(--color-border-default);
+  background: var(--bg-level-3);
+  border-top: var(--border-width-1) solid oklch(30% 0.002 250); /* 淺色邊框 - 光照效果 */
+  border-bottom: var(--border-width-1) solid oklch(10% 0.002 250); /* 深色邊框 - 陰影效果 */
+  border-left: var(--border-width-1) solid var(--color-border-default);
+  border-right: var(--border-width-1) solid var(--color-border-default);
   border-radius: var(--radius-card);
   padding: var(--spacing-6);
+  box-shadow: var(--shadow-md);
   transition: var(--transition-base);
   position: relative;
   overflow: hidden;
@@ -34,9 +38,11 @@
 }
 
 .card:hover {
-  background: var(--color-bg-card-hover);
-  border-color: rgba(0, 217, 255, 0.3);
-  box-shadow: 0 4px 20px rgba(0, 217, 255, 0.1);
+  background: var(--bg-level-4);
+  border-top-color: oklch(35% 0.002 250);
+  border-bottom-color: oklch(15% 0.002 250);
+  box-shadow: var(--shadow-lg);
+  transform: translateY(-1px);
 }
 
 .card:hover::before {
@@ -45,72 +51,92 @@
 
 /* 發光卡片 - 青色 */
 .card-glow-cyan {
-  background: var(--gradient-bg-card);
-  border: var(--border-width-1) solid var(--color-cyan);
+  background: var(--bg-level-3);
+  border-top: var(--border-width-1) solid oklch(30% 0.002 250);
+  border-bottom: var(--border-width-1) solid oklch(10% 0.002 250);
+  border-left: var(--border-width-1) solid var(--color-cyan);
+  border-right: var(--border-width-1) solid var(--color-cyan);
   border-radius: var(--radius-card);
   padding: var(--spacing-6);
-  box-shadow: var(--glow-cyan);
+  box-shadow: var(--glow-cyan), var(--shadow-md);
   transition: var(--transition-base);
 }
 
 .card-glow-cyan:hover {
-  box-shadow: var(--glow-cyan-strong);
+  box-shadow: var(--glow-cyan-strong), var(--shadow-lg);
+  transform: translateY(-1px);
 }
 
 /* 發光卡片 - 綠色 */
 .card-glow-green {
-  background: var(--gradient-bg-card);
-  border: var(--border-width-1) solid var(--color-green);
+  background: var(--bg-level-3);
+  border-top: var(--border-width-1) solid oklch(30% 0.002 250);
+  border-bottom: var(--border-width-1) solid oklch(10% 0.002 250);
+  border-left: var(--border-width-1) solid var(--color-green);
+  border-right: var(--border-width-1) solid var(--color-green);
   border-radius: var(--radius-card);
   padding: var(--spacing-6);
-  box-shadow: var(--glow-green);
+  box-shadow: var(--glow-green), var(--shadow-md);
   transition: var(--transition-base);
 }
 
 .card-glow-green:hover {
-  box-shadow: var(--glow-green-strong);
+  box-shadow: var(--glow-green-strong), var(--shadow-lg);
+  transform: translateY(-1px);
 }
 
 /* 發光卡片 - 紫色 */
 .card-glow-purple {
-  background: var(--gradient-bg-card);
-  border: var(--border-width-1) solid var(--color-purple);
+  background: var(--bg-level-3);
+  border-top: var(--border-width-1) solid oklch(30% 0.002 250);
+  border-bottom: var(--border-width-1) solid oklch(10% 0.002 250);
+  border-left: var(--border-width-1) solid var(--color-purple);
+  border-right: var(--border-width-1) solid var(--color-purple);
   border-radius: var(--radius-card);
   padding: var(--spacing-6);
-  box-shadow: var(--glow-purple);
+  box-shadow: var(--glow-purple), var(--shadow-md);
   transition: var(--transition-base);
 }
 
 .card-glow-purple:hover {
-  box-shadow: var(--glow-purple-strong);
+  box-shadow: var(--glow-purple-strong), var(--shadow-lg);
+  transform: translateY(-1px);
 }
 
 /* 發光卡片 - 橙色 */
 .card-glow-orange {
-  background: var(--gradient-bg-card);
-  border: var(--border-width-1) solid var(--color-orange);
+  background: var(--bg-level-3);
+  border-top: var(--border-width-1) solid oklch(30% 0.002 250);
+  border-bottom: var(--border-width-1) solid oklch(10% 0.002 250);
+  border-left: var(--border-width-1) solid var(--color-orange);
+  border-right: var(--border-width-1) solid var(--color-orange);
   border-radius: var(--radius-card);
   padding: var(--spacing-6);
-  box-shadow: var(--glow-orange);
+  box-shadow: var(--glow-orange), var(--shadow-md);
   transition: var(--transition-base);
 }
 
 .card-glow-orange:hover {
-  box-shadow: var(--glow-orange-strong);
+  box-shadow: var(--glow-orange-strong), var(--shadow-lg);
+  transform: translateY(-1px);
 }
 
 /* 發光卡片 - 紅色 */
 .card-glow-red {
-  background: var(--gradient-bg-card);
-  border: var(--border-width-1) solid var(--color-red);
+  background: var(--bg-level-3);
+  border-top: var(--border-width-1) solid oklch(30% 0.002 250);
+  border-bottom: var(--border-width-1) solid oklch(10% 0.002 250);
+  border-left: var(--border-width-1) solid var(--color-red);
+  border-right: var(--border-width-1) solid var(--color-red);
   border-radius: var(--radius-card);
   padding: var(--spacing-6);
-  box-shadow: var(--glow-red);
+  box-shadow: var(--glow-red), var(--shadow-md);
   transition: var(--transition-base);
 }
 
 .card-glow-red:hover {
-  box-shadow: var(--glow-red-strong);
+  box-shadow: var(--glow-red-strong), var(--shadow-lg);
+  transform: translateY(-1px);
 }
 
 /* 漸變邊框卡片 */
@@ -138,42 +164,46 @@
 
 /* 產業卡片 */
 .card-industry {
-  background: var(--gradient-bg-card);
-  border: var(--border-width-1) solid var(--color-border-default);
+  background: var(--bg-level-3);
+  border-top: var(--border-width-1) solid oklch(30% 0.002 250);
+  border-bottom: var(--border-width-1) solid oklch(10% 0.002 250);
+  border-left: var(--border-width-1) solid var(--color-border-default);
+  border-right: var(--border-width-1) solid var(--color-border-default);
   border-radius: var(--radius-card);
   padding: var(--spacing-6);
+  box-shadow: var(--shadow-md);
   text-align: center;
   transition: var(--transition-base);
 }
 
 .card-industry-legal {
   border-color: var(--color-orange);
-  background: linear-gradient(180deg, rgba(249, 115, 22, 0.1) 0%, var(--color-bg-card) 100%);
+  background: linear-gradient(180deg, oklch(65% 0.2 70 / 0.1) 0%, var(--bg-level-3) 100%);
 }
 
 .card-industry-healthcare {
   border-color: var(--color-red);
-  background: linear-gradient(180deg, rgba(239, 68, 68, 0.1) 0%, var(--color-bg-card) 100%);
+  background: linear-gradient(180deg, oklch(55% 0.25 25 / 0.1) 0%, var(--bg-level-3) 100%);
 }
 
 .card-industry-finance {
   border-color: var(--color-green);
-  background: linear-gradient(180deg, rgba(34, 197, 94, 0.1) 0%, var(--color-bg-card) 100%);
+  background: linear-gradient(180deg, oklch(60% 0.2 145 / 0.1) 0%, var(--bg-level-3) 100%);
 }
 
 .card-industry-logistics {
-  border-color: #3B82F6;
-  background: linear-gradient(180deg, rgba(59, 130, 246, 0.1) 0%, var(--color-bg-card) 100%);
+  border-color: oklch(55% 0.3 220);
+  background: linear-gradient(180deg, oklch(55% 0.3 220 / 0.1) 0%, var(--bg-level-3) 100%);
 }
 
 .card-industry-education {
   border-color: var(--color-purple);
-  background: linear-gradient(180deg, rgba(168, 85, 247, 0.1) 0%, var(--color-bg-card) 100%);
+  background: linear-gradient(180deg, oklch(55% 0.3 280 / 0.1) 0%, var(--bg-level-3) 100%);
 }
 
 .card-industry-insurance {
   border-color: var(--color-cyan);
-  background: linear-gradient(180deg, rgba(6, 182, 212, 0.1) 0%, var(--color-bg-card) 100%);
+  background: linear-gradient(180deg, oklch(55% 0.3 220 / 0.1) 0%, var(--bg-level-3) 100%);
 }
 
 /* ========================================
@@ -196,12 +226,13 @@
   border: var(--border-width-1) solid transparent;
 }
 
-/* 實心按鈕 */
+/* 實心按鈕 - 使用 OKLCH 顏色和新的陰影系統 */
 .btn-solid-cyan {
-  background: linear-gradient(135deg, #00D9FF 0%, #0EA5E9 50%, #00D9FF 100%);
+  background: linear-gradient(135deg, oklch(60% 0.35 220) 0%, oklch(50% 0.3 220) 50%, oklch(60% 0.35 220) 100%);
   background-size: 200% 200%;
   color: var(--color-bg-primary);
   border-color: var(--color-cyan);
+  box-shadow: var(--shadow-sm);
   animation: gradientShift 3s ease infinite;
 }
 
@@ -212,82 +243,96 @@
 }
 
 .btn-solid-cyan:hover {
-  box-shadow: var(--glow-cyan-strong);
-  transform: translateY(-2px);
+  box-shadow: var(--glow-cyan-strong), var(--shadow-md);
+  transform: translateY(-1px);
 }
 
 .btn-solid-green {
   background: var(--gradient-green);
   color: var(--color-text-primary);
   border-color: var(--color-green);
+  box-shadow: var(--shadow-sm);
 }
 
 .btn-solid-green:hover {
-  box-shadow: var(--glow-green);
+  box-shadow: var(--glow-green), var(--shadow-md);
+  transform: translateY(-1px);
 }
 
 .btn-solid-purple {
   background: var(--gradient-purple);
   color: var(--color-text-primary);
   border-color: var(--color-purple);
+  box-shadow: var(--shadow-sm);
 }
 
 .btn-solid-purple:hover {
-  box-shadow: var(--glow-purple);
+  box-shadow: var(--glow-purple), var(--shadow-md);
+  transform: translateY(-1px);
 }
 
 .btn-solid-orange {
   background: var(--gradient-orange);
   color: var(--color-bg-primary);
   border-color: var(--color-orange);
+  box-shadow: var(--shadow-sm);
 }
 
 .btn-solid-orange:hover {
-  box-shadow: var(--glow-orange);
+  box-shadow: var(--glow-orange), var(--shadow-md);
+  transform: translateY(-1px);
 }
 
 .btn-solid-red {
   background: var(--gradient-red);
   color: var(--color-text-primary);
   border-color: var(--color-red);
+  box-shadow: var(--shadow-sm);
 }
 
 .btn-solid-red:hover {
-  box-shadow: var(--glow-red);
+  box-shadow: var(--glow-red), var(--shadow-md);
+  transform: translateY(-1px);
 }
 
-/* 描邊按鈕 */
+/* 描邊按鈕 - 使用 OKLCH 顏色和新的陰影系統 */
 .btn-outline-cyan {
   background: transparent;
   color: var(--color-cyan);
   border-color: var(--color-cyan);
+  box-shadow: var(--shadow-sm);
 }
 
 .btn-outline-cyan:hover {
-  background: rgba(0, 217, 255, 0.1);
-  box-shadow: var(--glow-cyan);
+  background: oklch(60% 0.35 220 / 0.1);
+  box-shadow: var(--glow-cyan), var(--shadow-md);
+  transform: translateY(-1px);
 }
 
 .btn-outline-green {
   background: transparent;
   color: var(--color-green);
   border-color: var(--color-green);
+  box-shadow: var(--shadow-sm);
 }
 
 .btn-outline-green:hover {
-  background: rgba(34, 197, 94, 0.1);
-  box-shadow: var(--glow-green);
+  background: oklch(60% 0.2 145 / 0.1);
+  box-shadow: var(--glow-green), var(--shadow-md);
+  transform: translateY(-1px);
 }
 
 .btn-outline-purple {
   background: transparent;
   color: var(--color-purple);
   border-color: var(--color-purple);
+  box-shadow: var(--shadow-sm);
 }
 
 .btn-outline-purple:hover {
-  background: rgba(168, 85, 247, 0.1);
-  box-shadow: var(--glow-purple);
+  background: oklch(55% 0.3 280 / 0.1);
+  box-shadow: var(--glow-purple), var(--shadow-md);
+  transform: translateY(-1px);
 }
 
 /* 膠囊按鈕 */
@@ -346,27 +391,27 @@
   color: var(--color-text-primary);
 }
 
-/* 狀態標籤 */
+/* 狀態標籤 - 使用 OKLCH 顏色 */
 .tag-status-success {
-  background: rgba(34, 197, 94, 0.15);
+  background: oklch(60% 0.2 145 / 0.15);
   color: var(--color-green);
   border: var(--border-width-1) solid var(--color-green);
 }
 
 .tag-status-warning {
-  background: rgba(249, 115, 22, 0.15);
+  background: oklch(65% 0.2 70 / 0.15);
   color: var(--color-orange);
   border: var(--border-width-1) solid var(--color-orange);
 }
 
 .tag-status-error {
-  background: rgba(239, 68, 68, 0.15);
+  background: oklch(55% 0.25 25 / 0.15);
   color: var(--color-red);
   border: var(--border-width-1) solid var(--color-red);
 }
 
 .tag-status-info {
-  background: rgba(0, 217, 255, 0.15);
+  background: oklch(60% 0.35 220 / 0.15);
   color: var(--color-cyan);
   border: var(--border-width-1) solid var(--color-cyan);
 }
@@ -405,11 +450,11 @@
    4. 進度條元件 (Progress Bars)
    ======================================== */
 
-/* 基礎進度條容器 */
+/* 基礎進度條容器 - 使用 OKLCH 顏色 */
 .progress-container {
   width: 100%;
   height: 8px;
-  background: rgba(255, 255, 255, 0.1);
+  background: oklch(50% 0.002 250 / 0.1);
   border-radius: var(--radius-pill);
   overflow: hidden;
 }
@@ -477,22 +522,22 @@
 
 .icon-circle-cyan {
   color: var(--color-cyan);
-  background: rgba(0, 217, 255, 0.1);
+  background: oklch(60% 0.35 220 / 0.1);
 }
 
 .icon-circle-green {
   color: var(--color-green);
-  background: rgba(34, 197, 94, 0.1);
+  background: oklch(60% 0.2 145 / 0.1);
 }
 
 .icon-circle-purple {
   color: var(--color-purple);
-  background: rgba(168, 85, 247, 0.1);
+  background: oklch(55% 0.3 280 / 0.1);
 }
 
 .icon-circle-red {
   color: var(--color-red);
-  background: rgba(239, 68, 68, 0.1);
+  background: oklch(55% 0.25 25 / 0.1);
 }
 
 /* 方形圖示容器 */
@@ -508,19 +553,19 @@
 
 .icon-square-cyan {
   color: var(--color-cyan);
-  background: rgba(0, 217, 255, 0.1);
+  background: oklch(60% 0.35 220 / 0.1);
   border-color: var(--color-cyan);
 }
 
 .icon-square-green {
   color: var(--color-green);
-  background: rgba(34, 197, 94, 0.1);
+  background: oklch(60% 0.2 145 / 0.1);
   border-color: var(--color-green);
 }
 
 .icon-square-purple {
   color: var(--color-purple);
-  background: rgba(168, 85, 247, 0.1);
+  background: oklch(55% 0.3 280 / 0.1);
   border-color: var(--color-purple);
 }
 
@@ -631,17 +676,17 @@
 
 .flow-step-purple {
   border-color: var(--color-purple);
-  background: linear-gradient(180deg, rgba(168, 85, 247, 0.1) 0%, var(--color-bg-card) 100%);
+  background: linear-gradient(180deg, oklch(55% 0.3 280 / 0.1) 0%, var(--bg-level-3) 100%);
 }
 
 .flow-step-cyan {
   border-color: var(--color-cyan);
-  background: linear-gradient(180deg, rgba(6, 182, 212, 0.1) 0%, var(--color-bg-card) 100%);
+  background: linear-gradient(180deg, oklch(55% 0.3 220 / 0.1) 0%, var(--bg-level-3) 100%);
 }
 
 .flow-step-green {
   border-color: var(--color-green);
-  background: linear-gradient(180deg, rgba(34, 197, 94, 0.1) 0%, var(--color-bg-card) 100%);
+  background: linear-gradient(180deg, oklch(60% 0.2 145 / 0.1) 0%, var(--bg-level-3) 100%);
 }
 
 /* ========================================
@@ -700,7 +745,7 @@
 .bar-chart-bar {
   flex: 1;
   height: 24px;
-  background: rgba(255, 255, 255, 0.1);
+  background: oklch(50% 0.002 250 / 0.1);
   border-radius: var(--radius-sm);
   overflow: hidden;
 }
@@ -749,25 +794,25 @@
 }
 
 .alert-success {
-  background: rgba(34, 197, 94, 0.1);
+  background: oklch(60% 0.2 145 / 0.1);
   border-color: var(--color-green);
   color: var(--color-green);
 }
 
 .alert-warning {
-  background: rgba(249, 115, 22, 0.1);
+  background: oklch(65% 0.2 70 / 0.1);
   border-color: var(--color-orange);
   color: var(--color-orange);
 }
 
 .alert-error {
-  background: rgba(239, 68, 68, 0.1);
+  background: oklch(55% 0.25 25 / 0.1);
   border-color: var(--color-red);
   color: var(--color-red);
 }
 
 .alert-info {
-  background: rgba(0, 217, 255, 0.1);
+  background: oklch(60% 0.35 220 / 0.1);
   border-color: var(--color-cyan);
   color: var(--color-cyan);
 }

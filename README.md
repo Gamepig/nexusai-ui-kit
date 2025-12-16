@@ -1,8 +1,8 @@
 # NexusAI UI Kit - 深色科技主題設計系統
 
-**建置日期**: 2025-12-03
+**建置日期**: 2025-12-16
 **狀態**: ✅ 完整功能
-**版本**: v2.5
+**版本**: v3.0
 **GitHub**: [nexusai-ui-kit](https://github.com/Gamepig/nexusai-ui-kit)
 
 ---
@@ -18,15 +18,18 @@
 ## 🎯 核心特色
 
 ### 設計系統
-- ✨ **發光效果**: Cyan、Green、Purple、Orange、Red、Yellow 主題色彩
-- 🎨 **完整色彩系統**: 背景、文字、邊框、語意色彩
-- 📏 **設計 Token**: CSS 變數化（間距、圓角、字型、陰影、過渡）
-- 📱 **響應式設計**: Mobile (< 768px) / Tablet (768-1279px) / Desktop (≥ 1280px)
-- 🌓 **明暗主題**: 支援 Light/Dark 主題切換
+- 🎨 **OKLCH 顏色系統**: 使用 OKLCH 格式，更科學精確的顏色管理
+- 🌈 **完整色彩系統**: 中性色（帶自然色調）、品牌色、語意色彩
+- 📐 **三陰影法則**: 小、中、大三種陰影強度創造視覺層次
+- 🏗️ **四層結構**: 基礎背景、稍淺背景、卡片容器、互動元素的層級系統
+- ✨ **光照效果**: 頂部淺色邊框和底部深色邊框創造深度感
+- 📱 **響應式設計**: Mobile (< 640px) / Tablet (640-1023px) / Desktop (≥ 1024px) / Large Desktop (≥ 1280px)
+- 🌓 **明暗主題**: 支援 Light/Dark 主題切換，兩種模式都使用 OKLCH 格式
 
 ### 元件庫
 - 🧩 **60+ UI 元件**: 按鈕、卡片、表單、表格、Modal、Dropdown、Tabs、Alert 等
 - 🎯 **完整變體支援**: Solid、Outline、Pill、Ghost、Size (xs/sm/md/lg) 等
+- 📊 **響應式網格**: 卡片自動適應畫面寬度（手機1欄、平板2欄、桌面3-4欄）
 - ⚡ **高效能**: 純 HTML + CSS（無框架依賴）
 
 ### JavaScript 功能展示
@@ -225,21 +228,64 @@ npx serve .
 
 ## 🎨 設計系統參考
 
-### 色彩系統
+### 色彩系統（OKLCH 格式）
+
+本專案採用 OKLCH 顏色格式，提供更科學和精確的顏色管理：
 
 ```css
-/* 主要色彩 */
---color-cyan:     #00D9FF   /* 系統、連結 */
---color-green:    #22C55E   /* 成功、確認 */
---color-purple:   #A855F7   /* 次要、進階 */
---color-orange:   #F97316   /* 警告 */
---color-red:      #EF4444   /* 錯誤、危險 */
+/* 中性色調色板（Hue 250，加入 2-3% 藍色色調） */
+--neutral-50: oklch(98% 0.002 250);  /* 最淺 */
+--neutral-500: oklch(50% 0.002 250); /* 中間值 */
+--neutral-900: oklch(10% 0.002 250); /* 最深 */
 
-/* 背景層級 */
---color-bg-primary:    #0D1117
---color-bg-secondary:  #161B22
---color-bg-tertiary:   #21262D
---color-bg-card:       #1E293B
+/* 四層背景結構 */
+--bg-level-1: oklch(15% 0.002 250);  /* 基礎背景 */
+--bg-level-2: oklch(20% 0.002 250); /* 稍淺背景 */
+--bg-level-3: oklch(25% 0.002 250); /* 卡片容器 */
+--bg-level-4: oklch(30% 0.002 250); /* 互動元素 */
+
+/* 品牌色（OKLCH 格式） */
+--color-cyan: oklch(60% 0.35 220);   /* 系統、連結（Hue 220） */
+--color-green: oklch(60% 0.2 145);   /* 成功、確認（Hue 145） */
+--color-purple: oklch(55% 0.3 280);  /* 次要、進階（Hue 280） */
+--color-orange: oklch(65% 0.2 70);   /* 警告（Hue 70） */
+--color-red: oklch(55% 0.25 25);     /* 錯誤、危險（Hue 25） */
+
+/* 語意色彩 */
+--color-success: oklch(60% 0.2 145);
+--color-warning: oklch(70% 0.2 70);
+--color-error: oklch(55% 0.25 25);
+--color-info: oklch(60% 0.2 220);
+```
+
+### 陰影系統（三陰影法則）
+
+```css
+/* 小陰影 - 輕微的凸起效果、按鈕懸停狀態 */
+--shadow-sm: 0 1px 2px 0 oklch(0% 0 0 / 0.05);
+
+/* 中等陰影 - 卡片容器、下拉選單、模態框 */
+--shadow-md: 
+  0 4px 6px -1px oklch(0% 0 0 / 0.1),
+  0 2px 4px -2px oklch(0% 0 0 / 0.1);
+
+/* 大陰影 - 浮動操作按鈕、重要的模態框、頂層元素 */
+--shadow-lg: 
+  0 10px 15px -3px oklch(0% 0 0 / 0.1),
+  0 4px 6px -4px oklch(0% 0 0 / 0.1);
+```
+
+### 光照效果
+
+卡片元件使用光照效果創造深度感：
+
+```css
+.card {
+  background: var(--bg-level-3);
+  border-top: 1px solid oklch(30% 0.002 250);    /* 淺色邊框 - 光照 */
+  border-bottom: 1px solid oklch(10% 0.002 250); /* 深色邊框 - 陰影 */
+  box-shadow: var(--shadow-md);
+}
 ```
 
 ### 間距系統
@@ -256,10 +302,34 @@ npx serve .
 ### 響應式斷點
 
 ```css
-Mobile:    max-width: 767px
-Tablet:    768px - 1279px
-Desktop:   min-width: 1280px
+/* 手機 */
+@media (max-width: 639px) {
+  /* 1 欄布局 */
+}
+
+/* 平板 */
+@media (min-width: 640px) {
+  /* 2 欄布局 */
+}
+
+/* 小桌面 */
+@media (min-width: 1024px) {
+  /* 3 欄布局 */
+}
+
+/* 大桌面 */
+@media (min-width: 1280px) {
+  /* 4 欄布局 */
+}
 ```
+
+### 響應式網格系統
+
+卡片網格會根據畫面寬度自動調整：
+- **手機** (< 640px): 1 欄
+- **平板** (640px - 1023px): 2 欄
+- **小桌面** (1024px - 1279px): 3 欄
+- **大桌面** (≥ 1280px): 4 欄
 
 ---
 
@@ -336,8 +406,25 @@ MIT License
 
 ---
 
-**版本**: v2.5
-**最後更新**: 2025-12-03
-**頁面數**: 19
-**CSS 檔案**: 17
+## 🆕 v3.0 更新內容
+
+### 設計系統升級
+- ✅ **OKLCH 顏色系統**: 全面採用 OKLCH 格式，取代 HEX/RGB
+- ✅ **三陰影法則**: 重構陰影系統，使用 OKLCH 格式的三種強度
+- ✅ **四層結構**: 建立完整的背景層級系統
+- ✅ **光照效果**: 卡片元件應用頂部光照和底部陰影效果
+- ✅ **響應式網格**: 卡片網格自動適應畫面寬度（1-4欄）
+
+### 技術改進
+- ✅ 中性色加入 2-3% 藍色色調，更自然
+- ✅ 所有顏色使用 OKLCH 格式，更科學精確
+- ✅ 深色和淺色主題都使用 OKLCH 格式
+- ✅ 響應式斷點優化，更好的移動端體驗
+
+---
+
+**版本**: v3.0  
+**最後更新**: 2025-12-16  
+**頁面數**: 19  
+**CSS 檔案**: 17  
 **JS 模組**: 18
