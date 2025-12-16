@@ -34,7 +34,7 @@ const SidebarConfig = {
   bottomMenu: [
     { href: 'profile.html', icon: 'user', label: '個人資料' },
     { href: 'settings-general.html', icon: 'settings', label: '設定' },
-    { href: 'index.html', icon: 'home', label: '回首頁' }
+    { href: '../index.html', icon: 'home', label: '回首頁' }
   ]
 };
 
