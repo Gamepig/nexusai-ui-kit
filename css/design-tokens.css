@@ -27,21 +27,21 @@
   --neutral-900: oklch(10% 0.002 250);
 
   /* 四層背景結構 - 深色模式 */
-  --bg-level-1: oklch(15% 0.002 250);  /* 最深 - 基礎背景 */
-  --bg-level-2: oklch(20% 0.002 250);  /* 第二層 - 稍淺背景 */
-  --bg-level-3: oklch(25% 0.002 250);  /* 第三層 - 卡片容器 */
-  --bg-level-4: oklch(30% 0.002 250);  /* 最淺 - 互動元素 */
+  --bg-level-1: oklch(22% 0.002 250);  /* 最深 - 基礎背景 */
+  --bg-level-2: oklch(27% 0.002 250);  /* 第二層 - 稍淺背景 */
+  --bg-level-3: oklch(32% 0.002 250);  /* 第三層 - 卡片容器 */
+  --bg-level-4: oklch(37% 0.002 250);  /* 最淺 - 互動元素 */
 
   /* 背景色（向後兼容，映射到四層結構） */
   --color-bg-primary: var(--bg-level-1);
   --color-bg-secondary: var(--bg-level-2);
-  --color-bg-tertiary: oklch(22% 0.002 250);
+  --color-bg-tertiary: oklch(26% 0.002 250);
   --color-bg-elevated: var(--bg-level-2);
   --color-bg-card: var(--bg-level-3);
   --color-bg-card-hover: var(--bg-level-4);
 
   /* 文字色 - OKLCH 格式 */
-  --color-text-primary: oklch(100% 0 0);
+  --color-text-primary: oklch(96% 0.002 250);
   --color-text-secondary: oklch(65% 0.002 250);
   --color-text-tertiary: oklch(55% 0.002 250);
   --color-text-muted: oklch(40% 0.002 250);
@@ -50,6 +50,10 @@
   --color-border-default: oklch(50% 0.002 250 / 0.1);
   --color-border-muted: oklch(50% 0.002 250 / 0.05);
   --color-border-emphasis: oklch(50% 0.002 250 / 0.2);
+
+  /* 表面邊框（卡片/容器的上亮下暗邊線，用於取代硬編碼 OKLCH） */
+  --surface-border-top: oklch(42% 0.002 250);
+  --surface-border-bottom: oklch(20% 0.002 250);
 
   /* ========================================
      2. 主題色彩 (Theme Colors) - OKLCH 格式

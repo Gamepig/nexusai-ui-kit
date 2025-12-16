@@ -33,15 +33,19 @@
   --color-bg-card-hover: var(--bg-level-4);
 
   /* 文字色 - OKLCH 格式 */
-  --color-text-primary: oklch(20% 0.002 250);
-  --color-text-secondary: oklch(40% 0.002 250);
-  --color-text-tertiary: oklch(50% 0.002 250);
-  --color-text-muted: oklch(65% 0.002 250);
+  --color-text-primary: oklch(18% 0.002 250);
+  --color-text-secondary: oklch(28% 0.002 250);
+  --color-text-tertiary: oklch(36% 0.002 250);
+  --color-text-muted: oklch(45% 0.002 250);
 
   /* 邊框色 - OKLCH 格式 */
   --color-border-default: oklch(20% 0.002 250 / 0.1);
   --color-border-muted: oklch(20% 0.002 250 / 0.05);
   --color-border-emphasis: oklch(20% 0.002 250 / 0.15);
+
+  /* 表面邊框（卡片/容器的上亮下暗邊線） */
+  --surface-border-top: oklch(92% 0.002 250);
+  --surface-border-bottom: oklch(86% 0.002 250);
 
   /* 強調色（加深版本）- OKLCH 格式 */
   --color-cyan: oklch(50% 0.25 220);

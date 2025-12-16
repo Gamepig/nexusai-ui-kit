@@ -32,7 +32,7 @@
       left: 0;
       right: 0;
       bottom: 0;
-      background: linear-gradient(180deg, oklch(15% 0.002 250 / 0.7) 0%, oklch(15% 0.002 250 / 0.9) 100%);
+      background: linear-gradient(180deg, oklch(22% 0.002 250 / 0.7) 0%, oklch(22% 0.002 250 / 0.9) 100%);
       z-index: 1;
     }
 
@@ -100,8 +100,8 @@
 
     .feature-card {
       background: var(--bg-level-3);
-      border-top: 1px solid oklch(30% 0.002 250);
-      border-bottom: 1px solid oklch(10% 0.002 250);
+      border-top: 1px solid var(--surface-border-top);
+      border-bottom: 1px solid var(--surface-border-bottom);
       border-left: 1px solid var(--color-border-default);
       border-right: 1px solid var(--color-border-default);
       border-radius: var(--radius-lg);
@@ -123,8 +123,6 @@
     }
 
     .feature-card:hover {
-      border-top-color: oklch(35% 0.002 250);
-      border-bottom-color: oklch(15% 0.002 250);
       border-left-color: var(--color-cyan);
       border-right-color: var(--color-cyan);
       box-shadow: var(--glow-cyan-strong), var(--shadow-lg);
@@ -152,8 +150,8 @@
     /* CTA Section */
     .cta-section {
       background: linear-gradient(135deg, oklch(60% 0.35 220 / 0.05) 0%, oklch(55% 0.3 280 / 0.05) 100%);
-      border-top: 1px solid oklch(30% 0.002 250);
-      border-bottom: 1px solid oklch(10% 0.002 250);
+      border-top: 1px solid var(--surface-border-top);
+      border-bottom: 1px solid var(--surface-border-bottom);
       border-left: 1px solid oklch(60% 0.35 220 / 0.2);
       border-right: 1px solid oklch(60% 0.35 220 / 0.2);
       border-radius: var(--radius-xl);
@@ -174,7 +172,7 @@
   <nav class="top-nav">
     <div class="top-nav-container">
       <a href="index.html" class="logo">
-        <span style="font-size: 24px;">🚀</span>
+        <i data-lucide="sparkles" class="logo-icon" aria-hidden="true"></i>
         <span>NexusAI</span>
       </a>
       <ul class="nav-links">
@@ -183,7 +181,7 @@
         <li><a href="pages/about.html"><i data-lucide="users" class="nav-icon"></i>關於</a></li>
         <li><a href="pages/contact.html"><i data-lucide="mail" class="nav-icon"></i>聯繫</a></li>
       </ul>
-      <button id="theme-toggle-btn" class="btn btn-outline-cyan btn-sm mobile-theme-toggle" title="切換主題" aria-label="切換至淺色主題">
+      <button id="theme-toggle-btn" data-theme-toggle class="btn btn-outline-cyan btn-sm mobile-theme-toggle" title="切換主題" aria-label="切換至淺色主題">
         <i data-lucide="sun"></i>
       </button>
       <button class="hamburger-menu">
@@ -253,7 +251,7 @@
 
         <div class="feature-card">
           <div class="feature-icon">
-            <i data-lucide="responsive" style="width: 28px; height: 28px;"></i>
+            <i data-lucide="monitor-smartphone" style="width: 28px; height: 28px;"></i>
           </div>
           <h3>響應式設計</h3>
           <p>從手機到桌面，完美適應各種螢幕尺寸。</p>
@@ -327,7 +325,6 @@
     </div>
   </footer>
 
-  <script src="js/theme-toggle.js"></script>
   <script src="js/main.js"></script>
   <script src="js/sidebar.js"></script>
   <script>

@@ -49,20 +49,15 @@
     const btn = document.getElementById('theme-toggle-btn');
     if (!btn) return;
 
-    const icon = btn.querySelector('i');
-    if (!icon) return;
+    const nextLabel = theme === LIGHT_THEME ? '切換至深色主題' : '切換至淺色主題';
+    const nextIcon = theme === LIGHT_THEME ? 'moon' : 'sun';
 
-    if (theme === LIGHT_THEME) {
-      icon.setAttribute('data-lucide', 'moon');
-      btn.setAttribute('title', '切換至深色主題');
-      btn.setAttribute('aria-label', '切換至深色主題');
-    } else {
-      icon.setAttribute('data-lucide', 'sun');
-      btn.setAttribute('title', '切換至淺色主題');
-      btn.setAttribute('aria-label', '切換至淺色主題');
-    }
+    btn.setAttribute('title', nextLabel);
+    btn.setAttribute('aria-label', nextLabel);
 
-    // 重新渲染 Lucide 圖示
+    // Lucide 會把 <i> 轉成 <svg>，因此用重建內容的方式確保每次都能更新圖示
+    btn.innerHTML = `<i data-lucide="${nextIcon}"></i>`;
+
     if (typeof lucide !== 'undefined') {
       lucide.createIcons();
     }

@@ -13,8 +13,8 @@
 /* 基礎卡片 - 應用四層結構和光照效果 */
 .card {
   background: var(--bg-level-3);
-  border-top: var(--border-width-1) solid oklch(30% 0.002 250); /* 淺色邊框 - 光照效果 */
-  border-bottom: var(--border-width-1) solid oklch(10% 0.002 250); /* 深色邊框 - 陰影效果 */
+  border-top: var(--border-width-1) solid var(--surface-border-top); /* 淺色邊框 - 光照效果 */
+  border-bottom: var(--border-width-1) solid var(--surface-border-bottom); /* 深色邊框 - 陰影效果 */
   border-left: var(--border-width-1) solid var(--color-border-default);
   border-right: var(--border-width-1) solid var(--color-border-default);
   border-radius: var(--radius-card);
@@ -39,8 +39,6 @@
 
 .card:hover {
   background: var(--bg-level-4);
-  border-top-color: oklch(35% 0.002 250);
-  border-bottom-color: oklch(15% 0.002 250);
   box-shadow: var(--shadow-lg);
   transform: translateY(-1px);
 }
@@ -52,8 +50,8 @@
 /* 發光卡片 - 青色 */
 .card-glow-cyan {
   background: var(--bg-level-3);
-  border-top: var(--border-width-1) solid oklch(30% 0.002 250);
-  border-bottom: var(--border-width-1) solid oklch(10% 0.002 250);
+  border-top: var(--border-width-1) solid var(--surface-border-top);
+  border-bottom: var(--border-width-1) solid var(--surface-border-bottom);
   border-left: var(--border-width-1) solid var(--color-cyan);
   border-right: var(--border-width-1) solid var(--color-cyan);
   border-radius: var(--radius-card);
@@ -70,8 +68,8 @@
 /* 發光卡片 - 綠色 */
 .card-glow-green {
   background: var(--bg-level-3);
-  border-top: var(--border-width-1) solid oklch(30% 0.002 250);
-  border-bottom: var(--border-width-1) solid oklch(10% 0.002 250);
+  border-top: var(--border-width-1) solid var(--surface-border-top);
+  border-bottom: var(--border-width-1) solid var(--surface-border-bottom);
   border-left: var(--border-width-1) solid var(--color-green);
   border-right: var(--border-width-1) solid var(--color-green);
   border-radius: var(--radius-card);
@@ -88,8 +86,8 @@
 /* 發光卡片 - 紫色 */
 .card-glow-purple {
   background: var(--bg-level-3);
-  border-top: var(--border-width-1) solid oklch(30% 0.002 250);
-  border-bottom: var(--border-width-1) solid oklch(10% 0.002 250);
+  border-top: var(--border-width-1) solid var(--surface-border-top);
+  border-bottom: var(--border-width-1) solid var(--surface-border-bottom);
   border-left: var(--border-width-1) solid var(--color-purple);
   border-right: var(--border-width-1) solid var(--color-purple);
   border-radius: var(--radius-card);
@@ -106,8 +104,8 @@
 /* 發光卡片 - 橙色 */
 .card-glow-orange {
   background: var(--bg-level-3);
-  border-top: var(--border-width-1) solid oklch(30% 0.002 250);
-  border-bottom: var(--border-width-1) solid oklch(10% 0.002 250);
+  border-top: var(--border-width-1) solid var(--surface-border-top);
+  border-bottom: var(--border-width-1) solid var(--surface-border-bottom);
   border-left: var(--border-width-1) solid var(--color-orange);
   border-right: var(--border-width-1) solid var(--color-orange);
   border-radius: var(--radius-card);
@@ -124,8 +122,8 @@
 /* 發光卡片 - 紅色 */
 .card-glow-red {
   background: var(--bg-level-3);
-  border-top: var(--border-width-1) solid oklch(30% 0.002 250);
-  border-bottom: var(--border-width-1) solid oklch(10% 0.002 250);
+  border-top: var(--border-width-1) solid var(--surface-border-top);
+  border-bottom: var(--border-width-1) solid var(--surface-border-bottom);
   border-left: var(--border-width-1) solid var(--color-red);
   border-right: var(--border-width-1) solid var(--color-red);
   border-radius: var(--radius-card);
@@ -165,8 +163,8 @@
 /* 產業卡片 */
 .card-industry {
   background: var(--bg-level-3);
-  border-top: var(--border-width-1) solid oklch(30% 0.002 250);
-  border-bottom: var(--border-width-1) solid oklch(10% 0.002 250);
+  border-top: var(--border-width-1) solid var(--surface-border-top);
+  border-bottom: var(--border-width-1) solid var(--surface-border-bottom);
   border-left: var(--border-width-1) solid var(--color-border-default);
   border-right: var(--border-width-1) solid var(--color-border-default);
   border-radius: var(--radius-card);

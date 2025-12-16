@@ -534,18 +534,38 @@ const LazyLoad = {
 
 const DarkMode = {
   init: () => {
+    const STORAGE_KEY = 'nexusai-theme';
     const themeToggle = DOM.select('[data-theme-toggle]');
-    const currentTheme = Storage.get('theme') || 'dark';
+    if (!themeToggle) return;
 
-    if (themeToggle) {
-      document.documentElement.setAttribute('data-theme', currentTheme);
+    const systemTheme =
+      window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+    const savedTheme = Storage.get(STORAGE_KEY);
+    const initialTheme = savedTheme || systemTheme;
 
-      Events.on(themeToggle, 'click', () => {
-        const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-        document.documentElement.setAttribute('data-theme', newTheme);
-        Storage.set('theme', newTheme);
-      });
-    }
+    const applyTheme = (theme) => {
+      document.documentElement.setAttribute('data-theme', theme);
+
+      const nextLabel = theme === 'light' ? '切換至深色主題' : '切換至淺色主題';
+      const nextIcon = theme === 'light' ? 'moon' : 'sun';
+
+      themeToggle.setAttribute('title', nextLabel);
+      themeToggle.setAttribute('aria-label', nextLabel);
+      themeToggle.innerHTML = `<i data-lucide="${nextIcon}"></i>`;
+
+      if (typeof lucide !== 'undefined') {
+        lucide.createIcons();
+      }
+    };
+
+    applyTheme(initialTheme);
+
+    Events.on(themeToggle, 'click', () => {
+      const currentTheme = document.documentElement.getAttribute('data-theme') || 'dark';
+      const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+      applyTheme(newTheme);
+      Storage.set(STORAGE_KEY, newTheme);
+    });
   },
 };
 
