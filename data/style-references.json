@@ -1,0 +1,368 @@
+{
+  "metadata": {
+    "created": "2025-12-16",
+    "purpose": "Landing page style reference for NexusAI",
+    "version": "1.0",
+    "sources": 8
+  },
+  "styles": [
+    {
+      "id": "kloudmate",
+      "name": "Kloudmate",
+      "url": "https://www.kloudmate.com",
+      "category": "Dark Tech SaaS",
+      "colors": {
+        "primary": "#1a1a1a",
+        "secondary": "#141414",
+        "background": "#0d0d0d",
+        "text": {
+          "primary": "#e6e6e6",
+          "secondary": "#b3b3b3"
+        },
+        "accent": ["#08dec4", "#ffa600"],
+        "highlights": ["#ff004d"]
+      },
+      "typography": {
+        "family": "Inter",
+        "fallback": "Inter Display, Inter Variable",
+        "weights": [100, 200, 300, 400, 500, 600, 700, 800, 900],
+        "features": ["unicode-range optimization", "font-display: swap"]
+      },
+      "layout": {
+        "breakpoints": {
+          "desktop": "1296px+",
+          "tablet": "810-1295px",
+          "mobile": "≤810px"
+        },
+        "structure": ["hero", "features", "testimonials", "cta"]
+      },
+      "visual": {
+        "gradients": true,
+        "shadows": "subtle",
+        "animations": "Framer motion",
+        "antialiasing": true
+      },
+      "aesthetic": "Tech-forward, enterprise SaaS, dark with vibrant accents",
+      "bestFor": ["Hero structure", "Overall dark tone", "Accent color usage"]
+    },
+    {
+      "id": "klu",
+      "name": "Klu",
+      "url": "https://klu.so",
+      "category": "Minimalist B2B SaaS",
+      "colors": {
+        "primary": "#000000",
+        "secondary": "#ffffff",
+        "background": "#ffffff",
+        "text": {
+          "primary": "#000000",
+          "secondary": "#6b7280"
+        },
+        "accent": ["linear-gradient(from-black to-gray-600)"],
+        "borders": ["gray-100", "gray-200"]
+      },
+      "typography": {
+        "family": "System sans-serif",
+        "headings": "large, bold",
+        "body": "text-sm",
+        "weights": ["semibold", "bold"]
+      },
+      "layout": {
+        "breakpoints": {
+          "lg": "5 columns",
+          "md": "4 columns",
+          "sm": "2 columns"
+        },
+        "structure": ["hero with dual CTA", "features grid", "team use cases", "pricing", "footer"]
+      },
+      "visual": {
+        "gradients": "minimal",
+        "shadows": "subtle borders",
+        "animations": ["transition-colors", "hover:scale-105", "duration-300"],
+        "borders": "clean separations"
+      },
+      "aesthetic": "Modern, minimalist, professional, high contrast",
+      "bestFor": ["Clean layouts", "High contrast design", "Professional tone"]
+    },
+    {
+      "id": "specify",
+      "name": "Specify",
+      "url": "https://specifyapp.com",
+      "category": "Design System Tool",
+      "colors": {
+        "primary": {
+          "light": "rgb(98, 77, 227)",
+          "dark": "rgb(134, 115, 253)"
+        },
+        "palette": ["magenta", "orange", "yellow", "green", "teal", "blue"],
+        "neutrals": "dark grays with opacity variants",
+        "darkMode": true
+      },
+      "typography": {
+        "families": {
+          "primary": "Inter",
+          "headings": "Inter Display",
+          "code": "Fira Code",
+          "mono": "Fragment Mono"
+        },
+        "weights": [100, 200, 300, 400, 500, 600, 700, 800, 900],
+        "baseSize": "12px system font"
+      },
+      "layout": {
+        "breakpoints": {
+          "desktop": "1440px",
+          "tablet": "1200-1199px",
+          "mobile": "810-809px"
+        },
+        "framework": "Framer components"
+      },
+      "visual": {
+        "gradients": "purple to magenta",
+        "shadows": "opacity-based layering (0.1-0.85)",
+        "tokens": "CSS custom properties",
+        "darkMode": "full theme switching"
+      },
+      "aesthetic": "Modern, enterprise-grade design system, token-based",
+      "bestFor": ["Token-based design", "Purple accent palette", "Dark mode support"]
+    },
+    {
+      "id": "rive",
+      "name": "Rive",
+      "url": "https://rive.app",
+      "category": "Motion Design Tool",
+      "colors": {
+        "primary": "dark charcoal",
+        "secondary": ["white", "light grays"],
+        "accent": "vibrant blues",
+        "darkMode": true
+      },
+      "typography": {
+        "families": {
+          "display": "Inter Display",
+          "body": "Inter Variable",
+          "mono": ["JetBrains Mono", "Fragment Mono"],
+          "accent": "Tomorrow",
+          "bold": "Zodiak Extrabold"
+        },
+        "weights": [100, 200, 300, 400, 500, 600, 700, 800, 900],
+        "international": ["Cyrillic", "Greek", "Vietnamese"]
+      },
+      "layout": {
+        "focus": "motion design showcase",
+        "performance": "module preload optimization"
+      },
+      "visual": {
+        "gradients": "font rendering gradients",
+        "formats": "WOFF2 optimized",
+        "animations": "motion-focused",
+        "smoothRendering": "font-display swap"
+      },
+      "aesthetic": "Modern, developer-friendly, motion-focused, performance-conscious",
+      "bestFor": ["Animation effects", "Visual hierarchy", "Typography variety"]
+    },
+    {
+      "id": "superreply",
+      "name": "superReply",
+      "url": "https://superreply.co",
+      "category": "AI Email Tool",
+      "colors": {
+        "primary": "#32373c",
+        "background": "dark charcoal",
+        "text": "#ffffff",
+        "accent": {
+          "cyan": "#20c1ff",
+          "magenta": "#fe31ff",
+          "gradient": "linear-gradient(#20c1ff, #fe31ff)"
+        },
+        "hover": "#cc3364"
+      },
+      "typography": {
+        "headings": {
+          "gradient": "background: -webkit-linear-gradient(#20c1ff, #fe31ff)",
+          "sizes": ["36px", "59px"]
+        },
+        "body": {
+          "weight": 600,
+          "contrast": "good ratios"
+        }
+      },
+      "layout": {
+        "structure": ["hero banner", "features grid (3 columns)", "trust logos", "FAQ accordion", "CTA sections"]
+      },
+      "visual": {
+        "gradients": "cyan to magenta (primary effect)",
+        "buttons": {
+          "style": "rounded pill",
+          "borderRadius": "9999px",
+          "background": "dark",
+          "text": "white"
+        },
+        "shadows": "box shadows for depth",
+        "animations": ["transform", "opacity"]
+      },
+      "aesthetic": "Modern, tech-forward SaaS, vibrant gradients, professional yet approachable",
+      "bestFor": ["Gradient text effects", "CTA button styles", "Cyan-magenta color scheme"]
+    },
+    {
+      "id": "ready",
+      "name": "Ready",
+      "url": "https://ready.so",
+      "category": "Calendar/Meeting Tool",
+      "colors": {
+        "primary": "white/light backgrounds",
+        "text": "dark for contrast",
+        "accent": "brand blue",
+        "support": "neutral grays",
+        "darkMode": "supported"
+      },
+      "typography": {
+        "style": "clean, modern sans-serif",
+        "headings": "large, bold",
+        "body": "readable"
+      },
+      "layout": {
+        "hero": "logo, headline, avatar row",
+        "features": "full-width image sections",
+        "grid": "3-column feature cards",
+        "cta": "prominent 'Get Ready' button",
+        "footer": "minimal with social links"
+      },
+      "visual": {
+        "video": "auto-play with 3s delay",
+        "decorations": "SVG squiggles",
+        "images": "WebP optimized",
+        "masks": "radial gradients",
+        "avatars": "28x28px profile images"
+      },
+      "aesthetic": "Minimalist, contemporary B2B SaaS, friendly yet professional",
+      "bestFor": ["Clean minimal layouts", "Video integration", "Friendly tone"]
+    },
+    {
+      "id": "miro",
+      "name": "Miro",
+      "url": "https://miro.com",
+      "category": "Collaboration Platform",
+      "colors": {
+        "primary": "#1c1c1e",
+        "secondary": ["#fafafc", "#ffffff"],
+        "accent": {
+          "blue": ["#3859ff", "#314cd9"],
+          "yellow": "#fde050",
+          "cyan": "#72dfd5"
+        },
+        "multicolor": "gradients for visual interest"
+      },
+      "typography": {
+        "families": {
+          "primary": "Roobert PRO",
+          "fallback": "Inter",
+          "emphasis": "Noto Sans Bold 700",
+          "extended": "Open Sans"
+        },
+        "weights": {
+          "medium": 500,
+          "semibold": 600,
+          "bold": 700
+        },
+        "spacing": "generous letter-spacing and line-height"
+      },
+      "layout": {
+        "breakpoints": {
+          "xl": "1920px",
+          "lg": "1366px",
+          "md": "1200px",
+          "sm": "810px",
+          "mobile": "<810px"
+        },
+        "components": "flexible grid-based system",
+        "richText": "auto-sizing containers"
+      },
+      "visual": {
+        "shadows": {
+          "layers": ["0px 0px 2px", "0px 2px 4px", "0px 4px 6px"],
+          "purpose": "elevation"
+        },
+        "corners": "flexible corner-shape",
+        "animations": "will-change optimizations",
+        "gradients": "custom color token variables"
+      },
+      "aesthetic": "Modern, professional SaaS, clarity and functionality focus",
+      "bestFor": ["Layout structure", "Features grid", "Professional SaaS style"]
+    },
+    {
+      "id": "middle",
+      "name": "Middle",
+      "url": "https://middle.finance",
+      "category": "Fintech Platform",
+      "colors": {
+        "primary": "blue tones",
+        "accent": "yellow/gold",
+        "background": "white with subtle depth",
+        "shadows": "rgba(53, 80, 111, 0.1)"
+      },
+      "typography": {
+        "family": "modern sans-serif",
+        "headings": "large hero headlines",
+        "emphasis": "readability for financial info"
+      },
+      "layout": {
+        "hero": "Opening statement with CTA",
+        "features": "alternating image-text blocks (6 capabilities)",
+        "socialProof": "'What borrowers love' section",
+        "process": "5-step visual walkthrough",
+        "faq": "collapsible accordion",
+        "footer": "organized links with legal docs"
+      },
+      "visual": {
+        "shadows": "box-shadow: 0 7px 36px 0 rgba(53, 80, 111, 0.1)",
+        "animations": "CSS fade transitions 500ms",
+        "icons": "emoji integration (lock, folder, etc.)",
+        "illustrations": "illustrated icons and avatars",
+        "images": "Cloudinary optimized"
+      },
+      "aesthetic": "Professional fintech, security-focused, approachable",
+      "bestFor": ["Alternating layouts", "Process flow visualization", "Trust-building elements"]
+    }
+  ],
+  "recommendation": {
+    "bestMatch": "Kloudmate + superReply hybrid",
+    "primaryStyle": {
+      "source": "kloudmate",
+      "elements": ["dark background", "cyan accent color", "hero structure", "overall tone"]
+    },
+    "gradientEffects": {
+      "source": "superreply",
+      "elements": ["cyan-to-magenta gradient text", "pill-style CTA buttons", "gradient backgrounds"]
+    },
+    "layoutReference": {
+      "source": "miro",
+      "elements": ["professional SaaS structure", "features grid", "multi-layer shadows"]
+    },
+    "animationStyle": {
+      "source": "rive",
+      "elements": ["micro-interactions", "smooth transitions", "motion-focused design"]
+    },
+    "reasoning": [
+      "NexusAI already uses dark theme with cyan (#00D9FF) as primary accent - matches Kloudmate",
+      "OKLCH color system supports gradients similar to superReply's cyan-magenta effect",
+      "Existing glow effects align with superReply's visual language",
+      "Professional SaaS positioning matches Miro's layout patterns",
+      "Tech-forward aesthetic requires motion design elements from Rive"
+    ]
+  },
+  "nexusAI": {
+    "existingDesign": {
+      "theme": "dark tech",
+      "primaryColor": "cyan (oklch(60% 0.35 220))",
+      "secondaryColor": "purple (oklch(55% 0.3 280))",
+      "colorSystem": "OKLCH format",
+      "features": ["glow effects", "4-layer backgrounds", "rounded cards"]
+    },
+    "proposedEnhancements": {
+      "gradientText": "linear-gradient(135deg, oklch(60% 0.35 220) 0%, oklch(55% 0.3 280) 100%)",
+      "heroGlow": "radial-gradient with pulse animation",
+      "ctaButtons": "pill-style with glow on hover",
+      "sectionAnimations": "scroll-triggered fade-in"
+    }
+  }
+}

@@ -1,171 +1,17 @@
 <!DOCTYPE html>
-<html lang="zh-TW" data-theme="dark">
+<html lang="zh-TW" data-theme="dark" data-theme-lang="zh">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>NexusAI - 深色科技主題 Demo</title>
+  <title>NexusAI - Modern Dark Tech UI Design System</title>
+  <meta name="description" content="Enterprise-grade dark tech-themed UI design system and component library. Pure HTML, CSS, and JavaScript.">
   <script src="https://unpkg.com/lucide@latest"></script>
   <link rel="stylesheet" href="css/design-tokens.css">
   <link rel="stylesheet" href="css/components.css">
   <link rel="stylesheet" href="css/layout.css">
   <link rel="stylesheet" href="css/responsive.css">
   <link rel="stylesheet" href="css/theme-light.css">
-  <style>
-    /* Hero Section */
-    .hero {
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding-top: 80px;
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .hero::after {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: linear-gradient(180deg, oklch(22% 0.002 250 / 0.7) 0%, oklch(22% 0.002 250 / 0.9) 100%);
-      z-index: 1;
-    }
-
-    .hero::before {
-      content: '';
-      position: absolute;
-      top: -50%;
-      right: -20%;
-      width: 600px;
-      height: 600px;
-      background: radial-gradient(circle, oklch(60% 0.35 220 / 0.1) 0%, transparent 70%);
-      border-radius: 50%;
-      animation: float 6s ease-in-out infinite;
-    }
-
-    @keyframes float {
-      0%, 100% { transform: translateY(0px); }
-      50% { transform: translateY(30px); }
-    }
-
-    .hero-content {
-      position: relative;
-      z-index: 2;
-      text-align: center;
-      max-width: 800px;
-    }
-
-    .hero h1 {
-      font-size: clamp(1.75rem, 1rem + 5vw, 4rem);
-      margin-bottom: var(--spacing-4);
-      background: linear-gradient(135deg, oklch(60% 0.35 220) 0%, oklch(55% 0.3 280) 100%);
-      background-clip: text;
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      line-height: 1.2;
-    }
-
-    .hero p {
-      font-size: clamp(1rem, 0.9rem + 0.5vw, 1.25rem);
-      color: var(--color-text-secondary);
-      margin-bottom: var(--spacing-6);
-    }
-
-    @media (min-width: 768px) {
-      .hero h1 {
-        margin-bottom: var(--spacing-6);
-      }
-      .hero p {
-        margin-bottom: var(--spacing-8);
-      }
-    }
-
-    .hero-buttons {
-      display: flex;
-      gap: var(--spacing-4);
-      justify-content: center;
-      flex-wrap: wrap;
-    }
-
-    /* Features Section */
-    .features {
-      background: var(--color-bg-secondary);
-      padding: var(--spacing-20) 0;
-    }
-
-    .feature-card {
-      background: var(--bg-level-3);
-      border-top: 1px solid var(--surface-border-top);
-      border-bottom: 1px solid var(--surface-border-bottom);
-      border-left: 1px solid var(--color-border-default);
-      border-right: 1px solid var(--color-border-default);
-      border-radius: var(--radius-lg);
-      padding: var(--spacing-8);
-      box-shadow: var(--shadow-md);
-      transition: all var(--transition-base);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .feature-card::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 2px;
-      background: linear-gradient(90deg, transparent, var(--color-cyan), transparent);
-    }
-
-    .feature-card:hover {
-      border-left-color: var(--color-cyan);
-      border-right-color: var(--color-cyan);
-      box-shadow: var(--glow-cyan-strong), var(--shadow-lg);
-      transform: translateY(-1px);
-    }
-
-    .feature-icon {
-      width: 48px;
-      height: 48px;
-      background: oklch(60% 0.35 220 / 0.1);
-      border-radius: var(--radius-lg);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-bottom: var(--spacing-4);
-      color: var(--color-cyan);
-    }
-
-    .feature-card h3 {
-      font-size: var(--font-size-xl);
-      margin-bottom: var(--spacing-3);
-      color: var(--color-text-primary);
-    }
-
-    /* CTA Section */
-    .cta-section {
-      background: linear-gradient(135deg, oklch(60% 0.35 220 / 0.05) 0%, oklch(55% 0.3 280 / 0.05) 100%);
-      border-top: 1px solid var(--surface-border-top);
-      border-bottom: 1px solid var(--surface-border-bottom);
-      border-left: 1px solid oklch(60% 0.35 220 / 0.2);
-      border-right: 1px solid oklch(60% 0.35 220 / 0.2);
-      border-radius: var(--radius-xl);
-      padding: var(--spacing-12) var(--spacing-8);
-      box-shadow: var(--shadow-md);
-      text-align: center;
-      margin: var(--spacing-20) auto;
-      max-width: 800px;
-    }
-
-    .cta-section h2 {
-      margin-bottom: var(--spacing-4);
-    }
-  </style>
+  <link rel="stylesheet" href="css/landing.css">
 </head>
 <body>
   <!-- Top Navigation -->
@@ -176,12 +22,19 @@
         <span>NexusAI</span>
       </a>
       <ul class="nav-links">
-        <li><a href="#features" class="active"><i data-lucide="star" class="nav-icon"></i>特色</a></li>
-        <li><a href="pages/pricing.html"><i data-lucide="credit-card" class="nav-icon"></i>定價</a></li>
-        <li><a href="pages/about.html"><i data-lucide="users" class="nav-icon"></i>關於</a></li>
-        <li><a href="pages/contact.html"><i data-lucide="mail" class="nav-icon"></i>聯繫</a></li>
+        <li><a href="#features"><i data-lucide="star" class="nav-icon"></i><span data-lang="zh">特色</span><span data-lang="en">Features</span></a></li>
+        <li><a href="#showcase"><i data-lucide="layout" class="nav-icon"></i><span data-lang="zh">展示</span><span data-lang="en">Showcase</span></a></li>
+        <li><a href="#pricing"><i data-lucide="credit-card" class="nav-icon"></i><span data-lang="zh">定價</span><span data-lang="en">Pricing</span></a></li>
+        <li><a href="pages/about.html"><i data-lucide="users" class="nav-icon"></i><span data-lang="zh">關於</span><span data-lang="en">About</span></a></li>
       </ul>
-      <button id="theme-toggle-btn" data-theme-toggle class="btn btn-outline-cyan btn-sm mobile-theme-toggle" title="切換主題" aria-label="切換至淺色主題">
+      <div class="nav-actions">
+        <button data-lang-toggle class="lang-toggle" title="切換語言 / Switch Language">
+          <span data-lang-btn="zh">中</span>
+          <span>/</span>
+          <span data-lang-btn="en">EN</span>
+        </button>
+      </div>
+      <button id="theme-toggle-btn" data-theme-toggle class="btn btn-outline-cyan btn-sm" title="切換主題" aria-label="切換至淺色主題">
         <i data-lucide="sun"></i>
       </button>
       <button class="hamburger-menu">
@@ -195,150 +48,613 @@
     <nav class="sidebar-nav">
       <a href="index.html" class="sidebar-item active">
         <i data-lucide="home"></i>
-        <span>首頁</span>
+        <span data-lang="zh">首頁</span><span data-lang="en">Home</span>
       </a>
       <a href="#features" class="sidebar-item">
         <i data-lucide="star"></i>
-        <span>特色</span>
+        <span data-lang="zh">特色</span><span data-lang="en">Features</span>
       </a>
-      <a href="pages/pricing.html" class="sidebar-item">
+      <a href="#showcase" class="sidebar-item">
+        <i data-lucide="layout"></i>
+        <span data-lang="zh">展示</span><span data-lang="en">Showcase</span>
+      </a>
+      <a href="#pricing" class="sidebar-item">
         <i data-lucide="dollar-sign"></i>
-        <span>定價</span>
+        <span data-lang="zh">定價</span><span data-lang="en">Pricing</span>
       </a>
       <a href="pages/about.html" class="sidebar-item">
         <i data-lucide="info"></i>
-        <span>關於</span>
-      </a>
-      <a href="pages/contact.html" class="sidebar-item">
-        <i data-lucide="mail"></i>
-        <span>聯繫</span>
+        <span data-lang="zh">關於</span><span data-lang="en">About</span>
       </a>
     </nav>
+    <!-- 手機版語言切換 -->
+    <div class="sidebar-controls">
+      <button data-lang-toggle class="lang-toggle" title="切換語言 / Switch Language">
+        <span data-lang-btn="zh">中</span>
+        <span>/</span>
+        <span data-lang-btn="en">EN</span>
+      </button>
+    </div>
   </aside>
 
-  <!-- Hero Section -->
-  <section class="hero">
+  <!-- 1. Hero Section -->
+  <section class="landing-hero">
     <div class="hero-content">
-      <h1>歡迎來到 NexusAI</h1>
-      <p>現代深色科技主題展示 - 完整的 UI 設計系統與元件庫</p>
-      <div class="hero-buttons">
-        <a href="pages/dashboard.html" class="btn btn-solid-cyan btn-lg">開始探索</a>
-        <a href="pages/readme-viewer.html" class="btn btn-outline-cyan btn-lg">查看文檔</a>
+      <div class="hero-badge animate-on-scroll">
+        <i data-lucide="rocket" style="width: 16px; height: 16px;"></i>
+        <span data-lang="zh">v3.0 正式發布</span>
+        <span data-lang="en">v3.0 Now Available</span>
       </div>
-    </div>
-  </section>
-
-  <!-- Features Section -->
-  <section id="features" class="features">
-    <div class="container">
-      <h2 style="text-align: center; margin-bottom: var(--spacing-16);">核心特色</h2>
-      <div class="grid-3">
-        <div class="feature-card">
-          <div class="feature-icon">
-            <i data-lucide="zap" style="width: 28px; height: 28px;"></i>
-          </div>
-          <h3>高效能</h3>
-          <p>純 HTML + CSS + 最小化 JavaScript，極速載入與執行。</p>
+      <h1 class="hero-title animate-on-scroll animate-delay-1">
+        <span data-lang="zh">打造現代化深色科技界面</span>
+        <span data-lang="en">Build Modern Dark Tech Interfaces</span>
+      </h1>
+      <p class="hero-subtitle animate-on-scroll animate-delay-2">
+        <span data-lang="zh">企業級深色科技主題 UI 設計系統與元件庫。純 HTML、CSS 和 JavaScript，無框架依賴，即插即用。</span>
+        <span data-lang="en">Enterprise-grade dark tech-themed UI design system and component library. Pure HTML, CSS, and JavaScript. No framework dependencies, plug and play.</span>
+      </p>
+      <div class="hero-buttons animate-on-scroll animate-delay-3">
+        <a href="pages/dashboard.html" class="btn btn-solid-cyan btn-lg">
+          <i data-lucide="play" style="width: 20px; height: 20px;"></i>
+          <span data-lang="zh">開始探索</span>
+          <span data-lang="en">Get Started</span>
+        </a>
+        <a href="pages/readme-viewer.html" class="btn btn-outline-cyan btn-lg">
+          <i data-lucide="book-open" style="width: 20px; height: 20px;"></i>
+          <span data-lang="zh">查看文檔</span>
+          <span data-lang="en">Documentation</span>
+        </a>
+      </div>
+      <div class="hero-stats animate-on-scroll animate-delay-4">
+        <div class="hero-stat">
+          <span class="hero-stat-value" data-counter="30" data-suffix="+">0</span>
+          <span class="hero-stat-label" data-lang="zh">UI 元件</span>
+          <span class="hero-stat-label" data-lang="en">UI Components</span>
         </div>
-
-        <div class="feature-card">
-          <div class="feature-icon">
-            <i data-lucide="palette" style="width: 28px; height: 28px;"></i>
-          </div>
-          <h3>設計系統</h3>
-          <p>完整的色彩、字型、間距系統，確保一致的視覺表現。</p>
+        <div class="hero-stat">
+          <span class="hero-stat-value" data-counter="19" data-suffix="">0</span>
+          <span class="hero-stat-label" data-lang="zh">頁面範例</span>
+          <span class="hero-stat-label" data-lang="en">Page Templates</span>
         </div>
-
-        <div class="feature-card">
-          <div class="feature-icon">
-            <i data-lucide="monitor-smartphone" style="width: 28px; height: 28px;"></i>
-          </div>
-          <h3>響應式設計</h3>
-          <p>從手機到桌面，完美適應各種螢幕尺寸。</p>
-        </div>
-
-        <div class="feature-card">
-          <div class="feature-icon">
-            <i data-lucide="layers" style="width: 28px; height: 28px;"></i>
-          </div>
-          <h3>可重用元件</h3>
-          <p>按鈕、卡片、表單等 30+ 個精心設計的元件。</p>
-        </div>
-
-        <div class="feature-card">
-          <div class="feature-icon">
-            <i data-lucide="moon" style="width: 28px; height: 28px;"></i>
-          </div>
-          <h3>深色主題</h3>
-          <p>專業的深色主題搭配發光效果，展現現代科技感。</p>
-        </div>
-
-        <div class="feature-card">
-          <div class="feature-icon">
-            <i data-lucide="code" style="width: 28px; height: 28px;"></i>
-          </div>
-          <h3>易於自訂</h3>
-          <p>使用 CSS 變數，輕鬆自訂顏色、間距等設計參數。</p>
+        <div class="hero-stat">
+          <span class="hero-stat-value" data-counter="100" data-suffix="%">0</span>
+          <span class="hero-stat-label" data-lang="zh">響應式設計</span>
+          <span class="hero-stat-label" data-lang="en">Responsive</span>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- CTA Section -->
-  <section class="cta-section">
-    <h2>準備開始了嗎？</h2>
-    <p style="margin-bottom: var(--spacing-6);">探索我們的完整元件庫與頁面範例</p>
-    <div style="display: flex; gap: var(--spacing-4); justify-content: center; flex-wrap: wrap;">
-      <a href="pages/pricing.html" class="btn btn-solid-cyan">查看定價</a>
-      <a href="pages/dashboard.html" class="btn btn-outline-cyan">進入儀表板</a>
+  <!-- 2. Trusted By Section -->
+  <section class="landing-trusted">
+    <p class="trusted-title">
+      <span data-lang="zh">適用於各類現代應用</span>
+      <span data-lang="en">Perfect for Modern Applications</span>
+    </p>
+    <div class="trusted-logos">
+      <span style="font-size: var(--font-size-lg); color: var(--color-text-tertiary);">SaaS</span>
+      <span style="font-size: var(--font-size-lg); color: var(--color-text-tertiary);">Dashboard</span>
+      <span style="font-size: var(--font-size-lg); color: var(--color-text-tertiary);">Analytics</span>
+      <span style="font-size: var(--font-size-lg); color: var(--color-text-tertiary);">AI Platform</span>
+      <span style="font-size: var(--font-size-lg); color: var(--color-text-tertiary);">DevTools</span>
     </div>
   </section>
 
-  <!-- Footer -->
-  <footer>
-    <div class="container">
-      <div>
-        <h4>NexusAI</h4>
-        <p>現代化的深色科技主題設計系統</p>
+  <!-- 3. Features Section -->
+  <section id="features" class="landing-features">
+    <div class="section-header animate-on-scroll">
+      <span class="section-badge">
+        <span data-lang="zh">核心特色</span>
+        <span data-lang="en">Core Features</span>
+      </span>
+      <h2 class="section-title">
+        <span data-lang="zh">為開發者打造的設計系統</span>
+        <span data-lang="en">Design System Built for Developers</span>
+      </h2>
+      <p class="section-description">
+        <span data-lang="zh">完整的設計規範、可重用元件和最佳實踐，助您快速構建專業級應用。</span>
+        <span data-lang="en">Complete design specifications, reusable components, and best practices to help you build professional applications quickly.</span>
+      </p>
+    </div>
+    <div class="features-grid">
+      <div class="feature-card animate-on-scroll animate-delay-1">
+        <div class="feature-icon">
+          <i data-lucide="zap" style="width: 28px; height: 28px;"></i>
+        </div>
+        <h3 class="feature-title">
+          <span data-lang="zh">極速效能</span>
+          <span data-lang="en">Lightning Fast</span>
+        </h3>
+        <p class="feature-description">
+          <span data-lang="zh">純 HTML + CSS + 最小化 JavaScript，無框架依賴，極速載入與執行。</span>
+          <span data-lang="en">Pure HTML + CSS + minimal JavaScript. No framework dependencies, ultra-fast loading and execution.</span>
+        </p>
       </div>
-      <div>
-        <h4>導航</h4>
+
+      <div class="feature-card animate-on-scroll animate-delay-2">
+        <div class="feature-icon">
+          <i data-lucide="palette" style="width: 28px; height: 28px;"></i>
+        </div>
+        <h3 class="feature-title">
+          <span data-lang="zh">OKLCH 色彩系統</span>
+          <span data-lang="en">OKLCH Color System</span>
+        </h3>
+        <p class="feature-description">
+          <span data-lang="zh">採用現代 OKLCH 色彩空間，提供更一致的視覺感知和更豐富的漸變效果。</span>
+          <span data-lang="en">Modern OKLCH color space for more consistent visual perception and richer gradient effects.</span>
+        </p>
+      </div>
+
+      <div class="feature-card animate-on-scroll animate-delay-3">
+        <div class="feature-icon">
+          <i data-lucide="monitor-smartphone" style="width: 28px; height: 28px;"></i>
+        </div>
+        <h3 class="feature-title">
+          <span data-lang="zh">響應式設計</span>
+          <span data-lang="en">Responsive Design</span>
+        </h3>
+        <p class="feature-description">
+          <span data-lang="zh">從手機到大螢幕桌面，4 個斷點完美適應各種螢幕尺寸。</span>
+          <span data-lang="en">From mobile to large desktop, 4 breakpoints perfectly adapt to all screen sizes.</span>
+        </p>
+      </div>
+
+      <div class="feature-card animate-on-scroll animate-delay-1">
+        <div class="feature-icon">
+          <i data-lucide="layers" style="width: 28px; height: 28px;"></i>
+        </div>
+        <h3 class="feature-title">
+          <span data-lang="zh">30+ 元件</span>
+          <span data-lang="en">30+ Components</span>
+        </h3>
+        <p class="feature-description">
+          <span data-lang="zh">按鈕、卡片、表單、表格、模態框等精心設計的可重用元件。</span>
+          <span data-lang="en">Buttons, cards, forms, tables, modals, and more meticulously designed reusable components.</span>
+        </p>
+      </div>
+
+      <div class="feature-card animate-on-scroll animate-delay-2">
+        <div class="feature-icon">
+          <i data-lucide="moon" style="width: 28px; height: 28px;"></i>
+        </div>
+        <h3 class="feature-title">
+          <span data-lang="zh">深色/淺色主題</span>
+          <span data-lang="en">Dark/Light Theme</span>
+        </h3>
+        <p class="feature-description">
+          <span data-lang="zh">專業深色主題搭配發光效果，同時支援淺色主題切換。</span>
+          <span data-lang="en">Professional dark theme with glow effects, plus light theme support.</span>
+        </p>
+      </div>
+
+      <div class="feature-card animate-on-scroll animate-delay-3">
+        <div class="feature-icon">
+          <i data-lucide="smartphone" style="width: 28px; height: 28px;"></i>
+        </div>
+        <h3 class="feature-title">
+          <span data-lang="zh">PWA 支援</span>
+          <span data-lang="en">PWA Support</span>
+        </h3>
+        <p class="feature-description">
+          <span data-lang="zh">完整的 Progressive Web App 支援，可安裝、離線使用。</span>
+          <span data-lang="en">Full Progressive Web App support, installable and works offline.</span>
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. Showcase Section -->
+  <section id="showcase" class="landing-showcase">
+    <div class="section-header animate-on-scroll">
+      <span class="section-badge">
+        <span data-lang="zh">產品展示</span>
+        <span data-lang="en">Product Showcase</span>
+      </span>
+      <h2 class="section-title">
+        <span data-lang="zh">豐富的頁面範例</span>
+        <span data-lang="en">Rich Page Templates</span>
+      </h2>
+      <p class="section-description">
+        <span data-lang="zh">包含儀表板、專案管理、日曆、看板等 19 個完整頁面範例。</span>
+        <span data-lang="en">Includes dashboard, project management, calendar, kanban, and 19 complete page templates.</span>
+      </p>
+    </div>
+    <div class="showcase-content">
+      <div class="showcase-item animate-on-scroll">
+        <div class="showcase-text">
+          <h3>
+            <span data-lang="zh">專業儀表板</span>
+            <span data-lang="en">Professional Dashboard</span>
+          </h3>
+          <p>
+            <span data-lang="zh">包含 KPI 卡片、數據表格、圖表視覺化的完整儀表板範例。</span>
+            <span data-lang="en">Complete dashboard with KPI cards, data tables, and chart visualizations.</span>
+          </p>
+          <ul class="showcase-list">
+            <li><i data-lucide="check" style="width: 18px; height: 18px;"></i><span data-lang="zh">即時數據展示</span><span data-lang="en">Real-time data display</span></li>
+            <li><i data-lucide="check" style="width: 18px; height: 18px;"></i><span data-lang="zh">互動式圖表</span><span data-lang="en">Interactive charts</span></li>
+            <li><i data-lucide="check" style="width: 18px; height: 18px;"></i><span data-lang="zh">響應式表格</span><span data-lang="en">Responsive tables</span></li>
+          </ul>
+        </div>
+        <div class="showcase-image">
+          <img src="image/unnamed.jpg" alt="Dashboard Preview" style="opacity: 0.8;">
+        </div>
+      </div>
+
+      <div class="showcase-item animate-on-scroll">
+        <div class="showcase-text">
+          <h3>
+            <span data-lang="zh">JavaScript 功能展示</span>
+            <span data-lang="en">JavaScript Features Showcase</span>
+          </h3>
+          <p>
+            <span data-lang="zh">完整的 Web API、Canvas、WebGL、WebSocket 等現代 JavaScript 功能演示。</span>
+            <span data-lang="en">Complete demos of modern JavaScript features including Web API, Canvas, WebGL, WebSocket, and more.</span>
+          </p>
+          <ul class="showcase-list">
+            <li><i data-lucide="check" style="width: 18px; height: 18px;"></i><span data-lang="zh">ES2024+ 特性</span><span data-lang="en">ES2024+ Features</span></li>
+            <li><i data-lucide="check" style="width: 18px; height: 18px;"></i><span data-lang="zh">Web Workers</span><span data-lang="en">Web Workers</span></li>
+            <li><i data-lucide="check" style="width: 18px; height: 18px;"></i><span data-lang="zh">Three.js 3D</span><span data-lang="en">Three.js 3D</span></li>
+          </ul>
+        </div>
+        <div class="showcase-image">
+          <img src="image/unnamed (1).jpg" alt="JS Showcase Preview" style="opacity: 0.8;">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. Benefits Section -->
+  <section class="landing-benefits">
+    <div class="section-header animate-on-scroll">
+      <span class="section-badge">
+        <span data-lang="zh">為什麼選擇我們</span>
+        <span data-lang="en">Why Choose Us</span>
+      </span>
+      <h2 class="section-title">
+        <span data-lang="zh">開發者友好的設計</span>
+        <span data-lang="en">Developer-Friendly Design</span>
+      </h2>
+    </div>
+    <div class="benefits-grid">
+      <div class="benefit-item animate-on-scroll animate-delay-1">
+        <div class="benefit-icon">
+          <i data-lucide="code-2" style="width: 28px; height: 28px;"></i>
+        </div>
+        <h4 class="benefit-title">
+          <span data-lang="zh">無框架依賴</span>
+          <span data-lang="en">No Framework Dependencies</span>
+        </h4>
+        <p class="benefit-description">
+          <span data-lang="zh">純靜態檔案，可與任何技術棧整合</span>
+          <span data-lang="en">Pure static files, integrates with any tech stack</span>
+        </p>
+      </div>
+
+      <div class="benefit-item animate-on-scroll animate-delay-2">
+        <div class="benefit-icon">
+          <i data-lucide="sliders" style="width: 28px; height: 28px;"></i>
+        </div>
+        <h4 class="benefit-title">
+          <span data-lang="zh">CSS 變數</span>
+          <span data-lang="en">CSS Variables</span>
+        </h4>
+        <p class="benefit-description">
+          <span data-lang="zh">輕鬆自訂顏色、間距等設計參數</span>
+          <span data-lang="en">Easily customize colors, spacing, and more</span>
+        </p>
+      </div>
+
+      <div class="benefit-item animate-on-scroll animate-delay-3">
+        <div class="benefit-icon">
+          <i data-lucide="accessibility" style="width: 28px; height: 28px;"></i>
+        </div>
+        <h4 class="benefit-title">
+          <span data-lang="zh">無障礙設計</span>
+          <span data-lang="en">Accessibility</span>
+        </h4>
+        <p class="benefit-description">
+          <span data-lang="zh">語意化 HTML 與 ARIA 標籤支援</span>
+          <span data-lang="en">Semantic HTML and ARIA labels support</span>
+        </p>
+      </div>
+
+      <div class="benefit-item animate-on-scroll animate-delay-4">
+        <div class="benefit-icon">
+          <i data-lucide="file-code" style="width: 28px; height: 28px;"></i>
+        </div>
+        <h4 class="benefit-title">
+          <span data-lang="zh">MIT 授權</span>
+          <span data-lang="en">MIT License</span>
+        </h4>
+        <p class="benefit-description">
+          <span data-lang="zh">免費用於商業和個人專案</span>
+          <span data-lang="en">Free for commercial and personal projects</span>
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. Stats Section -->
+  <section class="landing-stats">
+    <div class="stats-grid">
+      <div class="stat-item animate-on-scroll animate-delay-1">
+        <span class="stat-value" data-counter="16000" data-suffix="+">0</span>
+        <span class="stat-label">
+          <span data-lang="zh">JavaScript 程式碼行數</span>
+          <span data-lang="en">Lines of JavaScript</span>
+        </span>
+      </div>
+      <div class="stat-item animate-on-scroll animate-delay-2">
+        <span class="stat-value" data-counter="16" data-suffix="">0</span>
+        <span class="stat-label">
+          <span data-lang="zh">CSS 樣式檔案</span>
+          <span data-lang="en">CSS Stylesheets</span>
+        </span>
+      </div>
+      <div class="stat-item animate-on-scroll animate-delay-3">
+        <span class="stat-value" data-counter="18" data-suffix="">0</span>
+        <span class="stat-label">
+          <span data-lang="zh">JS 模組</span>
+          <span data-lang="en">JS Modules</span>
+        </span>
+      </div>
+      <div class="stat-item animate-on-scroll animate-delay-4">
+        <span class="stat-value" data-counter="4" data-suffix="">0</span>
+        <span class="stat-label">
+          <span data-lang="zh">響應式斷點</span>
+          <span data-lang="en">Responsive Breakpoints</span>
+        </span>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7. Testimonials Section -->
+  <section class="landing-testimonials">
+    <div class="section-header animate-on-scroll">
+      <span class="section-badge">
+        <span data-lang="zh">開發者評價</span>
+        <span data-lang="en">Developer Reviews</span>
+      </span>
+      <h2 class="section-title">
+        <span data-lang="zh">來自社群的聲音</span>
+        <span data-lang="en">Voices from the Community</span>
+      </h2>
+    </div>
+    <div class="testimonials-grid">
+      <div class="testimonial-card animate-on-scroll animate-delay-1">
+        <p class="testimonial-content">
+          <span data-lang="zh">這個設計系統讓我的專案開發速度提升了至少 50%。深色主題非常專業，發光效果也恰到好處。</span>
+          <span data-lang="en">This design system has boosted my project development speed by at least 50%. The dark theme is very professional, and the glow effects are just right.</span>
+        </p>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">A</div>
+          <div class="testimonial-info">
+            <h4>Alex Chen</h4>
+            <p>Frontend Developer</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="testimonial-card animate-on-scroll animate-delay-2">
+        <p class="testimonial-content">
+          <span data-lang="zh">無框架依賴是最大的優點，可以直接整合到任何現有專案中。OKLCH 色彩系統也很先進。</span>
+          <span data-lang="en">No framework dependency is the biggest advantage. It integrates directly into any existing project. The OKLCH color system is also very advanced.</span>
+        </p>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">S</div>
+          <div class="testimonial-info">
+            <h4>Sarah Wang</h4>
+            <p>Full Stack Developer</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="testimonial-card animate-on-scroll animate-delay-3">
+        <p class="testimonial-content">
+          <span data-lang="zh">響應式設計做得非常好，從手機到桌面都有完美的體驗。JS 功能展示頁面也非常實用。</span>
+          <span data-lang="en">The responsive design is excellent, providing a perfect experience from mobile to desktop. The JS features showcase page is also very practical.</span>
+        </p>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">M</div>
+          <div class="testimonial-info">
+            <h4>Mike Liu</h4>
+            <p>UI/UX Designer</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 8. Pricing Section -->
+  <section id="pricing" class="landing-pricing">
+    <div class="section-header animate-on-scroll">
+      <span class="section-badge">
+        <span data-lang="zh">定價方案</span>
+        <span data-lang="en">Pricing Plans</span>
+      </span>
+      <h2 class="section-title">
+        <span data-lang="zh">簡單透明的定價</span>
+        <span data-lang="en">Simple, Transparent Pricing</span>
+      </h2>
+      <p class="section-description">
+        <span data-lang="zh">開源免費，MIT 授權。選擇適合您的支援方案。</span>
+        <span data-lang="en">Open source and free with MIT license. Choose the support plan that suits you.</span>
+      </p>
+    </div>
+    <div class="pricing-grid">
+      <div class="pricing-card animate-on-scroll animate-delay-1">
+        <h3 class="pricing-name">
+          <span data-lang="zh">社群版</span>
+          <span data-lang="en">Community</span>
+        </h3>
+        <div class="pricing-price">
+          <span data-lang="zh">免費</span>
+          <span data-lang="en">Free</span>
+        </div>
+        <p class="pricing-description">
+          <span data-lang="zh">適合個人專案和學習使用</span>
+          <span data-lang="en">Perfect for personal projects and learning</span>
+        </p>
+        <ul class="pricing-features">
+          <li><i data-lucide="check" style="width: 16px; height: 16px;"></i><span data-lang="zh">所有 UI 元件</span><span data-lang="en">All UI Components</span></li>
+          <li><i data-lucide="check" style="width: 16px; height: 16px;"></i><span data-lang="zh">所有頁面範例</span><span data-lang="en">All Page Templates</span></li>
+          <li><i data-lucide="check" style="width: 16px; height: 16px;"></i><span data-lang="zh">MIT 授權</span><span data-lang="en">MIT License</span></li>
+          <li><i data-lucide="check" style="width: 16px; height: 16px;"></i><span data-lang="zh">社群支援</span><span data-lang="en">Community Support</span></li>
+        </ul>
+        <a href="pages/dashboard.html" class="btn btn-outline-cyan">
+          <span data-lang="zh">立即使用</span>
+          <span data-lang="en">Get Started</span>
+        </a>
+      </div>
+
+      <div class="pricing-card featured animate-on-scroll animate-delay-2">
+        <span class="pricing-badge">
+          <span data-lang="zh">推薦</span>
+          <span data-lang="en">Popular</span>
+        </span>
+        <h3 class="pricing-name">
+          <span data-lang="zh">專業版</span>
+          <span data-lang="en">Professional</span>
+        </h3>
+        <div class="pricing-price">$49<span>/mo</span></div>
+        <p class="pricing-description">
+          <span data-lang="zh">適合團隊和商業專案</span>
+          <span data-lang="en">Perfect for teams and commercial projects</span>
+        </p>
+        <ul class="pricing-features">
+          <li><i data-lucide="check" style="width: 16px; height: 16px;"></i><span data-lang="zh">所有社群版功能</span><span data-lang="en">All Community Features</span></li>
+          <li><i data-lucide="check" style="width: 16px; height: 16px;"></i><span data-lang="zh">優先技術支援</span><span data-lang="en">Priority Support</span></li>
+          <li><i data-lucide="check" style="width: 16px; height: 16px;"></i><span data-lang="zh">私人 Discord 頻道</span><span data-lang="en">Private Discord Channel</span></li>
+          <li><i data-lucide="check" style="width: 16px; height: 16px;"></i><span data-lang="zh">優先功能請求</span><span data-lang="en">Priority Feature Requests</span></li>
+        </ul>
+        <a href="pages/contact.html" class="btn btn-solid-cyan">
+          <span data-lang="zh">聯繫我們</span>
+          <span data-lang="en">Contact Us</span>
+        </a>
+      </div>
+
+      <div class="pricing-card animate-on-scroll animate-delay-3">
+        <h3 class="pricing-name">
+          <span data-lang="zh">企業版</span>
+          <span data-lang="en">Enterprise</span>
+        </h3>
+        <div class="pricing-price">
+          <span data-lang="zh">客製</span>
+          <span data-lang="en">Custom</span>
+        </div>
+        <p class="pricing-description">
+          <span data-lang="zh">大型團隊和企業需求</span>
+          <span data-lang="en">For large teams and enterprise needs</span>
+        </p>
+        <ul class="pricing-features">
+          <li><i data-lucide="check" style="width: 16px; height: 16px;"></i><span data-lang="zh">所有專業版功能</span><span data-lang="en">All Professional Features</span></li>
+          <li><i data-lucide="check" style="width: 16px; height: 16px;"></i><span data-lang="zh">專屬客戶經理</span><span data-lang="en">Dedicated Account Manager</span></li>
+          <li><i data-lucide="check" style="width: 16px; height: 16px;"></i><span data-lang="zh">客製化開發</span><span data-lang="en">Custom Development</span></li>
+          <li><i data-lucide="check" style="width: 16px; height: 16px;"></i><span data-lang="zh">SLA 保證</span><span data-lang="en">SLA Guarantee</span></li>
+        </ul>
+        <a href="pages/contact.html" class="btn btn-outline-cyan">
+          <span data-lang="zh">聯繫銷售</span>
+          <span data-lang="en">Contact Sales</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 9. CTA Section -->
+  <section class="landing-cta">
+    <div class="cta-content animate-on-scroll">
+      <h2 class="cta-title">
+        <span data-lang="zh">準備好開始了嗎？</span>
+        <span data-lang="en">Ready to Get Started?</span>
+      </h2>
+      <p class="cta-description">
+        <span data-lang="zh">立即探索完整的 UI 元件庫和頁面範例，開始打造您的下一個專案。</span>
+        <span data-lang="en">Explore the complete UI component library and page templates now. Start building your next project.</span>
+      </p>
+      <div class="cta-buttons">
+        <a href="pages/dashboard.html" class="btn btn-solid-cyan btn-lg">
+          <i data-lucide="rocket" style="width: 20px; height: 20px;"></i>
+          <span data-lang="zh">進入儀表板</span>
+          <span data-lang="en">Enter Dashboard</span>
+        </a>
+        <a href="pages/js-showcase.html" class="btn btn-outline-cyan btn-lg">
+          <i data-lucide="code" style="width: 20px; height: 20px;"></i>
+          <span data-lang="zh">JS 功能展示</span>
+          <span data-lang="en">JS Features Showcase</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 10. Footer -->
+  <footer class="landing-footer">
+    <div class="footer-content">
+      <div class="footer-brand">
+        <div class="footer-logo">
+          <i data-lucide="sparkles" style="width: 24px; height: 24px;"></i>
+          <span>NexusAI</span>
+        </div>
+        <p>
+          <span data-lang="zh">現代化的深色科技主題設計系統，專為開發者打造。</span>
+          <span data-lang="en">Modern dark tech-themed design system, built for developers.</span>
+        </p>
+      </div>
+      <div class="footer-column">
+        <h4>
+          <span data-lang="zh">產品</span>
+          <span data-lang="en">Product</span>
+        </h4>
         <ul>
-          <li><a href="index.html">首頁</a></li>
-          <li><a href="pages/pricing.html">定價</a></li>
-          <li><a href="pages/about.html">關於</a></li>
-          <li><a href="pages/contact.html">聯繫</a></li>
+          <li><a href="pages/dashboard.html"><span data-lang="zh">儀表板</span><span data-lang="en">Dashboard</span></a></li>
+          <li><a href="pages/js-showcase.html"><span data-lang="zh">JS 展示</span><span data-lang="en">JS Showcase</span></a></li>
+          <li><a href="pages/pricing.html"><span data-lang="zh">定價</span><span data-lang="en">Pricing</span></a></li>
+          <li><a href="pages/readme-viewer.html"><span data-lang="zh">文檔</span><span data-lang="en">Docs</span></a></li>
         </ul>
       </div>
-      <div>
-        <h4>資源</h4>
+      <div class="footer-column">
+        <h4>
+          <span data-lang="zh">頁面</span>
+          <span data-lang="en">Pages</span>
+        </h4>
         <ul>
-          <li><a href="pages/dashboard.html">儀表板</a></li>
+          <li><a href="pages/projects.html"><span data-lang="zh">專案</span><span data-lang="en">Projects</span></a></li>
+          <li><a href="pages/calendar.html"><span data-lang="zh">日曆</span><span data-lang="en">Calendar</span></a></li>
+          <li><a href="pages/kanban.html"><span data-lang="zh">看板</span><span data-lang="en">Kanban</span></a></li>
+          <li><a href="pages/data-table.html"><span data-lang="zh">數據表</span><span data-lang="en">Data Table</span></a></li>
+        </ul>
+      </div>
+      <div class="footer-column">
+        <h4>
+          <span data-lang="zh">關於</span>
+          <span data-lang="en">About</span>
+        </h4>
+        <ul>
+          <li><a href="pages/about.html"><span data-lang="zh">關於我們</span><span data-lang="en">About Us</span></a></li>
+          <li><a href="pages/contact.html"><span data-lang="zh">聯繫</span><span data-lang="en">Contact</span></a></li>
+          <li><a href="#"><span data-lang="zh">部落格</span><span data-lang="en">Blog</span></a></li>
           <li><a href="#">GitHub</a></li>
-          <li><a href="#">部落格</a></li>
-          <li><a href="#">社群</a></li>
         </ul>
       </div>
     </div>
     <div class="footer-bottom">
-      <p>&copy; 2025 NexusAI. 保留所有權利。</p>
+      <p class="footer-copyright">
+        © 2025 NexusAI. <span data-lang="zh">保留所有權利。</span><span data-lang="en">All rights reserved.</span>
+      </p>
+      <div class="footer-social">
+        <a href="#" aria-label="GitHub"><i data-lucide="github" style="width: 18px; height: 18px;"></i></a>
+        <a href="#" aria-label="Twitter"><i data-lucide="twitter" style="width: 18px; height: 18px;"></i></a>
+        <a href="#" aria-label="LinkedIn"><i data-lucide="linkedin" style="width: 18px; height: 18px;"></i></a>
+        <a href="#" aria-label="Discord"><i data-lucide="message-circle" style="width: 18px; height: 18px;"></i></a>
+      </div>
     </div>
   </footer>
 
   <script src="js/main.js"></script>
   <script src="js/sidebar.js"></script>
+  <script src="js/landing-animations.js"></script>
   <script>
     lucide.createIcons();
-
-    // 隨機背景圖片
-    (function() {
-      const backgrounds = [
-        'image/unnamed.jpg',
-        'image/unnamed (1).jpg'
-      ];
-      const randomBg = backgrounds[Math.floor(Math.random() * backgrounds.length)];
-      document.querySelector('.hero').style.backgroundImage = `url('${randomBg}')`;
-    })();
   </script>
 </body>
 </html>

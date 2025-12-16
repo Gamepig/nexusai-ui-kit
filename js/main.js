@@ -535,8 +535,8 @@ const LazyLoad = {
 const DarkMode = {
   init: () => {
     const STORAGE_KEY = 'nexusai-theme';
-    const themeToggle = DOM.select('[data-theme-toggle]');
-    if (!themeToggle) return;
+    const themeToggles = DOM.selectAll('[data-theme-toggle]');
+    if (!themeToggles.length) return;
 
     const systemTheme =
       window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
@@ -549,9 +549,12 @@ const DarkMode = {
       const nextLabel = theme === 'light' ? '切換至深色主題' : '切換至淺色主題';
       const nextIcon = theme === 'light' ? 'moon' : 'sun';
 
-      themeToggle.setAttribute('title', nextLabel);
-      themeToggle.setAttribute('aria-label', nextLabel);
-      themeToggle.innerHTML = `<i data-lucide="${nextIcon}"></i>`;
+      // 更新所有主題切換按鈕
+      themeToggles.forEach(btn => {
+        btn.setAttribute('title', nextLabel);
+        btn.setAttribute('aria-label', nextLabel);
+        btn.innerHTML = `<i data-lucide="${nextIcon}"></i>`;
+      });
 
       if (typeof lucide !== 'undefined') {
         lucide.createIcons();
@@ -560,11 +563,14 @@ const DarkMode = {
 
     applyTheme(initialTheme);
 
-    Events.on(themeToggle, 'click', () => {
-      const currentTheme = document.documentElement.getAttribute('data-theme') || 'dark';
-      const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-      applyTheme(newTheme);
-      Storage.set(STORAGE_KEY, newTheme);
+    // 為所有主題切換按鈕綁定事件
+    themeToggles.forEach(btn => {
+      Events.on(btn, 'click', () => {
+        const currentTheme = document.documentElement.getAttribute('data-theme') || 'dark';
+        const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+        applyTheme(newTheme);
+        Storage.set(STORAGE_KEY, newTheme);
+      });
     });
   },
 };
